@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
  * - [data-hero-item]: hero eyebrow, headline, text and actions stagger in on load
  * - [data-hero-phone]: the phone slides up and tilts into place
  * - [data-hero-photo]: gentle parallax while scrolling past the hero
+ * - [data-parallax]: the same for section photos (Early access)
  * - [data-reveal]: headings and cards fade up once as they scroll into view
  * - svg[data-wheel] path: wheel-of-life segments draw in from the centre
  * Content is fully visible without JavaScript and with prefers-reduced-motion; only transforms
@@ -38,6 +39,11 @@ export function Motion() {
 
         gsap.utils.toArray<HTMLElement>("[data-hero-photo]").forEach((el) =>
           gsap.to(el, { yPercent: 12, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top top", end: "bottom top", scrub: true } }),
+        );
+
+        // photos inside sections drift slightly while the section passes through the screen
+        gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) =>
+          gsap.fromTo(el, { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } }),
         );
 
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {

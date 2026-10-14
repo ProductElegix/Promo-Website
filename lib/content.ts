@@ -214,7 +214,8 @@ export const JOIN = {
   eyebrow: "Early access",
   title: "Join before launch. Get *founding member* perks.",
   perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "A free plan, forever"],
-  card: { code: "Founding member", line: "Life balance", spec: ["6 life areas", "Goals · Habits · Tasks", "iOS & Android"] },
+  media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
+  signature: { name: "Eduard Korytskyi", role: "Founder, Elegix", link: { href: "/about#story", label: "Read our story" } },
   startLabel: "How do you want to start?",
   starts: [
     { id: "template", title: "Use the 6-area template" },

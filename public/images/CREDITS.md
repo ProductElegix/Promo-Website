@@ -17,3 +17,4 @@ All photos are from [Unsplash](https://unsplash.com) and used under the [Unsplas
 | how-score.jpg | [Eirik Skarstein](https://unsplash.com/@eskarstein) | https://unsplash.com/photos/person-running-on-park-path-with-city-buildings-at-sunset-3Y2z_UNWnfE |
 | founder.jpg | Edward (Elegix founder), own photo | — |
 | about-hero.jpg | [Elijah Hiett](https://unsplash.com/@elijahdhiett) | https://unsplash.com/photos/man-in-gray-shirt-sits-on-cliff-wW0BUXTTUmU |
+| join.jpg | [Tim Mossholder](https://unsplash.com/@timmossholder) | https://unsplash.com/photos/a-bird-is-perched-on-a-branch-of-a-tree-csNbW6hF5AQ |

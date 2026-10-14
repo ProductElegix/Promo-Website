@@ -1,28 +1,31 @@
-import { HERO, JOIN } from "@/lib/content";
-import { LogoMark } from "@/components/ui/Logo";
+import Image from "next/image";
+import Link from "next/link";
+import { JOIN, TRUST } from "@/lib/content";
+import { Media } from "@/components/ui/Media";
 import { Rich } from "@/components/ui/Rich";
-import { Wheel } from "@/components/ui/Wheel";
 import { StartPicker } from "./StartPicker";
 import styles from "./Join.module.css";
 
+/** Early access: a full-bleed photo with a cream panel overlapping it at the bottom right. */
 export function Join() {
-  const c = JOIN.card;
+  const sig = JOIN.signature;
+  const photo = TRUST.founder.media;
   return (
-    <section id="join" className="section" aria-labelledby="join-title">
-      <div className={`container ${styles.grid}`}>
-        <div className={`on-dark grain ${styles.card}`} data-reveal aria-hidden="true">
-          <div className={styles.cardTop}><LogoMark className={styles.mark} /><span>{c.code}</span></div>
-          <div className={styles.cardWheel}><Wheel scores={HERO.card.scores} size={210} ring="rgba(255,255,255,0.16)" /></div>
-          <div className={styles.cardBottom}>
-            <b>{c.line}</b>
-            <span>{c.spec.join(" · ")}</span>
-          </div>
-        </div>
-        <div className={styles.info} data-reveal>
+    <section id="join" className={styles.join} aria-labelledby="join-title">
+      <div className={styles.stage}>
+        <div className={styles.photo} data-parallax><Media media={JOIN.media} fill sizes="100vw" /></div>
+        <div className={styles.panel} data-reveal>
           <span className="label">{JOIN.eyebrow}</span>
-          <h2 id="join-title" className="display h2"><Rich text={JOIN.title} /></h2>
+          <h2 id="join-title" className={`display ${styles.title}`}><Rich text={JOIN.title} /></h2>
           <ul className={styles.perks}>{JOIN.perks.map((p) => <li key={p}><span className={styles.tick} aria-hidden="true">✓</span>{p}</li>)}</ul>
-          <div id="join-form"><StartPicker /></div>
+          <div id="join-form" className={styles.form}><StartPicker /></div>
+          <div className={styles.footer}>
+            <div className={styles.person}>
+              {photo.src && <Image src={photo.src} alt="" width={56} height={56} className={styles.thumb} />}
+              <div><b>{sig.name}</b><span>{sig.role}</span></div>
+            </div>
+            <Link href={sig.link.href} className={styles.storyBtn}><span>{sig.link.label}</span><i aria-hidden="true">↗</i></Link>
+          </div>
         </div>
       </div>
     </section>
