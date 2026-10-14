@@ -33,8 +33,9 @@ export const AREAS: Record<AreaKey, { name: string; short: string; description: 
 export const AREA_ORDER: AreaKey[] = ["health", "people", "career", "growth", "hobby", "meaning", "home"];
 
 export const META = {
-  title: "Elegix · Life balance tracker",
-  description: "Elegix tracks your goals, habits and tasks across 7 life areas and shows which part of your life you're neglecting.",
+  title: "Elegix · Life balance tracker for 7 areas of your life",
+  description: "Elegix tracks your goals, habits and tasks across 7 life areas and shows which part of your life you're neglecting, before it turns into burnout. Join the waitlist.",
+  keywords: ["life balance tracker", "life balance app", "work-life balance app", "wheel of life app", "balance wheel", "habit tracker", "goal tracker", "burnout prevention", "life areas", "personal growth app"],
 };
 
 export const NAV = [

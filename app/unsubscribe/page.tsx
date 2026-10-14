@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { verifyUnsubscribe } from "@/lib/unsubscribe";
 
-export const metadata: Metadata = { title: "Unsubscribe · Elegix", robots: { index: false } };
+export const metadata: Metadata = { title: "Unsubscribe", robots: { index: false, follow: false }, alternates: { canonical: "/unsubscribe" } };
 
 type Search = Promise<{ [key: string]: string | string[] | undefined }>;
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";

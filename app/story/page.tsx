@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/site";
 import Image from "next/image";
 import Link from "next/link";
 import { STORY, TRUST } from "@/lib/content";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./story.module.css";
 
+const DESCRIPTION = "Why we created Elegix: a system that helps people build a balanced, intentional life without burning out.";
+
 export const metadata: Metadata = {
-  title: "Our story · Elegix",
-  description: "Why we created Elegix: a system that helps people build a balanced, intentional life without burning out.",
+  title: "Our story",
+  description: DESCRIPTION,
+  alternates: { canonical: "/story" },
+  openGraph: { title: "Our story · Elegix", description: DESCRIPTION, url: "/story", siteName: "Elegix", type: "article", locale: "en_US", images: [OG_IMAGE] },
+  twitter: { card: "summary_large_image", title: "Our story · Elegix", description: DESCRIPTION, images: [OG_IMAGE] },
 };
 
 export default function Story() {

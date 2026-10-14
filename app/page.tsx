@@ -11,10 +11,19 @@ import { Join } from "@/components/sections/Join";
 import { Faq } from "@/components/sections/Faq";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { Reveal } from "@/components/ui/Reveal";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { FAQ } from "@/lib/content";
+
+const FAQ_DATA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
 
 export default function Home() {
   return (
     <main id="top">
+      <JsonLd data={FAQ_DATA} />
       <Hero />
       <Problem />
       <Compare />
