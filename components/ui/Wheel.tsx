@@ -2,7 +2,7 @@ import { AREA_ORDER } from "@/lib/content";
 
 type Props = { scores: number[]; size?: number; ring?: string; className?: string; label?: string };
 
-/** Wheel of Life: 7 areas x 10 rings, filled up to each area's score. */
+/** Wheel of Life: 6 areas x 10 rings, filled up to each area's score. */
 export function Wheel({ scores, size = 160, ring = "#e3e7e3", className, label }: Props) {
   const R0 = 10, R1 = 50, n = AREA_ORDER.length;
   const pt = (r: number, a: number) => `${(r * Math.cos(a)).toFixed(2)} ${(r * Math.sin(a)).toFixed(2)}`;

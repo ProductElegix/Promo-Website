@@ -15,7 +15,7 @@ npm run build && npm start
 The waitlist runs on Mailgun (US region, sending domain `mail.elegix.net`). Every signup from any form on the page:
 
 1. is added to the Mailgun mailing list `waitlist@mail.elegix.net` with its details as member variables (`source`, `start`, `scores`, `joinedAt`). **This list is the waitlist.** See it in Mailgun → Send → Mailing lists → `waitlist@mail.elegix.net`, where you can also download the members as CSV.
-2. gets a confirmation email from "Edward from Elegix" `<edward@mail.elegix.net>` (replies go to `hello@elegix.net`). People who took the balance check get their score, all 7 areas and a first step for their weakest area instead of the welcome content.
+2. gets a confirmation email from "Edward from Elegix" `<edward@mail.elegix.net>` (replies go to `hello@elegix.net`). People who took the balance check get their score, all 6 areas and a first step for their weakest area instead of the welcome content.
 
 The emails follow the Figma file "[DS] Foundation Elegix" → Email Template → Welcome eng. Layout lives in `lib/email/template.ts`, copy in `EMAIL` in `lib/content.ts`. Images (logo, illustration, icons) are PNGs in `lib/email/assets/`, attached inline (`cid:`), so they show without public hosting; after changing a PNG run `node lib/email/build-assets.mjs`. Open tracking follows the domain settings in Mailgun. Click tracking is switched off per message (`o:tracking-clicks=no` in `lib/mailgun.ts`) because the tracking domain `email.mail.elegix.net` only serves http and tracked links fail in Chrome. **When HTTPS tracking is enabled for `mail.elegix.net` in Mailgun (Domain settings → Tracking → HTTPS), remove that line to turn click tracking back on.** The footer's unsubscribe link is our own: `/unsubscribe?e=…&t=…` on the public site, signed with `UNSUBSCRIBE_SECRET`. The page asks to confirm (so link scanners can't unsubscribe anyone), then marks the person `subscribed: no` on the waitlist list. Without `UNSUBSCRIBE_SECRET` the footer falls back to Mailgun's `%unsubscribe_url%`.
 
@@ -36,10 +36,14 @@ Environment variables (already set in Vercel for Production and for the `dev` pr
 Webhook payload (balance-check signups include `scores`):
 
 ```json
-{ "email": "name@example.com", "source": "balance-check", "start": null, "scores": { "health": 8, "people": 6, "career": 9, "growth": 4, "hobby": 2, "meaning": 5, "home": 7 }, "joinedAt": "2026-10-14T01:00:00.000Z" }
+{ "email": "name@example.com", "source": "balance-check", "start": null, "scores": { "health": 8, "people": 6, "meaning": 5, "hobby": 2, "growth": 4, "career": 9 }, "joinedAt": "2026-10-14T01:00:00.000Z" }
 ```
 
 Without Mailgun and without a webhook, the forms log signups to the terminal in development and tell visitors the waitlist isn't open yet in production. Nothing is lost silently.
+
+## Life areas
+
+The site uses the app's 6 life areas, in the app's radar order: Health, Relationship, Spirituality, Leisure, Personal Growth, Finance & Career (`AREAS` and `AREA_ORDER` in `lib/content.ts`; internal keys `health`, `people`, `meaning`, `hobby`, `growth`, `career`). Signups from before this change may carry 7 scores (with `home`) in their Mailgun history; they are kept as they are.
 
 ## Edit copy and images
 

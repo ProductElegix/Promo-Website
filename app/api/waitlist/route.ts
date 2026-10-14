@@ -5,7 +5,8 @@ import { POLICY_VERSION } from "@/lib/content";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const STARTS = new Set(["template", "own", "unsure"]);
 
-const AREA_KEYS = ["health", "people", "career", "growth", "hobby", "meaning", "home"] as const;
+// The 6 life areas, as in the app (lib/content.ts AREA_ORDER). Older signups stored 7 scores; those stay as they are.
+const AREA_KEYS = ["health", "people", "meaning", "hobby", "growth", "career"] as const;
 
 type Body = { email?: unknown; source?: unknown; start?: unknown; company?: unknown; scores?: unknown; consent?: unknown; page?: unknown; attribution?: unknown };
 
@@ -19,7 +20,7 @@ function parseAttribution(v: unknown): Signup["attribution"] {
   return Object.values(out).some(Boolean) ? out : undefined;
 }
 
-/** Balance check: an optional object with all 7 areas rated as whole numbers 1–10. */
+/** Balance check: an optional object with all 6 areas rated as whole numbers 1–10. */
 function parseScores(value: unknown): Record<string, number> | null | "invalid" {
   if (value === undefined || value === null) return null;
   if (typeof value !== "object" || Array.isArray(value)) return "invalid";
@@ -53,7 +54,7 @@ export async function POST(request: Request) {
 
   const scores = parseScores(body.scores);
   if (scores === "invalid") {
-    return NextResponse.json({ error: "Rate each of the 7 areas from 1 to 10." }, { status: 400 });
+    return NextResponse.json({ error: "Rate each of the 6 areas from 1 to 10." }, { status: 400 });
   }
 
   if (rateLimited(request)) {

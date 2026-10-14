@@ -23,7 +23,6 @@ const PATHS: Record<AreaKey, React.ReactNode> = {
       <rect fill="currentColor" x="2.5" y="11.5" width="11" height="2.5" rx="1.25" />
     </>
   ),
-  home: <path fill="currentColor" d="M8 1.8l6.2 5.4V14a.5.5 0 0 1-.5.5H10V10H6v4.5H2.3a.5.5 0 0 1-.5-.5V7.2z" />,
 };
 
 export function AreaIcon({ area, className }: { area: AreaKey; className?: string }) {

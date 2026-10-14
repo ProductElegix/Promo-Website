@@ -775,7 +775,7 @@ export function websiteSection(entity: { name: string; form: string; city: strin
       { type: "list", items: [
         "Your email address, when you join the waitlist or take the Life Balance check.",
         "Which form you used (for example the hero, the balance check or the early access form) and, in the early access form, how you'd like to start.",
-        "If you take the Life Balance check: your 7 area ratings from 1 to 10. They are your own estimates, not medical information, and we keep your last 10 checks so you can see your progress later.",
+        "If you take the Life Balance check: your 6 area ratings from 1 to 10. They are your own estimates, not medical information, and we keep your last 10 checks so you can see your progress later.",
         "When you joined, and a record of your consent: the date, the page and the version of this policy.",
         "Where you came from, if your link had it: the referring website, the page you first landed on and campaign tags (utm_source, utm_medium, utm_campaign). Your browser keeps these locally until you sign up.",
         "Whether you opened our emails. Our email provider records opens with a small invisible image, together with the device and approximate location of the open.",

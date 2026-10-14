@@ -12,7 +12,7 @@ export type BuiltEmail = { subject: string; text: string; html: string; inline: 
 // Area colours from the brand book (same as --{area}-s in app/globals.css).
 const AREA_COLOR: Record<AreaKey, string> = {
   health: "#009a44", people: "#d50524", career: "#dd4903", growth: "#0f14da",
-  hobby: "#ff5e3b", meaning: "#6709c7", home: "#3d5545",
+  hobby: "#ff5e3b", meaning: "#6709c7",
 };
 
 const C = { bg: "#f6f8f6", card: "#ffffff", brand: "#009a44", text: "#031c08", muted: "#8a8a8e", track: "#e9ebe9" };

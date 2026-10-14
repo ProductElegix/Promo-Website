@@ -11,7 +11,7 @@
  * /public/images and set `src: "/images/your-file.jpg"`.
  */
 
-export type AreaKey = "health" | "people" | "career" | "growth" | "hobby" | "meaning" | "home";
+export type AreaKey = "health" | "people" | "meaning" | "hobby" | "growth" | "career";
 
 export type MediaSlot = {
   src?: string;
@@ -20,21 +20,21 @@ export type MediaSlot = {
   ratio: string; // CSS aspect-ratio, e.g. "4 / 5"
 };
 
+/** The 6 life areas, named and ordered exactly as in the app's Life Area radar. */
 export const AREAS: Record<AreaKey, { name: string; short: string; description: string; neglect: string }> = {
-  health: { name: "Health & Body", short: "Health", description: "Sleep, movement, food and energy.", neglect: "Sleep, food and movement are the first to go when work gets loud." },
-  people: { name: "Relationships & People", short: "People", description: "Family, friends, partner and community.", neglect: "The people who matter get whatever energy is left." },
-  career: { name: "Career & Finance", short: "Career", description: "Work, income, savings and business.", neglect: "Work gets every hour. But is it taking you where you want?" },
-  growth: { name: "Development & Training", short: "Growth", description: "Learning, skills, reading and courses.", neglect: "Learning stopped when the busy season started." },
-  hobby: { name: "Hobbies & Leisure", short: "Hobbies", description: "Play, creativity, rest and things you do for fun.", neglect: "When did you last do something just for fun?" },
-  meaning: { name: "Meaning & Awareness", short: "Meaning", description: "Values, reflection, mindfulness and purpose.", neglect: "Busy days leave no time to ask why." },
-  home: { name: "Life & Environment", short: "Home", description: "Home, surroundings, routines and order.", neglect: "Your space ends up looking like your head." },
+  health: { name: "Health", short: "Health", description: "Sleep, movement, food and energy.", neglect: "Sleep, food and movement are the first to go when work gets loud." },
+  people: { name: "Relationship", short: "Relationship", description: "Family, friends, partner and community.", neglect: "The people who matter get whatever energy is left." },
+  meaning: { name: "Spirituality", short: "Spirituality", description: "Values, reflection, mindfulness and inner calm.", neglect: "Busy days leave no time to stop and ask why." },
+  hobby: { name: "Leisure", short: "Leisure", description: "Rest, play, creativity and things you do for fun.", neglect: "When did you last do something just for fun?" },
+  growth: { name: "Personal Growth", short: "Personal Growth", description: "Learning, skills, reading and new challenges.", neglect: "Learning stopped when the busy season started." },
+  career: { name: "Finance & Career", short: "Finance & Career", description: "Work, income, savings and business.", neglect: "Work gets every hour. But is it taking you where you want?" },
 };
 
-export const AREA_ORDER: AreaKey[] = ["health", "people", "career", "growth", "hobby", "meaning", "home"];
+export const AREA_ORDER: AreaKey[] = ["health", "people", "meaning", "hobby", "growth", "career"];
 
 export const META = {
-  title: "Elegix · Life balance tracker for 7 areas of your life",
-  description: "Elegix tracks your goals, habits and tasks across 7 life areas and shows which part of your life you're neglecting, before it turns into burnout. Join the waitlist.",
+  title: "Elegix · Life balance tracker for 6 areas of your life",
+  description: "Elegix tracks your goals, habits and tasks across 6 life areas and shows which part of your life you're neglecting, before it turns into burnout. Join the waitlist.",
   keywords: ["life balance tracker", "life balance app", "work-life balance app", "wheel of life app", "balance wheel", "habit tracker", "goal tracker", "burnout prevention", "life areas", "personal growth app"],
 };
 
@@ -56,7 +56,7 @@ export const SOCIALS = [
 ];
 
 /** Shown under every signup form. Bump POLICY_VERSION whenever the privacy policy text changes. */
-export const POLICY_VERSION = "2026-10-14.4";
+export const POLICY_VERSION = "2026-10-14.5";
 
 /** Who runs Elegix, shown in the privacy policy: an individual entrepreneur (FOP) in Ukraine. */
 export const LEGAL_ENTITY = { name: "Eduard Korytskyi", form: "an individual entrepreneur (FOP)", city: "Lutsk", country: "Ukraine" };
@@ -69,7 +69,7 @@ export const EXAMPLE_TAG = "Example";
 export const HERO = {
   eyebrow: "Life balance tracker · Early access",
   title: "Crushing it at work. *Losing* the rest?",
-  lede: "Elegix tracks your goals, habits and tasks across 7 life areas and shows which part of your life you're neglecting, before it turns into burnout.",
+  lede: "Elegix tracks your goals, habits and tasks across 6 life areas and shows which part of your life you're neglecting, before it turns into burnout.",
   cta: "Get early access",
   trust: ["Free plan", "iOS & Android", "No spam, unsubscribe in one click"],
   media: { src: "/images/hero.jpg", alt: "A woman sitting on a grassy cliff, looking out over the sea in soft morning light", brief: "Hero photo · person outdoors at golden hour, calm · full-bleed 2400×1600", ratio: "3 / 2" } as MediaSlot,
@@ -77,7 +77,7 @@ export const HERO = {
     title: "Your balance",
     value: "5.6",
     of: "/10",
-    scores: [4, 5, 9, 6, 3, 5, 6],
+    scores: [4, 5, 3, 3, 6, 9],
     rows: [
       { area: "career" as AreaKey, value: "9.2", trend: "up" as const },
       { area: "health" as AreaKey, value: "4.1", trend: "down" as const },
@@ -106,7 +106,7 @@ export const COMPARE = {
   lede: "To-do apps ask “Did you get it done?” Elegix asks “Are you living the way you want?”",
   columns: ["To-do apps and Notion", "Elegix"],
   rows: [
-    { label: "What it tracks", them: "Tasks completed", us: "Balance across 7 life areas" },
+    { label: "What it tracks", them: "Tasks completed", us: "Balance across 6 life areas" },
     { label: "Setup", them: "Build your own system", us: "Ready framework, 2-minute start" },
     { label: "What it tells you", them: "You checked 12 boxes", us: "Health dropped 3 weeks in a row" },
     { label: "Horizon", them: "Today", us: "Your month and your year" },
@@ -117,7 +117,7 @@ export const COMPARE = {
 // 4
 export const INTRO = {
   label: "The Elegix framework",
-  title: "It starts with 7 *life areas*",
+  title: "It starts with 6 *life areas*",
   lede: "Every goal, habit and task belongs to an area. Together they make your balance score.",
   sample: { area: "health" as AreaKey, score: "4.1 / 10", text: "Sleep, movement, food", streak: "Dropped 3 weeks in a row" },
   link: { href: "#how", label: "See how it works" },
@@ -129,7 +129,7 @@ export const HOW = {
   title: "Know your balance. Change what happens *next*.",
   cta: "Get early access",
   steps: [
-    { title: "See", text: "One balance score and 7 area scores. Your whole life on one screen." },
+    { title: "See", text: "One balance score and 6 area scores. Your whole life on one screen." },
     { title: "Act", text: "Goals linked to daily habits and tasks, each with your “why”. Suggestions for the area that needs you most." },
     { title: "Reflect", text: "A 10-minute monthly review. What grew, what dropped, what to change." },
   ],
@@ -138,7 +138,7 @@ export const HOW = {
     { kind: "areas", caption: "Every area, scored", media: { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen", brief: "Dinner with friends · 4:5", ratio: "4 / 5" } },
     { kind: "next", caption: "Next steps, simplified", media: { src: "/images/how-next.jpg", alt: "A notebook, pen and laptop on a wooden desk", brief: "Planning the week, desk · 4:5", ratio: "4 / 5" } },
   ] as { kind: "score" | "areas" | "next"; caption: string; media: MediaSlot }[],
-  score: { label: "Balance", from: "5.6", to: "7.2", scores: [7, 7, 8, 7, 6, 7, 8] },
+  score: { label: "Balance", from: "5.6", to: "7.2", scores: [7, 7, 6, 7, 7, 8] },
   changes: [
     { area: "health" as AreaKey, change: "+23%" },
     { area: "people" as AreaKey, change: "+12%" },
@@ -150,7 +150,7 @@ export const HOW = {
 
 // 6
 export const AREAS_SECTION = {
-  label: "Seven areas",
+  label: "Six areas",
   title: "Which area are you *neglecting*?",
   media: {
     health: { src: "/images/area-health.jpg", alt: "A man running on a track at sunrise", brief: "Morning run, park", ratio: "4 / 5" },
@@ -179,7 +179,7 @@ export const APP = {
 export const CHECK = {
   eyebrow: "Free life balance check",
   title: "Find your weakest area in *2 minutes*",
-  text: "Rate your 7 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area. Free, and you'll get a spot on the waitlist.",
+  text: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area. Free, and you'll get a spot on the waitlist.",
   question: "How satisfied are you with each area right now?",
   button: "Take the free check",
   result: "Your balance",
@@ -213,10 +213,10 @@ export const JOIN = {
   eyebrow: "Early access",
   title: "Join before launch. Get *founding member* perks.",
   perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "A free plan, forever"],
-  card: { code: "Founding member", line: "Life balance", spec: ["7 life areas", "Goals · Habits · Tasks", "iOS & Android"] },
+  card: { code: "Founding member", line: "Life balance", spec: ["6 life areas", "Goals · Habits · Tasks", "iOS & Android"] },
   startLabel: "How do you want to start?",
   starts: [
-    { id: "template", title: "Use the 7-area template" },
+    { id: "template", title: "Use the 6-area template" },
     { id: "own", title: "Set it up my way" },
     { id: "unsure", title: "Not sure yet" },
   ],
@@ -232,7 +232,7 @@ export const FAQ_SECTION = {
 };
 
 export const FAQ = [
-  { q: "How is Elegix different from Todoist or Notion?", a: "They track whether you finished tasks. Elegix shows whether your life is balanced: 7 areas, one score, a monthly review. No system to build." },
+  { q: "How is Elegix different from Todoist or Notion?", a: "They track whether you finished tasks. Elegix shows whether your life is balanced: 6 areas, one score, a monthly review. No system to build." },
   { q: "Is the balance score real or just a number?", a: "It combines a quick weekly self-rating of each area with what you actually do. If there's too little data, Elegix tells you instead of guessing." },
   { q: "I've given up on every planner. Why would this one stick?", a: "You start from a ready template in 2 minutes, and the app asks for one short check-in a week. There's nothing to maintain." },
   { q: "When does it launch?", a: "We're finishing the first version. Waitlist members get in first, in the order they joined." },
@@ -278,7 +278,7 @@ export const EMAIL = {
     subtitle: "You're on the Elegix waitlist. We'll email you the moment your spot opens.",
     gridTitle: "With Elegix, you'll:",
     grid: [
-      { icon: "chart.png", text: "See all 7 areas of your life on one screen" },
+      { icon: "chart.png", text: "See all 6 areas of your life on one screen" },
       { icon: "battery.png", text: "Notice what's slipping before it turns into burnout" },
       { icon: "timer.png", text: "Have time to rest, not just work" },
       { icon: "box.png", text: "Turn big goals into small daily steps, without guilt" },
@@ -290,7 +290,7 @@ export const EMAIL = {
     subject: "Your Life Balance score: {score}/10",
     title: "Your Life Balance score: {score}/10",
     subtitle: "Your lowest area right now is {area}. That's not a failure. It's the best place to start.",
-    areasTitle: "Your 7 life areas",
+    areasTitle: "Your 6 life areas",
     stepTitle: "Your first step for {area}",
     button: { label: "See how Elegix works", href: "https://elegix-site.vercel.app/#how" },
     reply: "Want to talk through your result? Just hit reply, I read every answer.",
@@ -308,8 +308,7 @@ export const EMAIL = {
     career: "Write down where you want work to take you in a year, then check if this week moved you closer.",
     growth: "Choose one book or course and give it 15 minutes, three times this week.",
     hobby: "Block one hour this weekend for something you do just for fun, with no goal attached.",
-    meaning: "Spend 5 minutes tonight writing down what mattered most to you today.",
-    home: "Clear one surface you see every day, and keep it clear for a week.",
+    meaning: "Take 5 quiet minutes tonight, no phone, and write down what mattered most to you today.",
   } as Record<AreaKey, string>,
 };
 
