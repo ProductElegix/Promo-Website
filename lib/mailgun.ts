@@ -22,7 +22,7 @@ export function mailgunConfig(): Config | null {
   const domain = process.env.MAILGUN_DOMAIN;
   if (!key || !domain) return null;
   const base = process.env.MAILGUN_REGION === "eu" ? "https://api.eu.mailgun.net" : "https://api.mailgun.net";
-  return { key, domain, base, from: process.env.MAIL_FROM || `Edward from Elegix <edward@${domain}>`, list: `waitlist@${domain}` };
+  return { key, domain, base, from: process.env.MAIL_FROM || "Edward from Elegix <edward@elegix.net>", list: `waitlist@${domain}` };
 }
 
 async function call(cfg: Config, path: string, form: Record<string, string>) {
@@ -58,10 +58,8 @@ function balance(scores: Record<string, number>) {
   return { average, lowest };
 }
 
-const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
 /**
- * A short personal note: plain text plus bare HTML paragraphs (no images, colours, buttons or links),
+ * A short personal note in plain text (no HTML part, images, buttons or links),
  * which is what Gmail expects from a 1:1 message rather than a newsletter.
  */
 export function buildEmail(s: Signup) {
@@ -85,9 +83,7 @@ export function buildEmail(s: Signup) {
   }
   paragraphs.push(EMAIL.signature, `--\n${EMAIL.footer}`);
 
-  const text = paragraphs.join("\n\n");
-  const html = `<!doctype html><html><body>${paragraphs.map((p) => `<p>${esc(p).replace(/\n/g, "<br>")}</p>`).join("\n")}</body></html>`;
-  return { subject, text, html };
+  return { subject, text: paragraphs.join("\n\n") };
 }
 
 /** Sends the confirmation (and, for the balance check, the result). Returns true when Mailgun accepted it. */
@@ -97,8 +93,8 @@ export async function sendConfirmation(cfg: Config, s: Signup, testMode = false)
     from: cfg.from,
     to: s.email,
     subject: mail.subject,
+    // plain text only, like a message typed by a person
     text: mail.text,
-    html: mail.html,
     "h:Reply-To": "hello@elegix.net",
     // no open pixel, no rewritten links, no auto unsubscribe footer: all of these read as bulk mail
     "o:tracking": "no",
