@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TRUST } from "@/lib/content";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Pill, areaVars } from "@/components/ui/Pill";
-import { Reveal } from "@/components/ui/Reveal";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import { Wheel } from "@/components/ui/Wheel";
@@ -165,7 +164,6 @@ export default function About() {
 
       {/* 9. FAQ */}
       <Faq />
-      <Reveal />
     </main>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
+import { Motion } from "@/components/ui/Motion";
 import { Clarity } from "@/components/ui/Clarity";
 import { CloudflareAnalytics } from "@/components/ui/CloudflareAnalytics";
 import { GoogleAnalytics } from "@/components/ui/GoogleAnalytics";
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <JsonLd data={ORGANIZATION} />
         <Attribution />
+        <Motion />
         <Clarity />
         <CloudflareAnalytics />
         <GoogleAnalytics />

@@ -19,7 +19,7 @@ export function Wheel({ scores, size = 160, ring = "#e3e7e3", className, label }
     }
   });
   return (
-    <svg viewBox="-52 -52 104 104" width={size} height={size} className={className} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
+    <svg data-wheel viewBox="-52 -52 104 104" width={size} height={size} className={className} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true}>
       {cells}
     </svg>
   );

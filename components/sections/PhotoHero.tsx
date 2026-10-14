@@ -24,15 +24,15 @@ export function PhotoHero({ id, media, eyebrow, title, lede, screen, children, c
   return (
     <section className={`on-dark ${styles.hero}`} aria-labelledby={id}>
       <div className={`grain ${styles.frame}`}>
-        <div className={styles.photo}><Media media={media} tone="dark" fill priority sizes="100vw" /></div>
+        <div className={styles.photo} data-hero-photo><Media media={media} tone="dark" fill priority sizes="100vw" /></div>
         <div className={`${styles.atmo} ${media.src ? styles.onPhoto : ""}`} aria-hidden="true" />
         <div className={styles.content}>
-          <span className={`glass ${styles.eyebrow}`}>{eyebrow}</span>
-          <h1 id={id} className={`display ${styles.title}`}><Rich text={title} /></h1>
-          <p className={styles.lede}>{lede}</p>
-          {children}
+          <span className={`glass ${styles.eyebrow}`} data-hero-item>{eyebrow}</span>
+          <h1 id={id} className={`display ${styles.title}`} data-hero-item><Rich text={title} /></h1>
+          <p className={styles.lede} data-hero-item>{lede}</p>
+          <div className={styles.actions} data-hero-item>{children}</div>
         </div>
-        <div className={styles.device}><Phone screen={screen} priority className={styles.phone} /></div>
+        <div className={styles.device}><div data-hero-phone><Phone screen={screen} priority className={styles.phone} /></div></div>
         {card}
       </div>
     </section>

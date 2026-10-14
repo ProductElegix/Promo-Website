@@ -10,7 +10,6 @@ import { Trust } from "@/components/sections/Trust";
 import { Join } from "@/components/sections/Join";
 import { Faq } from "@/components/sections/Faq";
 import { Manifesto } from "@/components/sections/Manifesto";
-import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { FAQ } from "@/lib/content";
 
@@ -36,7 +35,6 @@ export default function Home() {
       <Join />
       <Faq />
       <Manifesto />
-      <Reveal />
     </main>
   );
 }
