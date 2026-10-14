@@ -1,5 +1,6 @@
-import { AREAS, EXAMPLE_TAG, HERO } from "@/lib/content";
+import { APP, AREAS, EXAMPLE_TAG, HERO } from "@/lib/content";
 import { Media } from "@/components/ui/Media";
+import { Phone } from "@/components/ui/Phone";
 import { areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
 import { Wheel } from "@/components/ui/Wheel";
@@ -22,6 +23,7 @@ export function Hero() {
           </div>
           <ul className={styles.trust}>{HERO.trust.map((t) => <li key={t}>{t}</li>)}</ul>
         </div>
+        <div className={styles.device}><Phone screen={APP.screens[0].media} priority className={styles.phone} /></div>
         <figure className={`glass ${styles.card}`}>
           <div className={styles.cardHead}>
             <Wheel scores={c.scores} size={52} ring="rgba(255,255,255,0.18)" />
