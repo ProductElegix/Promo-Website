@@ -10,7 +10,7 @@ import styles from "./BalanceCheck.module.css";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-type Result = { average: number; lowest: AreaKey; email: string };
+type Result = { average: number; lowest: AreaKey; email: string; emailed: boolean };
 
 export function BalanceCheck() {
   const [scores, setScores] = useState<Record<AreaKey, number>>(
@@ -34,12 +34,12 @@ export function BalanceCheck() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: value, source: "balance-check", scores, company }),
       });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean };
       if (!res.ok) throw new Error(data.error || "We couldn't save your check. Please try again.");
       const values = AREA_ORDER.map((a) => scores[a]);
       const average = values.reduce((sum, n) => sum + n, 0) / values.length;
       const lowest = AREA_ORDER.reduce((low, a) => (scores[a] < scores[low] ? a : low), AREA_ORDER[0]);
-      setResult({ average, lowest, email: value });
+      setResult({ average, lowest, email: value, emailed: !!data.emailed });
     } catch (err) {
       setError(err instanceof Error ? err.message : "We couldn't save your check. Please try again.");
     } finally {
@@ -66,7 +66,7 @@ export function BalanceCheck() {
                 <span className={styles.icon} aria-hidden="true"><AreaIcon area={result.lowest} /></span>
                 <div><small>{CHECK.lowest}</small><b>{AREAS[result.lowest].name} · {scores[result.lowest]}/10</b></div>
               </div>
-              <p className={styles.done}>{CHECK.done} <b>{result.email}</b>.</p>
+              <p className={styles.done}>{result.emailed ? CHECK.sent : CHECK.done} <b>{result.email}</b>.</p>
             </div>
           ) : (
             <form className={styles.form} onSubmit={onSubmit} noValidate>

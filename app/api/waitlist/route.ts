@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { addToWaitlist, mailgunConfig, sendConfirmation, type Signup } from "@/lib/mailgun";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const STARTS = new Set(["template", "own", "unsure"]);
@@ -44,7 +45,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Rate each of the 7 areas from 1 to 10." }, { status: 400 });
   }
 
-  const signup = {
+  if (rateLimited(request)) {
+    return NextResponse.json({ error: "Too many tries. Please wait a minute and try again." }, { status: 429 });
+  }
+
+  const signup: Signup = {
     email,
     source: typeof body.source === "string" ? body.source.slice(0, 32) : "unknown",
     start: typeof body.start === "string" && STARTS.has(body.start) ? body.start : null,
@@ -52,26 +57,64 @@ export async function POST(request: Request) {
     joinedAt: new Date().toISOString(),
   };
 
+  const mailgun = mailgunConfig();
   const webhook = process.env.WAITLIST_WEBHOOK_URL;
-  if (!webhook) {
+  if (!mailgun && !webhook) {
     if (process.env.NODE_ENV !== "production") {
-      console.info("[waitlist] WAITLIST_WEBHOOK_URL is not set; signup not stored:", signup);
-      return NextResponse.json({ ok: true, stored: false });
+      console.info("[waitlist] neither Mailgun nor WAITLIST_WEBHOOK_URL is set; signup not stored:", signup);
+      return NextResponse.json({ ok: true, stored: false, emailed: false });
     }
     return NextResponse.json({ error: "The waitlist is not open yet. Please try again soon." }, { status: 503 });
   }
 
-  try {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(signup),
-    });
-    if (!res.ok) throw new Error(`webhook responded ${res.status}`);
-  } catch (err) {
-    console.error("[waitlist] forwarding failed", err);
+  // Store: the Mailgun mailing list is the waitlist; the webhook is an optional extra copy.
+  let stored = false;
+  if (mailgun) {
+    try {
+      await addToWaitlist(mailgun, signup);
+      stored = true;
+    } catch (err) {
+      console.error("[waitlist] mailgun list failed", err);
+    }
+  }
+  if (webhook) {
+    try {
+      const res = await fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(signup),
+      });
+      if (!res.ok) throw new Error(`webhook responded ${res.status}`);
+      stored = true;
+    } catch (err) {
+      console.error("[waitlist] forwarding failed", err);
+    }
+  }
+  if (!stored) {
     return NextResponse.json({ error: "We couldn't save your email just now. Please try again." }, { status: 502 });
   }
 
-  return NextResponse.json({ ok: true, stored: true });
+  // A failed email never fails the signup: the person is already on the list.
+  let emailed = false;
+  if (mailgun) {
+    try {
+      emailed = await sendConfirmation(mailgun, signup, process.env.MAILGUN_TEST_MODE === "yes");
+    } catch (err) {
+      console.error("[waitlist] email failed", err);
+    }
+  }
+
+  return NextResponse.json({ ok: true, stored: true, emailed });
+}
+
+/** Basic per-IP limit: 5 signups a minute per server instance. Enough to stop accidental loops and simple abuse. */
+const hits = new Map<string, number[]>();
+function rateLimited(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "local";
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < 60_000);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > 5;
 }

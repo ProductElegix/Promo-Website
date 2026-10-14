@@ -169,6 +169,7 @@ export const CHECK = {
   result: "Your balance",
   lowest: "Your weakest area",
   done: "We'll email your score and a first step to",
+  sent: "We've emailed your score and a first step to",
 };
 
 // 9
@@ -250,4 +251,25 @@ export const FOOTER = {
     { href: "#", label: "X" },
   ],
   wordmark: "elegix",
+};
+
+/** Emails sent by /api/waitlist through Mailgun. */
+export const EMAIL = {
+  subject: "You're on the Elegix waitlist",
+  checkSubject: "Your Life Balance score",
+  intro: "Thanks for joining the Elegix waitlist.",
+  next: "We're finishing the first version now. Waitlist members get in first, in the order they joined, and we'll email you as soon as your spot opens.",
+  checkIntro: "Here's your Life Balance check.",
+  firstStepLabel: "One first step",
+  signoff: "Talk soon,\nThe Elegix team",
+  footer: "You're getting this email because you joined the Elegix waitlist. To stop hearing from us, reply “unsubscribe” or click Unsubscribe.",
+  firstSteps: {
+    health: "Pick one evening this week and be in bed 30 minutes earlier. Just one.",
+    people: "Message one person you've been meaning to call and put a time in the calendar.",
+    career: "Write down where you want work to take you in a year, then check if this week moved you closer.",
+    growth: "Choose one book or course and give it 15 minutes, three times this week.",
+    hobby: "Block one hour this weekend for something you do just for fun, with no goal attached.",
+    meaning: "Spend 5 minutes tonight writing down what mattered most to you today.",
+    home: "Clear one surface you see every day, and keep it clear for a week.",
+  } as Record<AreaKey, string>,
 };

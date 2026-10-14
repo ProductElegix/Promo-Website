@@ -36,9 +36,9 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: value, source, start, company }),
       });
-      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean };
       if (!res.ok) throw new Error(data.error || "We couldn't save your email. Please try again.");
-      setStatus({ kind: "ok", text: `You're on the list. We'll email ${value} when your spot opens.` });
+      setStatus({ kind: "ok", text: data.emailed ? `You're on the list. We've sent a confirmation to ${value}.` : `You're on the list. We'll email ${value} when your spot opens.` });
       setEmail("");
     } catch (err) {
       setStatus({ kind: "err", text: err instanceof Error ? err.message : "We couldn't save your email. Please try again." });

@@ -12,23 +12,31 @@ npm run build && npm start
 
 ## Configure the waitlist
 
-Copy `.env.example` to `.env.local` and set `WAITLIST_WEBHOOK_URL`. Every signup is sent there as a JSON POST:
+The waitlist runs on Mailgun (US region, sending domain `mail.elegix.net`). Every signup from any form on the page:
+
+1. is added to the Mailgun mailing list `waitlist@mail.elegix.net` with its details as member variables (`source`, `start`, `scores`, `joinedAt`). **This list is the waitlist.** See it in Mailgun → Send → Mailing lists → `waitlist@mail.elegix.net`, where you can also download the members as CSV.
+2. gets a confirmation email from `hello@mail.elegix.net` (replies go to `hello@elegix.net`). People who took the balance check also get their 7 area scores, their average, their weakest area and one first step for it. Email copy lives in `EMAIL` in `lib/content.ts`.
+
+A failed email never loses a signup: the person is already on the list. The API allows 5 signups a minute per IP, and a hidden honeypot field filters simple bots.
+
+Environment variables (already set in Vercel for Production and for the `dev` preview):
+
+| Variable | Value |
+|---|---|
+| `MAILGUN_API_KEY` | Mailgun API key (sensitive) |
+| `MAILGUN_DOMAIN` | `mail.elegix.net` |
+| `MAILGUN_REGION` | `us` |
+| `MAIL_FROM` | `Elegix <hello@mail.elegix.net>` |
+| `MAILGUN_TEST_MODE` | `yes` only in `.env.local`: Mailgun accepts emails but doesn't deliver them, so local testing never emails anyone. List signups are still real. |
+| `WAITLIST_WEBHOOK_URL` | Optional. Also forwards every signup as a JSON POST, for example to Google Sheets via Make or Zapier. |
+
+Webhook payload (balance-check signups include `scores`):
 
 ```json
-{ "email": "name@example.com", "source": "hero", "start": "template", "joinedAt": "2026-10-14T01:00:00.000Z" }
+{ "email": "name@example.com", "source": "balance-check", "start": null, "scores": { "health": 8, "people": 6, "career": 9, "growth": 4, "hobby": 2, "meaning": 5, "home": 7 }, "joinedAt": "2026-10-14T01:00:00.000Z" }
 ```
 
-Signups from the free balance check (`source: "balance-check"`) also carry the visitor's ratings, so you can send their score and a first step for the lowest area:
-
-```json
-{ "email": "name@example.com", "source": "balance-check", "start": null, "scores": { "health": 8, "people": 6, "career": 9, "growth": 4, "hobby": 2, "meaning": 5, "home": 7 }, "joinedAt": "…" }
-```
-
-Any service that accepts a webhook works: Formspree, Make, Zapier, a Supabase Edge Function, Google Sheets via Apps Script.
-
-- In development without the variable, signups are logged to the terminal and the form shows success.
-- In production without the variable, the form tells visitors the waitlist isn't open yet. Nothing is lost silently.
-- A hidden honeypot field filters simple bots.
+Without Mailgun and without a webhook, the forms log signups to the terminal in development and tell visitors the waitlist isn't open yet in production. Nothing is lost silently.
 
 ## Edit copy and images
 
@@ -84,4 +92,4 @@ Never commit straight to `main`. Any other branch or pull request also gets its 
 
 ## Deploy
 
-The Vercel project `elegix-site` is connected to this repo (production branch `main`). Add `WAITLIST_WEBHOOK_URL` in the project's environment variables to turn on the waitlist forms; `NEXT_PUBLIC_SITE_URL` is already set for production and for the `dev` preview.
+The Vercel project `elegix-site` is connected to this repo (production branch `main`). Mailgun and `NEXT_PUBLIC_SITE_URL` are already set in the project's environment variables for production and for the `dev` preview.
