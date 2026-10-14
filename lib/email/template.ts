@@ -1,4 +1,4 @@
-import { AREAS, AREA_ORDER, EMAIL, type AreaKey } from "../content";
+import { AREAS, AREA_ORDER, EMAIL, SOCIALS, type AreaKey } from "../content";
 import { unsubscribeUrl } from "../unsubscribe";
 
 /**
@@ -113,7 +113,11 @@ function footer(email: string, unsub: string) {
     `<p style="margin:0;font-family:${FONT};font-size:16px;line-height:24px;color:${C.muted}">${esc(before)}<span style="color:${C.brand}">${esc(email)}</span>${esc(after)} ` +
       `<a href="${esc(unsub)}" style="color:${C.brand};text-decoration:none">${esc(f.unsubscribe)}</a>.</p>` +
       `<p style="margin:16px 0 0;font-family:${FONT};font-size:16px;line-height:24px;color:${C.muted}">${esc(f.copyright)}</p>` +
-      `<img src="cid:logo-green.png" width="149" height="40" alt="Elegix" style="display:block;border:0;margin-top:32px">`,
+      `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:32px"><tr>` +
+      `<td valign="middle"><img src="cid:logo-green.png" width="149" height="40" alt="Elegix" style="display:block;border:0"></td>` +
+      `<td valign="middle" align="right" style="font-family:${FONT};font-size:14px;line-height:22px;text-align:right">` +
+      SOCIALS.map((x) => `<a href="${esc(x.href)}" style="color:${C.brand};text-decoration:none;white-space:nowrap">${esc(x.label)}</a>`).join(`<span style="color:${C.muted}"> &middot; </span>`) +
+      `</td></tr></table>`,
   );
 }
 
@@ -135,7 +139,7 @@ function balance(scores: Record<string, number>) {
 export function buildEmail(input: EmailInput): BuiltEmail {
   // our own link when UNSUBSCRIBE_SECRET is set, otherwise Mailgun's tracking link
   const unsub = unsubscribeUrl(input.email) ?? "%unsubscribe_url%";
-  const foot = `${fill(EMAIL.footer.sent, { email: input.email })} ${EMAIL.footer.unsubscribe}: ${unsub}\n${EMAIL.footer.copyright}`;
+  const foot = `${fill(EMAIL.footer.sent, { email: input.email })} ${EMAIL.footer.unsubscribe}: ${unsub}\n${EMAIL.footer.copyright}\n${SOCIALS.map((x) => `${x.label}: ${x.href}`).join("\n")}`;
   const waitText = (reply: string) => `${EMAIL.wait.title}\n${reply}\n— ${EMAIL.wait.name}\n${EMAIL.wait.note}`;
 
   if (input.source === "balance-check" && input.scores) {

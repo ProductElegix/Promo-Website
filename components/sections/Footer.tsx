@@ -23,7 +23,7 @@ export function Footer() {
         ))}
         <nav className={styles.col} aria-label="Social">
           <h2 className={styles.h}>Follow</h2>
-          <ul>{FOOTER.socials.map((s) => <li key={s.label}><a href={s.href}>{s.label}</a></li>)}</ul>
+          <ul>{FOOTER.socials.map((s) => <li key={s.label}><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
         </nav>
       </div>
       <div className={`container ${styles.base}`}>
