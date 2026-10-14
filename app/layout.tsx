@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import { Header } from "@/components/sections/Header";
+import { Attribution } from "@/components/ui/Attribution";
 import { Footer } from "@/components/sections/Footer";
 import { META } from "@/lib/content";
 import "./globals.css";
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body>
+        <Attribution />
         <Header />
         {children}
         <Footer />

@@ -45,6 +45,10 @@ export const NAV = [
 ];
 export const NAV_CTA = "Get early access";
 
+/** Shown under every signup form. Bump POLICY_VERSION whenever the privacy policy text changes. */
+export const POLICY_VERSION = "2026-10-14";
+export const CONSENT = { before: "By joining, you agree to our", link: "Privacy Policy", after: ". Unsubscribe any time." };
+
 /** Small tag on cards whose numbers are illustrative. */
 export const EXAMPLE_TAG = "Example";
 
@@ -298,4 +302,55 @@ export const EMAIL = {
     meaning: "Spend 5 minutes tonight writing down what mattered most to you today.",
     home: "Clear one surface you see every day, and keep it clear for a week.",
   } as Record<AreaKey, string>,
+};
+
+/** Privacy policy (/privacy). [Brackets] are details only the owner can fill in. Bump POLICY_VERSION when this changes. */
+export const PRIVACY = {
+  title: "Privacy policy",
+  updated: "Last updated: 14 October 2026",
+  intro: "This policy explains what we collect when you join the Elegix waitlist or take the Life Balance check on this site, why, where it's kept and how to remove it. Elegix is run by [legal name], [country], [postal address] (\"we\").",
+  sections: [
+    {
+      title: "What we collect",
+      items: [
+        "Your email address.",
+        "Which form you used (for example the hero, the balance check or the early access form) and, in the early access form, how you'd like to start.",
+        "If you take the Life Balance check: your 7 area ratings from 1 to 10. You decide what to enter; they are your own estimates, not medical information.",
+        "When you joined, and a record of your consent: the date, the page and the version of this policy.",
+        "Where you came from, if your link had it: the referring website and campaign tags (utm_source, utm_medium, utm_campaign).",
+        "Whether you opened our emails. Our email provider records opens with a small invisible image, along with the device and approximate location of the open.",
+      ],
+    },
+    {
+      title: "Why we collect it",
+      items: [
+        "To keep your place on the waitlist and email you when your spot opens.",
+        "To send you your Life Balance score and a first step for your weakest area.",
+        "To understand which pages and campaigns bring people in, and to improve the product.",
+        "We never sell your data and never use it for advertising by others.",
+      ],
+    },
+    {
+      title: "Where it's kept",
+      items: [
+        "Your details are stored in our mailing list at Mailgun (Mailgun Technologies, Inc., United States), which also sends our emails. Mailgun processes the data on our behalf.",
+        "This site is hosted on Vercel. We don't use analytics or advertising cookies. Your browser stores the campaign tags above locally so they can be sent with your signup.",
+      ],
+    },
+    {
+      title: "How long we keep it",
+      items: [
+        "Until you unsubscribe or ask us to delete it. When you unsubscribe we stop emailing you and keep only a note that you unsubscribed, so we don't email you by mistake.",
+      ],
+    },
+    {
+      title: "Your choices and rights",
+      items: [
+        "Unsubscribe any time with the link at the bottom of every email.",
+        "Ask us for a copy of your data, to correct it or to delete it: write to hello@elegix.net and we'll reply within 30 days.",
+        "If you're in the EU or UK, you can also complain to your local data protection authority.",
+      ],
+    },
+  ],
+  contact: "Questions about privacy: hello@elegix.net",
 };

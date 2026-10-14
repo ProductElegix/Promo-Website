@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { AREAS, AREA_ORDER, CHECK, type AreaKey } from "@/lib/content";
+import Link from "next/link";
+import { AREAS, AREA_ORDER, CHECK, CONSENT, type AreaKey } from "@/lib/content";
+import { readAttribution } from "@/lib/attribution";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
@@ -32,7 +34,7 @@ export function BalanceCheck() {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source: "balance-check", scores, company }),
+        body: JSON.stringify({ email: value, source: "balance-check", scores, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean };
       if (!res.ok) throw new Error(data.error || "We couldn't save your check. Please try again.");
@@ -89,6 +91,7 @@ export function BalanceCheck() {
                 <input type="text" name="company" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
                 <button type="submit" className="btn" disabled={busy}>{busy ? "Sending…" : CHECK.button}</button>
               </div>
+              <p className={styles.consent}>{CONSENT.before} <Link href="/privacy">{CONSENT.link}</Link>{CONSENT.after}</p>
               <p id="check-status" className={styles.error} role="status" aria-live="polite">{error}</p>
             </form>
           )}

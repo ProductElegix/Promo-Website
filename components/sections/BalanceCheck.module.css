@@ -42,3 +42,5 @@
   .submit { flex-direction: column; border-radius: 20px; padding: 8px; }
   .submit input[type="email"] { padding: 10px 10px; }
 }
+.consent { font-size: 0.78rem; color: var(--muted); }
+.consent a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }

@@ -1,6 +1,9 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { CONSENT } from "@/lib/content";
+import { readAttribution } from "@/lib/attribution";
 import styles from "./WaitlistForm.module.css";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -34,7 +37,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source, start, company }),
+        body: JSON.stringify({ email: value, source, start, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean };
       if (!res.ok) throw new Error(data.error || "We couldn't save your email. Please try again.");
@@ -60,6 +63,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
           {busy ? "Joining…" : buttonLabel}
         </button>
       </form>
+      <p className={styles.consent}>{CONSENT.before} <Link href="/privacy">{CONSENT.link}</Link>{CONSENT.after}</p>
       <p id={`${id}-status`} className={`${styles.msg} ${styles[status.kind]}`} role="status" aria-live="polite">{status.text}</p>
     </div>
   );
