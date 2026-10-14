@@ -15,9 +15,9 @@ npm run build && npm start
 The waitlist runs on Mailgun (US region, sending domain `mail.elegix.net`). Every signup from any form on the page:
 
 1. is added to the Mailgun mailing list `waitlist@mail.elegix.net` with its details as member variables (`source`, `start`, `scores`, `joinedAt`). **This list is the waitlist.** See it in Mailgun → Send → Mailing lists → `waitlist@mail.elegix.net`, where you can also download the members as CSV.
-2. gets a confirmation email from "Edward from Elegix" `<edward@mail.elegix.net>` (replies go to `hello@elegix.net`). People who took the balance check also get their 7 area scores, their average, their weakest area and one first step for it. Email copy lives in `EMAIL` in `lib/content.ts`.
+2. gets a confirmation email from "Edward from Elegix" `<edward@mail.elegix.net>` (replies go to `hello@elegix.net`). People who took the balance check get their score, all 7 areas and a first step for their weakest area instead of the welcome content.
 
-To land in Gmail's Primary tab rather than Promotions, the email is written as a short personal note: plain text only (no HTML part), no images, buttons or links, open and click tracking switched off for these messages, and a question that invites a reply. Keep it that way when you edit the copy.
+The emails follow the Figma file "[DS] Foundation Elegix" → Email Template → Welcome eng. Layout lives in `lib/email/template.ts`, copy in `EMAIL` in `lib/content.ts`. Images (logo, illustration, icons) are PNGs in `lib/email/assets/`, attached inline (`cid:`), so they show without public hosting; after changing a PNG run `node lib/email/build-assets.mjs`. Open, click and unsubscribe tracking follow the domain settings in Mailgun; the footer's unsubscribe link is Mailgun's `%unsubscribe_url%`.
 
 A failed email never loses a signup: the person is already on the list. The API allows 5 signups a minute per IP, and a hidden honeypot field filters simple bots.
 

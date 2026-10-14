@@ -1,4 +1,5 @@
-import { AREAS, AREA_ORDER, EMAIL, type AreaKey } from "./content";
+import { EMAIL_ASSETS } from "./email/assets";
+import { buildEmail } from "./email/template";
 
 /**
  * Mailgun (REST API) for the waitlist: every signup is stored as a member of the mailing list
@@ -51,59 +52,30 @@ export async function addToWaitlist(cfg: Config, s: Signup): Promise<void> {
   if (!res.ok) throw new Error(`list add failed: ${res.status} ${await res.text()}`);
 }
 
-function balance(scores: Record<string, number>) {
-  const values = AREA_ORDER.map((a) => scores[a]);
-  const average = values.reduce((sum, n) => sum + n, 0) / values.length;
-  const lowest = AREA_ORDER.reduce((low, a) => (scores[a] < scores[low] ? a : low), AREA_ORDER[0]) as AreaKey;
-  return { average, lowest };
-}
-
 /**
- * A short personal note in plain text (no HTML part, images, buttons or links),
- * which is what Gmail expects from a 1:1 message rather than a newsletter.
+ * Sends the confirmation (and, for the balance check, the result) with its images attached inline,
+ * so they show without public hosting. Tracking follows the domain settings in Mailgun.
+ * Returns true when Mailgun accepted the message.
  */
-export function buildEmail(s: Signup) {
-  const isCheck = s.source === "balance-check" && !!s.scores;
-  const paragraphs: string[] = [EMAIL.greeting];
-  let subject = EMAIL.subject;
-
-  if (isCheck) {
-    const { average, lowest } = balance(s.scores!);
-    subject = EMAIL.checkSubject.replace("{score}", average.toFixed(1));
-    paragraphs.push(
-      EMAIL.checkIntro,
-      `${EMAIL.checkScore}: ${average.toFixed(1)}/10`,
-      AREA_ORDER.map((a) => `${AREAS[a].name}: ${s.scores![a]}/10`).join("\n"),
-      `${EMAIL.checkLowest} ${AREAS[lowest].name}. ${EMAIL.firstStepLabel}: ${EMAIL.firstSteps[lowest]}`,
-      EMAIL.checkQuestion,
-      EMAIL.checkWaitlist,
-    );
-  } else {
-    paragraphs.push(EMAIL.intro, EMAIL.next, EMAIL.question);
-  }
-  paragraphs.push(EMAIL.signature, `--\n${EMAIL.footer}`);
-
-  return { subject, text: paragraphs.join("\n\n") };
-}
-
-/** Sends the confirmation (and, for the balance check, the result). Returns true when Mailgun accepted it. */
 export async function sendConfirmation(cfg: Config, s: Signup, testMode = false): Promise<boolean> {
   const mail = buildEmail(s);
-  const form: Record<string, string> = {
-    from: cfg.from,
-    to: s.email,
-    subject: mail.subject,
-    // plain text only, like a message typed by a person
-    text: mail.text,
-    "h:Reply-To": "hello@elegix.net",
-    // no open pixel, no rewritten links, no auto unsubscribe footer: all of these read as bulk mail
-    "o:tracking": "no",
-    "o:tracking-opens": "no",
-    "o:tracking-clicks": "no",
-    "o:tag": s.source === "balance-check" ? "balance-check" : "waitlist",
-  };
-  if (testMode) form["o:testmode"] = "yes";
-  const res = await call(cfg, `/v3/${cfg.domain}/messages`, form);
+  const form = new FormData();
+  form.append("from", cfg.from);
+  form.append("to", s.email);
+  form.append("subject", mail.subject);
+  form.append("text", mail.text);
+  form.append("html", mail.html);
+  form.append("h:Reply-To", "hello@elegix.net");
+  form.append("o:tag", s.source === "balance-check" ? "balance-check" : "waitlist");
+  if (testMode) form.append("o:testmode", "yes");
+  for (const name of mail.inline) {
+    form.append("inline", new Blob([Buffer.from(EMAIL_ASSETS[name], "base64")], { type: "image/png" }), name);
+  }
+  const res = await fetch(`${cfg.base}/v3/${cfg.domain}/messages`, {
+    method: "POST",
+    headers: { Authorization: `Basic ${Buffer.from(`api:${cfg.key}`).toString("base64")}` },
+    body: form,
+  });
   if (!res.ok) console.error("[waitlist] email failed", res.status, await res.text());
   return res.ok;
 }
