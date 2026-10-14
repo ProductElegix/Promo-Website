@@ -170,9 +170,8 @@ export const APP = {
   lede: "Goals, habits and tasks in one place, sorted by life area. No dashboards to build. No guilt trips.",
   chips: ["Balance score", "Monthly review", "Why story", "Ready templates", "iOS & Android"],
   screens: [
-    { label: "Home", media: { alt: "Elegix home screen", brief: "App screenshot · Home · 1170×2532", ratio: "9 / 19.5" } },
-    { label: "Balance", media: { alt: "Elegix balance screen", brief: "App screenshot · Balance · 1170×2532", ratio: "9 / 19.5" } },
-    { label: "Monthly review", media: { alt: "Elegix monthly review screen", brief: "App screenshot · Monthly review · 1170×2532", ratio: "9 / 19.5" } },
+    { label: "Home", media: { src: "/images/app/home.jpg", alt: "Elegix app home screen: goals and habits counters, categories, the Life Area balance score and Why Story", brief: "App screenshot · Home", ratio: "9 / 19.5" } },
+    { label: "Life Area", media: { src: "/images/app/life-area.jpg", alt: "Elegix Life Area screen: a radar chart of life areas with weekly changes and a balance score out of 10", brief: "App screenshot · Life Area", ratio: "9 / 19.5" } },
   ] as { label: string; media: MediaSlot }[],
 };
 
