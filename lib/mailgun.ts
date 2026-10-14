@@ -52,6 +52,12 @@ export async function addToWaitlist(cfg: Config, s: Signup): Promise<void> {
   if (!res.ok) throw new Error(`list add failed: ${res.status} ${await res.text()}`);
 }
 
+/** Marks the person unsubscribed on the waitlist list (kept as a member, so their history stays). */
+export async function unsubscribeFromWaitlist(cfg: Config, email: string): Promise<void> {
+  const res = await call(cfg, `/v3/lists/${cfg.list}/members`, { address: email, subscribed: "no", upsert: "yes" });
+  if (!res.ok) throw new Error(`unsubscribe failed: ${res.status} ${await res.text()}`);
+}
+
 /**
  * Sends the confirmation (and, for the balance check, the result) with its images attached inline,
  * so they show without public hosting. Tracking follows the domain settings in Mailgun.

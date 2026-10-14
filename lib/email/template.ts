@@ -1,4 +1,5 @@
 import { AREAS, AREA_ORDER, EMAIL, type AreaKey } from "../content";
+import { unsubscribeUrl } from "../unsubscribe";
 
 /**
  * Waitlist emails, after the Figma file "[DS] Foundation Elegix" → Email Template → Welcome eng.
@@ -105,12 +106,12 @@ function wait(reply: string) {
   );
 }
 
-function footer(email: string) {
+function footer(email: string, unsub: string) {
   const f = EMAIL.footer;
   const [before, after] = fill(f.sent, { email: "\u0000" }).split("\u0000");
   return card(
     `<p style="margin:0;font-family:${FONT};font-size:16px;line-height:24px;color:${C.muted}">${esc(before)}<span style="color:${C.brand}">${esc(email)}</span>${esc(after)} ` +
-      `<a href="%unsubscribe_url%" style="color:${C.brand};text-decoration:none">${esc(f.unsubscribe)}</a>.</p>` +
+      `<a href="${esc(unsub)}" style="color:${C.brand};text-decoration:none">${esc(f.unsubscribe)}</a>.</p>` +
       `<p style="margin:16px 0 0;font-family:${FONT};font-size:16px;line-height:24px;color:${C.muted}">${esc(f.copyright)}</p>` +
       `<img src="cid:logo-green.png" width="149" height="40" alt="Elegix" style="display:block;border:0;margin-top:32px">`,
   );
@@ -132,7 +133,9 @@ function balance(scores: Record<string, number>) {
 }
 
 export function buildEmail(input: EmailInput): BuiltEmail {
-  const foot = `${fill(EMAIL.footer.sent, { email: input.email })} ${EMAIL.footer.unsubscribe}: %unsubscribe_url%\n${EMAIL.footer.copyright}`;
+  // our own link when UNSUBSCRIBE_SECRET is set, otherwise Mailgun's tracking link
+  const unsub = unsubscribeUrl(input.email) ?? "%unsubscribe_url%";
+  const foot = `${fill(EMAIL.footer.sent, { email: input.email })} ${EMAIL.footer.unsubscribe}: ${unsub}\n${EMAIL.footer.copyright}`;
   const waitText = (reply: string) => `${EMAIL.wait.title}\n${reply}\n— ${EMAIL.wait.name}\n${EMAIL.wait.note}`;
 
   if (input.source === "balance-check" && input.scores) {
@@ -147,7 +150,7 @@ export function buildEmail(input: EmailInput): BuiltEmail {
       firstStep(lowest),
       belief(c.button),
       wait(c.reply),
-      footer(input.email),
+      footer(input.email, unsub),
     ].join(""));
     const text = [
       fill(c.title, vars),
@@ -163,7 +166,7 @@ export function buildEmail(input: EmailInput): BuiltEmail {
   }
 
   const w = EMAIL.welcome;
-  const html = page(w.subject, [header(), hero(w.title, w.subtitle, true), grid(), belief(w.button), wait(w.reply), footer(input.email)].join(""));
+  const html = page(w.subject, [header(), hero(w.title, w.subtitle, true), grid(), belief(w.button), wait(w.reply), footer(input.email, unsub)].join(""));
   const text = [
     w.title,
     w.subtitle,
