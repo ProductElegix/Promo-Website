@@ -91,20 +91,17 @@ function firstStep(lowest: AreaKey) {
   );
 }
 
-function signoff() {
-  return card(p(EMAIL.signoff.question, C.text, "left") + p(`— ${EMAIL.signoff.name}`, C.muted, "left", "padding-top:8px"));
-}
-
 function belief(btn: { label: string; href: string }) {
   return card(h(EMAIL.belief.title, 24, 30, "#ffffff") + p(EMAIL.belief.text, "#ffffff", "center", "padding-top:16px") + button(btn.label, btn.href), C.brand);
 }
 
-function app() {
+function wait(reply: string) {
+  const k = EMAIL.wait;
   return card(
-    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>` +
-      `<td valign="middle">${h(EMAIL.app.title, 20, 28, C.brand, "left", "font-style:italic;font-weight:700")}</td>` +
-      `<td valign="middle" align="right"><span style="display:inline-block;padding:8px 14px;border-radius:9999px;background:${C.bg};font-family:${FONT};font-size:13px;line-height:18px;color:${C.muted};text-align:center">${esc(EMAIL.app.note)}</span></td>` +
-      `</tr></table>`,
+    h(k.title, 20, 28, C.brand, "left", "font-style:italic;font-weight:700") +
+      p(reply, C.text, "left", "padding-top:8px") +
+      p(`— ${k.name}`, C.muted, "left", "padding-top:8px") +
+      `<p style="margin:16px 0 0"><span style="display:inline-block;padding:8px 14px;border-radius:9999px;background:${C.bg};font-family:${FONT};font-size:13px;line-height:18px;color:${C.muted}">${esc(k.note)}</span></p>`,
   );
 }
 
@@ -135,8 +132,8 @@ function balance(scores: Record<string, number>) {
 }
 
 export function buildEmail(input: EmailInput): BuiltEmail {
-  const sign = `${EMAIL.signoff.question}\n— ${EMAIL.signoff.name}`;
   const foot = `${fill(EMAIL.footer.sent, { email: input.email })} ${EMAIL.footer.unsubscribe}: %unsubscribe_url%\n${EMAIL.footer.copyright}`;
+  const waitText = (reply: string) => `${EMAIL.wait.title}\n${reply}\n— ${EMAIL.wait.name}\n${EMAIL.wait.note}`;
 
   if (input.source === "balance-check" && input.scores) {
     const c = EMAIL.check;
@@ -148,9 +145,8 @@ export function buildEmail(input: EmailInput): BuiltEmail {
       hero(fill(c.title, vars), fill(c.subtitle, vars), false),
       areas(input.scores, lowest),
       firstStep(lowest),
-      signoff(),
       belief(c.button),
-      app(),
+      wait(c.reply),
       footer(input.email),
     ].join(""));
     const text = [
@@ -158,25 +154,23 @@ export function buildEmail(input: EmailInput): BuiltEmail {
       fill(c.subtitle, vars),
       `${c.areasTitle}:\n${AREA_ORDER.map((a) => `${AREAS[a].name}: ${input.scores![a]}/10`).join("\n")}`,
       `${fill(c.stepTitle, vars)}: ${EMAIL.firstSteps[lowest]}`,
-      sign,
       `${EMAIL.belief.title}: ${EMAIL.belief.text}`,
       `${c.button.label}: ${c.button.href}`,
-      EMAIL.app.note,
+      waitText(c.reply),
       `--\n${foot}`,
     ].join("\n\n");
     return { subject, text, html, inline: ["logo-white.png", "logo-green.png"] };
   }
 
   const w = EMAIL.welcome;
-  const html = page(w.subject, [header(), hero(w.title, w.subtitle, true), grid(), signoff(), belief(w.button), app(), footer(input.email)].join(""));
+  const html = page(w.subject, [header(), hero(w.title, w.subtitle, true), grid(), belief(w.button), wait(w.reply), footer(input.email)].join(""));
   const text = [
     w.title,
     w.subtitle,
     `${w.gridTitle}\n${w.grid.map((g) => `- ${g.text}`).join("\n")}`,
-    sign,
     `${EMAIL.belief.title}: ${EMAIL.belief.text}`,
     `${w.button.label}: ${w.button.href}`,
-    EMAIL.app.note,
+    waitText(w.reply),
     `--\n${foot}`,
   ].join("\n\n");
   return { subject: w.subject, text, html, inline: ["logo-white.png", "logo-green.png", "hero.png", ...w.grid.map((g) => g.icon)] };
