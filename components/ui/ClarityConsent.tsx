@@ -7,7 +7,7 @@ import styles from "./ClarityConsent.module.css";
 const KEY = "elegix_cookie_consent"; // "yes" | "no"
 
 declare global {
-  interface Window { clarity?: ((...args: unknown[]) => void) & { q?: unknown[] } }
+  interface Window { clarity?: ((...args: unknown[]) => void) & { q?: unknown[] }; gtag?: (...args: unknown[]) => void }
 }
 
 /** Loads the Clarity tag (the official snippet) and signals consent to it. */
@@ -29,7 +29,12 @@ function save(v: "yes" | "no") {
   try { localStorage.setItem(KEY, v); } catch { /* storage blocked: ask again next visit */ }
 }
 
-/** Small cookie banner: Clarity runs only after "Accept". The choice is remembered in this browser. */
+/** Google Analytics Consent Mode: analytics cookies only after "Accept"; ads stay denied. */
+function grantGoogle() {
+  window.gtag?.("consent", "update", { analytics_storage: "granted" });
+}
+
+/** Small cookie banner: Clarity and GA cookies run only after "Accept". The choice is remembered in this browser. */
 export function ClarityConsent({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
 
@@ -45,7 +50,7 @@ export function ClarityConsent({ id }: { id: string }) {
       <p>We use cookies to see how people use this site and improve it. <Link href="/privacy">Privacy Policy</Link></p>
       <div className={styles.actions}>
         <button type="button" className={styles.decline} onClick={() => { save("no"); setOpen(false); }}>Decline</button>
-        <button type="button" className={styles.accept} onClick={() => { save("yes"); setOpen(false); loadClarity(id); }}>Accept</button>
+        <button type="button" className={styles.accept} onClick={() => { save("yes"); setOpen(false); loadClarity(id); grantGoogle(); }}>Accept</button>
       </div>
     </div>
   );

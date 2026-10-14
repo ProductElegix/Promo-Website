@@ -41,6 +41,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean };
       if (!res.ok) throw new Error(data.error || "We couldn't save your email. Please try again.");
+      window.gtag?.("event", "generate_lead", { form: source });
       setStatus({ kind: "ok", text: data.emailed ? `You're on the list. We've sent a confirmation to ${value}.` : `You're on the list. We'll email ${value} when your spot opens.` });
       setEmail("");
     } catch (err) {

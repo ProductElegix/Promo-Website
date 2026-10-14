@@ -4,6 +4,7 @@ import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
 import { Clarity } from "@/components/ui/Clarity";
 import { CloudflareAnalytics } from "@/components/ui/CloudflareAnalytics";
+import { GoogleAnalytics } from "@/components/ui/GoogleAnalytics";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { META, SOCIALS } from "@/lib/content";
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Attribution />
         <Clarity />
         <CloudflareAnalytics />
+        <GoogleAnalytics />
         <Header />
         {children}
         <Footer />

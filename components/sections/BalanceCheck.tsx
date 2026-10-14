@@ -41,6 +41,7 @@ export function BalanceCheck() {
       const values = AREA_ORDER.map((a) => scores[a]);
       const average = values.reduce((sum, n) => sum + n, 0) / values.length;
       const lowest = AREA_ORDER.reduce((low, a) => (scores[a] < scores[low] ? a : low), AREA_ORDER[0]);
+      window.gtag?.("event", "generate_lead", { form: "balance-check" });
       setResult({ average, lowest, email: value, emailed: !!data.emailed });
     } catch (err) {
       setError(err instanceof Error ? err.message : "We couldn't save your check. Please try again.");
