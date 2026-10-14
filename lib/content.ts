@@ -55,13 +55,10 @@ export const SOCIALS = [
 ];
 
 /** Shown under every signup form. Bump POLICY_VERSION whenever the privacy policy text changes. */
-export const POLICY_VERSION = "2026-10-14.3";
+export const POLICY_VERSION = "2026-10-14.4";
 
-/**
- * Who runs Elegix, shown in the privacy policy once filled in.
- * TODO(owner): add the legal name, country and postal address (needed for GDPR).
- */
-export const LEGAL_ENTITY = { name: "", country: "", address: "" };
+/** Who runs Elegix, shown in the privacy policy: an individual entrepreneur (FOP) in Ukraine. */
+export const LEGAL_ENTITY = { name: "Eduard Korytskyi", form: "an individual entrepreneur (FOP)", city: "Lutsk", country: "Ukraine" };
 export const CONSENT = { before: "By joining, you agree to our", link: "Privacy Policy", after: ". Unsubscribe any time." };
 
 /** Small tag on cards whose numbers are illustrative. */

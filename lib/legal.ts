@@ -718,7 +718,7 @@ export const TERMS: LegalDoc = {
     },
     {
      "type": "p",
-     "text": "These Terms are governed by the laws of the jurisdiction in which Elegix is incorporated, without regard to conflict-of-law principles."
+     "text": "These Terms are governed by the laws of Ukraine, without regard to conflict-of-law principles. Subject to Sections 20.2 and 20.3, any dispute that goes to court will be heard by the courts of Ukraine. Elegix is operated by Eduard Korytskyi, an individual entrepreneur (FOP) registered in Lutsk, Ukraine. If you live in the EU or UK, this does not take away the protection you have under the consumer laws of your country."
     }
    ]
   },
@@ -763,10 +763,10 @@ export const TERMS: LegalDoc = {
 
 /**
  * What this website and the waitlist collect. Shown as its own section in /privacy, right after the introduction.
- * The operator line appears only once LEGAL_ENTITY in lib/content.ts is filled in.
+ * The operator line comes from LEGAL_ENTITY in lib/content.ts.
  */
-export function websiteSection(entity: { name: string; country: string; address: string }): { title: string; blocks: LegalBlock[] } {
-  const operator = entity.name ? ` Elegix is operated by ${[entity.name, entity.country, entity.address].filter(Boolean).join(", ")}.` : "";
+export function websiteSection(entity: { name: string; form: string; city: string; country: string }): { title: string; blocks: LegalBlock[] } {
+  const operator = entity.name ? ` Elegix is operated by ${entity.name}, ${entity.form} registered in ${[entity.city, entity.country].filter(Boolean).join(", ")}, who is responsible for your data.` : "";
   return {
     title: "Our website and waitlist",
     blocks: [
