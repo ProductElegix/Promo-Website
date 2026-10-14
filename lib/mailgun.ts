@@ -60,7 +60,7 @@ export async function unsubscribeFromWaitlist(cfg: Config, email: string): Promi
 
 /**
  * Sends the confirmation (and, for the balance check, the result) with its images attached inline,
- * so they show without public hosting. Tracking follows the domain settings in Mailgun.
+ * so they show without public hosting. Open tracking follows the Mailgun domain settings; click tracking is off (see below).
  * Returns true when Mailgun accepted the message.
  */
 export async function sendConfirmation(cfg: Config, s: Signup, testMode = false): Promise<boolean> {
@@ -73,6 +73,9 @@ export async function sendConfirmation(cfg: Config, s: Signup, testMode = false)
   form.append("html", mail.html);
   form.append("h:Reply-To", "hello@elegix.net");
   form.append("o:tag", s.source === "balance-check" ? "balance-check" : "waitlist");
+  // Click tracking off for now: the tracking domain email.mail.elegix.net only serves http, so tracked
+  // links fail in Chrome. Remove this line once HTTPS tracking is enabled for mail.elegix.net in Mailgun.
+  form.append("o:tracking-clicks", "no");
   if (testMode) form.append("o:testmode", "yes");
   for (const name of mail.inline) {
     form.append("inline", new Blob([Buffer.from(EMAIL_ASSETS[name], "base64")], { type: "image/png" }), name);
