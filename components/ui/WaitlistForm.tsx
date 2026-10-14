@@ -52,7 +52,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
 
   const id = `email-${source}`;
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} data-clarity-mask="true">
       <form className={`${styles.form} ${styles[variant]}`} onSubmit={onSubmit} noValidate>
         <label htmlFor={id} className="visually-hidden">Email</label>
         <input id={id} type="email" inputMode="email" autoComplete="email" placeholder={placeholder}

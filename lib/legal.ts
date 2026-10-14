@@ -784,7 +784,9 @@ export function websiteSection(entity: { name: string; form: string; city: strin
       { type: "list", items: [
         "We use this to keep your place on the waitlist, email you when your spot opens, send your Life Balance score with a first step, and understand which pages and campaigns bring people in.",
         "Waitlist details are stored in our mailing list at Mailgun (Mailgun Technologies, Inc., United States), which also sends our emails and processes the data on our behalf.",
-        "The website is hosted on Vercel. It uses no analytics or advertising cookies.",
+        "The website is hosted on Vercel and uses no advertising cookies.",
+        "For simple visitor statistics we use Cloudflare Web Analytics (Cloudflare, Inc., United States). It counts page views and referrers in aggregate, uses no cookies and doesn't identify you.",
+        "To understand how people use the website, we use Microsoft Clarity (Microsoft Corporation, United States). It records clicks, scrolling and mouse movement, creates heatmaps and session replays, and sets cookies to recognise a returning browser. It also sees your device type and approximate location. Text you type into our forms is masked and never recorded. Clarity runs only if you choose “Accept” in the cookie banner; choose “Decline” and it never loads. To change your choice, clear this site's data in your browser and the banner will ask again. Microsoft processes this data as described in the Microsoft Privacy Statement.",
         "The app services named elsewhere in this policy (Firebase Analytics, Firebase Crashlytics, RevenueCat, Apple and Google billing, Stripe) apply to the app once it is released. The website doesn't use them.",
         "We keep waitlist details until you unsubscribe or ask us to delete them. After you unsubscribe we keep only a note that you did, so we don't email you by mistake.",
         "Unsubscribe any time with the link at the bottom of every email, or write to hello@elegix.net to get a copy of your data or have it deleted.",

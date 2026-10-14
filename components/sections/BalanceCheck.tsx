@@ -71,7 +71,7 @@ export function BalanceCheck() {
               <p className={styles.done}>{result.emailed ? CHECK.sent : CHECK.done} <b>{result.email}</b>.</p>
             </div>
           ) : (
-            <form className={styles.form} onSubmit={onSubmit} noValidate>
+            <form className={styles.form} onSubmit={onSubmit} noValidate data-clarity-mask="true">
               <fieldset className={styles.sliders}>
                 <legend>{CHECK.question}</legend>
                 {AREA_ORDER.map((a) => (

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
+import { Clarity } from "@/components/ui/Clarity";
+import { CloudflareAnalytics } from "@/components/ui/CloudflareAnalytics";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { META, SOCIALS } from "@/lib/content";
@@ -62,6 +64,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <JsonLd data={ORGANIZATION} />
         <Attribution />
+        <Clarity />
+        <CloudflareAnalytics />
         <Header />
         {children}
         <Footer />
