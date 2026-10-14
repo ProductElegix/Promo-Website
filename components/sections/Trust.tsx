@@ -16,7 +16,7 @@ export function Trust() {
           <figure className={styles.founder} data-reveal>
             <div className={styles.photo}><Media media={f.media} fill sizes="(max-width: 860px) 100vw, 360px" /></div>
             <div className={styles.note}>
-              <blockquote className={styles.quote}>{f.quote}</blockquote>
+              <blockquote className={styles.quote}>{f.quote || f.fallback}</blockquote>
               <figcaption><b>{f.name}</b>, {f.role}</figcaption>
             </div>
           </figure>

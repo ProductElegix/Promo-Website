@@ -1,7 +1,7 @@
 /**
  * Legal pages (/privacy, /terms). The app's Privacy Policy and Terms of Service come from the owner's
  * documents (effective March 30, 2025); the "Our website and waitlist" privacy section describes what
- * this site does. [Brackets] are details still to fill in.
+ * this site does. The operator details come from LEGAL_ENTITY in lib/content.ts.
  */
 export type LegalBlock = { type: "p" | "h3"; text: string } | { type: "list"; items: string[] };
 export type LegalDoc = { title: string; effective: string; contact: string; sections: { title: string; blocks: LegalBlock[] }[] };
@@ -19,11 +19,11 @@ export const PRIVACY_POLICY: LegalDoc = {
     },
     {
      "type": "p",
-     "text": "By downloading, installing, or using the Elegix app — available on the Apple App Store and Google Play Store — you agree to the practices described in this Policy. If you do not agree, please do not use the Services. If you change your mind in the future, you may stop using the Services and exercise your rights as described below."
+     "text": "Elegix is currently in development; when released, the Elegix app will be available on the Apple App Store and Google Play Store. By downloading, installing, or using the Elegix app, you agree to the practices described in this Policy. If you do not agree, please do not use the Services. If you change your mind in the future, you may stop using the Services and exercise your rights as described below."
     },
     {
      "type": "p",
-     "text": "For questions or concerns, contact us at mail@elegix.net."
+     "text": "For questions or concerns, contact us at hello@elegix.net."
     }
    ]
   },
@@ -177,7 +177,7 @@ export const PRIVACY_POLICY: LegalDoc = {
     },
     {
      "type": "p",
-     "text": "No method of electronic transmission or storage is completely secure. If you believe your account has been compromised, contact us immediately at mail@elegix.net."
+     "text": "No method of electronic transmission or storage is completely secure. If you believe your account has been compromised, contact us immediately at hello@elegix.net."
     }
    ]
   },
@@ -228,10 +228,10 @@ export const PRIVACY_POLICY: LegalDoc = {
      "type": "list",
      "items": [
       "Account information: You may update or correct your account details at any time within the app settings.",
-      "Marketing communications: You may opt out of promotional emails by clicking the \"Unsubscribe\" link in any such email, or by contacting us at mail@elegix.net. You will still receive essential transactional messages.",
+      "Marketing communications: You may opt out of promotional emails by clicking the \"Unsubscribe\" link in any such email, or by contacting us at hello@elegix.net. You will still receive essential transactional messages.",
       "Push notifications: You can manage or disable push notifications through your device settings at any time.",
       "Analytics opt-out: You may limit ad tracking or analytics collection through your iOS or Android device privacy settings.",
-      "Account deletion: You may request deletion of your account and associated data by contacting us at mail@elegix.net."
+      "Account deletion: You may request deletion of your account and associated data by contacting us at hello@elegix.net."
      ]
     }
    ]
@@ -241,7 +241,7 @@ export const PRIVACY_POLICY: LegalDoc = {
    "blocks": [
     {
      "type": "p",
-     "text": "If you are based in the European Economic Area or the United Kingdom, you have the following rights under applicable data protection law. To exercise any of these rights, contact us at mail@elegix.net. We may ask you to verify your identity before processing your request."
+     "text": "If you are based in the European Economic Area or the United Kingdom, you have the following rights under applicable data protection law. To exercise any of these rights, contact us at hello@elegix.net. We may ask you to verify your identity before processing your request."
     },
     {
      "type": "list",
@@ -263,7 +263,7 @@ export const PRIVACY_POLICY: LegalDoc = {
    "blocks": [
     {
      "type": "p",
-     "text": "Our Services are not directed to children under the age of 13 (or 16 in certain jurisdictions). We do not knowingly collect personal information from children. If you believe a child has provided us with their information, please contact us at mail@elegix.net and we will take steps to delete such information promptly."
+     "text": "Our Services are not directed to children under the age of 13 (or 16 in certain jurisdictions). We do not knowingly collect personal information from children. If you believe a child has provided us with their information, please contact us at hello@elegix.net and we will take steps to delete such information promptly."
     }
    ]
   },
@@ -276,7 +276,7 @@ export const PRIVACY_POLICY: LegalDoc = {
     },
     {
      "type": "h3",
-     "text": "Elegix Privacy enquiries: mail@elegix.net"
+     "text": "Elegix Privacy enquiries: hello@elegix.net"
     },
     {
      "type": "p",
@@ -298,7 +298,7 @@ export const PRIVACY_POLICY: LegalDoc = {
    ]
   }
  ],
- "contact": "mail@elegix.net"
+ "contact": "hello@elegix.net"
 };
 
 export const TERMS: LegalDoc = {
@@ -310,7 +310,7 @@ export const TERMS: LegalDoc = {
    "blocks": [
     {
      "type": "p",
-     "text": "Welcome, and thank you for your interest in Elegix. These Terms of Service are a legally binding contract between you and Elegix regarding your use of the Elegix mobile application and related services (collectively, the “Service”), available on the Apple App Store and Google Play Store."
+     "text": "Welcome, and thank you for your interest in Elegix. These Terms of Service are a legally binding contract between you and Elegix regarding your use of the Elegix mobile application and related services (collectively, the “Service”). Elegix is currently in development; when released, the Service will be available on the Apple App Store and Google Play Store."
     },
     {
      "type": "p",
@@ -331,7 +331,7 @@ export const TERMS: LegalDoc = {
    "blocks": [
     {
      "type": "p",
-     "text": "Elegix offers a mobile productivity application available on a freemium model. The free tier provides access to core features at no cost. The “Premium” tier provides access to additional features via an auto-renewing paid subscription, processed through the Apple App Store or Google Play Store, as applicable."
+     "text": "Elegix offers a mobile life balance application available on a freemium model. The free tier provides access to core features at no cost. The “Premium” tier provides access to additional features via an auto-renewing paid subscription, processed through the Apple App Store or Google Play Store, as applicable."
     }
    ]
   },
@@ -353,7 +353,7 @@ export const TERMS: LegalDoc = {
     },
     {
      "type": "p",
-     "text": "You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. If you believe your account is no longer secure, please contact us immediately at mail@elegix.net."
+     "text": "You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. If you believe your account is no longer secure, please contact us immediately at hello@elegix.net."
     }
    ]
   },
@@ -561,7 +561,7 @@ export const TERMS: LegalDoc = {
     },
     {
      "type": "p",
-     "text": "We may send you transactional emails related to your account and, where you have opted in, promotional emails about the Service. You may opt out of promotional emails at any time by following the unsubscribe link in the email or by contacting us at mail@elegix.net."
+     "text": "We may send you transactional emails related to your account and, where you have opted in, promotional emails about the Service. You may opt out of promotional emails at any time by following the unsubscribe link in the email or by contacting us at hello@elegix.net."
     }
    ]
   },
@@ -592,7 +592,7 @@ export const TERMS: LegalDoc = {
    "blocks": [
     {
      "type": "p",
-     "text": "If you believe that content on the Service infringes your intellectual property rights, please contact us at mail@elegix.net with the following information:"
+     "text": "If you believe that content on the Service infringes your intellectual property rights, please contact us at hello@elegix.net with the following information:"
     },
     {
      "type": "list",
@@ -637,7 +637,7 @@ export const TERMS: LegalDoc = {
     },
     {
      "type": "p",
-     "text": "If you violate any provision of these Terms, your authorization to use the Service and these Terms automatically terminate. Elegix may also, at its sole discretion, suspend or terminate your account or access to the Service at any time, with or without notice. You may terminate your account at any time by contacting us at mail@elegix.net."
+     "text": "If you violate any provision of these Terms, your authorization to use the Service and these Terms automatically terminate. Elegix may also, at its sole discretion, suspend or terminate your account or access to the Service at any time, with or without notice. You may terminate your account at any time by contacting us at hello@elegix.net."
     },
     {
      "type": "h3",
@@ -681,7 +681,7 @@ export const TERMS: LegalDoc = {
    "blocks": [
     {
      "type": "p",
-     "text": "TO THE FULLEST EXTENT PERMITTED BY LAW, ELEGIX AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS WILL NOT BE LIABLE TO YOU FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATED TO YOUR USE OF OR INABILITY TO USE THE SERVICE. TO THE FULLEST EXTENT PERMITTED BY LAW, ELEGIX’S TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING OUT OF OR RELATED TO THESE TERMS OR THE SERVICE IS LIMITED TO THE GREATER OF: (A) THE AMOUNTS YOU HAVE PAID TO ELEGIX (VIA THE APPLICABLE APP STORE) IN THE 12 MONTHS PRIOR TO THE CLAIM; OR (B) [amount]."
+     "text": "TO THE FULLEST EXTENT PERMITTED BY LAW, ELEGIX AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS WILL NOT BE LIABLE TO YOU FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATED TO YOUR USE OF OR INABILITY TO USE THE SERVICE. TO THE FULLEST EXTENT PERMITTED BY LAW, ELEGIX’S TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING OUT OF OR RELATED TO THESE TERMS OR THE SERVICE IS LIMITED TO THE GREATER OF: (A) THE AMOUNTS YOU HAVE PAID TO ELEGIX (VIA THE APPLICABLE APP STORE) IN THE 12 MONTHS PRIOR TO THE CLAIM; OR (B) $50 (USD 50)."
     }
    ]
   },
@@ -694,7 +694,7 @@ export const TERMS: LegalDoc = {
     },
     {
      "type": "p",
-     "text": "Before filing any formal legal claim, you agree to contact Elegix at mail@elegix.net and attempt to resolve the dispute informally. Most concerns can be resolved this way."
+     "text": "Before filing any formal legal claim, you agree to contact Elegix at hello@elegix.net and attempt to resolve the dispute informally. Most concerns can be resolved this way."
     },
     {
      "type": "h3",
@@ -733,7 +733,7 @@ export const TERMS: LegalDoc = {
       "Waiver: Elegix’s failure to enforce any provision of these Terms will not constitute a waiver of that provision.",
       "Assignment: You may not assign or transfer your rights under these Terms without Elegix’s prior written consent. Elegix may assign these Terms without restriction.",
       "No Third-Party Beneficiaries: These Terms do not create any third-party beneficiary rights.",
-      "Contact: For questions about these Terms, contact us at mail@elegix.net."
+      "Contact: For questions about these Terms, contact us at hello@elegix.net."
      ]
     }
    ]
@@ -758,30 +758,37 @@ export const TERMS: LegalDoc = {
    ]
   }
  ],
- "contact": "mail@elegix.net"
+ "contact": "hello@elegix.net"
 };
 
-/** What this website and the waitlist collect. Shown as its own section in /privacy, right after the introduction. */
-export const WEBSITE_SECTION: { title: string; blocks: LegalBlock[] } = {
-  title: "Our website and waitlist",
-  blocks: [
-    { type: "p", text: "This section covers the Elegix website and its waitlist, before the app is available. Elegix is operated by [legal name], [country], [postal address]." },
-    { type: "h3", text: "What we collect on the website" },
-    { type: "list", items: [
-      "Your email address, when you join the waitlist or take the Life Balance check.",
-      "Which form you used (for example the hero, the balance check or the early access form) and, in the early access form, how you'd like to start.",
-      "If you take the Life Balance check: your 7 area ratings from 1 to 10. They are your own estimates, not medical information, and we keep your last 10 checks so you can see your progress later.",
-      "When you joined, and a record of your consent: the date, the page and the version of this policy.",
-      "Where you came from, if your link had it: the referring website, the page you first landed on and campaign tags (utm_source, utm_medium, utm_campaign). Your browser keeps these locally until you sign up.",
-      "Whether you opened our emails. Our email provider records opens with a small invisible image, together with the device and approximate location of the open.",
-    ] },
-    { type: "h3", text: "Why and where" },
-    { type: "list", items: [
-      "We use this to keep your place on the waitlist, email you when your spot opens, send your Life Balance score with a first step, and understand which pages and campaigns bring people in.",
-      "Waitlist details are stored in our mailing list at Mailgun (Mailgun Technologies, Inc., United States), which also sends our emails and processes the data on our behalf.",
-      "The website is hosted on Vercel. It uses no analytics or advertising cookies.",
-      "We keep waitlist details until you unsubscribe or ask us to delete them. After you unsubscribe we keep only a note that you did, so we don't email you by mistake.",
-      "Unsubscribe any time with the link at the bottom of every email, or write to mail@elegix.net to get a copy of your data or have it deleted.",
-    ] },
-  ],
-};
+/**
+ * What this website and the waitlist collect. Shown as its own section in /privacy, right after the introduction.
+ * The operator line appears only once LEGAL_ENTITY in lib/content.ts is filled in.
+ */
+export function websiteSection(entity: { name: string; country: string; address: string }): { title: string; blocks: LegalBlock[] } {
+  const operator = entity.name ? ` Elegix is operated by ${[entity.name, entity.country, entity.address].filter(Boolean).join(", ")}.` : "";
+  return {
+    title: "Our website and waitlist",
+    blocks: [
+      { type: "p", text: `This section covers the Elegix website and its waitlist, before the app is released.${operator} Questions: hello@elegix.net.` },
+      { type: "h3", text: "What we collect on the website" },
+      { type: "list", items: [
+        "Your email address, when you join the waitlist or take the Life Balance check.",
+        "Which form you used (for example the hero, the balance check or the early access form) and, in the early access form, how you'd like to start.",
+        "If you take the Life Balance check: your 7 area ratings from 1 to 10. They are your own estimates, not medical information, and we keep your last 10 checks so you can see your progress later.",
+        "When you joined, and a record of your consent: the date, the page and the version of this policy.",
+        "Where you came from, if your link had it: the referring website, the page you first landed on and campaign tags (utm_source, utm_medium, utm_campaign). Your browser keeps these locally until you sign up.",
+        "Whether you opened our emails. Our email provider records opens with a small invisible image, together with the device and approximate location of the open.",
+      ] },
+      { type: "h3", text: "Why and where" },
+      { type: "list", items: [
+        "We use this to keep your place on the waitlist, email you when your spot opens, send your Life Balance score with a first step, and understand which pages and campaigns bring people in.",
+        "Waitlist details are stored in our mailing list at Mailgun (Mailgun Technologies, Inc., United States), which also sends our emails and processes the data on our behalf.",
+        "The website is hosted on Vercel. It uses no analytics or advertising cookies.",
+        "The app services named elsewhere in this policy (Firebase Analytics, Firebase Crashlytics, RevenueCat, Apple and Google billing, Stripe) apply to the app once it is released. The website doesn't use them.",
+        "We keep waitlist details until you unsubscribe or ask us to delete them. After you unsubscribe we keep only a note that you did, so we don't email you by mistake.",
+        "Unsubscribe any time with the link at the bottom of every email, or write to hello@elegix.net to get a copy of your data or have it deleted.",
+      ] },
+    ],
+  };
+}

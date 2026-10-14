@@ -55,7 +55,13 @@ export const SOCIALS = [
 ];
 
 /** Shown under every signup form. Bump POLICY_VERSION whenever the privacy policy text changes. */
-export const POLICY_VERSION = "2026-10-14.2";
+export const POLICY_VERSION = "2026-10-14.3";
+
+/**
+ * Who runs Elegix, shown in the privacy policy once filled in.
+ * TODO(owner): add the legal name, country and postal address (needed for GDPR).
+ */
+export const LEGAL_ENTITY = { name: "", country: "", address: "" };
 export const CONSENT = { before: "By joining, you agree to our", link: "Privacy Policy", after: ". Unsubscribe any time." };
 
 /** Small tag on cards whose numbers are illustrative. */
@@ -190,7 +196,9 @@ export const TRUST = {
   eyebrow: "Who's behind it",
   title: "Why we're building *Elegix*",
   founder: {
-    quote: "[Founder story: 2–3 sentences about why you came to this problem]",
+    // TODO(owner): your story in 2–3 sentences (why you're building Elegix). Until then the card shows `fallback`.
+    quote: "",
+    fallback: "Questions, ideas or your own story with burnout? Write to me directly at hello@elegix.net. I read every message.",
     name: "Edward",
     role: "Founder",
     media: { alt: "Portrait of Edward, founder of Elegix", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
@@ -207,7 +215,7 @@ export const TRUST = {
 export const JOIN = {
   eyebrow: "Early access",
   title: "Join before launch. Get *founding member* perks.",
-  perks: ["First access, in the order you join", "Founding member price, [−X%] locked for life", "Vote on what we build next", "A free plan, forever"],
+  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "A free plan, forever"],
   card: { code: "Founding member", line: "Life balance", spec: ["7 life areas", "Goals · Habits · Tasks", "iOS & Android"] },
   startLabel: "How do you want to start?",
   starts: [
