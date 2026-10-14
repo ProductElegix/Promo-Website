@@ -22,7 +22,7 @@ export function mailgunConfig(): Config | null {
   const domain = process.env.MAILGUN_DOMAIN;
   if (!key || !domain) return null;
   const base = process.env.MAILGUN_REGION === "eu" ? "https://api.eu.mailgun.net" : "https://api.mailgun.net";
-  return { key, domain, base, from: process.env.MAIL_FROM || "Edward from Elegix <edward@elegix.net>", list: `waitlist@${domain}` };
+  return { key, domain, base, from: process.env.MAIL_FROM || `Edward from Elegix <edward@${domain}>`, list: `waitlist@${domain}` };
 }
 
 async function call(cfg: Config, path: string, form: Record<string, string>) {
