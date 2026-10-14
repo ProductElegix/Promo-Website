@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TRUST } from "@/lib/content";
 import { AreaIcon } from "@/components/ui/AreaIcon";
-import { Phone } from "@/components/ui/Phone";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Reveal } from "@/components/ui/Reveal";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import { Wheel } from "@/components/ui/Wheel";
 import { Faq } from "@/components/sections/Faq";
+import { PhotoHero } from "@/components/sections/PhotoHero";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
@@ -24,28 +24,19 @@ export default function About() {
   const photo = TRUST.founder.media;
   return (
     <main>
-      {/* 1. What is Elegix */}
-      <section className={`section ${styles.hero}`} aria-labelledby="about-title">
-        <div className={`container ${styles.heroGrid}`}>
-          <div className={styles.heroText} data-reveal>
-            <span className="label">{A.hero.label}</span>
-            <h1 id="about-title" className={`display ${styles.h1}`}><Rich text={A.hero.title} /></h1>
-            <p className="lede">{A.hero.lede}</p>
-            <div className={styles.ctas}>
-              <a href="#join" className="btn">{A.hero.cta}</a>
-              <Link href={A.hero.secondary.href} className="btn ghost">{A.hero.secondary.label}</Link>
-            </div>
-            <dl className={styles.facts}>
-              {A.hero.facts.map((f) => (
-                <div key={f.label}><dt className="visually-hidden">{f.label}</dt><dd className={styles.factValue}>{f.value}</dd><dd className={styles.factLabel}>{f.label}</dd></div>
-              ))}
-            </dl>
-          </div>
-          <div className={styles.heroVisual} data-reveal>
-            <div className={styles.glow} aria-hidden="true" />
-            <Phone screen={lifeArea.media} priority className={styles.phone} />
-          </div>
+      {/* 1. Hero, same style as the home page */}
+      <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede} screen={lifeArea.media}>
+        <div className={styles.ctas}>
+          <a href="#join" className="btn lime">{A.hero.cta}</a>
+          <Link href={A.hero.secondary.href} className="btn ghost">{A.hero.secondary.label}</Link>
         </div>
+      </PhotoHero>
+      <section className={styles.factsSection} aria-label="Elegix in numbers">
+        <dl className={`container ${styles.facts}`}>
+          {A.hero.facts.map((f) => (
+            <div key={f.label}><dt className="visually-hidden">{f.label}</dt><dd className={styles.factValue}>{f.value}</dd><dd className={styles.factLabel}>{f.label}</dd></div>
+          ))}
+        </dl>
       </section>
 
       {/* 2. What you get */}

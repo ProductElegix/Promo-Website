@@ -345,7 +345,8 @@ export const ABOUT_PAGE = {
   },
   hero: {
     label: "About Elegix",
-    title: "What is *Elegix*?",
+    title: "Built for a *balanced* life, not a busier one",
+    media: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn", brief: "About hero · calm person outdoors · 2400×1600", ratio: "3 / 2" } as MediaSlot,
     lede: "A life balance tracker for people who want to grow at work without losing the rest of their life. Our mission is simple: to help people build a life they're proud of, one small step at a time.",
     cta: "Get early access",
     secondary: { href: "/#check", label: "Take the free balance check" },
