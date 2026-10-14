@@ -22,7 +22,7 @@ export function mailgunConfig(): Config | null {
   const domain = process.env.MAILGUN_DOMAIN;
   if (!key || !domain) return null;
   const base = process.env.MAILGUN_REGION === "eu" ? "https://api.eu.mailgun.net" : "https://api.mailgun.net";
-  return { key, domain, base, from: process.env.MAIL_FROM || `Elegix <hello@${domain}>`, list: `waitlist@${domain}` };
+  return { key, domain, base, from: process.env.MAIL_FROM || `Edward from Elegix <edward@${domain}>`, list: `waitlist@${domain}` };
 }
 
 async function call(cfg: Config, path: string, form: Record<string, string>) {
@@ -58,43 +58,36 @@ function balance(scores: Record<string, number>) {
   return { average, lowest };
 }
 
-const UNSUBSCRIBE = "mailto:hello@elegix.net?subject=Unsubscribe";
-
 const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+/**
+ * A short personal note: plain text plus bare HTML paragraphs (no images, colours, buttons or links),
+ * which is what Gmail expects from a 1:1 message rather than a newsletter.
+ */
 export function buildEmail(s: Signup) {
   const isCheck = s.source === "balance-check" && !!s.scores;
-  const lines: string[] = [];
-  let html = "";
+  const paragraphs: string[] = [EMAIL.greeting];
+  let subject = EMAIL.subject;
 
   if (isCheck) {
     const { average, lowest } = balance(s.scores!);
-    lines.push(EMAIL.checkIntro, "", `Your balance: ${average.toFixed(1)}/10`, "");
-    AREA_ORDER.forEach((a) => lines.push(`${AREAS[a].name}: ${s.scores![a]}/10`));
-    lines.push("", `Your weakest area: ${AREAS[lowest].name}`, `${EMAIL.firstStepLabel}: ${EMAIL.firstSteps[lowest]}`, "");
-    html += `<p style="margin:0 0 16px">${esc(EMAIL.checkIntro)}</p>
-<p style="margin:0 0 4px;color:#6b726e;font-size:14px">Your balance</p>
-<p style="margin:0 0 20px;font-size:40px;font-weight:600;letter-spacing:-1px">${average.toFixed(1)}<span style="font-size:16px;color:#6b726e">/10</span></p>
-<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 20px;font-size:15px">${AREA_ORDER.map(
-      (a) => `<tr><td style="padding:6px 0;border-bottom:1px solid #eceae2">${esc(AREAS[a].name)}</td><td style="padding:6px 0;border-bottom:1px solid #eceae2;text-align:right;font-weight:600">${s.scores![a]}/10</td></tr>`,
-    ).join("")}</table>
-<div style="background:#f3f2ed;border-radius:14px;padding:16px 18px;margin:0 0 20px">
-<p style="margin:0 0 4px;font-size:14px;color:#6b726e">Your weakest area: <b style="color:#111613">${esc(AREAS[lowest].name)}</b></p>
-<p style="margin:0;font-size:16px"><b>${esc(EMAIL.firstStepLabel)}:</b> ${esc(EMAIL.firstSteps[lowest])}</p></div>`;
+    subject = EMAIL.checkSubject.replace("{score}", average.toFixed(1));
+    paragraphs.push(
+      EMAIL.checkIntro,
+      `${EMAIL.checkScore}: ${average.toFixed(1)}/10`,
+      AREA_ORDER.map((a) => `${AREAS[a].name}: ${s.scores![a]}/10`).join("\n"),
+      `${EMAIL.checkLowest} ${AREAS[lowest].name}. ${EMAIL.firstStepLabel}: ${EMAIL.firstSteps[lowest]}`,
+      EMAIL.checkQuestion,
+      EMAIL.checkWaitlist,
+    );
+  } else {
+    paragraphs.push(EMAIL.intro, EMAIL.next, EMAIL.question);
   }
+  paragraphs.push(EMAIL.signature, `--\n${EMAIL.footer}`);
 
-  lines.push(EMAIL.intro, EMAIL.next, "", EMAIL.signoff, "", "--", EMAIL.footer, `Unsubscribe: ${UNSUBSCRIBE}`);
-  html += `<p style="margin:0 0 12px">${esc(EMAIL.intro)}</p><p style="margin:0 0 20px">${esc(EMAIL.next)}</p>
-<p style="margin:0 0 28px;white-space:pre-line">${esc(EMAIL.signoff)}</p>`;
-
-  const page = `<!doctype html><html><body style="margin:0;background:#f3f2ed;font-family:Helvetica,Arial,sans-serif;color:#111613">
-<div style="max-width:520px;margin:0 auto;padding:32px 20px">
-<p style="margin:0 0 24px;font-size:20px;font-weight:600;letter-spacing:-0.5px;color:#009a44">elegix</p>
-<div style="background:#ffffff;border-radius:20px;padding:28px 24px;font-size:16px;line-height:1.55">${html}</div>
-<p style="margin:20px 4px 0;font-size:12px;line-height:1.5;color:#6b726e">${esc(EMAIL.footer)} <a href="${UNSUBSCRIBE}" style="color:#6b726e">Unsubscribe</a></p>
-</div></body></html>`;
-
-  return { subject: isCheck ? EMAIL.checkSubject : EMAIL.subject, text: lines.join("\n"), html: page };
+  const text = paragraphs.join("\n\n");
+  const html = `<!doctype html><html><body>${paragraphs.map((p) => `<p>${esc(p).replace(/\n/g, "<br>")}</p>`).join("\n")}</body></html>`;
+  return { subject, text, html };
 }
 
 /** Sends the confirmation (and, for the balance check, the result). Returns true when Mailgun accepted it. */
@@ -107,7 +100,10 @@ export async function sendConfirmation(cfg: Config, s: Signup, testMode = false)
     text: mail.text,
     html: mail.html,
     "h:Reply-To": "hello@elegix.net",
-    "h:List-Unsubscribe": `<${UNSUBSCRIBE}>`,
+    // no open pixel, no rewritten links, no auto unsubscribe footer: all of these read as bulk mail
+    "o:tracking": "no",
+    "o:tracking-opens": "no",
+    "o:tracking-clicks": "no",
     "o:tag": s.source === "balance-check" ? "balance-check" : "waitlist",
   };
   if (testMode) form["o:testmode"] = "yes";

@@ -253,16 +253,26 @@ export const FOOTER = {
   wordmark: "elegix",
 };
 
-/** Emails sent by /api/waitlist through Mailgun. */
+/**
+ * Emails sent by /api/waitlist through Mailgun. Written as a short personal note
+ * (plain text, minimal HTML, no tracking) so Gmail treats it as a 1:1 message, not a promotion.
+ * {score} in checkSubject is replaced with the person's average.
+ */
 export const EMAIL = {
-  subject: "You're on the Elegix waitlist",
-  checkSubject: "Your Life Balance score",
-  intro: "Thanks for joining the Elegix waitlist.",
-  next: "We're finishing the first version now. Waitlist members get in first, in the order they joined, and we'll email you as soon as your spot opens.",
-  checkIntro: "Here's your Life Balance check.",
+  subject: "You're on the Elegix list",
+  checkSubject: "Your Life Balance score: {score}/10",
+  greeting: "Hi,",
+  intro: "Thanks for joining the Elegix waitlist. I'm Edward, the founder.",
+  next: "We're finishing the first version now. Waitlist members get in first, in the order they joined, and I'll email you as soon as your spot opens.",
+  question: "Quick question: which part of your life gets the least attention right now? Just hit reply, I read every answer.",
+  checkIntro: "Thanks for taking the Life Balance check. Here are your results.",
+  checkScore: "Your balance",
+  checkLowest: "Your weakest area right now is",
   firstStepLabel: "One first step",
-  signoff: "Talk soon,\nThe Elegix team",
-  footer: "You're getting this email because you joined the Elegix waitlist. To stop hearing from us, reply “unsubscribe” or click Unsubscribe.",
+  checkWaitlist: "You're also on the Elegix waitlist. We're finishing the first version, and you'll get in in the order you joined.",
+  checkQuestion: "Which area do you want to work on first? Just hit reply, I read every answer.",
+  signature: "Edward\nFounder, Elegix",
+  footer: "You got this because you joined the waitlist at elegix.net. If that wasn't you, just reply and I'll remove you.",
   firstSteps: {
     health: "Pick one evening this week and be in bed 30 minutes earlier. Just one.",
     people: "Message one person you've been meaning to call and put a time in the calendar.",
