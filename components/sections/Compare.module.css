@@ -1,0 +1,23 @@
+.compare { background: var(--atmo-dark); color: #f1f1ec; border-radius: var(--radius-l); margin-inline: 8px; overflow: hidden; }
+.compare :global(.h2) em { color: var(--lime); }
+.table { display: grid; border-radius: 22px; overflow: hidden; background: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .1); }
+.row { display: grid; grid-template-columns: 1fr 1.3fr 1.3fr; }
+.row + .row { border-top: 1px solid rgba(255, 255, 255, .08); }
+.row > span { padding: 20px 24px; }
+.headRow > span { padding-block: 16px; font-size: 0.85rem; }
+.rowLabel { font-size: 0.85rem; color: #8f9792; }
+.them { color: #9aa09c; font-size: 1.05rem; text-decoration: line-through; text-decoration-color: rgba(255, 255, 255, .25); }
+.headRow .them { text-decoration: none; }
+.us { background: rgba(213, 244, 94, .08); color: #fff; font-size: 1.05rem; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+.headRow .us { color: var(--lime); }
+.mark { width: 20px; height: auto; color: var(--lime); }
+.line { margin-top: clamp(40px, 6vw, 72px); font-size: clamp(1.7rem, 3.6vw, 2.9rem); text-align: center; }
+.line em { color: var(--lime); }
+@media (max-width: 860px) {
+  .compare { margin-inline: 6px; border-radius: 20px; }
+  .row { grid-template-columns: 1fr 1fr; }
+  .rowLabel { grid-column: 1 / -1; padding-bottom: 0 !important; }
+  .headRow .rowLabel { display: none; }
+  .row > span { padding: 14px 16px; }
+  .them, .us { font-size: 0.92rem; }
+}

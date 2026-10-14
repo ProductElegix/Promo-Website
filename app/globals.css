@@ -1,0 +1,173 @@
+/*
+  Elegix design system
+  Grounds: soft off-white (default) with white rounded cards; black and deep green for atmosphere sections.
+  Type: Inter for headlines (mixed case, tight tracking) and body. Instrument Serif italic for accent words (<em>).
+  Accent: brand green on light grounds, lime on dark grounds. Area colours only on area pills, the wheel and time circles.
+*/
+:root {
+  --cream: #f3f2ed;
+  --cream-2: #e9e8e2;
+  --paper: #ffffff;
+  --black: #0b0f0d;
+  --black-2: #161c19;
+  --deep: #1f3326;
+  --ink: #111613;
+  --ink-2: #3a413d;
+  --muted: #6b726e;
+  --line: #dddcd5;
+  --line-dark: #2a312d;
+  --green: #009a44;
+  --lime: #d5f45e;
+  --mint: #e0f0e5;
+  --danger: #c0122b;
+
+  /* life-area pairs from the brand book: strong / soft */
+  --health-s: #009a44; --health-t: #d5f45e;
+  --people-s: #d50524; --people-t: #feb5a6;
+  --career-s: #dd4903; --career-t: #ffe254;
+  --growth-s: #0f14da; --growth-t: #a8dffe;
+  --hobby-s: #ff5e3b;  --hobby-t: #ffd7ab;
+  --meaning-s: #6709c7; --meaning-t: #eaa7fe;
+  --home-s: #3d5545;   --home-t: #e0f0e5;
+
+  --font-serif: var(--font-instrument), "Times New Roman", Georgia, serif;
+  --font-sans: var(--font-inter), "Helvetica Neue", Arial, system-ui, sans-serif;
+
+  --radius-s: 6px;
+  --radius-m: 14px;
+  --radius-l: 24px;
+  --page: 1280px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --section-y: clamp(80px, 11vw, 150px);
+  --header-h: 76px;
+
+  /* atmosphere: the brand's green light, used where photos would be */
+  --atmo-green:
+    radial-gradient(60% 70% at 78% 18%, rgba(213, 244, 94, 0.55), transparent 60%),
+    radial-gradient(55% 65% at 12% 85%, rgba(0, 154, 68, 0.75), transparent 62%),
+    radial-gradient(80% 90% at 50% 50%, #1f3326, #0b0f0d);
+  --atmo-dark:
+    radial-gradient(50% 60% at 50% 35%, rgba(0, 154, 68, 0.45), transparent 65%),
+    radial-gradient(40% 50% at 85% 90%, rgba(213, 244, 94, 0.18), transparent 60%),
+    #0b0f0d;
+
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, p, figure, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+.on-dark :focus-visible { outline-color: var(--lime); }
+
+/* layout: full-bleed sections, content in one shared container */
+.section { position: relative; padding-block: var(--section-y); scroll-margin-top: var(--header-h); }
+.container { width: 100%; max-width: calc(var(--page) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* type */
+.display {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.display em, .accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.h2 { font-size: clamp(2.2rem, 4.6vw, 3.9rem); }
+.lede { font-size: clamp(1rem, 1.3vw, 1.125rem); line-height: 1.6; color: var(--muted); max-width: 36rem; }
+.on-dark .lede { color: #a9b0ab; }
+.label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); }
+.label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.on-dark .label { color: #a9b0ab; }
+.on-dark .label::before { background: var(--lime); }
+.eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.muted { color: var(--muted); }
+
+/* section header: label, H2, optional lede; .split puts a CTA on the right */
+.section-head { display: grid; gap: 18px; justify-items: start; max-width: 48rem; margin-bottom: clamp(40px, 6vw, 72px); }
+.section-head.split { max-width: none; grid-template-columns: 1fr auto; align-items: end; }
+.section-head.split > :not(.btn) { grid-column: 1; }
+.section-head.split > .btn { grid-column: 2; grid-row: 1 / span 3; align-self: end; }
+.section-head.center { justify-items: center; text-align: center; margin-inline: auto; }
+
+/* inline highlight inside body text (Rich ==word==) */
+.hl { background: var(--paper); color: var(--ink); padding: 0.05em 0.45em; border-radius: 0.5em; box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 6px 16px -10px rgba(0, 0, 0, .25); white-space: nowrap; }
+.on-dark .hl { background: rgba(255, 255, 255, .14); color: #fff; box-shadow: none; }
+
+/* "Example" tag on cards with illustrative numbers */
+.example-tag { display: inline-block; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(255, 255, 255, .16); color: rgba(255, 255, 255, .8); }
+.example-tag.light { background: var(--cream-2); color: var(--muted); }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 0; border-radius: 999px; cursor: pointer; text-decoration: none; white-space: nowrap;
+  font-weight: 500; font-size: 0.92rem; letter-spacing: -0.005em;
+  padding: 12px 22px; background: var(--green); color: #fff;
+  transition: transform .2s ease, filter .2s ease, background-color .2s ease;
+}
+.btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn:disabled { opacity: .6; cursor: progress; transform: none; }
+.btn.lime, .on-dark .btn:not(.ghost):not(.white) { background: var(--lime); color: var(--black); }
+.btn.white { background: #fff; color: var(--ink); }
+.btn.dark { background: var(--ink); color: #fff; }
+.btn.ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
+
+/* pills (life areas) */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px 5px 9px; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 500; line-height: 1.2; white-space: nowrap;
+  background: var(--t); color: var(--s);
+}
+.pill.strong { background: var(--s); color: var(--t); }
+.pill svg { width: 13px; height: 13px; flex: none; }
+
+/* glass */
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* soft film grain over atmosphere sections */
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* scroll reveal (enabled by components/ui/Reveal.tsx) */
+.js-reveal [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+.js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .section-head.split { grid-template-columns: 1fr; }
+  .section-head.split > .btn { grid-column: 1; grid-row: auto; justify-self: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .js-reveal [data-reveal] { opacity: 1; transform: none; }
+}

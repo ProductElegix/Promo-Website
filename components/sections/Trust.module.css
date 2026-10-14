@@ -1,0 +1,21 @@
+.grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; }
+.founder { margin: 0; background: var(--paper); border-radius: var(--radius-l); padding: 16px; display: grid; grid-template-columns: minmax(0, 0.9fr) 1fr; gap: 24px; }
+.photo { position: relative; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; }
+.photo > div { border-radius: 0; }
+.note { display: grid; align-content: space-between; gap: 24px; padding: 12px 8px 8px 0; }
+.quote { margin: 0; font-size: clamp(1.2rem, 1.9vw, 1.55rem); line-height: 1.35; letter-spacing: -0.02em; font-weight: 500; }
+.quote::before { content: "“"; display: block; font-family: var(--font-serif); font-size: 3rem; line-height: .6; color: var(--green); margin-bottom: 8px; }
+.note figcaption { font-size: 0.92rem; color: var(--muted); }
+.note figcaption b { color: var(--ink); font-weight: 500; }
+.principles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.principle { background: var(--cream-2); border-radius: 20px; padding: 22px; display: grid; gap: 8px; align-content: start; transition: background-color .2s; }
+.principle:hover { background: #e2e1da; }
+.n { font-size: 0.75rem; color: var(--green); }
+.principle h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 18px; }
+.principle p { font-size: 0.92rem; color: var(--ink-2); }
+@media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .founder { grid-template-columns: 1fr; }
+  .principles { grid-template-columns: 1fr; }
+  .principle h3 { margin-top: 8px; }
+}
