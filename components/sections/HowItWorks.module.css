@@ -5,6 +5,7 @@
 .steps h3 { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em; }
 .steps p { font-size: 0.95rem; color: var(--muted); max-width: 22rem; }
 
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 .card { position: relative; margin: 0; aspect-ratio: 4 / 5; border-radius: var(--radius-l); overflow: hidden; color: #fff; isolation: isolate; }
 .card > div:first-child { border-radius: 0; z-index: -2; }
 .shade { position: absolute; inset: 0; z-index: -1; background: var(--atmo-green); opacity: .78; }
@@ -30,5 +31,9 @@
 .check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--green); flex: none; }
 @media (max-width: 860px) {
   .steps { grid-template-columns: 1fr; gap: 20px; }
+  /* phones: swipe through the cards, no arrows */
+  .cards { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+  .cards::-webkit-scrollbar { display: none; }
+  .cards li { flex: none; width: 78vw; scroll-snap-align: start; }
 }
 .overlay :global(.glass) { background: rgba(11, 15, 13, .55); border-color: rgba(255, 255, 255, .14); }

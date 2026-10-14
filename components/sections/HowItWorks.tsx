@@ -1,5 +1,4 @@
 import { AREAS, EXAMPLE_TAG, HOW } from "@/lib/content";
-import { Carousel } from "@/components/ui/Carousel";
 import { Media } from "@/components/ui/Media";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
@@ -57,18 +56,19 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
-      </div>
-      <div data-reveal>
-        <Carousel label="What Elegix shows you">
+        {/* one example card under each step: See → score, Act → next step, Reflect → changes by area */}
+        <ul className={styles.cards} aria-label="What Elegix shows you">
           {HOW.cards.map((c) => (
-            <figure key={c.caption} className={`grain ${styles.card}`}>
-              <Media media={c.media} tone="dark" fill compact sizes="(max-width: 860px) 80vw, 400px" />
-              <div className={`${styles.shade} ${c.media.src ? styles.onPhoto : ""}`} aria-hidden="true" />
-              <figcaption className={styles.caption}>{c.caption}<span className="example-tag">{EXAMPLE_TAG}</span></figcaption>
-              <div className={styles.overlay}><Overlay kind={c.kind} /></div>
-            </figure>
+            <li key={c.caption} data-reveal>
+              <figure className={`grain ${styles.card}`}>
+                <Media media={c.media} tone="dark" fill compact sizes="(max-width: 860px) 80vw, 420px" />
+                <div className={`${styles.shade} ${c.media.src ? styles.onPhoto : ""}`} aria-hidden="true" />
+                <figcaption className={styles.caption}>{c.caption}<span className="example-tag">{EXAMPLE_TAG}</span></figcaption>
+                <div className={styles.overlay}><Overlay kind={c.kind} /></div>
+              </figure>
+            </li>
           ))}
-        </Carousel>
+        </ul>
       </div>
     </section>
   );

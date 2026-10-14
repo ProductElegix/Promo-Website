@@ -136,8 +136,8 @@ export const HOW = {
   ],
   cards: [
     { kind: "score", caption: "Balance, quantified", media: { src: "/images/how-score.jpg", alt: "A person running along a park path at sunset", brief: "Morning run, park · 4:5", ratio: "4 / 5" } },
-    { kind: "areas", caption: "Every area, scored", media: { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen", brief: "Dinner with friends · 4:5", ratio: "4 / 5" } },
     { kind: "next", caption: "Next steps, simplified", media: { src: "/images/how-next.jpg", alt: "A notebook, pen and laptop on a wooden desk", brief: "Planning the week, desk · 4:5", ratio: "4 / 5" } },
+    { kind: "areas", caption: "Every area, scored", media: { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen", brief: "Dinner with friends · 4:5", ratio: "4 / 5" } },
   ] as { kind: "score" | "areas" | "next"; caption: string; media: MediaSlot }[],
   score: { label: "Balance", from: "5.6", to: "7.2", scores: [7, 7, 6, 7, 7, 8] },
   changes: [
