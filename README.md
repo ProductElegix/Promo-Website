@@ -66,6 +66,22 @@ lib/content.ts          all copy and image slots
 
 The brand display face, Averique, needs a web licence. When you have it, load it with `next/font/local` in `app/layout.tsx` and point `--font-serif` at it.
 
+## Workflow
+
+Two branches, two sites:
+
+| Branch | Site | Who sees it |
+|---|---|---|
+| `dev` | https://elegix-site-dev.vercel.app | Only people logged in to the Vercel team (Vercel Authentication) |
+| `main` | https://elegix-site.vercel.app | Everyone (production) |
+
+1. Commit and push changes to `dev`. Vercel rebuilds the dev site in about a minute.
+2. Review the dev site.
+3. When it looks right, open a pull request from `dev` into `main`: https://github.com/ProductElegix/Promo-Website/compare/main...dev
+4. Merge the pull request. Vercel publishes `main` to production.
+
+Never commit straight to `main`. Any other branch or pull request also gets its own preview link from Vercel.
+
 ## Deploy
 
-Push to GitHub and import the repo in Vercel, then add `WAITLIST_WEBHOOK_URL` and `NEXT_PUBLIC_SITE_URL` in the project's environment variables.
+The Vercel project `elegix-site` is connected to this repo (production branch `main`). Add `WAITLIST_WEBHOOK_URL` in the project's environment variables to turn on the waitlist forms; `NEXT_PUBLIC_SITE_URL` is already set for production and for the `dev` preview.
