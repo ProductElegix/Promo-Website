@@ -1,4 +1,5 @@
 import { TRUST } from "@/lib/content";
+import Link from "next/link";
 import { Media } from "@/components/ui/Media";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Trust.module.css";
@@ -17,7 +18,7 @@ export function Trust() {
             <div className={styles.photo}><Media media={f.media} fill sizes="(max-width: 860px) 100vw, 360px" /></div>
             <div className={styles.note}>
               <blockquote className={styles.quote}>{f.quote || f.fallback}</blockquote>
-              <figcaption><b>{f.name}</b>, {f.role}</figcaption>
+              <figcaption><b>{f.name}</b>, {f.role} · <Link href={f.storyLink.href} className={styles.story}>{f.storyLink.label} →</Link></figcaption>
             </div>
           </figure>
           <ul className={styles.principles}>

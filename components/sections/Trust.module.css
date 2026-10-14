@@ -1,6 +1,7 @@
 .grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; }
 .founder { margin: 0; background: var(--paper); border-radius: var(--radius-l); padding: 16px; display: grid; grid-template-columns: minmax(0, 0.9fr) 1fr; gap: 24px; }
-.photo { position: relative; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; }
+.photo { position: relative; min-height: 320px; height: 100%; border-radius: 16px; overflow: hidden; }
+.photo img { object-position: 50% 30%; }
 .photo > div { border-radius: 0; }
 .note { display: grid; align-content: space-between; gap: 24px; padding: 12px 8px 8px 0; }
 .quote { margin: 0; font-size: clamp(1.2rem, 1.9vw, 1.55rem); line-height: 1.35; letter-spacing: -0.02em; font-weight: 500; }
@@ -16,6 +17,10 @@
 @media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }
 @media (max-width: 600px) {
   .founder { grid-template-columns: 1fr; }
+  .photo { height: auto; aspect-ratio: 4 / 5; }
   .principles { grid-template-columns: 1fr; }
   .principle h3 { margin-top: 8px; }
 }
+.story { color: var(--green); text-decoration: none; font-weight: 500; }
+.story:hover { text-decoration: underline; }
+.quote { font-size: clamp(1.05rem, 1.6vw, 1.3rem) !important; }

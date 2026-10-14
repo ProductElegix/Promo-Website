@@ -193,12 +193,12 @@ export const TRUST = {
   eyebrow: "Who's behind it",
   title: "Why we're building *Elegix*",
   founder: {
-    // TODO(owner): your story in 2–3 sentences (why you're building Elegix). Until then the card shows `fallback`.
-    quote: "",
+    quote: "Most people don't struggle because they lack ambition. They struggle because modern life got too complex: too many goals, too many notifications, too many tools. We tried every planner and habit tracker, and none answered the bigger question: how do you build a balanced life without the process itself becoming overwhelming? Elegix is our answer. One calm system for the parts of life that matter, one small step at a time.",
     fallback: "Questions, ideas or your own story with burnout? Write to me directly at hello@elegix.net. I read every message.",
+    storyLink: { href: "/story", label: "Read our story" },
     name: "Edward",
     role: "Founder",
-    media: { alt: "Portrait of Edward, founder of Elegix", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
+    media: { src: "/images/founder.jpg", alt: "Edward, founder of Elegix, smiling in a white T-shirt in front of tropical greenery", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
   },
   principles: [
     { title: "No guilt, no fake streaks.", text: "We show the picture and one next step." },
@@ -259,7 +259,7 @@ export const FOOTER = {
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   columns: [
     { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Balance check" }, { href: "/#faq", label: "FAQ" }] },
-    { title: "Company", links: [{ href: "/#trust", label: "About" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
+    { title: "Company", links: [{ href: "/story", label: "Our story" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
     { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
   ],
   socials: SOCIALS,
@@ -311,4 +311,28 @@ export const EMAIL = {
     meaning: "Spend 5 minutes tonight writing down what mattered most to you today.",
     home: "Clear one surface you see every day, and keep it clear for a week.",
   } as Record<AreaKey, string>,
+};
+
+/** The founder story (/story), in Edward's words. */
+export const STORY = {
+  label: "Our story",
+  title: "Why we created *Elegix*",
+  blocks: [
+    { type: "lead", text: "Elegix began with a simple realization:" },
+    { type: "p", text: "Most people don't struggle because they lack ambition or motivation. They struggle because modern life has become increasingly complex and overwhelming." },
+    { type: "p", text: "As founders, we've experienced this firsthand." },
+    { type: "lines", lines: ["Too many goals.", "Too many responsibilities.", "An endless stream of notifications.", "Dozens of productivity tools.", "Constant pressure to do more, achieve more, improve faster, and somehow keep everything under control."] },
+    { type: "p", text: "We tried planners, habit trackers, calendars, note-taking apps, and countless productivity systems. Each one solved a specific problem, but none helped us solve the bigger one:" },
+    { type: "quote", text: "How do you build a balanced, intentional life without feeling overwhelmed by the very process of trying to improve it?" },
+    { type: "p", text: "Over time, we realized that people don't need another productivity app. They need a system that helps them stay connected to what truly matters." },
+    { type: "lines", lines: ["A system that makes their goals visible.", "That turns progress into something tangible.", "That helps build lasting habits.", "And supports personal growth without making life feel like an endless list of tasks."] },
+    { type: "p", text: "That realization became the foundation of Elegix." },
+    { type: "p", text: "We created Elegix to help people organize more than their schedules. We want to help them organize the parts of life that truly matter — health, personal growth, relationships, emotional well-being, daily habits, and long-term goals." },
+    { type: "quote", text: "Our mission is simple: to help people build a life they're proud of, one small step at a time." },
+    { type: "lines", lines: ["We believe productivity should create freedom — not burnout.", "Planning should bring clarity — not stress.", "Personal growth should feel achievable — not overwhelming."] },
+    { type: "p", text: "Elegix exists to bring clarity, structure, and balance into everyday life, giving people the confidence to move forward while staying focused on what matters most to them." },
+    { type: "p", text: "Because Elegix isn't just another productivity app. It's a system designed to help people become the person they want to become." },
+  ] as ({ type: "lead" | "p" | "quote"; text: string } | { type: "lines"; lines: string[] })[],
+  signature: "Edward, Founder",
+  cta: "Get early access",
 };

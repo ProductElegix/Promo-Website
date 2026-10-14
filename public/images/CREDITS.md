@@ -15,3 +15,4 @@ All photos are from [Unsplash](https://unsplash.com) and used under the [Unsplas
 | how-areas.jpg | [Apartment Life](https://unsplash.com/@apartmentlife) | https://unsplash.com/photos/friends-making-pizza-together-at-a-kitchen-counter-SatHwYJdlRA |
 | how-next.jpg | [Justin Morgan](https://unsplash.com/@justin_morgan) | https://unsplash.com/photos/black-spring-notebook-on-brown-wooden-table-2_BrZ3AJ_78 |
 | how-score.jpg | [Eirik Skarstein](https://unsplash.com/@eskarstein) | https://unsplash.com/photos/person-running-on-park-path-with-city-buildings-at-sunset-3Y2z_UNWnfE |
+| founder.jpg | Edward (Elegix founder), own photo | — |
