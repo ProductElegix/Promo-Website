@@ -443,7 +443,6 @@ export const FEATURES = {
 export const PRIVACY_BLOCK = {
   title: "Built for *privacy*",
   text: "We never sell your data. Analytics cookies run only if you say yes, and you can unsubscribe or have your data deleted any time.",
-  facts: ["Your data is never sold", "Cookies only with your consent", "Form text never recorded", "Delete everything on request"],
   link: { href: "/privacy", label: "Read our privacy policy" },
 };
 

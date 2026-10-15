@@ -21,9 +21,6 @@
 .title { font-size: clamp(2.6rem, 6vw, 5rem); color: #fff; }
 .title em { color: var(--lime); }
 .text { font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.55; color: #a9b0ab; max-width: 34rem; }
-.facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 4px; }
-.facts li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; font-size: 0.86rem; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); }
-.facts span { color: var(--lime); font-size: 0.75rem; }
 .link { color: var(--lime); text-decoration: none; font-size: 0.95rem; }
 .link:hover { text-decoration: underline; }
 @media (max-width: 600px) {

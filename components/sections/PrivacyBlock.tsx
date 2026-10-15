@@ -20,7 +20,6 @@ export function PrivacyBlock() {
           <div className={styles.content}>
             <h2 id="privacy-title" className={`display ${styles.title}`}><Rich text={PRIVACY_BLOCK.title} /></h2>
             <p className={styles.text}>{PRIVACY_BLOCK.text}</p>
-            <ul className={styles.facts}>{PRIVACY_BLOCK.facts.map((f) => <li key={f}><span aria-hidden="true">✓</span>{f}</li>)}</ul>
             <Link href={PRIVACY_BLOCK.link.href} className={styles.link}>{PRIVACY_BLOCK.link.label} →</Link>
           </div>
         </div>
