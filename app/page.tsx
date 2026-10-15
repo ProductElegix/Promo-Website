@@ -9,6 +9,7 @@ import { AppShowcase } from "@/components/sections/AppShowcase";
 import { BalanceCheck } from "@/components/sections/BalanceCheck";
 import { Trust } from "@/components/sections/Trust";
 import { Join } from "@/components/sections/Join";
+import { PrivacyBlock } from "@/components/sections/PrivacyBlock";
 import { Faq } from "@/components/sections/Faq";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -34,6 +35,7 @@ export default function Home() {
       <AppShowcase />
       <BalanceCheck />
       <Trust />
+      <PrivacyBlock />
       <Join />
       <Faq />
       <Manifesto />
