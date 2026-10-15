@@ -406,3 +406,35 @@ export const ABOUT_PAGE = {
   publicBuild: { title: "Built in public", text: "Elegix is in development and we share every step. Follow along:" },
   cta: { title: "Ready to see your *whole* life?", text: "Join the waitlist and get early access, a founding member price and a say in what we build next." },
 };
+
+/** "Features" cards after How it works: three tall cards with a phone peeking up from the bottom. */
+export const FEATURES = {
+  title: "See your whole life.\n*Grow it on purpose.*",
+  lede: "Six life areas, one clear balance score, and small steps that move it.",
+  cards: [
+    {
+      key: "balance",
+      title: "Balance",
+      text: "One balance score and 6 area scores, so you see at a glance which part of your life needs you.",
+      screen: "Life Area",
+      tint: ["health", "growth"] as [AreaKey, AreaKey],
+      scroll: 0,
+    },
+    {
+      key: "goals",
+      title: "Goals & habits",
+      text: "Goals linked to daily habits and tasks, each with your “why” written next to it.",
+      screen: "Home",
+      tint: ["hobby", "people"] as [AreaKey, AreaKey],
+      scroll: 0,
+    },
+    {
+      key: "review",
+      title: "Review",
+      text: "Compare this week or month with the last one: what grew, what dropped, what to change next.",
+      screen: "Life Area",
+      tint: ["meaning", "growth"] as [AreaKey, AreaKey],
+      scroll: 36,
+    },
+  ] as { key: "balance" | "goals" | "review"; title: string; text: string; screen: string; tint: [AreaKey, AreaKey]; scroll: number }[],
+};

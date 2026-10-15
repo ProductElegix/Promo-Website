@@ -3,6 +3,7 @@ import { Problem } from "@/components/sections/Problem";
 import { Compare } from "@/components/sections/Compare";
 import { Intro } from "@/components/sections/Intro";
 import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Features } from "@/components/sections/Features";
 import { AreasList } from "@/components/sections/AreasList";
 import { AppShowcase } from "@/components/sections/AppShowcase";
 import { BalanceCheck } from "@/components/sections/BalanceCheck";
@@ -28,6 +29,7 @@ export default function Home() {
       <Compare />
       <Intro />
       <HowItWorks />
+      <Features />
       <AreasList />
       <AppShowcase />
       <BalanceCheck />
