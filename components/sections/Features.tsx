@@ -1,4 +1,4 @@
-import { APP, AREAS, EXAMPLE_TAG, FEATURES, HERO, HOW } from "@/lib/content";
+import { APP, AREAS, FEATURES, HERO, HOW } from "@/lib/content";
 import { Phone } from "@/components/ui/Phone";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
@@ -13,7 +13,6 @@ function Chip({ kind }: { kind: (typeof FEATURES.cards)[number]["key"] }) {
       <div className={`${styles.chip} ${styles.chipBalance}`}>
         <Wheel scores={c.scores} size={44} ring="#e9ebe9" />
         <div><small>{c.title}</small><b>{c.value}<span>{c.of}</span></b></div>
-        <span className="example-tag light">{EXAMPLE_TAG}</span>
       </div>
     );
   }

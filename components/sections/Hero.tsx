@@ -1,4 +1,4 @@
-import { APP, AREAS, EXAMPLE_TAG, HERO } from "@/lib/content";
+import { APP, AREAS, HERO } from "@/lib/content";
 import { areaVars } from "@/components/ui/Pill";
 import { Wheel } from "@/components/ui/Wheel";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
@@ -15,7 +15,6 @@ export function Hero() {
           <span className={styles.cardTitle}>{c.title}</span>
           <b className={styles.cardValue}>{c.value}<small>{c.of}</small></b>
         </div>
-        <span className="example-tag">{EXAMPLE_TAG}</span>
       </div>
       <ul className={styles.rows}>
         {c.rows.map((r) => (

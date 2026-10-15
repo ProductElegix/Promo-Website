@@ -1,4 +1,4 @@
-import { AREAS, EXAMPLE_TAG, HOW } from "@/lib/content";
+import { AREAS, HOW } from "@/lib/content";
 import { Media } from "@/components/ui/Media";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
@@ -63,7 +63,7 @@ export function HowItWorks() {
               <figure className={`grain ${styles.card}`}>
                 <Media media={c.media} tone="dark" fill compact sizes="(max-width: 860px) 80vw, 420px" />
                 <div className={`${styles.shade} ${c.media.src ? styles.onPhoto : ""}`} aria-hidden="true" />
-                <figcaption className={styles.caption}>{c.caption}<span className="example-tag">{EXAMPLE_TAG}</span></figcaption>
+                <figcaption className={styles.caption}>{c.caption}</figcaption>
                 <div className={styles.overlay}><Overlay kind={c.kind} /></div>
               </figure>
             </li>

@@ -113,9 +113,6 @@ button { font: inherit; }
 .hl { background: var(--paper); color: var(--ink); padding: 0.05em 0.45em; border-radius: 0.5em; box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 6px 16px -10px rgba(0, 0, 0, .25); white-space: nowrap; }
 .on-dark .hl { background: rgba(255, 255, 255, .14); color: #fff; box-shadow: none; }
 
-/* "Example" tag on cards with illustrative numbers */
-.example-tag { display: inline-block; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(255, 255, 255, .16); color: rgba(255, 255, 255, .8); }
-.example-tag.light { background: var(--cream-2); color: var(--muted); }
 
 /* buttons */
 .btn {

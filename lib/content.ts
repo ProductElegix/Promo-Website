@@ -63,8 +63,6 @@ export const POLICY_VERSION = "2026-10-14.7";
 export const LEGAL_ENTITY = { name: "Eduard Korytskyi", form: "an individual entrepreneur (FOP)", city: "Lutsk", country: "Ukraine" };
 export const CONSENT = { before: "By joining, you agree to our", link: "Privacy Policy", after: ". Unsubscribe any time." };
 
-/** Small tag on cards whose numbers are illustrative. */
-export const EXAMPLE_TAG = "Example";
 
 // 1
 export const HERO = {

@@ -1,4 +1,4 @@
-import { AREAS, AREA_ORDER, EXAMPLE_TAG, INTRO } from "@/lib/content";
+import { AREAS, AREA_ORDER, INTRO } from "@/lib/content";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
@@ -21,7 +21,7 @@ export function Intro() {
           <a href={INTRO.link.href} className={styles.link}>{INTRO.link.label} →</a>
         </div>
         <div className={styles.sample} data-reveal>
-          <div className={styles.sampleTop}><Pill area={s.area} strong /><span className="example-tag light">{EXAMPLE_TAG}</span></div>
+          <div className={styles.sampleTop}><Pill area={s.area} strong /></div>
           <b className={styles.score}>{s.score}</b>
           <p>{s.text}</p>
           <div className={styles.bar} style={areaVars(s.area)}><span style={{ width: "41%" }} /></div>

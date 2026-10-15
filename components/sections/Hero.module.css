@@ -25,7 +25,6 @@
 .card { position: absolute; right: clamp(16px, 3vw, 36px); bottom: clamp(16px, 3vw, 36px); width: 250px; margin: 0; display: grid; gap: 12px; padding: 14px; border-radius: 20px; }
 .cardHead { display: flex; gap: 12px; align-items: center; }
 .cardHead > div { display: grid; line-height: 1.1; margin-right: auto; }
-.cardHead :global(.example-tag) { align-self: start; }
 .cardTitle { font-size: 0.72rem; color: rgba(255, 255, 255, .7); }
 .cardValue { font-size: 1.6rem; font-weight: 500; letter-spacing: -0.03em; }
 .cardValue small { font-size: 0.8rem; color: rgba(255, 255, 255, .6); margin-left: 2px; }
