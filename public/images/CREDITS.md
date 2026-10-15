@@ -18,3 +18,9 @@ All photos are from [Unsplash](https://unsplash.com) and used under the [Unsplas
 | founder.jpg | Edward (Elegix founder), own photo | — |
 | about-hero.jpg | [Elijah Hiett](https://unsplash.com/@elijahdhiett) | https://unsplash.com/photos/man-in-gray-shirt-sits-on-cliff-wW0BUXTTUmU |
 | join.jpg | [Tim Mossholder](https://unsplash.com/@timmossholder) | https://unsplash.com/photos/a-bird-is-perched-on-a-branch-of-a-tree-csNbW6hF5AQ |
+| ready/health.jpg | [Tilak Bahadur Karki](https://tilakbahadurkarki.com.np/) | https://wordpress.org/photos/photo/4586a13267/ (CC0, WordPress Photo Directory) |
+| ready/growth.jpg | [David Chandra Purnama](https://shellcreeper.com/) | https://wordpress.org/photos/photo/632620a981/ (CC0, WordPress Photo Directory) |
+| ready/people.jpg | [Tilak Bahadur Karki](https://tilakbahadurkarki.com.np/) | https://wordpress.org/photos/photo/188696652d/ (CC0, WordPress Photo Directory) |
+| ready/meaning.jpg | [Roy Tanck](https://www.roytanck.com) | https://wordpress.org/photos/photo/718636f685/ (CC0, WordPress Photo Directory) |
+| ready/hobby.jpg | [Nilo Velez](https://www.nilovelez.com) | https://wordpress.org/photos/photo/18766603c1/ (CC0, WordPress Photo Directory) |
+| ready/career.jpg | [Mashfik Upal Aumy](https://wpsocialninja.com/) | https://wordpress.org/photos/photo/1536645973/ (CC0, WordPress Photo Directory) |

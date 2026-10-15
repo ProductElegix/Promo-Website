@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
  * - [data-hero-phone]: the phone slides up and tilts into place
  * - [data-hero-photo]: gentle parallax while scrolling past the hero
  * - [data-parallax]: the same for section photos (Early access)
+ * - [data-drift]: objects around the phone in the closing block drift in from the sides
  * - [data-reveal]: headings and cards fade up once as they scroll into view
  * - svg[data-wheel] path: wheel-of-life segments draw in from the centre
  * Content is fully visible without JavaScript and with prefers-reduced-motion; only transforms
@@ -44,6 +45,11 @@ export function Motion() {
         // photos inside sections drift slightly while the section passes through the screen
         gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) =>
           gsap.fromTo(el, { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } }),
+        );
+
+        // everyday objects around the phone drift in from the sides
+        gsap.utils.toArray<HTMLElement>("[data-drift]").forEach((el, i) =>
+          gsap.from(el, { x: (el.getBoundingClientRect().left < window.innerWidth / 2 ? -1 : 1) * 60, y: 30, opacity: 0, duration: 1.1, ease, delay: (i % 3) * 0.08, scrollTrigger: { trigger: el, start: "top 95%", once: true } }),
         );
 
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {

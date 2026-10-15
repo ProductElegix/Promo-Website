@@ -446,3 +446,18 @@ export const PRIVACY_BLOCK = {
   facts: ["Your data is never sold", "Cookies only with your consent", "Form text never recorded", "Delete everything on request"],
   link: { href: "/privacy", label: "Read our privacy policy" },
 };
+
+/** Closing "Ready when you are": the app in the middle, one everyday object per life area around it. */
+export const READY = {
+  title: "Ready when *you* are",
+  lede: "No system to build, no streaks to protect. Start with one honest check-in and see where your life stands.",
+  cta: "Get early access",
+  objects: [
+    { area: "health" as AreaKey, src: "/images/ready/health.jpg", alt: "A water bottle with fresh mint" },
+    { area: "growth" as AreaKey, src: "/images/ready/growth.jpg", alt: "A notebook with a pen" },
+    { area: "people" as AreaKey, src: "/images/ready/people.jpg", alt: "Two cups of coffee on a wooden tray, seen from above" },
+    { area: "meaning" as AreaKey, src: "/images/ready/meaning.jpg", alt: "Two candles in glass holders" },
+    { area: "hobby" as AreaKey, src: "/images/ready/hobby.jpg", alt: "A pair of over-ear headphones" },
+    { area: "career" as AreaKey, src: "/images/ready/career.jpg", alt: "A laptop on a desk" },
+  ],
+};
