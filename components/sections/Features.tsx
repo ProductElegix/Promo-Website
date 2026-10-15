@@ -39,7 +39,7 @@ function Chip({ kind }: { kind: (typeof FEATURES.cards)[number]["key"] }) {
 
 export function Features() {
   return (
-    <section className="section" aria-labelledby="features-title">
+    <section id="features" className="section" aria-labelledby="features-title">
       <div className="container">
         <div className={`section-head center ${styles.head}`} data-reveal>
           <h2 id="features-title" className="display h2"><Rich text={FEATURES.title} /></h2>

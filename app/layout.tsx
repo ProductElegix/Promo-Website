@@ -3,6 +3,7 @@ import { Instrument_Serif, Inter } from "next/font/google";
 import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
 import { Motion } from "@/components/ui/Motion";
+import { HashScroll } from "@/components/ui/HashScroll";
 import { Clarity } from "@/components/ui/Clarity";
 import { CloudflareAnalytics } from "@/components/ui/CloudflareAnalytics";
 import { GoogleAnalytics } from "@/components/ui/GoogleAnalytics";
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={ORGANIZATION} />
         <Attribution />
         <Motion />
+        <HashScroll />
         <Clarity />
         <CloudflareAnalytics />
         <GoogleAnalytics />

@@ -40,6 +40,7 @@ export const META = {
 
 export const NAV = [
   { href: "/#how", label: "How it works" },
+  { href: "/#features", label: "Features" },
   { href: "/#areas", label: "Life areas" },
   { href: "/#check", label: "Balance check" },
   { href: "/#faq", label: "FAQ" },
@@ -258,8 +259,8 @@ export const FOOTER = {
   slogan: "Design a life you're *proud of*",
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   columns: [
-    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Balance check" }, { href: "/#faq", label: "FAQ" }] },
-    { title: "Company", links: [{ href: "/about", label: "About" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
+    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#features", label: "Features" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Balance check" }, { href: "/#faq", label: "FAQ" }] },
+    { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Our story" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
     { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
   ],
   socials: SOCIALS,

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FOOTER } from "@/lib/content";
 import { Logo } from "@/components/ui/Logo";
+import { NavLink } from "@/components/ui/NavLink";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Footer.module.css";
@@ -18,7 +19,7 @@ export function Footer() {
         {FOOTER.columns.map((c) => (
           <nav key={c.title} className={styles.col} aria-label={c.title}>
             <h2 className={styles.h}>{c.title}</h2>
-            <ul>{c.links.map((l) => <li key={l.label}><a href={l.href}>{l.label}</a></li>)}</ul>
+            <ul>{c.links.map((l) => <li key={l.label}>{l.href.startsWith("/") ? <NavLink href={l.href}>{l.label}</NavLink> : <a href={l.href}>{l.label}</a>}</li>)}</ul>
           </nav>
         ))}
         <nav className={styles.col} aria-label="Social">
