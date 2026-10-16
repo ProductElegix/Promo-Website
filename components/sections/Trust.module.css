@@ -21,7 +21,7 @@
   .principles { grid-template-columns: 1fr; }
   .principle h3 { margin-top: 8px; }
 }
-.story { color: var(--green); text-decoration: none; font-weight: 500; }
+.story { color: var(--green); text-decoration: none; font-weight: 500; white-space: nowrap; }
 .story:hover { text-decoration: underline; }
 .quote { font-size: clamp(1.05rem, 1.6vw, 1.3rem) !important; }
 /* privacy principle: dark card with a faint embossed lock */
