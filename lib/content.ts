@@ -216,7 +216,7 @@ export const PRINCIPLES: { title: string; text: string; link?: { href: string; l
 export const JOIN = {
   eyebrow: "Early access",
   title: "Join before launch. Get *founding member* perks.",
-  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what gets built next", "A free plan, forever"],
+  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what gets built next", "Behind-the-scenes updates as it's built"],
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
   button: "Reserve my spot",
