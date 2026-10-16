@@ -426,12 +426,13 @@ export const CAREERS = {
   title: "Help build a *calmer* way to live",
   lede: "Elegix helps people see all 6 areas of their life and grow without burning out. We're a small, early-stage team, building it in public.",
   how: {
-    label: "How we work",
+    label: "Our culture",
     title: "What it's like to build *Elegix*",
     items: [
       { title: "Calm over hustle", text: "We're building a product against burnout, so we try not to run on it ourselves: clear priorities and one next step." },
       { title: "Built in public", text: "We share progress and decisions openly, with our early members and on our socials." },
       { title: "Small team, real ownership", text: "Everyone works close to the product and to the people who use it." },
+      { title: "A 4-day week", text: "We work four days a week, with Wednesday off. Nobody goes more than two days without a break." },
     ],
   },
   open: {

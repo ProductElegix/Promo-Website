@@ -3,7 +3,7 @@
 .title { font-size: clamp(2.6rem, 6.4vw, 5.2rem); }
 .title em { color: var(--green); }
 .how { padding-top: 0; }
-.items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .item { background: var(--paper); border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start; }
 .item h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 14px; }
 .item p { color: var(--ink-2); font-size: 0.95rem; }
