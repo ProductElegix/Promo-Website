@@ -181,19 +181,19 @@ export const APP = {
 export const CHECK = {
   eyebrow: "Free Life Balance Check",
   title: "Find your weakest area in *2 minutes*",
-  text: "Rate your 6 life areas from 1 to 10. I'll email your Life Balance score and one first step for your lowest area. Free, and you'll get a spot on the waitlist.",
+  text: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area. Free, and you'll get a spot on the waitlist.",
   question: "How satisfied are you with each area right now?",
   button: "Take the free check",
   result: "Your Life Balance score",
   lowest: "Your weakest area",
-  done: "I'll email your score and a first step to",
-  sent: "I've emailed your score and a first step to",
+  done: "We'll email your score and a first step to",
+  sent: "We've emailed your score and a first step to",
 };
 
 // 9
 export const TRUST = {
   eyebrow: "Who's behind it",
-  title: "Why I'm building *Elegix*",
+  title: "Why I started *Elegix*",
   founder: {
     quote: "I tried every planner and habit tracker. Each fixed one piece, and none answered the bigger question: how do you build a balanced life without the process itself becoming overwhelming? Elegix is my answer.",
     fallback: "Questions, ideas or your own story with burnout? Write to me directly at hello@elegix.net. I read every message.",
@@ -202,6 +202,18 @@ export const TRUST = {
     role: "Founder",
     media: { src: "/images/founder.jpg", alt: "Edward Korytskyi, founder of Elegix, smiling in a white T-shirt in front of tropical greenery", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
   },
+};
+
+/** The team: /about#team and the avatar row under the founder quote. Add `photo` when a portrait arrives; until then initials show. */
+export const TEAM = {
+  label: "Team",
+  title: "The people behind *Elegix*",
+  link: { href: "/about#team", label: "Meet the team" },
+  members: [
+    { name: "Edward Korytskyi", role: "Founder", photo: "/images/founder.jpg" },
+    { name: "Alina Krupa", role: "CMO" },
+    { name: "Yevhenii Bohomol", role: "Product Analyst" }, // placeholder title, to confirm with Edward
+  ] as { name: string; role: string; photo?: string; linkedin?: string }[],
 };
 
 /** Shared by the founder block on the home page and "Our principles" on /about. The last one carries the privacy promise. */
@@ -216,7 +228,7 @@ export const PRINCIPLES: { title: string; text: string; link?: { href: string; l
 export const JOIN = {
   eyebrow: "Early access",
   title: "Join before launch. Get *founding member* perks.",
-  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what gets built next", "Behind-the-scenes updates as it's built"],
+  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "Behind-the-scenes updates as it's built"],
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
   button: "Reserve my spot",
@@ -226,7 +238,7 @@ export const JOIN = {
 // 11
 export const FAQ_SECTION = {
   title: "Questions before you *join*",
-  text: "Didn't find your question? Write to me any time. I read every message.",
+  text: "Didn't find your question? Write to us any time. We read every message.",
   email: "hello@elegix.net",
 };
 
@@ -234,11 +246,11 @@ export const FAQ = [
   { q: "How is Elegix different from Todoist or Notion?", a: "They track whether you finished tasks. Elegix shows whether your life is balanced: 6 areas, one Life Balance score, a weekly check-in and a monthly review. No system to build." },
   { q: "Is the Life Balance score real or just a number?", a: "It combines your 1-minute weekly check-in, where you rate each area, with what you actually do. If there's too little data, Elegix tells you instead of guessing." },
   { q: "I've given up on every planner. Why would this one stick?", a: "You start from a ready template in 2 minutes. After that it's a 1-minute weekly check-in, plus a 10-minute monthly review. There's nothing to maintain." },
-  { q: "When does it launch?", a: "I'm finishing the first version. Waitlist members get in first, in the order they joined." },
+  { q: "When does it launch?", a: "We're finishing the first version. Waitlist members get in first, in the order they joined." },
   { q: "Is it free?", a: "Yes, Elegix is free to use. An optional Premium plan adds more, and its pricing will be announced before launch. Waitlist members hear first." },
   { q: "Which platforms?", a: "iOS and Android, one account on all your devices." },
   { q: "What happens to my data?", a: "It's used only to run the app for you. It's never sold, and you can delete it any time." },
-  { q: "What do I get for joining early?", a: "First access, a founding member price and a say in what gets built next." },
+  { q: "What do I get for joining early?", a: "First access, a founding member price and a say in what we build next." },
 ];
 
 export const FOOTER = {
@@ -262,7 +274,7 @@ export const EMAIL = {
   welcome: {
     subject: "You're on the Elegix waitlist",
     title: "You're in. Let's bring your whole life back into balance.",
-    subtitle: "You're on the Elegix waitlist. I'll email you the moment your spot opens.",
+    subtitle: "You're on the Elegix waitlist. We'll email you the moment your spot opens.",
     gridTitle: "With Elegix, you'll:",
     grid: [
       { icon: "chart.png", text: "See all 6 areas of your life on one screen" },
@@ -326,7 +338,7 @@ export const STORY = {
 export const ABOUT_PAGE = {
   meta: {
     title: "About Elegix",
-    description: "What Elegix is, who it's for and why I'm building it: a calm planner that keeps all 6 areas of your life in balance.",
+    description: "What Elegix is, who it's for and why we're building it: a calm planner that keeps all 6 areas of your life in balance.",
   },
   hero: {
     label: "About Elegix",
@@ -376,9 +388,9 @@ export const ABOUT_PAGE = {
     points: ["Rate each area honestly, from 1 to 10", "Connect every goal and habit to an area", "Watch your balance change week by week", "Change one thing at a time, without guilt"],
   },
   story: { label: "Our story", id: "story" },
-  beliefs: { label: "What I believe", title: "Our *principles*" },
-  publicBuild: { title: "Built in public", text: "Elegix is in development and I share every step. Follow along:" },
-  cta: { title: "Ready to see your *whole* life?", text: "Join the waitlist and get early access, a founding member price and a say in what gets built next." },
+  beliefs: { label: "What we believe", title: "Our *principles*" },
+  publicBuild: { title: "Built in public", text: "Elegix is in development and we share every step. Follow along:" },
+  cta: { title: "Ready to see your *whole* life?", text: "Join the waitlist and get early access, a founding member price and a say in what we build next." },
 };
 
 /** Closing "Ready when you are": the app in the middle, one everyday object per life area around it. */

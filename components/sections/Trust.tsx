@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PRINCIPLES, TRUST } from "@/lib/content";
+import { PRINCIPLES, TEAM, TRUST } from "@/lib/content";
+import { Avatar } from "@/components/ui/Avatar";
 import { LogoMark } from "@/components/ui/Logo";
 import { Media } from "@/components/ui/Media";
 import { Rich } from "@/components/ui/Rich";
@@ -49,7 +50,13 @@ export function Trust() {
             <div className={styles.photo}><Media media={f.media} fill sizes="(max-width: 860px) 100vw, 360px" /></div>
             <div className={styles.note}>
               <blockquote className={styles.quote}>{f.quote || f.fallback}</blockquote>
-              <figcaption><b>{f.name}</b>, {f.role} · <Link href={f.storyLink.href} className={styles.story}>{f.storyLink.label} →</Link></figcaption>
+              <figcaption>
+                <span><b>{f.name}</b>, {f.role} · <Link href={f.storyLink.href} className={styles.story}>{f.storyLink.label} →</Link></span>
+                <Link href={TEAM.link.href} className={styles.team}>
+                  <span className={styles.faces}>{TEAM.members.map((m) => <Avatar key={m.name} name={m.name} photo={m.photo} size={34} className={styles.face} />)}</span>
+                  {TEAM.link.label} →
+                </Link>
+              </figcaption>
             </div>
           </figure>
           <Principles />

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TRUST } from "@/lib/content";
+import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
+import { Avatar } from "@/components/ui/Avatar";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
@@ -133,7 +134,26 @@ export default function About() {
         </div>
       </section>
 
-      {/* 7. What we believe */}
+      {/* 7. Team */}
+      <section id="team" className={`section ${styles.teamSection}`} aria-labelledby="team-title" style={{ scrollMarginTop: "var(--header-h)" }}>
+        <div className="container">
+          <div className="section-head" data-reveal>
+            <span className="label">{TEAM.label}</span>
+            <h2 id="team-title" className="display h2"><Rich text={TEAM.title} /></h2>
+          </div>
+          <ul className={styles.team}>
+            {TEAM.members.map((m) => (
+              <li key={m.name} className={styles.member} data-reveal>
+                <Avatar name={m.name} photo={m.photo} size={420} className={styles.memberPhoto} />
+                <div><h3>{m.name}</h3><p>{m.role}</p></div>
+                {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener" className={styles.memberLink}>LinkedIn ↗</a>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 8. What we believe */}
       <section className={`section ${styles.beliefsSection}`} aria-labelledby="beliefs-title">
         <div className="container">
           <div className="section-head" data-reveal>
@@ -148,7 +168,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 8. Early access */}
+      {/* 9. Early access */}
       <section id="join" className="section" aria-labelledby="cta-title" style={{ scrollMarginTop: "var(--header-h)" }}>
         <div className="container">
           <div className={`on-dark grain ${styles.cta}`} data-reveal>
@@ -159,7 +179,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 9. FAQ */}
+      {/* 10. FAQ */}
       <Faq />
     </main>
   );
