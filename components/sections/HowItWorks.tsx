@@ -43,7 +43,7 @@ function Chip({ kind }: { kind: (typeof HOW.steps)[number]["key"] }) {
 }
 
 /** How it works: the 6 areas as chips, then See / Act / Reflect as tall cards with the app peeking up.
- *  On the home page it ends with one "Learn more" link to /what-is-elegix; that page renders it without. */
+ *  On the home page it ends with one "Learn more" link to /about; /about renders it without. */
 export function HowItWorks({ learnMore = true, chips = true }: { learnMore?: boolean; chips?: boolean }) {
   return (
     <section id="how" className="section" aria-labelledby="how-title">
