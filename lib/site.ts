@@ -1,11 +1,9 @@
 /**
  * Public URL and indexing switch, used by metadata, robots.txt, sitemap.xml and structured data.
- * NEXT_PUBLIC_SITE_URL wins when set. Otherwise Vercel's production domain is used, which becomes
- * elegix.net on its own once that domain is connected to the project.
+ * NEXT_PUBLIC_SITE_URL wins when set. Otherwise it's the primary domain: elegix.net redirects to www in Vercel,
+ * so every canonical URL, the sitemap and structured data point at www.elegix.net.
  */
-const vercelProd = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || (vercelProd ? `https://${vercelProd}` : "https://elegix.net")).replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.elegix.net").replace(/\/$/, "");
 
 /** Only production is indexed; previews (the dev branch) and local builds ask search engines to stay away. */
 export const INDEXABLE = process.env.VERCEL_ENV === "production" || process.env.SITE_INDEXABLE === "yes";

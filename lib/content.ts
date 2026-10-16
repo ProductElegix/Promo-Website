@@ -302,7 +302,7 @@ export const EMAIL = {
       { icon: "timer.png", text: "Have time to rest, not just work" },
       { icon: "box.png", text: "Turn big goals into small daily steps, without guilt" },
     ],
-    button: { label: "Take the free Life Balance Check", href: "https://elegix-site.vercel.app/#check" },
+    button: { label: "Take the free Life Balance Check", href: "https://www.elegix.net/life-balance-check" },
     reply: "Which area of your life do you want to work on first? Just hit reply, I read every answer.",
   },
   check: {
@@ -311,7 +311,7 @@ export const EMAIL = {
     subtitle: "Your lowest area right now is {area}. That's not a failure. It's the best place to start.",
     areasTitle: "Your 6 life areas",
     stepTitle: "Your first step for {area}",
-    button: { label: "See how Elegix works", href: "https://elegix-site.vercel.app/#how" },
+    button: { label: "See how Elegix works", href: "https://www.elegix.net/#how" },
     reply: "Want to talk through your result? Just hit reply, I read every answer.",
   },
   belief: { title: "At Elegix, we believe", text: "A good life isn't the most productive one. It's a balanced one." },

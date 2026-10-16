@@ -5,7 +5,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
  * The token is an HMAC of the email with UNSUBSCRIBE_SECRET, so nobody can unsubscribe someone else.
  * The link always points at the public site (dev previews are behind Vercel login).
  */
-const BASE = process.env.UNSUBSCRIBE_BASE_URL || "https://elegix-site.vercel.app";
+const BASE = process.env.UNSUBSCRIBE_BASE_URL || "https://www.elegix.net";
 
 export function unsubscribeToken(email: string): string | null {
   const secret = process.env.UNSUBSCRIBE_SECRET;
