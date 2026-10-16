@@ -32,4 +32,3 @@
 .lock { position: absolute; right: -40px; bottom: -70px; width: 220px; z-index: -1; }
 .lock svg { display: block; width: 100%; height: auto; overflow: visible; }
 .lock path, .lock rect { stroke: rgba(255, 255, 255, .07); stroke-width: 22; }
-.mark { position: absolute; left: 50%; top: 70%; width: 26%; height: auto; transform: translate(-50%, -50%); color: rgba(255, 255, 255, .06); }

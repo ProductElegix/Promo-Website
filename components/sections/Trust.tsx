@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PRINCIPLES, TRUST } from "@/lib/content";
-import { LogoMark } from "@/components/ui/Logo";
 import { Media } from "@/components/ui/Media";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Trust.module.css";
@@ -13,7 +12,6 @@ function Lock() {
         <path d="M110 230 V150 a90 90 0 0 1 180 0 V230" fill="none" />
         <rect x="40" y="230" width="320" height="270" rx="56" fill="none" />
       </svg>
-      <LogoMark className={styles.mark} />
     </div>
   );
 }
