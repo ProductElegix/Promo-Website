@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { CONSENT } from "@/lib/content";
-import { CommunityButton } from "./CommunityButton";
+import { CommunityNote } from "./CommunityNote";
 import { readAttribution } from "@/lib/attribution";
 import styles from "./WaitlistForm.module.css";
 
@@ -23,6 +23,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
+  const [invited, setInvited] = useState(false);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,10 +41,11 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: value, source, start, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
       });
-      const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean };
+      const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean; invited?: boolean };
       if (!res.ok) throw new Error(data.error || "We couldn't save your email. Please try again.");
       window.gtag?.("event", "generate_lead", { form: source });
       setStatus({ kind: "ok", text: data.emailed ? `You're on the list. We've sent a confirmation to ${value}.` : `You're on the list. We'll email ${value} when your spot opens.` });
+      setInvited(!!data.invited);
       setEmail("");
     } catch (err) {
       setStatus({ kind: "err", text: err instanceof Error ? err.message : "We couldn't save your email. Please try again." });
@@ -67,7 +69,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
       </form>
       <p className={styles.consent}>{CONSENT.before} <Link href="/privacy">{CONSENT.link}</Link>{CONSENT.after}</p>
       <p id={`${id}-status`} className={`${styles.msg} ${styles[status.kind]}`} role="status" aria-live="polite">{status.text}</p>
-      {status.kind === "ok" && <div className={styles.community}><CommunityButton tone={variant === "glass" ? "dark" : "light"} /></div>}
+      {status.kind === "ok" && invited && <CommunityNote className={styles.community} />}
     </div>
   );
 }

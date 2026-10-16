@@ -7,13 +7,13 @@ import { readAttribution } from "@/lib/attribution";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
-import { CommunityButton } from "@/components/ui/CommunityButton";
+import { CommunityNote } from "@/components/ui/CommunityNote";
 import { Wheel } from "@/components/ui/Wheel";
 import styles from "./BalanceCheck.module.css";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-type Result = { average: number; lowest: AreaKey; email: string; emailed: boolean };
+type Result = { average: number; lowest: AreaKey; email: string; emailed: boolean; invited: boolean };
 
 export function BalanceCheck() {
   const [scores, setScores] = useState<Record<AreaKey, number>>(
@@ -37,13 +37,13 @@ export function BalanceCheck() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: value, source: "balance-check", scores, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
       });
-      const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean };
+      const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean; invited?: boolean };
       if (!res.ok) throw new Error(data.error || "We couldn't save your check. Please try again.");
       const values = AREA_ORDER.map((a) => scores[a]);
       const average = values.reduce((sum, n) => sum + n, 0) / values.length;
       const lowest = AREA_ORDER.reduce((low, a) => (scores[a] < scores[low] ? a : low), AREA_ORDER[0]);
       window.gtag?.("event", "generate_lead", { form: "balance-check" });
-      setResult({ average, lowest, email: value, emailed: !!data.emailed });
+      setResult({ average, lowest, email: value, emailed: !!data.emailed, invited: !!data.invited });
     } catch (err) {
       setError(err instanceof Error ? err.message : "We couldn't save your check. Please try again.");
     } finally {
@@ -71,7 +71,7 @@ export function BalanceCheck() {
                 <div><small>{CHECK.lowest}</small><b>{AREAS[result.lowest].name} · {scores[result.lowest]}/10</b></div>
               </div>
               <p className={styles.done}>{result.emailed ? CHECK.sent : CHECK.done} <b>{result.email}</b>.</p>
-              <CommunityButton tone="dark" withText />
+              {result.invited && <CommunityNote className={styles.done} />}
             </div>
           ) : (
             <form className={styles.form} onSubmit={onSubmit} noValidate data-clarity-mask="true">

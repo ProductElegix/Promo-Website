@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { addToWaitlist, mailgunConfig, sendConfirmation, type Signup } from "@/lib/mailgun";
 import { POLICY_VERSION } from "@/lib/content";
+import { communityUrl } from "@/lib/email/template";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const STARTS = new Set(["template", "own", "unsure"]);
@@ -120,7 +121,8 @@ export async function POST(request: Request) {
     }
   }
 
-  return NextResponse.json({ ok: true, stored: true, emailed });
+  // the invite itself only travels by email; the site just says to check the inbox
+  return NextResponse.json({ ok: true, stored: true, emailed, invited: emailed && !!communityUrl() });
 }
 
 /** Basic per-IP limit: 5 signups a minute per server instance. Enough to stop accidental loops and simple abuse. */

@@ -57,14 +57,15 @@ export const SOCIALS = [
 ];
 
 /**
- * Telegram community: the button after every signup and the card in the waitlist emails.
- * Paste the t.me link into `url`. While it's empty, the button and the email card are hidden.
+ * Private Telegram group for waitlist members. The invite link is NOT here: it's the server-only
+ * env var TELEGRAM_COMMUNITY_URL (Vercel → Settings → Environment Variables), so it never reaches
+ * the public site. While it's unset, the email card and the "check your inbox" line are hidden.
  */
 export const COMMUNITY = {
-  url: "",
-  button: "Join the Telegram community",
-  text: "Meet other early members, see what we're building and help shape it.",
-  emailTitle: "Join our community",
+  emailTitle: "Your invite to our private community",
+  emailText: "A private Telegram group just for early members. Meet the others, see what we're building and help shape it.",
+  button: "Join the private group",
+  siteLine: "Check your inbox: your invite to our private Telegram community is there.",
 };
 
 /** Shown under every signup form. Bump POLICY_VERSION whenever the privacy policy text changes. */

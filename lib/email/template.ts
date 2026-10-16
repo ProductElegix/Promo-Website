@@ -96,14 +96,18 @@ function belief(btn: { label: string; href: string }) {
   return card(h(EMAIL.belief.title, 24, 30, "#ffffff") + p(EMAIL.belief.text, "#ffffff", "center", "padding-top:16px") + button(btn.label, btn.href), C.brand);
 }
 
-/** Telegram community card; empty until COMMUNITY.url is set in lib/content.ts. */
+/** Invite link to the private Telegram group: a server-only env var, never shipped to the site. */
+export const communityUrl = () => process.env.TELEGRAM_COMMUNITY_URL?.trim() || "";
+
+/** Private Telegram group invite card; empty while TELEGRAM_COMMUNITY_URL is unset. */
 function community() {
-  if (!COMMUNITY.url) return "";
+  const url = communityUrl();
+  if (!url) return "";
   const btn = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px"><tr><td align="center" bgcolor="${C.brand}" style="border-radius:9999px;background:${C.brand}">` +
-    `<a href="${esc(COMMUNITY.url)}" style="display:block;padding:14px 28px;font-family:${FONT};font-size:16px;line-height:24px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:9999px">${esc(COMMUNITY.button)}</a></td></tr></table>`;
-  return card(h(COMMUNITY.emailTitle, 20, 28, C.brand, "left") + p(COMMUNITY.text, C.text, "left", "padding-top:8px") + btn);
+    `<a href="${esc(url)}" style="display:block;padding:14px 28px;font-family:${FONT};font-size:16px;line-height:24px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:9999px">${esc(COMMUNITY.button)}</a></td></tr></table>`;
+  return card(h(COMMUNITY.emailTitle, 20, 28, C.brand, "left") + p(COMMUNITY.emailText, C.text, "left", "padding-top:8px") + btn);
 }
-const communityText = () => (COMMUNITY.url ? `${COMMUNITY.emailTitle}: ${COMMUNITY.text}\n${COMMUNITY.button}: ${COMMUNITY.url}` : "");
+const communityText = () => (communityUrl() ? `${COMMUNITY.emailTitle}\n${COMMUNITY.emailText}\n${COMMUNITY.button}: ${communityUrl()}` : "");
 
 function wait(reply: string) {
   const k = EMAIL.wait;
