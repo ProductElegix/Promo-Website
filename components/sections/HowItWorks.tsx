@@ -1,74 +1,79 @@
-import { AREAS, HOW } from "@/lib/content";
-import { Media } from "@/components/ui/Media";
+import { APP, AREAS, AREA_ORDER, HERO, HOW } from "@/lib/content";
+import { Phone } from "@/components/ui/Phone";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
 import { Wheel } from "@/components/ui/Wheel";
 import styles from "./HowItWorks.module.css";
 
-function Overlay({ kind }: { kind: (typeof HOW.cards)[number]["kind"] }) {
-  if (kind === "score") {
-    const sc = HOW.score;
+/** Small floating UI chip over the phone's edge; demo values are labelled as examples. */
+function Chip({ kind }: { kind: (typeof HOW.steps)[number]["key"] }) {
+  if (kind === "balance") {
+    const c = HERO.card;
     return (
-      <div className={`glass ${styles.panel} ${styles.score}`}>
-        <span className={styles.small}>{sc.label}</span>
-        <b className={styles.big}>{sc.from} <span className={styles.arrow}>→</span> {sc.to}</b>
-        <Wheel scores={sc.scores} size={110} ring="rgba(255,255,255,0.18)" />
+      <div className={`${styles.chip} ${styles.chipBalance}`}>
+        <Wheel scores={c.scores} size={44} ring="#e9ebe9" />
+        <div><small>{c.title}</small><b>{c.value}<span>{c.of}</span></b></div>
       </div>
     );
   }
-  if (kind === "areas") {
+  if (kind === "goals") {
+    const n = HOW.next;
     return (
-      <ul className={`glass ${styles.panel} ${styles.rows}`}>
-        {HOW.changes.map((c) => (
-          <li key={c.area} style={areaVars(c.area)}>
-            <span className={styles.dot} aria-hidden="true" />
-            <span>{AREAS[c.area].short}</span>
-            <b className={c.change.startsWith("+") ? styles.up : styles.down}>{c.change}</b>
+      <div className={`${styles.chip} ${styles.chipNext}`}>
+        <small>{n.title}</small>
+        <div className={styles.nextRow}><span className={styles.check} aria-hidden="true" /><b>{n.item}</b><Pill area={n.area} strong /></div>
+      </div>
+    );
+  }
+  const t = HOW.trends;
+  return (
+    <div className={`${styles.chip} ${styles.chipRows}`}>
+      <small>{t.title}</small>
+      <ul>
+        {t.rows.map((r) => (
+          <li key={r.area} style={areaVars(r.area)}>
+            <span className={styles.dot} aria-hidden="true" />{AREAS[r.area].short}
+            <b className={r.trend === "up" ? styles.up : styles.down}>{r.trend === "up" ? "↑" : "↓"}</b>
           </li>
         ))}
       </ul>
-    );
-  }
-  const n = HOW.next;
-  return (
-    <div className={`${styles.panel} ${styles.white}`}>
-      <span className={styles.nextLabel}>{n.title}</span>
-      <div className={styles.nextItem}><span className={styles.check} aria-hidden="true" /><b>{n.item}</b><Pill area={n.area} strong /></div>
     </div>
   );
 }
 
+/** How it works: the 6 areas as chips, then See / Act / Reflect as tall cards with the app peeking up. */
 export function HowItWorks() {
   return (
-    <section id="how" className={`section ${styles.how}`} aria-labelledby="how-title">
+    <section id="how" className="section" aria-labelledby="how-title">
       <div className="container">
-        <div className="section-head split" data-reveal>
+        <div className={`section-head center ${styles.head}`} data-reveal>
           <span className="label">{HOW.label}</span>
           <h2 id="how-title" className="display h2"><Rich text={HOW.title} /></h2>
-          <a href="#join" className="btn">{HOW.cta}</a>
+          <p className="lede">{HOW.lede}</p>
+          <ul className={styles.areas} aria-label="The 6 life areas">
+            {AREA_ORDER.map((a) => <li key={a}><Pill area={a} /></li>)}
+          </ul>
         </div>
-        <ol className={styles.steps} data-reveal>
-          {HOW.steps.map((s, i) => (
-            <li key={s.title}>
-              <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
-            </li>
-          ))}
+        <ol className={styles.cards}>
+          {HOW.steps.map((c, i) => {
+            const screen = (APP.screens.find((s) => s.label === c.screen) ?? APP.screens[0]).media;
+            const [a, b] = c.tint;
+            return (
+              <li key={c.key} className={styles.card} data-reveal
+                style={{ ["--a" as string]: `var(--${a}-t)`, ["--b" as string]: `var(--${b}-t)` }}>
+                <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
+                <h3 className={styles.title}>{c.title}</h3>
+                <p className={styles.text}>{c.text}</p>
+                <div className={styles.device}>
+                  <div className={`${styles.phoneWrap} ${c.scroll ? styles.scrolled : ""}`} style={{ ["--scroll" as string]: `-${c.scroll}%` }}>
+                    <Phone screen={screen} className={styles.phone} />
+                  </div>
+                  <div className={styles.chipWrap} aria-hidden="true"><Chip kind={c.key} /></div>
+                </div>
+              </li>
+            );
+          })}
         </ol>
-        {/* one example card under each step: See → score, Act → next step, Reflect → changes by area */}
-        <ul className={styles.cards} aria-label="What Elegix shows you">
-          {HOW.cards.map((c) => (
-            <li key={c.caption} data-reveal>
-              <figure className={`grain ${styles.card}`}>
-                <Media media={c.media} tone="dark" fill compact sizes="(max-width: 860px) 80vw, 420px" />
-                <div className={`${styles.shade} ${c.media.src ? styles.onPhoto : ""}`} aria-hidden="true" />
-                <figcaption className={styles.caption}>{c.caption}</figcaption>
-                <div className={styles.overlay}><Overlay kind={c.kind} /></div>
-              </figure>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

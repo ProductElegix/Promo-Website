@@ -12,7 +12,7 @@ export function Ready() {
       <div className="container">
         <div className={`section-head center ${styles.head}`} data-reveal>
           <h2 id="ready-title" className="display h2"><Rich text={READY.title} /></h2>
-          <p className="lede">{READY.lede}</p>
+          <p className={`lede ${styles.lede}`}><Rich text={READY.lede} /></p>
           <a href="#join" className="btn dark">{READY.cta}</a>
         </div>
       </div>

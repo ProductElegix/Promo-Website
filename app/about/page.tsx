@@ -8,6 +8,7 @@ import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import { Wheel } from "@/components/ui/Wheel";
 import { Faq } from "@/components/sections/Faq";
+import { Principles } from "@/components/sections/Trust";
 import { PhotoHero } from "@/components/sections/PhotoHero";
 import styles from "./about.module.css";
 
@@ -139,11 +140,7 @@ export default function About() {
             <span className="label">{A.beliefs.label}</span>
             <h2 id="beliefs-title" className="display h2"><Rich text={A.beliefs.title} /></h2>
           </div>
-          <ul className={styles.beliefs}>
-            {A.beliefs.items.map((b) => (
-              <li key={b.title} className={styles.belief} data-reveal><h3>{b.title}</h3><p>{b.text}</p></li>
-            ))}
-          </ul>
+          <Principles className={styles.principles} />
           <div className={styles.public} data-reveal>
             <div><b>{A.publicBuild.title}</b><p>{A.publicBuild.text}</p></div>
             <ul>{SOCIALS.map((s) => <li key={s.label}><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>

@@ -7,7 +7,7 @@
 .factValue { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -0.04em; color: var(--green); }
 .factLabel { font-size: 0.85rem; color: var(--muted); max-width: 12rem; }
 
-.features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .feature { background: var(--paper); border-radius: 20px; padding: 24px; display: grid; gap: 12px; align-content: start; transition: transform .2s ease, box-shadow .2s ease; }
 .feature:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -28px rgba(20, 26, 23, .45); }
 .feature h3 { font-size: 1.15rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 12px; }
@@ -59,10 +59,7 @@
 .sign { color: var(--muted); }
 
 .beliefsSection { padding-top: 0; }
-.beliefs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.belief { background: var(--cream-2); border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start; }
-.belief h3 { font-size: 1.15rem; font-weight: 500; letter-spacing: -0.02em; }
-.belief p { font-size: 0.95rem; color: var(--ink-2); }
+ul.principles { grid-template-columns: repeat(4, 1fr); }
 .public { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding: 22px 26px; border-radius: 20px; background: var(--paper); }
 .public p { color: var(--muted); font-size: 0.95rem; }
 .public ul { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -77,15 +74,16 @@
 .ctaForm input[type="email"] { width: 100%; }
 
 @media (max-width: 1024px) {
-  .features, .beliefs { grid-template-columns: repeat(2, 1fr); }
+  ul.principles { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
-  .idea, .story, .modes, .audience { grid-template-columns: 1fr; }
+  .idea, .story, .modes, .audience, .features { grid-template-columns: 1fr; }
   .storyAside { position: static; }
   .photo { aspect-ratio: 4 / 3; }
   .dark { margin-inline: 6px; border-radius: 20px; }
 }
 @media (max-width: 560px) {
-  .features, .beliefs { grid-template-columns: 1fr; }
+  .features { grid-template-columns: 1fr; }
+  ul.principles { grid-template-columns: 1fr; }
   .facts { grid-template-columns: 1fr; gap: 12px; }
 }

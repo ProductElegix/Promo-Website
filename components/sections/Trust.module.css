@@ -24,3 +24,14 @@
 .story { color: var(--green); text-decoration: none; font-weight: 500; }
 .story:hover { text-decoration: underline; }
 .quote { font-size: clamp(1.05rem, 1.6vw, 1.3rem) !important; }
+/* privacy principle: dark card with a faint embossed lock */
+.privacy { position: relative; overflow: hidden; isolation: isolate; color: #f1f1ec; background: radial-gradient(70% 80% at 100% 100%, rgba(0, 154, 68, .45), transparent 70%), #121614; }
+.privacy:hover { background: radial-gradient(70% 80% at 100% 100%, rgba(0, 154, 68, .55), transparent 70%), #121614; }
+.privacy .n { color: var(--lime); }
+.privacy p { color: #a9b0ab; }
+.lock { position: absolute; right: -40px; bottom: -70px; width: 220px; z-index: -1; }
+.lock svg { display: block; width: 100%; height: auto; overflow: visible; }
+.lock path, .lock rect { stroke: rgba(255, 255, 255, .07); stroke-width: 22; }
+.mark { position: absolute; left: 50%; top: 70%; width: 26%; height: auto; transform: translate(-50%, -50%); color: rgba(255, 255, 255, .06); }
+.policy { color: var(--lime); text-decoration: none; font-size: 0.9rem; margin-top: 4px; }
+.policy:hover { text-decoration: underline; }

@@ -40,9 +40,8 @@ export const META = {
 
 export const NAV = [
   { href: "/#how", label: "How it works" },
-  { href: "/#features", label: "Features" },
   { href: "/#areas", label: "Life areas" },
-  { href: "/#check", label: "Balance check" },
+  { href: "/#check", label: "Life Balance Check" },
   { href: "/#faq", label: "FAQ" },
   { href: "/about", label: "About" },
 ];
@@ -71,10 +70,10 @@ export const HERO = {
   title: "Crushing it at work. *Losing* the rest?",
   lede: "Elegix tracks your goals, habits and tasks across 6 life areas and shows which part of your life you're neglecting, before it turns into burnout.",
   cta: "Get early access",
-  trust: ["Free plan", "iOS & Android", "No spam, unsubscribe in one click"],
+  trust: ["Free plan", "iOS & Android", "No spam"],
   media: { src: "/images/hero.jpg", alt: "A woman sitting on a grassy cliff, looking out over the sea in soft morning light", brief: "Hero photo · person outdoors at golden hour, calm · full-bleed 2400×1600", ratio: "3 / 2" } as MediaSlot,
   card: {
-    title: "Your balance",
+    title: "Example balance",
     value: "5.6",
     of: "/10",
     scores: [4, 5, 3, 3, 6, 9],
@@ -108,44 +107,51 @@ export const COMPARE = {
   rows: [
     { label: "What it tracks", them: "Tasks completed", us: "Balance across 6 life areas" },
     { label: "Setup", them: "Build your own system", us: "Ready framework, 2-minute start" },
-    { label: "What it tells you", them: "You checked 12 boxes", us: "Health dropped 3 weeks in a row" },
+    { label: "What it tells you", them: "How many boxes you checked", us: "Which area is slipping, and for how long" },
     { label: "Horizon", them: "Today", us: "Your month and your year" },
   ],
-  line: "Not another to-do app. A mirror for your *whole life*.",
+  line: "Not another to-do app. One clear view of all *6 areas* of your life.",
 };
 
-// 4
-export const INTRO = {
-  label: "The Elegix framework",
-  title: "It starts with 6 *life areas*",
-  lede: "Every goal, habit and task belongs to an area. Together they make your balance score.",
-  sample: { area: "health" as AreaKey, score: "4.1 / 10", text: "Sleep, movement, food", streak: "Dropped 3 weeks in a row" },
-  link: { href: "#how", label: "See how it works" },
-};
-
-// 5
+// 4 · How it works: the 6 areas, then three steps shown as cards with the app inside
 export const HOW = {
   label: "How it works",
   title: "Know your balance. Change what happens *next*.",
-  cta: "Get early access",
+  lede: "Every goal, habit and task belongs to one of 6 life areas. Together they make your Life Balance score.",
   steps: [
-    { title: "See", text: "One balance score and 6 area scores. Your whole life on one screen." },
-    { title: "Act", text: "Goals linked to daily habits and tasks, each with your “why”. Suggestions for the area that needs you most." },
-    { title: "Reflect", text: "A 10-minute monthly review. What grew, what dropped, what to change." },
-  ],
-  cards: [
-    { kind: "score", caption: "Balance, quantified", media: { src: "/images/how-score.jpg", alt: "A person running along a park path at sunset", brief: "Morning run, park · 4:5", ratio: "4 / 5" } },
-    { kind: "next", caption: "Next steps, simplified", media: { src: "/images/how-next.jpg", alt: "A notebook, pen and laptop on a wooden desk", brief: "Planning the week, desk · 4:5", ratio: "4 / 5" } },
-    { kind: "areas", caption: "Every area, scored", media: { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen", brief: "Dinner with friends · 4:5", ratio: "4 / 5" } },
-  ] as { kind: "score" | "areas" | "next"; caption: string; media: MediaSlot }[],
-  score: { label: "Balance", from: "5.6", to: "7.2", scores: [7, 7, 6, 7, 7, 8] },
-  changes: [
-    { area: "health" as AreaKey, change: "+23%" },
-    { area: "people" as AreaKey, change: "+12%" },
-    { area: "career" as AreaKey, change: "−4%" },
-    { area: "hobby" as AreaKey, change: "+18%" },
-  ],
+    {
+      key: "balance",
+      title: "See",
+      text: "One Life Balance score and 6 area scores, so you see at a glance which part of your life needs you.",
+      screen: "Life Area",
+      tint: ["health", "growth"] as [AreaKey, AreaKey],
+      scroll: 0,
+    },
+    {
+      key: "goals",
+      title: "Act",
+      text: "Goals linked to daily habits and tasks, each with your “why” next to it, and one next step for the area that needs you most.",
+      screen: "Home",
+      tint: ["hobby", "people"] as [AreaKey, AreaKey],
+      scroll: 0,
+    },
+    {
+      key: "review",
+      title: "Reflect",
+      text: "A 1-minute weekly check-in, plus a 10-minute monthly review: what grew, what dropped, what to change next.",
+      screen: "Life Area",
+      tint: ["meaning", "growth"] as [AreaKey, AreaKey],
+      scroll: 36,
+    },
+  ] as { key: "balance" | "goals" | "review"; title: string; text: string; screen: string; tint: [AreaKey, AreaKey]; scroll: number }[],
+  /** demo values in the floating chips; each chip is labelled as an example */
+  example: "Example",
   next: { title: "Next step", item: "20-minute walk", area: "health" as AreaKey },
+  trends: { title: "Example week", rows: [
+    { area: "health" as AreaKey, trend: "up" as const },
+    { area: "people" as AreaKey, trend: "up" as const },
+    { area: "career" as AreaKey, trend: "down" as const },
+  ] },
 };
 
 // 6
@@ -163,12 +169,8 @@ export const AREAS_SECTION = {
   } as Record<AreaKey, MediaSlot>,
 };
 
-// 7
+/** Real app screenshots: the hero phone, the How it works cards, the About hero and Ready. */
 export const APP = {
-  eyebrow: "The Elegix app",
-  title: "A calm planner for your *whole* life",
-  lede: "Goals, habits and tasks in one place, sorted by life area. No dashboards to build. No guilt trips.",
-  chips: ["Balance score", "Monthly review", "Why story", "Ready templates", "iOS & Android"],
   screens: [
     { label: "Home", media: { src: "/images/app/home.jpg", alt: "Elegix app home screen: goals and habits counters, categories, the Life Area balance score and Why Story", brief: "App screenshot · Home", ratio: "9 / 19.5" } },
     { label: "Life Area", media: { src: "/images/app/life-area.jpg", alt: "Elegix Life Area screen: a radar chart of life areas with weekly changes and a balance score out of 10", brief: "App screenshot · Life Area", ratio: "9 / 19.5" } },
@@ -177,90 +179,74 @@ export const APP = {
 
 // 8
 export const CHECK = {
-  eyebrow: "Free life balance check",
+  eyebrow: "Free Life Balance Check",
   title: "Find your weakest area in *2 minutes*",
-  text: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area. Free, and you'll get a spot on the waitlist.",
+  text: "Rate your 6 life areas from 1 to 10. I'll email your Life Balance score and one first step for your lowest area. Free, and you'll get a spot on the waitlist.",
   question: "How satisfied are you with each area right now?",
   button: "Take the free check",
-  result: "Your balance",
+  result: "Your Life Balance score",
   lowest: "Your weakest area",
-  done: "We'll email your score and a first step to",
-  sent: "We've emailed your score and a first step to",
+  done: "I'll email your score and a first step to",
+  sent: "I've emailed your score and a first step to",
 };
 
 // 9
 export const TRUST = {
   eyebrow: "Who's behind it",
-  title: "Why we're building *Elegix*",
+  title: "Why I'm building *Elegix*",
   founder: {
-    quote: "Most people don't struggle because they lack ambition. They struggle because modern life got too complex: too many goals, too many notifications, too many tools. We tried every planner and habit tracker, and none answered the bigger question: how do you build a balanced life without the process itself becoming overwhelming? Elegix is our answer. One calm system for the parts of life that matter, one small step at a time.",
+    quote: "I tried every planner and habit tracker. Each fixed one piece, and none answered the bigger question: how do you build a balanced life without the process itself becoming overwhelming? Elegix is my answer.",
     fallback: "Questions, ideas or your own story with burnout? Write to me directly at hello@elegix.net. I read every message.",
-    storyLink: { href: "/about#story", label: "Read our story" },
-    name: "Edward",
+    storyLink: { href: "/about#story", label: "Read my story" },
+    name: "Edward Korytskyi",
     role: "Founder",
-    media: { src: "/images/founder.jpg", alt: "Edward, founder of Elegix, smiling in a white T-shirt in front of tropical greenery", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
+    media: { src: "/images/founder.jpg", alt: "Edward Korytskyi, founder of Elegix, smiling in a white T-shirt in front of tropical greenery", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
   },
-  principles: [
-    { title: "No guilt, no fake streaks.", text: "We show the picture and one next step." },
-    { title: "An honest score.", text: "When there isn't enough data, Elegix says so." },
-    { title: "Your data is yours.", text: "We never sell it or show it to anyone." },
-    { title: "Built in public.", text: "Follow every update on Instagram, TikTok, LinkedIn, X and Pinterest." },
-  ],
 };
+
+/** Shared by the founder block on the home page and "Our principles" on /about. The last one carries the privacy promise. */
+export const PRINCIPLES: { title: string; text: string; link?: { href: string; label: string } }[] = [
+  { title: "Freedom, not burnout.", text: "Productivity should create freedom. If a planner makes you feel worse, it's the planner's fault." },
+  { title: "One step, not a wall of tasks.", text: "No guilt, no fake streaks. Elegix shows the picture and one small next step." },
+  { title: "An honest score.", text: "When there isn't enough data, Elegix says so instead of guessing." },
+  { title: "Your data is yours.", text: "It's never sold. Analytics run only if you say yes, and you can have your data deleted any time.", link: { href: "/privacy", label: "Read the privacy policy" } },
+];
 
 // 10
 export const JOIN = {
   eyebrow: "Early access",
   title: "Join before launch. Get *founding member* perks.",
-  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "A free plan, forever"],
+  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what gets built next", "A free plan, forever"],
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
-  signature: { name: "Eduard Korytskyi", role: "Founder, Elegix", link: { href: "/about#story", label: "Read our story" } },
-  startLabel: "How do you want to start?",
-  starts: [
-    { id: "template", title: "Use the 6-area template" },
-    { id: "own", title: "Set it up my way" },
-    { id: "unsure", title: "Not sure yet" },
-  ],
+  signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
   button: "Reserve my spot",
   note: "No payment now. One email when your spot opens.",
 };
 
 // 11
 export const FAQ_SECTION = {
-  title: "Answers that help you *decide*",
-  text: "Didn't find your question? Write to us any time.",
+  title: "Questions before you *join*",
+  text: "Didn't find your question? Write to me any time. I read every message.",
   email: "hello@elegix.net",
 };
 
 export const FAQ = [
-  { q: "How is Elegix different from Todoist or Notion?", a: "They track whether you finished tasks. Elegix shows whether your life is balanced: 6 areas, one score, a monthly review. No system to build." },
-  { q: "Is the balance score real or just a number?", a: "It combines a quick weekly self-rating of each area with what you actually do. If there's too little data, Elegix tells you instead of guessing." },
-  { q: "I've given up on every planner. Why would this one stick?", a: "You start from a ready template in 2 minutes, and the app asks for one short check-in a week. There's nothing to maintain." },
-  { q: "When does it launch?", a: "We're finishing the first version. Waitlist members get in first, in the order they joined." },
+  { q: "How is Elegix different from Todoist or Notion?", a: "They track whether you finished tasks. Elegix shows whether your life is balanced: 6 areas, one Life Balance score, a weekly check-in and a monthly review. No system to build." },
+  { q: "Is the Life Balance score real or just a number?", a: "It combines your 1-minute weekly check-in, where you rate each area, with what you actually do. If there's too little data, Elegix tells you instead of guessing." },
+  { q: "I've given up on every planner. Why would this one stick?", a: "You start from a ready template in 2 minutes. After that it's a 1-minute weekly check-in, plus a 10-minute monthly review. There's nothing to maintain." },
+  { q: "When does it launch?", a: "I'm finishing the first version. Waitlist members get in first, in the order they joined." },
   { q: "Will it be free?", a: "Yes, there's a free plan. Premium adds unlimited goals and habits, with a free trial first." },
   { q: "Which platforms?", a: "iOS and Android, one account on all your devices." },
-  { q: "What happens to my data?", a: "It's used only to run the app for you. We never sell it, and you can delete it any time." },
-  { q: "What do I get for joining early?", a: "First access, a founding member price and a say in what we build next." },
+  { q: "What happens to my data?", a: "It's used only to run the app for you. It's never sold, and you can delete it any time." },
+  { q: "What do I get for joining early?", a: "First access, a founding member price and a say in what gets built next." },
 ];
-
-// 12
-export const MANIFESTO = {
-  eyebrow: "What we believe",
-  paragraphs: [
-    "We believe a good life isn't the most productive one. It's a ==balanced== one.",
-    "Most apps make you better at work and leave everything else to chance.",
-    "You don't burn out in a day. You burn out in the parts of your life you stopped looking at.",
-    "We built Elegix so you can see all of it.",
-  ],
-  cta: "Get early access",
-};
 
 export const FOOTER = {
   slogan: "Design a life you're *proud of*",
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   columns: [
-    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#features", label: "Features" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Balance check" }, { href: "/#faq", label: "FAQ" }] },
-    { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Our story" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
+    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
+    { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Founder's story" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
     { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
   ],
   socials: SOCIALS,
@@ -276,7 +262,7 @@ export const EMAIL = {
   welcome: {
     subject: "You're on the Elegix waitlist",
     title: "You're in. Let's bring your whole life back into balance.",
-    subtitle: "You're on the Elegix waitlist. We'll email you the moment your spot opens.",
+    subtitle: "You're on the Elegix waitlist. I'll email you the moment your spot opens.",
     gridTitle: "With Elegix, you'll:",
     grid: [
       { icon: "chart.png", text: "See all 6 areas of your life on one screen" },
@@ -297,7 +283,7 @@ export const EMAIL = {
     reply: "Want to talk through your result? Just hit reply, I read every answer.",
   },
   belief: { title: "At Elegix, we believe", text: "A good life isn't the most productive one. It's a balanced one." },
-  wait: { title: "While you wait", name: "Edward, Founder", note: "Coming soon to iOS & Android" },
+  wait: { title: "While you wait", name: "Edward Korytskyi, Founder", note: "Coming soon to iOS & Android" },
   footer: {
     sent: "This email was sent to {email} because you joined the Elegix waitlist. If you'd rather not receive these emails, you can",
     unsubscribe: "unsubscribe",
@@ -316,24 +302,23 @@ export const EMAIL = {
 /** The founder story (shown on /about#story), in Edward's words. */
 export const STORY = {
   label: "Our story",
-  title: "Why we created *Elegix*",
+  title: "Why I created *Elegix*",
   blocks: [
     { type: "lead", text: "Elegix began with a simple realization:" },
     { type: "p", text: "Most people don't struggle because they lack ambition or motivation. They struggle because modern life has become increasingly complex and overwhelming." },
-    { type: "p", text: "As founders, we've experienced this firsthand." },
+    { type: "p", text: "I've experienced this firsthand." },
     { type: "lines", lines: ["Too many goals.", "Too many responsibilities.", "An endless stream of notifications.", "Dozens of productivity tools.", "Constant pressure to do more, achieve more, improve faster, and somehow keep everything under control."] },
-    { type: "p", text: "We tried planners, habit trackers, calendars, note-taking apps, and countless productivity systems. Each one solved a specific problem, but none helped us solve the bigger one:" },
+    { type: "p", text: "I tried planners, habit trackers, calendars, note-taking apps, and countless productivity systems. Each one solved a specific problem, but none helped me solve the bigger one:" },
     { type: "quote", text: "How do you build a balanced, intentional life without feeling overwhelmed by the very process of trying to improve it?" },
-    { type: "p", text: "Over time, we realized that people don't need another productivity app. They need a system that helps them stay connected to what truly matters." },
+    { type: "p", text: "Over time, I realized that people don't need another productivity app. They need a system that helps them stay connected to what truly matters." },
     { type: "lines", lines: ["A system that makes their goals visible.", "That turns progress into something tangible.", "That helps build lasting habits.", "And supports personal growth without making life feel like an endless list of tasks."] },
     { type: "p", text: "That realization became the foundation of Elegix." },
-    { type: "p", text: "We created Elegix to help people organize more than their schedules. We want to help them organize the parts of life that truly matter — health, personal growth, relationships, emotional well-being, daily habits, and long-term goals." },
+    { type: "p", text: "I created Elegix to help people organize more than their schedules: the parts of life that truly matter. Health, relationships, inner calm, rest, personal growth and career, through daily habits and long-term goals." },
     { type: "quote", text: "Our mission is simple: to help people build a life they're proud of, one small step at a time." },
-    { type: "lines", lines: ["We believe productivity should create freedom — not burnout.", "Planning should bring clarity — not stress.", "Personal growth should feel achievable — not overwhelming."] },
-    { type: "p", text: "Elegix exists to bring clarity, structure, and balance into everyday life, giving people the confidence to move forward while staying focused on what matters most to them." },
-    { type: "p", text: "Because Elegix isn't just another productivity app. It's a system designed to help people become the person they want to become." },
+    { type: "lines", lines: ["I believe productivity should create freedom — not burnout.", "Planning should bring clarity — not stress.", "Personal growth should feel achievable — not overwhelming."] },
+    { type: "p", text: "Elegix isn't just another productivity app. It's a system that brings clarity, structure and balance into everyday life, and helps people become the person they want to become." },
   ] as ({ type: "lead" | "p" | "quote"; text: string } | { type: "lines"; lines: string[] })[],
-  signature: "Edward, Founder",
+  signature: "Edward Korytskyi, Founder",
   cta: "Get early access",
 };
 
@@ -341,29 +326,28 @@ export const STORY = {
 export const ABOUT_PAGE = {
   meta: {
     title: "About Elegix",
-    description: "What Elegix is, who it's for and why we're building it: a calm planner that keeps all 6 areas of your life in balance.",
+    description: "What Elegix is, who it's for and why I'm building it: a calm planner that keeps all 6 areas of your life in balance.",
   },
   hero: {
     label: "About Elegix",
     title: "Built for a *balanced* life, not a busier one",
     media: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn", brief: "About hero · calm person outdoors · 2400×1600", ratio: "3 / 2" } as MediaSlot,
-    lede: "A life balance tracker for people who want to grow at work without losing the rest of their life. Our mission is simple: to help people build a life they're proud of, one small step at a time.",
+    lede: "A life balance tracker for people who want to grow at work without losing the rest of their life. The mission is simple: to help people build a life they're proud of, one small step at a time.",
     cta: "Get early access",
-    secondary: { href: "/#check", label: "Take the free balance check" },
+    secondary: { href: "/#check", label: "Take the free Life Balance Check" },
     facts: [
       { value: "6", label: "life areas, from health to career" },
-      { value: "1", label: "balance score that updates as you go" },
-      { value: "10 min", label: "monthly review of your whole life" },
+      { value: "1", label: "Life Balance score that updates as you go" },
+      { value: "1 min", label: "weekly check-in, plus a 10-minute monthly review" },
     ],
   },
   features: {
-    label: "What you get",
-    title: "One calm planner for your *whole* life",
+    label: "What's inside",
+    title: "Small things that make it *stick*",
     items: [
-      { icon: "health" as AreaKey, title: "6 life areas, one balance score", text: "Every goal, habit and task belongs to an area, so you can see on one screen which part of your life is growing and which one you've been neglecting." },
-      { icon: "growth" as AreaKey, title: "Goals linked to daily habits", text: "Break big goals into small daily steps and tasks, and keep your “why” next to each one so you remember what it's for." },
-      { icon: "meaning" as AreaKey, title: "A 10-minute monthly review", text: "Once a month, see what grew, what dropped and choose what to change next. No spreadsheets, no system to maintain." },
       { icon: "hobby" as AreaKey, title: "Ready templates, 2-minute start", text: "Start from a template built around the 6 areas, or set it up your way. Either way you're planning in minutes, not evenings." },
+      { icon: "meaning" as AreaKey, title: "A “why” next to every goal", text: "Write down why a goal matters when you set it. Elegix keeps it next to the goal, so you remember what it's for on the days it's hard." },
+      { icon: "growth" as AreaKey, title: "One account, every device", text: "iOS and Android, with the same goals, habits and Life Balance score on your phone and tablet." },
     ],
   },
   audience: {
@@ -377,11 +361,11 @@ export const ABOUT_PAGE = {
     ],
   },
   modes: {
-    label: "Flexible",
-    title: "Two ways to use *Elegix*",
-    lede: "A quick check-in on busy days, or a deeper look when you have a little more time.",
+    label: "The rhythm",
+    title: "A weekly check-in and a *monthly review*",
+    lede: "A 1-minute weekly check-in, plus a 10-minute monthly review. That's the whole routine.",
     items: [
-      { title: "Daily check-in", time: "2 minutes", points: ["Tick off today's habits and tasks", "See your balance score update", "Notice which area needs you next"] },
+      { title: "Weekly check-in", time: "1 minute", points: ["Rate each of the 6 areas from 1 to 10", "See your Life Balance score update", "Notice which area needs you next"] },
       { title: "Monthly review", time: "10 minutes", points: ["See which areas grew and which dropped", "Read back your “why” for each goal", "Choose one area to focus on next month"] },
     ],
   },
@@ -392,63 +376,15 @@ export const ABOUT_PAGE = {
     points: ["Rate each area honestly, from 1 to 10", "Connect every goal and habit to an area", "Watch your balance change week by week", "Change one thing at a time, without guilt"],
   },
   story: { label: "Our story", id: "story" },
-  beliefs: {
-    label: "What we believe",
-    title: "Our *principles*",
-    items: [
-      { title: "Freedom, not burnout.", text: "Productivity should create freedom. If a planner makes you feel worse, it's the planner's fault." },
-      { title: "Clarity, not stress.", text: "Planning should make your life clearer, not add another list to worry about." },
-      { title: "Achievable, not overwhelming.", text: "Personal growth happens in small steps. We show one next step, never a wall of tasks." },
-      { title: "Honest and private.", text: "When there isn't enough data, Elegix says so. Your data is yours; we never sell it." },
-    ],
-  },
-  publicBuild: { title: "Built in public", text: "Elegix is in development and we share every step. Follow along:" },
-  cta: { title: "Ready to see your *whole* life?", text: "Join the waitlist and get early access, a founding member price and a say in what we build next." },
-};
-
-/** "Features" cards after How it works: three tall cards with a phone peeking up from the bottom. */
-export const FEATURES = {
-  title: "See your whole life.\n*Grow it on purpose.*",
-  lede: "Six life areas, one clear balance score, and small steps that move it.",
-  cards: [
-    {
-      key: "balance",
-      title: "Balance",
-      text: "One balance score and 6 area scores, so you see at a glance which part of your life needs you.",
-      screen: "Life Area",
-      tint: ["health", "growth"] as [AreaKey, AreaKey],
-      scroll: 0,
-    },
-    {
-      key: "goals",
-      title: "Goals & habits",
-      text: "Goals linked to daily habits and tasks, each with your “why” written next to it.",
-      screen: "Home",
-      tint: ["hobby", "people"] as [AreaKey, AreaKey],
-      scroll: 0,
-    },
-    {
-      key: "review",
-      title: "Review",
-      text: "Compare this week or month with the last one: what grew, what dropped, what to change next.",
-      screen: "Life Area",
-      tint: ["meaning", "growth"] as [AreaKey, AreaKey],
-      scroll: 36,
-    },
-  ] as { key: "balance" | "goals" | "review"; title: string; text: string; screen: string; tint: [AreaKey, AreaKey]; scroll: number }[],
-};
-
-/** "Built for privacy": every line here is backed by /privacy. */
-export const PRIVACY_BLOCK = {
-  title: "Built for *privacy*",
-  text: "We never sell your data. Analytics cookies run only if you say yes, and you can unsubscribe or have your data deleted any time.",
-  link: { href: "/privacy", label: "Read our privacy policy" },
+  beliefs: { label: "What I believe", title: "Our *principles*" },
+  publicBuild: { title: "Built in public", text: "Elegix is in development and I share every step. Follow along:" },
+  cta: { title: "Ready to see your *whole* life?", text: "Join the waitlist and get early access, a founding member price and a say in what gets built next." },
 };
 
 /** Closing "Ready when you are": the app in the middle, one everyday object per life area around it. */
 export const READY = {
   title: "Ready when *you* are",
-  lede: "No system to build, no streaks to protect. Start with one honest check-in and see where your life stands.",
+  lede: "A good life isn't the most productive one. It's a ==balanced== one.",
   cta: "Get early access",
   objects: [
     { area: "health" as AreaKey, src: "/images/ready/health.jpg", alt: "A water bottle with fresh mint" },

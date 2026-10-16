@@ -1,5 +1,5 @@
 .hero { padding: 0; background: var(--cream); }
-.frame { position: relative; min-height: max(640px, 100svh); border-radius: 0 0 var(--radius-l) var(--radius-l); overflow: hidden; display: grid; align-items: end; color: #fff; isolation: isolate; }
+.frame { position: relative; min-height: max(640px, 100svh); border-radius: 0 0 var(--radius-l) var(--radius-l); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); align-items: end; color: #fff; isolation: isolate; }
 .photo { position: absolute; inset: -6% 0 -12% 0; z-index: -2; will-change: transform; }
 .photo > div { border-radius: 0; }
 .photo img { object-position: 60% 40%; }
