@@ -346,7 +346,7 @@ export const STORY = {
   cta: "Get early access",
 };
 
-/** The About page (/about): what Elegix is, how it works, who's behind it. /what-is-elegix redirects here. */
+/** The About page (/about): what Elegix is, how it works and who's behind it. */
 export const ABOUT_PAGE = {
   meta: {
     title: "What is Elegix? About the life balance tracker",

@@ -8,8 +8,6 @@ const nextConfig: NextConfig = {
       { source: "/story", destination: "/about#story", statusCode: 301 },
       // the check lives on the home page; keep old links working
       { source: "/life-balance-check", destination: "/#check", permanent: true },
-      // What is Elegix and About are one page
-      { source: "/what-is-elegix", destination: "/about", permanent: true },
     ];
   },
 };
