@@ -270,7 +270,7 @@ export const FOOTER = {
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   columns: [
     { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
-    { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Founder's story" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
+    { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Founder's story" }, { href: "/careers", label: "Careers" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
     { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
   ],
   socials: SOCIALS,
@@ -414,4 +414,32 @@ export const READY = {
     { area: "hobby" as AreaKey, src: "/images/ready/hobby.jpg", alt: "A pair of over-ear headphones" },
     { area: "career" as AreaKey, src: "/images/ready/career.jpg", alt: "A laptop on a desk" },
   ],
+};
+
+/** Careers (/careers): honest for an early team. No listings until there are real roles. */
+export const CAREERS = {
+  meta: {
+    title: "Careers",
+    description: "Work on Elegix, the life balance tracker. There are no open roles right now, but we'd like to hear from people who care about this problem.",
+  },
+  label: "Careers",
+  title: "Help build a *calmer* way to live",
+  lede: "Elegix helps people see all 6 areas of their life and grow without burning out. We're a small, early-stage team, building it in public.",
+  how: {
+    label: "How we work",
+    title: "What it's like to build *Elegix*",
+    items: [
+      { title: "Calm over hustle", text: "We're building a product against burnout, so we try not to run on it ourselves: clear priorities and one next step." },
+      { title: "Built in public", text: "We share progress and decisions openly, with our early members and on our socials." },
+      { title: "Small team, real ownership", text: "Everyone works close to the product and to the people who use it." },
+    ],
+  },
+  open: {
+    title: "No open roles *right now*",
+    text: "We're not hiring for specific roles yet. If Elegix feels like your kind of problem, introduce yourself: tell us what you do and what you'd like to work on.",
+    button: "Introduce yourself",
+    email: "hello@elegix.net",
+    subject: "Careers",
+    team: { href: "/about#team", label: "Meet the team" },
+  },
 };
