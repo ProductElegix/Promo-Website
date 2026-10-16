@@ -70,7 +70,7 @@ export const HERO = {
   title: "Crushing it at work. *Losing* the rest?",
   lede: "Elegix tracks your goals, habits and tasks across 6 life areas and shows which part of your life you're neglecting, before it turns into burnout.",
   cta: "Get early access",
-  trust: ["iOS & Android", "No spam"],
+  trust: ["Free to use", "iOS & Android", "No spam"],
   media: { src: "/images/hero.jpg", alt: "A woman sitting on a grassy cliff, looking out over the sea in soft morning light", brief: "Hero photo · person outdoors at golden hour, calm · full-bleed 2400×1600", ratio: "3 / 2" } as MediaSlot,
   card: {
     title: "Example balance",
@@ -235,7 +235,7 @@ export const FAQ = [
   { q: "Is the Life Balance score real or just a number?", a: "It combines your 1-minute weekly check-in, where you rate each area, with what you actually do. If there's too little data, Elegix tells you instead of guessing." },
   { q: "I've given up on every planner. Why would this one stick?", a: "You start from a ready template in 2 minutes. After that it's a 1-minute weekly check-in, plus a 10-minute monthly review. There's nothing to maintain." },
   { q: "When does it launch?", a: "I'm finishing the first version. Waitlist members get in first, in the order they joined." },
-  { q: "How much will it cost?", a: "Pricing will be announced before launch. Waitlist members hear first." },
+  { q: "Is it free?", a: "Yes, Elegix is free to use. Premium adds more for those who want it. Premium pricing will be announced before launch, and waitlist members hear first." },
   { q: "Which platforms?", a: "iOS and Android, one account on all your devices." },
   { q: "What happens to my data?", a: "It's used only to run the app for you. It's never sold, and you can delete it any time." },
   { q: "What do I get for joining early?", a: "First access, a founding member price and a say in what gets built next." },
