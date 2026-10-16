@@ -3,6 +3,7 @@ import { Instrument_Serif, Inter } from "next/font/google";
 import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
 import { Motion } from "@/components/ui/Motion";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { HashScroll } from "@/components/ui/HashScroll";
 import { Clarity } from "@/components/ui/Clarity";
 import { CloudflareAnalytics } from "@/components/ui/CloudflareAnalytics";
@@ -63,11 +64,12 @@ export const viewport: Viewport = { themeColor: "#f6f5ef", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${serif.variable} ${sans.variable}`}>
       <body>
         <JsonLd data={ORGANIZATION} />
         <Attribution />
         <Motion />
+        <ScrollToTop />
         <HashScroll />
         <Clarity />
         <CloudflareAnalytics />

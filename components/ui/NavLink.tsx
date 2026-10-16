@@ -9,7 +9,8 @@ import type { MouseEvent, ReactNode } from "react";
  * - "/#section" on the home page: smooth-scrolls to the section (sticky-header offset via scroll-margin-top)
  * - "/#section" on any other page: client-side navigation to the home page, landing on the section
  * - "/" on the home page: smooth-scrolls to the top
- * - other paths: normal client-side navigation (no full reload)
+ * - the page you're already on (e.g. About on /about): smooth-scrolls to the top
+ * - other paths: normal client-side navigation (no full reload), landing at the top (see ScrollToTop)
  */
 export function NavLink({ href, children, className, onNavigate, current }: {
   href: string; children: ReactNode; className?: string; onNavigate?: () => void; current?: boolean;
@@ -17,7 +18,13 @@ export function NavLink({ href, children, className, onNavigate, current }: {
   const pathname = usePathname();
   const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
     onNavigate?.();
-    if (pathname !== "/" || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (href === pathname && pathname !== "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    if (pathname !== "/") return;
     if (href === "/") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });

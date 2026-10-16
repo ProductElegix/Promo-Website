@@ -31,12 +31,18 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
+  // while the mobile menu is open: Escape closes it and the page behind doesn't scroll
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = overflow; };
   }, [open]);
+
+  // a new page always starts with the menu closed
+  useEffect(() => setOpen(false), [pathname]);
 
   const close = () => setOpen(false);
   const isCurrent = (href: string) => (href.startsWith("/#") ? active === href : pathname === href || pathname.startsWith(`${href}/`));
@@ -54,6 +60,7 @@ export function Header() {
           <span /><span />
         </button>
       </div>
+      {open && <button type="button" className={styles.backdrop} aria-label="Close menu" tabIndex={-1} onClick={close} />}
       <div id="mobile-menu" className={styles.menu} hidden={!open}>
         <nav aria-label="Mobile">
           {NAV.map((n) => <NavLink key={n.href} href={n.href} onNavigate={close} current={isCurrent(n.href)}>{n.label}</NavLink>)}
