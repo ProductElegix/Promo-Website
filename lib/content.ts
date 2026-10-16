@@ -216,11 +216,10 @@ export const TRUST = {
   },
 };
 
-/** The team: /about#team and the avatar row under the founder quote. Add `photo` when a portrait arrives; until then initials show. */
+/** The team on /about#team. Add `photo` when a portrait arrives; until then initials show. */
 export const TEAM = {
   label: "Team",
   title: "The people behind *Elegix*",
-  link: { href: "/about#team", label: "Meet the team" },
   members: [
     { name: "Edward Korytskyi", role: "Founder", photo: "/images/founder.jpg" },
     { name: "Alina Krupa", role: "CMO" },
@@ -228,12 +227,12 @@ export const TEAM = {
   ] as { name: string; role: string; photo?: string; linkedin?: string }[],
 };
 
-/** Shared by the founder block on the home page and "Our principles" on /about. The last one carries the privacy promise. */
-export const PRINCIPLES: { title: string; text: string; link?: { href: string; label: string } }[] = [
+/** Shared by the founder block on the home page and "Our principles" on /about. The last one (dark, with the lock) carries the privacy promise. */
+export const PRINCIPLES: { title: string; text: string; dark?: boolean }[] = [
   { title: "Freedom, not burnout.", text: "Productivity should create freedom. If a planner makes you feel worse, it's the planner's fault." },
   { title: "One step, not a wall of tasks.", text: "No guilt, no fake streaks. Elegix shows the picture and one small next step." },
   { title: "An honest score.", text: "When there isn't enough data, Elegix says so instead of guessing." },
-  { title: "Your data is yours.", text: "It's never sold. Analytics run only if you say yes, and you can have your data deleted any time.", link: { href: "/privacy", label: "Read the privacy policy" } },
+  { title: "Your data is yours.", text: "It's never sold. Analytics run only if you say yes, and you can have your data deleted any time.", dark: true },
 ];
 
 // 10

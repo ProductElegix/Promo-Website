@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { PRINCIPLES, TEAM, TRUST } from "@/lib/content";
-import { Avatar } from "@/components/ui/Avatar";
+import { PRINCIPLES, TRUST } from "@/lib/content";
 import { LogoMark } from "@/components/ui/Logo";
 import { Media } from "@/components/ui/Media";
 import { Rich } from "@/components/ui/Rich";
@@ -19,17 +18,16 @@ function Lock() {
   );
 }
 
-/** The 4 principles, shared with /about. The one with a link (privacy) is the dark card with the lock. */
+/** The 4 principles, shared with /about. The privacy one is the dark card with the lock. */
 export function Principles({ className = "" }: { className?: string }) {
   return (
     <ul className={`${styles.principles} ${className}`}>
       {PRINCIPLES.map((p, i) => (
-        <li key={p.title} className={`${styles.principle} ${p.link ? `on-dark ${styles.privacy}` : ""}`} data-reveal>
-          {p.link && <Lock />}
+        <li key={p.title} className={`${styles.principle} ${p.dark ? `on-dark ${styles.privacy}` : ""}`} data-reveal>
+          {p.dark && <Lock />}
           <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
           <h3>{p.title}</h3>
           <p>{p.text}</p>
-          {p.link && <Link href={p.link.href} className={styles.policy}>{p.link.label} →</Link>}
         </li>
       ))}
     </ul>
@@ -50,13 +48,7 @@ export function Trust() {
             <div className={styles.photo}><Media media={f.media} fill sizes="(max-width: 860px) 100vw, 360px" /></div>
             <div className={styles.note}>
               <blockquote className={styles.quote}>{f.quote || f.fallback}</blockquote>
-              <figcaption>
-                <span><b>{f.name}</b>, {f.role} · <Link href={f.storyLink.href} className={styles.story}>{f.storyLink.label} →</Link></span>
-                <Link href={TEAM.link.href} className={styles.team}>
-                  <span className={styles.faces}>{TEAM.members.map((m) => <Avatar key={m.name} name={m.name} photo={m.photo} size={34} className={styles.face} />)}</span>
-                  {TEAM.link.label} →
-                </Link>
-              </figcaption>
+              <figcaption><b>{f.name}</b>, {f.role} · <Link href={f.storyLink.href} className={styles.story}>{f.storyLink.label} →</Link></figcaption>
             </div>
           </figure>
           <Principles />
