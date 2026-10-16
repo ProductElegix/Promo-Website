@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { APP, AREAS, AREA_ORDER, HERO, HOW } from "@/lib/content";
 import { Phone } from "@/components/ui/Phone";
 import { Pill, areaVars } from "@/components/ui/Pill";
@@ -41,8 +42,9 @@ function Chip({ kind }: { kind: (typeof HOW.steps)[number]["key"] }) {
   );
 }
 
-/** How it works: the 6 areas as chips, then See / Act / Reflect as tall cards with the app peeking up. */
-export function HowItWorks() {
+/** How it works: the 6 areas as chips, then See / Act / Reflect as tall cards with the app peeking up.
+ *  On the home page it ends with one "Learn more" link to /what-is-elegix; that page renders it without. */
+export function HowItWorks({ learnMore = true, chips = true }: { learnMore?: boolean; chips?: boolean }) {
   return (
     <section id="how" className="section" aria-labelledby="how-title">
       <div className="container">
@@ -50,9 +52,11 @@ export function HowItWorks() {
           <span className="label">{HOW.label}</span>
           <h2 id="how-title" className="display h2"><Rich text={HOW.title} /></h2>
           <p className="lede">{HOW.lede}</p>
-          <ul className={styles.areas} aria-label="The 6 life areas">
-            {AREA_ORDER.map((a) => <li key={a}><Pill area={a} /></li>)}
-          </ul>
+          {chips && (
+            <ul className={styles.areas} aria-label="The 6 life areas">
+              {AREA_ORDER.map((a) => <li key={a}><Pill area={a} /></li>)}
+            </ul>
+          )}
         </div>
         <ol className={styles.cards}>
           {HOW.steps.map((c, i) => {
@@ -74,6 +78,7 @@ export function HowItWorks() {
             );
           })}
         </ol>
+        {learnMore && <p className={styles.more} data-reveal><Link href={HOW.more.href}>{HOW.more.label} →</Link></p>}
       </div>
     </section>
   );

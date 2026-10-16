@@ -130,6 +130,7 @@ export const HOW = {
   label: "How it works",
   title: "Know your balance. Change what happens *next*.",
   lede: "Every goal, habit and task belongs to one of 6 life areas. Together they make your Life Balance score.",
+  more: { href: "/what-is-elegix", label: "Learn more about Elegix" },
   steps: [
     {
       key: "balance",
@@ -268,7 +269,7 @@ export const FOOTER = {
   slogan: "Design a life you're *proud of*",
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   columns: [
-    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
+    { title: "Product", links: [{ href: "/what-is-elegix", label: "What is Elegix" }, { href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
     { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Founder's story" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
     { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
   ],
@@ -345,33 +346,28 @@ export const STORY = {
   cta: "Get early access",
 };
 
-/** The About page (/about). Structure after a "what is X" page; every fact here is true pre-launch. */
-export const ABOUT_PAGE = {
+/** The product page (/what-is-elegix): what Elegix is and how it works. /about is about the people behind it. */
+export const WHAT_IS = {
   meta: {
-    title: "About Elegix",
-    description: "What Elegix is, who it's for and why we're building it: a calm planner that keeps all 6 areas of your life in balance.",
+    title: "What is Elegix? The life balance tracker for 6 areas of your life",
+    description: "Elegix is a life balance tracker: goals, habits and tasks across 6 life areas, one Life Balance score, a 1-minute weekly check-in and a 10-minute monthly review. Free app, optional Premium.",
   },
   hero: {
-    label: "About Elegix",
-    title: "Built for a *balanced* life, not a busier one",
-    media: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn", brief: "About hero · calm person outdoors · 2400×1600", ratio: "3 / 2" } as MediaSlot,
-    lede: "A life balance tracker for people who want to grow at work without losing the rest of their life. The mission is simple: to help people build a life they're proud of, one small step at a time.",
+    label: "What is Elegix",
+    title: "One app for all *6 areas* of your life",
+    lede: "Elegix is a life balance tracker. It links your goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next.",
     cta: "Get early access",
-    secondary: { href: "/#check", label: "Take the free Life Balance Check" },
-    facts: [
-      { value: "6", label: "life areas, from health to career" },
-      { value: "1", label: "Life Balance score that updates as you go" },
-      { value: "1 min", label: "weekly check-in, plus a 10-minute monthly review" },
-    ],
+    media: { src: "/images/hero.jpg", alt: "A woman sitting on a grassy cliff, looking out over the sea in soft morning light", brief: "Product page hero", ratio: "3 / 2" } as MediaSlot,
   },
-  features: {
-    label: "What's inside",
-    title: "Small things that make it *stick*",
-    items: [
-      { icon: "hobby" as AreaKey, title: "Ready templates, 2-minute start", text: "Start from a template built around the 6 areas, or set it up your way. Either way you're planning in minutes, not evenings." },
-      { icon: "meaning" as AreaKey, title: "A “why” next to every goal", text: "Write down why a goal matters when you set it. Elegix keeps it next to the goal, so you remember what it's for on the days it's hard." },
-      { icon: "growth" as AreaKey, title: "One account, every device", text: "iOS and Android, with the same goals, habits and Life Balance score on your phone and tablet." },
-    ],
+  facts: [
+    { value: "6", label: "life areas, from health to career" },
+    { value: "1", label: "Life Balance score that updates as you go" },
+    { value: "1 min", label: "weekly check-in, plus a 10-minute monthly review" },
+  ],
+  areas: {
+    label: "The 6 life areas",
+    title: "Everything you do belongs to an *area*",
+    lede: "Every goal, habit and task sits in one of these areas. Together they make your Life Balance score.",
   },
   audience: {
     label: "Who it's for",
@@ -397,6 +393,39 @@ export const ABOUT_PAGE = {
     title: "Built on the *Wheel of Life*",
     text: "The Wheel of Life is a classic coaching exercise: rate each area of your life, look at the shape, and the gaps become obvious. It works, but people do it once and forget it. Elegix turns it into something you use every day, linked to your real goals, habits and tasks.",
     points: ["Rate each area honestly, from 1 to 10", "Connect every goal and habit to an area", "Watch your balance change week by week", "Change one thing at a time, without guilt"],
+  },
+  inside: {
+    label: "What's inside",
+    title: "Small things that make it *stick*",
+    items: [
+      { icon: "hobby" as AreaKey, title: "Ready templates, 2-minute start", text: "Start from a template built around the 6 areas, or set it up your way. Either way you're planning in minutes, not evenings." },
+      { icon: "meaning" as AreaKey, title: "A “why” next to every goal", text: "Write down why a goal matters when you set it. Elegix keeps it next to the goal, so you remember what it's for on the days it's hard." },
+      { icon: "growth" as AreaKey, title: "One account, every device", text: "iOS and Android, with the same goals, habits and Life Balance score on your phone and tablet." },
+    ],
+  },
+  pricing: {
+    label: "Pricing",
+    title: "Free to use. *Premium* if you want more.",
+    text: "Elegix is free to download and use. An optional Premium plan adds more, and its pricing will be announced before launch. Waitlist members hear first.",
+  },
+  /** questions from the home FAQ that fit this page */
+  faq: ["How is Elegix different from Todoist or Notion?", "Is the Life Balance score real or just a number?", "I've given up on every planner. Why would this one stick?", "Is it free?", "Which platforms?", "What happens to my data?"],
+  cta: { title: "See where your life *stands*", text: "Join the waitlist for early access and a founding member price." },
+};
+
+/** The About page (/about): the people behind Elegix. The product itself is on /what-is-elegix. */
+export const ABOUT_PAGE = {
+  meta: {
+    title: "About Elegix",
+    description: "Who's behind Elegix and why we're building it: our mission, the founder's story, the team and our principles.",
+  },
+  hero: {
+    label: "About Elegix",
+    title: "Built for a *balanced* life, not a busier one",
+    media: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn", brief: "About hero · calm person outdoors · 2400×1600", ratio: "3 / 2" } as MediaSlot,
+    lede: "A life balance tracker for people who want to grow at work without losing the rest of their life. The mission is simple: to help people build a life they're proud of, one small step at a time.",
+    cta: "Get early access",
+    secondary: { href: "/what-is-elegix", label: "What is Elegix" },
   },
   story: { label: "Our story", id: "story" },
   beliefs: { label: "What we believe", title: "Our *principles*" },

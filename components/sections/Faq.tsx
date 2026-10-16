@@ -2,7 +2,9 @@ import { FAQ, FAQ_SECTION } from "@/lib/content";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Faq.module.css";
 
-export function Faq() {
+/** `only` limits it to these questions (in the home FAQ order). */
+export function Faq({ only }: { only?: string[] }) {
+  const items = only ? FAQ.filter((f) => only.includes(f.q)) : FAQ;
   return (
     <section id="faq" className={`section ${styles.faq}`} aria-labelledby="faq-title">
       <div className={`container ${styles.grid}`}>
@@ -13,7 +15,7 @@ export function Faq() {
           <a className="btn dark" href={`mailto:${FAQ_SECTION.email}`}>Email us</a>
         </div>
         <div className={styles.list} data-reveal>
-          {FAQ.map((f) => (
+          {items.map((f) => (
             <details key={f.q} className={styles.item}>
               <summary>{f.q}<span className={styles.plus} aria-hidden="true" /></summary>
               <p>{f.a}</p>
