@@ -15,8 +15,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 type Result = { average: number; lowest: AreaKey; email: string; emailed: boolean; invited: boolean };
 
-/** `standalone` renders it as the main block of /life-balance-check: an h1 and room for the fixed header. */
-export function BalanceCheck({ standalone = false }: { standalone?: boolean }) {
+export function BalanceCheck() {
   const [scores, setScores] = useState<Record<AreaKey, number>>(
     () => Object.fromEntries(AREA_ORDER.map((a) => [a, 5])) as Record<AreaKey, number>,
   );
@@ -53,14 +52,12 @@ export function BalanceCheck({ standalone = false }: { standalone?: boolean }) {
   }
 
   return (
-    <section id="check" className="section" aria-labelledby="check-title" style={standalone ? { paddingTop: "calc(var(--header-h) + var(--section-y))" } : undefined}>
+    <section id="check" className="section" aria-labelledby="check-title">
       <div className="container">
         <div className={styles.card} data-reveal>
           <div className={styles.intro}>
             <span className="label">{CHECK.eyebrow}</span>
-            {standalone
-              ? <h1 id="check-title" className="display h2"><Rich text={CHECK.title} /></h1>
-              : <h2 id="check-title" className="display h2"><Rich text={CHECK.title} /></h2>}
+            <h2 id="check-title" className="display h2"><Rich text={CHECK.title} /></h2>
             <p className="lede">{CHECK.text}</p>
             <div className={styles.wheel}><Wheel scores={AREA_ORDER.map((a) => scores[a])} size={180} label="Your ratings as a wheel of life" /></div>
           </div>
