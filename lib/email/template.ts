@@ -1,4 +1,4 @@
-import { AREAS, AREA_ORDER, EMAIL, SOCIALS, type AreaKey } from "../content";
+import { AREAS, AREA_ORDER, COMMUNITY, EMAIL, SOCIALS, type AreaKey } from "../content";
 import { unsubscribeUrl } from "../unsubscribe";
 
 /**
@@ -96,6 +96,15 @@ function belief(btn: { label: string; href: string }) {
   return card(h(EMAIL.belief.title, 24, 30, "#ffffff") + p(EMAIL.belief.text, "#ffffff", "center", "padding-top:16px") + button(btn.label, btn.href), C.brand);
 }
 
+/** Telegram community card; empty until COMMUNITY.url is set in lib/content.ts. */
+function community() {
+  if (!COMMUNITY.url) return "";
+  const btn = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px"><tr><td align="center" bgcolor="${C.brand}" style="border-radius:9999px;background:${C.brand}">` +
+    `<a href="${esc(COMMUNITY.url)}" style="display:block;padding:14px 28px;font-family:${FONT};font-size:16px;line-height:24px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:9999px">${esc(COMMUNITY.button)}</a></td></tr></table>`;
+  return card(h(COMMUNITY.emailTitle, 20, 28, C.brand, "left") + p(COMMUNITY.text, C.text, "left", "padding-top:8px") + btn);
+}
+const communityText = () => (COMMUNITY.url ? `${COMMUNITY.emailTitle}: ${COMMUNITY.text}\n${COMMUNITY.button}: ${COMMUNITY.url}` : "");
+
 function wait(reply: string) {
   const k = EMAIL.wait;
   return card(
@@ -153,6 +162,7 @@ export function buildEmail(input: EmailInput): BuiltEmail {
       areas(input.scores, lowest),
       firstStep(lowest),
       belief(c.button),
+      community(),
       wait(c.reply),
       footer(input.email, unsub),
     ].join(""));
@@ -163,22 +173,24 @@ export function buildEmail(input: EmailInput): BuiltEmail {
       `${fill(c.stepTitle, vars)}: ${EMAIL.firstSteps[lowest]}`,
       `${EMAIL.belief.title}: ${EMAIL.belief.text}`,
       `${c.button.label}: ${c.button.href}`,
+      communityText(),
       waitText(c.reply),
       `--\n${foot}`,
-    ].join("\n\n");
+    ].filter(Boolean).join("\n\n");
     return { subject, text, html, inline: ["logo-white.png", "logo-green.png"] };
   }
 
   const w = EMAIL.welcome;
-  const html = page(w.subject, [header(), hero(w.title, w.subtitle, true), grid(), belief(w.button), wait(w.reply), footer(input.email, unsub)].join(""));
+  const html = page(w.subject, [header(), hero(w.title, w.subtitle, true), grid(), belief(w.button), community(), wait(w.reply), footer(input.email, unsub)].join(""));
   const text = [
     w.title,
     w.subtitle,
     `${w.gridTitle}\n${w.grid.map((g) => `- ${g.text}`).join("\n")}`,
     `${EMAIL.belief.title}: ${EMAIL.belief.text}`,
     `${w.button.label}: ${w.button.href}`,
+    communityText(),
     waitText(w.reply),
     `--\n${foot}`,
-  ].join("\n\n");
+  ].filter(Boolean).join("\n\n");
   return { subject: w.subject, text, html, inline: ["logo-white.png", "logo-green.png", "hero.png", ...w.grid.map((g) => g.icon)] };
 }

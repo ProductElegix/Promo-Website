@@ -56,6 +56,17 @@ export const SOCIALS = [
   { href: "https://www.pinterest.com/elegixofficial/", label: "Pinterest" },
 ];
 
+/**
+ * Telegram community: the button after every signup and the card in the waitlist emails.
+ * Paste the t.me link into `url`. While it's empty, the button and the email card are hidden.
+ */
+export const COMMUNITY = {
+  url: "",
+  button: "Join the Telegram community",
+  text: "Meet other early members, see what we're building and help shape it.",
+  emailTitle: "Join our community",
+};
+
 /** Shown under every signup form. Bump POLICY_VERSION whenever the privacy policy text changes. */
 export const POLICY_VERSION = "2026-10-14.7";
 

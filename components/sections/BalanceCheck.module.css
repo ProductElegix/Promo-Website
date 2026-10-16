@@ -33,7 +33,7 @@
 .lowest b { font-weight: 500; }
 .done { font-size: 0.92rem; color: rgba(255,255,255,.85); }
 @media (max-width: 960px) {
-  .card { grid-template-columns: 1fr; }
+  .card { grid-template-columns: minmax(0, 1fr); }
   .wheel { display: none; }
 }
 @media (max-width: 480px) {
@@ -41,6 +41,7 @@
   .slider input[type="range"] { grid-column: 1 / -1; grid-row: 2; }
   .submit { flex-direction: column; border-radius: 20px; padding: 8px; }
   .submit input[type="email"] { padding: 10px 10px; }
+  .result { padding: 24px 20px; }
 }
 .consent { font-size: 0.78rem; color: var(--muted); }
 .consent a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }

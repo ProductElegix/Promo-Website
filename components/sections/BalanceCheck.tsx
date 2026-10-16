@@ -7,6 +7,7 @@ import { readAttribution } from "@/lib/attribution";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { areaVars } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
+import { CommunityButton } from "@/components/ui/CommunityButton";
 import { Wheel } from "@/components/ui/Wheel";
 import styles from "./BalanceCheck.module.css";
 
@@ -70,6 +71,7 @@ export function BalanceCheck() {
                 <div><small>{CHECK.lowest}</small><b>{AREAS[result.lowest].name} · {scores[result.lowest]}/10</b></div>
               </div>
               <p className={styles.done}>{result.emailed ? CHECK.sent : CHECK.done} <b>{result.email}</b>.</p>
+              <CommunityButton tone="dark" withText />
             </div>
           ) : (
             <form className={styles.form} onSubmit={onSubmit} noValidate data-clarity-mask="true">
