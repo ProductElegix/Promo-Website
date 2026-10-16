@@ -16,11 +16,11 @@ import { OG_IMAGE } from "@/lib/site";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
-  title: A.meta.title,
+  title: { absolute: A.meta.title },
   description: A.meta.description,
   alternates: { canonical: "/about" },
-  openGraph: { title: `${A.meta.title} · Elegix`, description: A.meta.description, url: "/about", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
-  twitter: { card: "summary_large_image", title: `${A.meta.title} · Elegix`, description: A.meta.description, images: [OG_IMAGE] },
+  openGraph: { title: A.meta.title, description: A.meta.description, url: "/about", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
+  twitter: { card: "summary_large_image", title: A.meta.title, description: A.meta.description, images: [OG_IMAGE] },
 };
 
 export default function About() {
