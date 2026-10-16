@@ -29,3 +29,13 @@
 .wrap:has(.glass) .community { text-align: center; color: rgba(255, 255, 255, .85); }
 .wrap:has(.glass) .ok { color: var(--lime); }
 .wrap:has(.glass) .err { color: #ffb4a8; }
+
+/* phones: email full width, button full width underneath (Safari otherwise sizes the layout to input + button) */
+@media (max-width: 560px) {
+  .bar, .glass { flex-direction: column; align-items: stretch; gap: 6px; padding: 6px; border-radius: 22px; }
+  .bar input[type="email"], .glass input[type="email"] { flex: none; width: 100%; padding: 12px 14px; }
+  .bar .barBtn, .glass .barBtn { width: 100%; padding: 14px 18px; white-space: normal; }
+  .underline { flex-direction: column; align-items: stretch; }
+  .underline input[type="email"] { flex: none; width: 100%; }
+  .underline :global(.btn) { width: 100%; }
+}
