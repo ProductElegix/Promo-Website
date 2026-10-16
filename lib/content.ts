@@ -41,7 +41,7 @@ export const META = {
 export const NAV = [
   { href: "/#how", label: "How it works" },
   { href: "/#areas", label: "Life areas" },
-  { href: "/#check", label: "Life Balance Check" },
+  { href: "/life-balance-check", label: "Life Balance Check" },
   { href: "/#faq", label: "FAQ" },
   { href: "/about", label: "About" },
 ];
@@ -190,6 +190,14 @@ export const APP = {
 };
 
 // 8
+/** The standalone Life Balance Check page (/life-balance-check). The check itself uses CHECK below. */
+export const CHECK_PAGE = {
+  meta: {
+    title: "Free Life Balance Check: find your weakest life area",
+    description: "Rate 6 areas of your life from 1 to 10 and get your Life Balance score, your weakest area and one first step by email. Free, takes 2 minutes.",
+  },
+};
+
 export const CHECK = {
   eyebrow: "Free Life Balance Check",
   title: "Find your weakest area in *2 minutes*",
@@ -269,7 +277,7 @@ export const FOOTER = {
   slogan: "Design a life you're *proud of*",
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   columns: [
-    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
+    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/life-balance-check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
     { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Founder's story" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
     { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
   ],
@@ -358,7 +366,7 @@ export const ABOUT_PAGE = {
     media: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn", brief: "About hero · calm person outdoors · 2400×1600", ratio: "3 / 2" } as MediaSlot,
     lede: "A life balance tracker for people who want to grow at work without losing the rest of their life. The mission is simple: to help people build a life they're proud of, one small step at a time.",
     cta: "Get early access",
-    secondary: { href: "/#check", label: "Take the free Life Balance Check" },
+    secondary: { href: "/life-balance-check", label: "Take the free Life Balance Check" },
     facts: [
       { value: "6", label: "life areas, from health to career" },
       { value: "1", label: "Life Balance score that updates as you go" },

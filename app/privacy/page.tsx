@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/site";
+import { Breadcrumbs } from "@/components/ui/JsonLd";
 import { LegalPage } from "@/components/ui/LegalPage";
 import { LEGAL_ENTITY, POLICY_VERSION } from "@/lib/content";
 import { PRIVACY_POLICY, websiteSection } from "@/lib/legal";
@@ -12,5 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function Privacy() {
-  return <LegalPage doc={PRIVACY_POLICY} version={POLICY_VERSION} extra={[websiteSection(LEGAL_ENTITY)]} />;
+  return (
+    <>
+      <Breadcrumbs name="Privacy policy" path="/privacy" />
+      <LegalPage doc={PRIVACY_POLICY} version={POLICY_VERSION} extra={[websiteSection(LEGAL_ENTITY)]} />
+    </>
+  );
 }

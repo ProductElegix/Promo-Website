@@ -11,13 +11,16 @@ import { Wheel } from "@/components/ui/Wheel";
 import { Faq } from "@/components/sections/Faq";
 import { Principles } from "@/components/sections/Trust";
 import { PhotoHero } from "@/components/sections/PhotoHero";
+import { Breadcrumbs } from "@/components/ui/JsonLd";
+import { OG_IMAGE } from "@/lib/site";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
   title: A.meta.title,
   description: A.meta.description,
   alternates: { canonical: "/about" },
-  openGraph: { title: `${A.meta.title} · Elegix`, description: A.meta.description, url: "/about" },
+  openGraph: { title: `${A.meta.title} · Elegix`, description: A.meta.description, url: "/about", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
+  twitter: { card: "summary_large_image", title: `${A.meta.title} · Elegix`, description: A.meta.description, images: [OG_IMAGE] },
 };
 
 export default function About() {
@@ -25,6 +28,7 @@ export default function About() {
   const photo = TRUST.founder.media;
   return (
     <main>
+      <Breadcrumbs name="About" path="/about" />
       {/* 1. Hero, same style as the home page */}
       <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede} screen={lifeArea.media}>
         <div className={styles.ctas}>

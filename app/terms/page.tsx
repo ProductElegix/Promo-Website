@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/site";
+import { Breadcrumbs } from "@/components/ui/JsonLd";
 import { LegalPage } from "@/components/ui/LegalPage";
 import { TERMS } from "@/lib/legal";
 
@@ -11,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function Terms() {
-  return <LegalPage doc={TERMS} />;
+  return (
+    <>
+      <Breadcrumbs name="Terms of Service" path="/terms" />
+      <LegalPage doc={TERMS} />
+    </>
+  );
 }
