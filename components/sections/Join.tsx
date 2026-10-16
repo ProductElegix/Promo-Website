@@ -23,7 +23,7 @@ export function Join() {
           </div>
           <div className={styles.footer}>
             <div className={styles.person}>
-              {photo.src && <Image src={photo.src} alt="" width={56} height={56} className={styles.thumb} />}
+              {photo.src && <Image src={photo.src} alt={`Portrait of ${sig.name}`} width={56} height={56} className={styles.thumb} />}
               <div><b>{sig.name}</b><span>{sig.role}</span></div>
             </div>
           </div>
