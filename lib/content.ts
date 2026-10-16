@@ -39,11 +39,8 @@ export const META = {
 };
 
 export const NAV = [
-  { href: "/#how", label: "How it works" },
-  { href: "/#areas", label: "Life areas" },
-  { href: "/#check", label: "Life Balance Check" },
-  { href: "/#faq", label: "FAQ" },
   { href: "/about", label: "About" },
+  { href: "/careers", label: "Careers" },
 ];
 export const NAV_CTA = "Get early access";
 
