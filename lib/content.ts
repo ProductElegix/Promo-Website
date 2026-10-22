@@ -40,6 +40,7 @@ export const META = {
 
 export const NAV = [
   { href: "/about", label: "About" },
+  { href: "/guides", label: "Guides" },
   { href: "/careers", label: "Careers" },
 ];
 export const NAV_CTA = "Get early access";
