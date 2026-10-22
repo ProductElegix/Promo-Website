@@ -27,7 +27,7 @@ export function Hero() {
     </figure>
   );
   return (
-    <PhotoHero id="hero-title" media={HERO.media} eyebrow={HERO.eyebrow} title={HERO.title} lede={HERO.lede} screen={APP.screens[0].media} card={card}>
+    <PhotoHero id="hero-title" media={HERO.media} eyebrow={HERO.eyebrow} title={HERO.title} titlePrefix={HERO.h1Prefix} lede={HERO.lede} screen={APP.screens[0].media} card={card}>
       <div className={styles.form}>
         <WaitlistForm source="hero" variant="glass" placeholder="Your email" buttonLabel={HERO.cta} />
       </div>

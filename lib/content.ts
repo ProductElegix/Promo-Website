@@ -77,6 +77,8 @@ export const CONSENT = { before: "By joining, you agree to our", link: "Privacy 
 export const HERO = {
   eyebrow: "Life balance tracker · Early access",
   title: "Crushing it at work. *Losing* the rest?",
+  /** Start of the page's h1 for Google and screen readers (not shown; the eyebrow above says it visually). */
+  h1Prefix: "Elegix, the life balance tracker",
   lede: "Elegix tracks your goals, habits and tasks across 6 life areas and shows which part of your life you're neglecting, before it turns into burnout.",
   cta: "Get early access",
   trust: ["Free app", "iOS & Android", "No spam"],
