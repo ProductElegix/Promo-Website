@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Pill, areaVars } from "@/components/ui/Pill";
@@ -13,6 +14,7 @@ import { Principles } from "@/components/sections/Trust";
 import { PhotoHero } from "@/components/sections/PhotoHero";
 import { Breadcrumbs } from "@/components/ui/JsonLd";
 import { OG_IMAGE } from "@/lib/site";
+import { areaGuideHref } from "@/lib/guides";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
@@ -47,6 +49,7 @@ export default function About() {
                 <span className={styles.areaIcon} aria-hidden="true"><AreaIcon area={a} /></span>
                 <h3>{AREAS[a].name}</h3>
                 <p>{AREAS[a].description}</p>
+                <Link href={areaGuideHref(a)} className={styles.areaLink}>Read the guide<span className="visually-hidden"> to {AREAS[a].name}</span> →</Link>
               </li>
             ))}
           </ul>

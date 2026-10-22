@@ -109,6 +109,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 .area { background: var(--paper); border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start; }
 .area h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 10px; color: var(--s); }
 .area p { font-size: 0.95rem; color: var(--ink-2); }
+.areaLink { font-size: 0.88rem; color: var(--s); text-underline-offset: 3px; margin-top: 4px; }
 .areaIcon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--t); color: var(--s); }
 .areaIcon svg { width: 18px; height: 18px; }
 .pricingSection { padding-top: 0; }

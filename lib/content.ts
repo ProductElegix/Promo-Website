@@ -269,6 +269,7 @@ export const FOOTER = {
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   columns: [
     { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
+    { title: "Guides", links: [{ href: "/guides/wheel-of-life", label: "Wheel of Life" }, { href: "/guides/signs-of-burnout", label: "Signs of burnout" }, { href: "/guides/work-life-balance", label: "Work-life balance" }, { href: "/life-areas", label: "The 6 life areas" }, { href: "/guides", label: "All guides" }] },
     { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Founder's story" }, { href: "/careers", label: "Careers" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
     { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
   ],

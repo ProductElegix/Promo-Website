@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AREAS, AREA_ORDER, AREAS_SECTION } from "@/lib/content";
+import { areaGuideHref } from "@/lib/guides";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Media } from "@/components/ui/Media";
 import { Pill, areaVars } from "@/components/ui/Pill";
@@ -57,6 +59,7 @@ export function AreasList() {
             <div className={`glass ${styles.note}`}>
               <Pill area={active} strong />
               <p>{AREAS[active].neglect}</p>
+              <Link href={areaGuideHref(active)} className={styles.more}>How to balance {AREAS[active].name.toLowerCase()} →</Link>
             </div>
           </div>
         </div>

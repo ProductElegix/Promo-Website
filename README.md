@@ -105,4 +105,5 @@ The Vercel project `elegix-site` is connected to this repo (production branch `m
 
 - `robots.txt`, `sitemap.xml`, canonical URLs and structured data all use `https://www.elegix.net` (`lib/site.ts`). Only production is indexable; the `dev` preview answers `Disallow: /`.
 - Google Search Console and Bing Webmaster Tools: optional `GOOGLE_SITE_VERIFICATION` and `BING_SITE_VERIFICATION` env vars add the verification meta tags, if a console asks for the meta-tag method.
+- Guides (`/guides/…`) and the 6 life area pages (`/life-areas/…`) are long-form pages written for real searches (wheel of life, signs of burnout, work-life balance). Their text lives in `lib/guides.ts`; a new guide added there appears in the hub, the sitemap and `/llms.txt` automatically. After publishing one, run `npm run indexnow`.
 - IndexNow (Bing, Yandex, Seznam, Naver): after a production deploy that adds or changes pages, run `npm run indexnow` to submit every URL in the live sitemap, or `npm run indexnow -- /about` for specific paths. The key file is `public/59d9d89b46d18e22bbfbbdf2b584731c.txt`.
