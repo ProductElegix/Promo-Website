@@ -100,3 +100,9 @@ Never commit straight to `main`. Any other branch or pull request also gets its 
 ## Deploy
 
 The Vercel project `elegix-site` is connected to this repo (production branch `main`). Mailgun and `NEXT_PUBLIC_SITE_URL` are already set in the project's environment variables for production and for the `dev` preview.
+
+## Search engines
+
+- `robots.txt`, `sitemap.xml`, canonical URLs and structured data all use `https://www.elegix.net` (`lib/site.ts`). Only production is indexable; the `dev` preview answers `Disallow: /`.
+- Google Search Console and Bing Webmaster Tools: optional `GOOGLE_SITE_VERIFICATION` and `BING_SITE_VERIFICATION` env vars add the verification meta tags, if a console asks for the meta-tag method.
+- IndexNow (Bing, Yandex, Seznam, Naver): after a production deploy that adds or changes pages, run `npm run indexnow` to submit every URL in the live sitemap, or `npm run indexnow -- /about` for specific paths. The key file is `public/59d9d89b46d18e22bbfbbdf2b584731c.txt`.
