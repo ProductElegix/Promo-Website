@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { APP, HERO, OPENING } from "@/lib/content";
-import { Phone } from "@/components/ui/Phone";
+import { HERO, OPENING } from "@/lib/content";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Opening.module.css";
@@ -71,14 +70,7 @@ export function Opening() {
       <ul className={styles.strip} data-strip>
         {OPENING.strip.map((p, i) => (
           <li key={p.src} className={`${styles.stripItem} ${i === 2 ? styles.stripMain : ""}`}>
-            {i === 2 ? (
-              <>
-                <div className={styles.stripClip}><Image src={p.src} alt={p.alt} fill sizes="(max-width: 767px) 70vw, 30vw" /></div>
-                <Phone screen={APP.screens[0].media} className={styles.stripPhone} />
-              </>
-            ) : (
-              <Image src={p.src} alt={p.alt} fill sizes="(max-width: 767px) 50vw, 20vw" />
-            )}
+            <Image src={p.src} alt={p.alt} fill sizes={i === 2 ? "(max-width: 767px) 70vw, 30vw" : "(max-width: 767px) 50vw, 20vw"} />
           </li>
         ))}
       </ul>
