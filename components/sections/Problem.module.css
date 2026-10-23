@@ -1,4 +1,4 @@
-.head { display: grid; gap: 22px; justify-items: start; max-width: 56rem; margin-bottom: clamp(40px, 6vw, 72px); }
+.head { display: grid; gap: 22px; justify-items: center; text-align: center; max-width: 56rem; margin: 0 auto clamp(40px, 6vw, 72px); }
 .text { font-size: clamp(1.15rem, 1.8vw, 1.5rem); line-height: 1.5; letter-spacing: -0.02em; color: var(--muted); max-width: 40rem; }
 
 /* four photo cards: what slips first */
