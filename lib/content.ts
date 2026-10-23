@@ -219,7 +219,7 @@ export const AREAS_SECTION = {
  */
 export const ORBIT = {
   label: "Six areas, one view",
-  title: "Elegix brings work, health, people and everything in between into one picture",
+  title: "Elegix brings work, health, people and everything in between into *one picture*",
   caption: "Six life areas, one balance score. See where your energy goes, and what is quietly slipping.",
   photos: [
     { area: "health", src: "/images/area-health.jpg", x: 27, y: 30, size: 7.6 },
