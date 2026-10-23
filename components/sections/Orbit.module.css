@@ -10,7 +10,7 @@
 .mark { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); line-height: 0; color: var(--green); }
 .mark svg { width: clamp(44px, 6vw, 96px); height: auto; }
 
-/* round photos: grayscale, colour and their area name on hover, a slow float */
+/* round colour photos: their area name on hover, a slow float */
 .photo {
   position: absolute; aspect-ratio: 1; margin: 0; border-radius: 50%; overflow: visible; transform: translate(-50%, -50%);
   animation: float 7s ease-in-out infinite alternate;
