@@ -8,17 +8,16 @@
 .factLabel { font-size: 0.85rem; color: var(--muted); max-width: 12rem; }
 
 .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.feature { background: var(--paper); border-radius: 20px; padding: 24px; display: grid; gap: 12px; align-content: start; transition: transform .2s ease, box-shadow .2s ease; }
+.feature { background: var(--paper); border-radius: 8px; padding: 24px; display: grid; gap: 12px; align-content: start; transition: transform .2s ease, box-shadow .2s ease; }
 .feature:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -28px rgba(20, 26, 23, .45); }
 .feature h3 { font-size: 1.15rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 12px; }
 .feature p { font-size: 0.95rem; color: var(--ink-2); }
-.icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--t); color: var(--s); }
+.icon { width: 40px; height: 40px; border-radius: 6px; display: grid; place-items: center; background: var(--t); color: var(--s); }
 .icon svg { width: 18px; height: 18px; }
 
 .dark { background: var(--atmo-dark); color: #f1f1ec; border-radius: var(--radius-l); margin-inline: 8px; overflow: hidden; }
-.dark :global(.h2) em { color: var(--lime); }
 .audience { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.audienceCard { border-radius: 20px; padding: 26px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); display: grid; gap: 12px; align-content: start; }
+.audienceCard { border-radius: 8px; padding: 26px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); display: grid; gap: 12px; align-content: start; }
 .audienceCard h3 { font-size: 1.3rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 18px; }
 .audienceCard p { color: #a9b0ab; }
 .n { justify-self: start; background: var(--lime); color: var(--black); }
@@ -32,7 +31,7 @@
 .modeDark .time { background: rgba(255, 255, 255, .14); color: #fff; }
 .mode ul, .points { display: grid; gap: 12px; font-size: 1.02rem; }
 .mode li, .points li { display: flex; gap: 12px; align-items: center; }
-.tick { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--mint); color: var(--green); font-size: 0.75rem; font-weight: 700; }
+.tick { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--mint); color: var(--green); font-size: 0.75rem; font-weight: 500; }
 .modeDark .tick { background: rgba(213, 244, 94, .2); color: var(--lime); }
 
 .ideaSection { background: var(--paper); }
@@ -41,7 +40,6 @@
 .wheel { padding: 18px; border-radius: 50%; background: var(--cream); display: grid; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 420px; }
 .ideaText { display: grid; gap: 20px; justify-items: start; }
-.ideaText :global(.h2) em { color: var(--green); }
 .ideaP { font-size: clamp(1.05rem, 1.4vw, 1.2rem); line-height: 1.6; color: var(--ink-2); }
 
 .story { display: grid; grid-template-columns: minmax(0, 0.8fr) 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
@@ -52,7 +50,6 @@
 .founder b { color: var(--ink); font-weight: 500; }
 .storyBody { display: grid; gap: 20px; font-size: clamp(1.05rem, 1.4vw, 1.18rem); line-height: 1.65; color: var(--ink-2); }
 .storyBody :global(.h2) { color: var(--ink); margin-bottom: 8px; }
-.storyBody :global(.h2) em { color: var(--green); }
 .lead { font-size: 1.3em; line-height: 1.35; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
 .lines { display: grid; gap: 4px; padding-left: 18px; border-left: 2px solid var(--green); color: var(--ink); }
 .quote { margin: 8px 0; font-size: 1.3em; line-height: 1.35; font-weight: 500; letter-spacing: -0.02em; color: var(--green); }
@@ -60,14 +57,13 @@
 
 .beliefsSection { padding-top: 0; }
 ul.principles { grid-template-columns: repeat(4, 1fr); }
-.public { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding: 22px 26px; border-radius: 20px; background: var(--paper); }
+.public { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding: 22px 26px; border-radius: 8px; background: var(--paper); }
 .public p { color: var(--muted); font-size: 0.95rem; }
 .public ul { display: flex; flex-wrap: wrap; gap: 8px; }
 .public a { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--cream); text-decoration: none; font-size: 0.9rem; transition: background-color .15s; }
 .public a:hover { background: var(--mint); }
 
-.cta { grid-template-columns: minmax(0, 1fr); border-radius: 32px; padding: clamp(40px, 7vw, 88px) clamp(24px, 5vw, 64px); background: var(--atmo-green); color: #fff; display: grid; gap: 18px; justify-items: center; text-align: center; position: relative; overflow: hidden; }
-.cta :global(.h2) em { color: var(--lime); }
+.cta { grid-template-columns: minmax(0, 1fr); border-radius: 8px; padding: clamp(40px, 7vw, 88px) clamp(24px, 5vw, 64px); background: var(--atmo-green); color: #fff; display: grid; gap: 18px; justify-items: center; text-align: center; position: relative; overflow: hidden; }
 .cta :global(.lede) { color: rgba(255, 255, 255, .82); }
 .ctaForm { width: 100%; max-width: 480px; min-width: 0; margin-top: 8px; }
 .ctaForm form { min-width: 0; }
@@ -80,7 +76,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
   .idea, .story, .modes, .audience, .features { grid-template-columns: 1fr; }
   .storyAside { position: static; }
   .photo { aspect-ratio: 4 / 3; }
-  .dark { margin-inline: 6px; border-radius: 20px; }
+  .dark { margin-inline: 6px; border-radius: 8px; }
 }
 @media (max-width: 560px) {
   .features { grid-template-columns: 1fr; }
@@ -92,7 +88,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 .teamSection { padding-top: 0; }
 .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .member { background: var(--paper); border-radius: var(--radius-l); padding: 16px 16px 24px; display: grid; gap: 18px; align-content: start; }
-.memberPhoto { width: 100% !important; height: auto !important; aspect-ratio: 4 / 5; border-radius: 16px; font-size: clamp(2.4rem, 5vw, 3.6rem) !important; }
+.memberPhoto { width: 100% !important; height: auto !important; aspect-ratio: 4 / 5; border-radius: 8px; font-size: clamp(2.4rem, 5vw, 3.6rem) !important; }
 .member h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; padding-inline: 8px; }
 .member p { color: var(--muted); font-size: 0.95rem; padding-inline: 8px; }
 .memberLink { color: var(--green); text-decoration: none; font-size: 0.9rem; padding-inline: 8px; }
@@ -100,21 +96,20 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 560px) {
   .team { grid-template-columns: 1fr; gap: 10px; }
   .member { grid-template-columns: 88px 1fr; align-items: center; gap: 8px; padding: 12px; }
-  .memberPhoto { aspect-ratio: 1; border-radius: 14px; font-size: 1.8rem !important; }
+  .memberPhoto { aspect-ratio: 1; border-radius: 6px; font-size: 1.8rem !important; }
   .memberLink { grid-column: 2; }
 }
 
 /* 6 areas and pricing */
 .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.area { background: var(--paper); border-radius: 20px; padding: 24px; display: grid; gap: 10px; align-content: start; }
+.area { background: var(--paper); border-radius: 8px; padding: 24px; display: grid; gap: 10px; align-content: start; }
 .area h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 10px; color: var(--s); }
 .area p { font-size: 0.95rem; color: var(--ink-2); }
 .areaLink { font-size: 0.88rem; color: var(--s); text-underline-offset: 3px; margin-top: 4px; }
-.areaIcon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--t); color: var(--s); }
+.areaIcon { width: 40px; height: 40px; border-radius: 6px; display: grid; place-items: center; background: var(--t); color: var(--s); }
 .areaIcon svg { width: 18px; height: 18px; }
 .pricingSection { padding-top: 0; }
 .pricing { display: grid; gap: 18px; justify-items: start; background: var(--paper); border-radius: var(--radius-l); padding: clamp(28px, 5vw, 64px); }
-.pricing :global(.h2) em { color: var(--green); }
 .pricing :global(.lede) { max-width: 40rem; }
 @media (max-width: 860px) { .areas { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .areas { grid-template-columns: 1fr; } }

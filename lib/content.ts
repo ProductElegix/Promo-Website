@@ -96,6 +96,14 @@ export const HERO = {
   },
 };
 
+/** Home opening (black, Duna style): two caption lines under the wordmark and the facts row next to the form. */
+export const OPENING = {
+  captions: [["Life balance tracker.", "6 areas, one score."], ["Goals, habits and tasks.", "iOS & Android."]],
+  formCaption: "Early access · free app",
+  highlights: { label: "Highlights", link: { href: "/about", label: "How Elegix works" } },
+  highlight: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn" },
+};
+
 /** Facts ticker under the hero: a value and a short caption, scrolling on a dark strip. */
 export const FACTS = [
   { value: "6", caption: "life areas" },

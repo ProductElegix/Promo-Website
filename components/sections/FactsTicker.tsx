@@ -7,13 +7,13 @@ export function FactsTicker() {
     <ul className={styles.row} aria-hidden={hidden || undefined}>
       {FACTS.map((f) => (
         <li key={f.caption} className={styles.item}>
-          <b>{f.value}</b><span className="caption">{f.caption}</span><i aria-hidden="true">/</i>
+          <b>{f.value}</b><span className="caption">{f.caption}</span><i aria-hidden="true">✳</i>
         </li>
       ))}
     </ul>
   );
   return (
-    <section className={styles.ticker} aria-label="Elegix in numbers">
+    <section className={`on-dark ${styles.ticker}`} data-theme="dark" aria-label="Elegix in numbers">
       <div className={styles.track}>{row()}{row(true)}</div>
     </section>
   );

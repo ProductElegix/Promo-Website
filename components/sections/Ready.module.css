@@ -1,6 +1,5 @@
 .ready { overflow: hidden; padding-bottom: 0; }
 .head { margin-bottom: clamp(32px, 5vw, 56px); }
-.head :global(.h2) em { color: var(--green); }
 .head :global(.btn) { margin-top: 6px; }
 
 /* the "table": phone in the middle, objects scattered around it, cropped by the screen edges */
@@ -32,4 +31,4 @@
   .o4 { right: -18px; top: 50%; }
   .o5 { right: -40px; top: 2%; }
 }
-.lede { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; color: var(--ink-2); }
+.lede { font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; color: var(--muted); }

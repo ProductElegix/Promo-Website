@@ -1,4 +1,4 @@
-import { Hero } from "@/components/sections/Hero";
+import { Opening } from "@/components/sections/Opening";
 import { FactsTicker } from "@/components/sections/FactsTicker";
 import { Problem } from "@/components/sections/Problem";
 import { Compare } from "@/components/sections/Compare";
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main id="top">
       <JsonLd data={FAQ_DATA} />
-      <Hero />
+      <Opening />
       <FactsTicker />
       <Problem />
       <Compare />

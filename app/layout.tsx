@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
 import { Motion } from "@/components/ui/Motion";
@@ -14,8 +14,7 @@ import { META, SOCIALS } from "@/lib/content";
 import { INDEXABLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-instrument", display: "swap" });
-const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const sans = Inter_Tight({ subsets: ["latin", "latin-ext"], weight: ["300", "400", "500"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -64,7 +63,7 @@ export const viewport: Viewport = { themeColor: "#2a2a2a", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={sans.variable}>
       <body>
         <JsonLd data={ORGANIZATION} />
         <Attribution />

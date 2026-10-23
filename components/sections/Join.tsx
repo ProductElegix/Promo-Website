@@ -10,7 +10,7 @@ export function Join() {
   const sig = JOIN.signature;
   const photo = TRUST.founder.media;
   return (
-    <section id="join" className={styles.join} aria-labelledby="join-title">
+    <section id="join" className={`on-dark ${styles.join}`} data-theme="dark" aria-labelledby="join-title">
       <div className={styles.stage}>
         <div className={styles.photo} data-parallax data-scale-in><Media media={JOIN.media} fill sizes="100vw" /></div>
         <div className={styles.panel} data-reveal>
@@ -18,7 +18,7 @@ export function Join() {
           <h2 id="join-title" className={`display ${styles.title}`}><Rich text={JOIN.title} /></h2>
           <ul className={styles.perks}>{JOIN.perks.map((p) => <li key={p}><span className={styles.tick} aria-hidden="true">✓</span>{p}</li>)}</ul>
           <div id="join-form" className={styles.form}>
-            <WaitlistForm source="join" variant="bar" placeholder="Your email" buttonLabel={JOIN.button} />
+            <WaitlistForm source="join" variant="underline" placeholder="Your email" buttonLabel={JOIN.button} />
             <p className={styles.note}>{JOIN.note}</p>
           </div>
           <div className={styles.footer}>
