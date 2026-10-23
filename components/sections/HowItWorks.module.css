@@ -1,3 +1,5 @@
+.head.head { justify-items: center; text-align: center; max-width: 60rem; margin-inline: auto; }
+.head .areas { justify-content: center; }
 .areas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .n { align-self: flex-start; }
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -47,6 +49,6 @@
   .card { flex: none; width: 82vw; scroll-snap-align: start; min-height: 540px; }
   .device { height: 320px; }
 }
-.more { margin-top: clamp(28px, 4vw, 44px); font-size: var(--fs-ui); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.more { display: table; margin-inline: auto; margin-top: clamp(28px, 4vw, 44px); font-size: var(--fs-ui); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
 .more a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3em; }
 .more a:hover { opacity: .6; }
