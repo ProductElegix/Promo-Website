@@ -1,5 +1,6 @@
 .ready { overflow: hidden; padding-bottom: 0; }
-.head { margin-bottom: clamp(32px, 5vw, 56px); }
+.head.head { margin: 0 auto clamp(32px, 5vw, 56px); justify-items: center; text-align: center; }
+.head :global(.lede) { margin-inline: auto; }
 .head :global(.btn) { margin-top: 6px; }
 
 /* the "table": phone in the middle, objects scattered around it, cropped by the screen edges */
