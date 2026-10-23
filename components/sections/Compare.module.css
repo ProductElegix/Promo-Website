@@ -1,9 +1,10 @@
 .compare { background: #000; color: var(--paper); }
-/* comparison as an editorial table: hairlines only, Elegix column in white, the rest in muted gray */
-.table { display: grid; border-top: 1px solid var(--line-dark); }
-.row { display: grid; grid-template-columns: 1fr 1.3fr 1.3fr; gap: var(--gutter); border-bottom: 1px solid var(--line-dark); }
-.row > span { padding: clamp(18px, 2vw, 28px) 0; }
-.headRow > span { padding-block: 16px; }
+/* comparison as a stack of soft cards: one card per row, Elegix column in white, the rest in muted gray */
+.table { display: grid; gap: 8px; }
+.row { display: grid; grid-template-columns: 1fr 1.3fr 1.3fr; gap: var(--gutter); align-items: center; padding: 0 clamp(18px, 2vw, 28px); border-radius: var(--radius-m); background: rgba(255, 255, 255, .07); }
+.row > span { padding: clamp(18px, 2vw, 26px) 0; }
+.headRow { background: none; }
+.headRow > span { padding-block: 8px; }
 .rowLabel, .headRow > span { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 255, 255, .55); }
 .them { color: rgba(255, 255, 255, .45); font-size: clamp(18px, 1.6vw, 24px); letter-spacing: -0.02em; text-decoration: line-through; text-decoration-thickness: 1px; text-decoration-color: rgba(255, 255, 255, .3); }
 .headRow .them { text-decoration: none; }
@@ -16,4 +17,5 @@
   .rowLabel { grid-column: 1 / -1; padding-bottom: 0 !important; }
   .headRow .rowLabel { display: none; }
   .row > span { padding: 14px 0; }
+  .row { padding: 0 16px; }
 }

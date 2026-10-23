@@ -122,7 +122,6 @@ export const PROBLEM = {
     { area: "people" as AreaKey, text: "Friends stopped asking you out.", src: "/images/area-people.jpg" },
     { area: "hobby" as AreaKey, text: "Hobbies turned into someday.", src: "/images/area-hobby.jpg" },
   ],
-  media: { src: "/images/how-next.jpg", alt: "A journal, a notebook and a laptop on a wooden desk" },
   closing: "Burnout doesn't arrive in a day. It builds quietly in the parts of your life you stopped looking at.",
 };
 

@@ -2,7 +2,7 @@
 .ctas :global(.btn.ghost) { color: #fff; }
 .factsSection { padding: clamp(40px, 6vw, 72px) 0 0; }
 .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-block: 0; }
-.facts > div { padding-top: 20px; border-top: 1px solid var(--line); }
+.facts > div { padding: 20px 22px; border-radius: var(--radius-m); background: var(--paper); }
 .facts dd { margin: 0; }
 .factValue { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -0.04em; color: var(--green); }
 .factLabel { font-size: 0.85rem; color: var(--muted); max-width: 12rem; }

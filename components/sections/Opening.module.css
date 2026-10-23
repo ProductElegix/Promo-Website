@@ -23,7 +23,7 @@
 /* facts row with the form */
 .facts {
   display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap);
-  margin: 0 var(--gap); padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.28);
+  margin: 0 var(--gap); padding: clamp(20px, 2.4vw, 32px); border-radius: var(--radius-l); background: rgba(255, 255, 255, .07);
 }
 .form { max-width: 460px; display: grid; gap: 16px; }
 .trust { display: flex; flex-wrap: wrap; gap: 6px 18px; color: rgba(255, 255, 255, 0.62); }
