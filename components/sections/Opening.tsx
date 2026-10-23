@@ -16,6 +16,9 @@ export function Opening() {
         <div className={styles.bg} data-hero-photo>
           <Image src={HERO.media.src!} alt={HERO.media.alt} fill priority sizes="100vw" className={styles.bgImage} />
         </div>
+        <div className={`${styles.captions} caption`} data-hero-item>
+          {OPENING.captions.map(([a, b]) => <p key={a}>{a}<br />{b}</p>)}
+        </div>
         <h1 id="hero-title" className={styles.title} data-hero-item>
           <span className="visually-hidden">{HERO.h1Prefix}: </span>
           <Rich text={HERO.title} />

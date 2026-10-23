@@ -2,7 +2,7 @@
 
 /* first screen: full-bleed photo, a centred two-tone headline, the early access card at the bottom centre */
 .stage {
-  position: relative; isolation: isolate; display: grid; grid-template-rows: 1fr auto; justify-items: center;
+  position: relative; isolation: isolate; display: grid; grid-template-rows: auto 1fr auto; justify-items: center;
   min-height: max(680px, calc(100svh - 2 * var(--frame))); padding: 120px var(--gap) clamp(20px, 3vw, 40px); overflow: hidden;
 }
 .bg { position: absolute; inset: -8% 0; z-index: -2; will-change: transform; }
@@ -13,6 +13,9 @@
   font-size: clamp(36px, 4.4vw, 72px); font-weight: 400; line-height: 1.02; letter-spacing: -0.035em;
 }
 .title em { font-style: normal; color: var(--lime); }
+
+/* caption row at the top, under the header */
+.captions { justify-self: stretch; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; color: rgba(255, 255, 255, .85); }
 
 /* white early access card */
 .card {
