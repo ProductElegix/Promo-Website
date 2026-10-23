@@ -10,7 +10,7 @@
 .bar input[type="email"] { padding: 10px 0; }
 .bar .barBtn { border-radius: 2px; padding: 14px 18px 13px; white-space: nowrap; }
 .bar input[type="email"]::placeholder { color: #8d948f; }
-.barBtn { align-self: stretch; border: 0; background: var(--paper); color: var(--ink); font-weight: 500; font-size: 12px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 16px; cursor: pointer; transition: opacity .3s; }
+.barBtn { align-self: stretch; border: 0; background: var(--lime); color: var(--black); font-weight: 500; font-size: 12px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 16px; cursor: pointer; transition: opacity .3s; }
 .barBtn:hover { opacity: .82; }
 .barBtn::after { content: " →"; }
 .barBtn:disabled { opacity: 0.6; cursor: progress; }

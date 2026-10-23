@@ -7,7 +7,7 @@
 .card p { font-size: clamp(1.15rem, 1.7vw, 1.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
 .icon { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: var(--t); color: var(--s); }
 .icon svg { width: 15px; height: 15px; }
-.closing { margin-top: clamp(40px, 5vw, 64px); max-width: 40rem; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.5; color: var(--ink-2); padding-left: 18px; border-left: 1px solid var(--ink); }
+.closing { margin-top: clamp(40px, 5vw, 64px); max-width: 40rem; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.5; color: var(--ink-2); padding-left: 18px; border-left: 2px solid var(--green); }
 @media (max-width: 1024px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
   .card:nth-child(3) { padding-left: 0; border-left: 0; }

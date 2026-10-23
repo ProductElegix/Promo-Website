@@ -96,7 +96,7 @@ export const HERO = {
   },
 };
 
-/** Home opening (black, Duna style): two caption lines under the wordmark and the facts row next to the form. */
+/** Home opening (black, Duna style): two caption lines under the headline and the facts row next to the form. */
 export const OPENING = {
   captions: [["Life balance tracker.", "6 areas, one score."], ["Goals, habits and tasks.", "iOS & Android."]],
   formCaption: "Early access · free app",

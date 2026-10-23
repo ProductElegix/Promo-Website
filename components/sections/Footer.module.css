@@ -20,4 +20,4 @@
 .logo svg { height: 16px; width: auto; }
 @media (max-width: 1024px) { .top { grid-template-columns: repeat(3, 1fr); } .brand { grid-column: 1 / -1; max-width: none; } }
 @media (max-width: 600px) { .top { grid-template-columns: 1fr 1fr; } .base { flex-direction: column; align-items: flex-start; } }
-.lead em { font-style: normal; color: var(--muted); }
+.lead em { font-style: normal; color: var(--lime); }

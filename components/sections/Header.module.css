@@ -33,9 +33,9 @@
 .actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 .cta {
   display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px 11px; border-radius: 3px;
-  background: var(--ink); color: var(--paper); text-decoration: none; transition: opacity .3s, background .4s, color .4s;
+  background: var(--green); color: #fff; text-decoration: none; transition: opacity .3s, background .4s, color .4s;
 }
-.onDark .cta, .open .cta { background: var(--paper); color: var(--ink); }
+.onDark .cta, .open .cta { background: var(--lime); color: var(--black); }
 .cta:hover { opacity: .8; }
 
 .burger { display: none; align-items: center; gap: 10px; padding: 12px 14px 11px; border: 1px solid currentColor; border-radius: 3px; background: none; color: inherit; cursor: pointer; }

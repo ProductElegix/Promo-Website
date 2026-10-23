@@ -29,7 +29,7 @@
 .quote { font-size: clamp(22px, 2.2vw, 34px) !important; font-weight: 400 !important; line-height: 1.15 !important; letter-spacing: -0.03em !important; }
 /* privacy principle: dark card with a faint embossed lock */
 .privacy.privacy { position: relative; overflow: hidden; isolation: isolate; color: var(--paper); background: #000; padding: 16px 18px 24px; border-radius: 6px; border: 0; }
-.privacy .n { background: var(--paper); color: var(--ink); }
+.privacy .n { background: var(--lime); color: var(--black); }
 .privacy p { color: #a9b0ab; }
 .lock { position: absolute; right: -40px; bottom: -70px; width: 220px; z-index: -1; }
 .lock svg { display: block; width: 100%; height: auto; overflow: visible; }

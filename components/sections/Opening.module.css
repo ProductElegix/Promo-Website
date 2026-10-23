@@ -1,11 +1,8 @@
 .opening { --gap: var(--gutter); background: #000; color: #fff; padding-bottom: var(--section-y); }
 
-/* wordmark: scales to the full width of the page card */
-.wordmarkWrap { container-type: inline-size; padding: clamp(96px, 9vw, 130px) var(--gap) 0; overflow: hidden; }
-.wordmark {
-  display: block; font-size: 45cqi; font-weight: 500; line-height: 0.78; letter-spacing: -0.06em;
-  white-space: nowrap; margin-left: -0.035em;
-}
+/* headline: huge and tight, filling the width of the page card */
+.titleWrap { padding: clamp(120px, 11vw, 160px) var(--gap) 0; }
+.title { font-size: clamp(56px, 10.5vw, 200px); line-height: 0.88; letter-spacing: -0.055em; max-width: 12ch; }
 
 .captions {
   display: grid; grid-template-columns: 220px 1fr auto; gap: 24px; align-items: end;
@@ -21,9 +18,7 @@
 
 /* statement: the page h1 */
 .statementWrap { padding: clamp(56px, 7vw, 110px) var(--gap) clamp(48px, 6vw, 96px); }
-.statementWrap h1 { max-width: 1200px; text-indent: 25%; }
-.lead { font-weight: 500; }
-.lead em { color: rgba(255, 255, 255, 0.5); }
+.statementWrap p { max-width: 1200px; text-indent: 25%; }
 
 /* facts row with the form */
 .facts {
@@ -49,7 +44,7 @@
 @media (max-width: 767px) {
   .captions { grid-template-columns: 1fr 1fr auto; gap: 14px; }
   .band { aspect-ratio: 4 / 5; }
-  .statementWrap h1 { text-indent: 18%; }
+  .statementWrap p { text-indent: 18%; }
   .facts { grid-template-columns: 1fr; }
   .card { aspect-ratio: 4 / 5; }
 }

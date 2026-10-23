@@ -19,7 +19,7 @@
 .submit input[type="email"] { flex: 1; min-width: 0; border: 0; background: transparent; color: inherit; font: inherit; font-size: 0.95rem; }
 .submit input[type="email"]::placeholder { color: #8d948f; }
 .submit input[type="email"]:focus { outline: none; }
-.submit :global(.btn) { background: var(--paper); color: var(--ink); border-radius: 2px; }
+.submit :global(.btn) { background: var(--lime); color: var(--black); border-radius: 2px; }
 .error { color: var(--danger); font-size: 0.85rem; min-height: 1.2em; }
 .error:empty { display: none; }
 .result { display: grid; gap: 18px; align-content: center; justify-items: start; padding: 32px; border-radius: 6px; background: #000; color: #fff; }

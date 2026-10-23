@@ -7,14 +7,17 @@ import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Opening.module.css";
 
 /**
- * Black opening of the home page (Duna style): edge-to-edge wordmark, caption row, a cinematic photo band,
- * the statement (the page's h1) and the early-access form, then a highlight card.
+ * Black opening of the home page (Duna style): the headline (the page's h1) at full width, caption row,
+ * a cinematic photo band, the statement and the early-access form, then a highlight card.
  */
 export function Opening() {
   return (
     <section className={`on-dark ${styles.opening}`} data-theme="dark" aria-labelledby="hero-title">
-      <div className={styles.wordmarkWrap}>
-        <span className={styles.wordmark} aria-hidden="true" data-hero-item>elegix</span>
+      <div className={styles.titleWrap}>
+        <h1 id="hero-title" className={`display ${styles.title}`} data-hero-item>
+          <span className="visually-hidden">{HERO.h1Prefix}: </span>
+          <Rich text={HERO.title} />
+        </h1>
       </div>
 
       <div className={`${styles.captions} caption`} data-hero-item>
@@ -29,10 +32,7 @@ export function Opening() {
       </div>
 
       <div id="statement" className={styles.statementWrap}>
-        <h1 id="hero-title" className="statement" data-reveal>
-          <span className="visually-hidden">{HERO.h1Prefix}: </span>
-          <span className={styles.lead}><Rich text={HERO.title} /></span> {HERO.lede}
-        </h1>
+        <p className="statement" data-reveal>{HERO.lede}</p>
       </div>
 
       <div className={styles.facts}>
