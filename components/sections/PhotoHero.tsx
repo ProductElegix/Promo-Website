@@ -32,7 +32,7 @@ export function PhotoHero({ id, media, eyebrow, title, titlePrefix, lede, screen
         <div className={styles.photo} data-hero-photo><Media media={media} tone="dark" fill priority sizes="100vw" /></div>
         <div className={`${styles.atmo} ${media.src ? styles.onPhoto : ""}`} aria-hidden="true" />
         <div className={styles.content}>
-          <span className={`glass ${styles.eyebrow}`} data-hero-item aria-hidden={titlePrefix ? true : undefined}>{eyebrow}</span>
+          <span className="label" data-hero-item aria-hidden={titlePrefix ? true : undefined}>{eyebrow}</span>
           <h1 id={id} className={`display ${styles.title}`} data-hero-item>
             {titlePrefix && <span className="visually-hidden">{titlePrefix}: </span>}
             <Rich text={title} />

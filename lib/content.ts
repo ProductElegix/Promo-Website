@@ -411,7 +411,15 @@ export const ABOUT_PAGE = {
     label: "What is Elegix",
     title: "Built for a *balanced* life, not a busier one",
     media: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn", brief: "About hero · calm person outdoors · 2400×1600", ratio: "3 / 2" } as MediaSlot,
-    lede: "Elegix is a life balance tracker. It links your goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next. Our mission: to help people build a life they're proud of, one small step at a time.",
+    lede: "Elegix is a life balance tracker. It links your goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next.",
+    mission: { label: "Our mission", text: "To help people build a life they're *proud of*, one *small step* at a time. Not by doing more, but by seeing *all six areas* at once." },
+    strip: [
+      { src: "/images/area-people.jpg", alt: "Friends clinking glasses of red wine over dinner" },
+      { src: "/images/area-meaning.jpg", alt: "A woman standing at a tall window at dusk" },
+      { src: "/images/about-hero.jpg", alt: "A man looking out over misty mountains at dawn" },
+      { src: "/images/area-home.jpg", alt: "A bright, tidy living room with plants and an orange armchair" },
+      { src: "/images/area-career.jpg", alt: "A woman working on a laptop at a wooden table" },
+    ],
     cta: "Get early access",
   },
   areas: {

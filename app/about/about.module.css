@@ -102,14 +102,23 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 
 /* 6 areas and pricing */
 .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.area { background: var(--paper); border-radius: 16px; padding: 24px; display: grid; gap: 10px; align-content: start; }
-.area h3 { font-size: 1.2rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 10px; color: var(--s); }
-.area p { font-size: 0.95rem; color: var(--ink-2); }
-.areaLink { font-size: 0.88rem; color: var(--s); text-underline-offset: 3px; margin-top: 4px; }
-.areaIcon { width: 40px; height: 40px; border-radius: 6px; display: grid; place-items: center; background: var(--t); color: var(--s); }
+.area { background: var(--paper); border-radius: var(--radius-l); padding: 10px 10px 24px; display: grid; gap: 10px; align-content: start; }
+.area > :not(.areaPhoto) { margin-inline: 14px; }
+.areaPhoto { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-m); overflow: hidden; margin-bottom: 8px; }
+.areaPhoto img { object-fit: cover; transition: transform 1.1s var(--ease); }
+.area:hover .areaPhoto img { transform: scale(1.04); }
+.area h3 { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
+.area p { font-size: var(--fs-body); color: var(--ink-2); }
+.areaLink { font-size: var(--fs-small); color: var(--s); text-underline-offset: 3px; margin-top: 4px; }
+.areaIcon { position: absolute; top: 12px; left: 12px; width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; background: var(--t); color: var(--s); }
 .areaIcon svg { width: 18px; height: 18px; }
 .pricingSection { padding-top: 0; }
-.pricing { display: grid; gap: 18px; justify-items: start; background: var(--paper); border-radius: var(--radius-l); padding: clamp(28px, 5vw, 64px); }
+.pricing { display: grid; gap: 18px; justify-items: center; text-align: center; background: var(--paper); border-radius: var(--radius-l); padding: clamp(28px, 5vw, 64px); }
 .pricing :global(.lede) { max-width: 40rem; }
 @media (max-width: 860px) { .areas { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .areas { grid-template-columns: 1fr; } }
+
+/* centred section heads, like the home page */
+.center.center { justify-items: center; text-align: center; max-width: 60rem; margin-inline: auto; }
+/* the tag above the story keeps its own width inside the grid */
+.storyBody > :global(.label) { justify-self: start; }
