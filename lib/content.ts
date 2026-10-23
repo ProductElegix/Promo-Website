@@ -101,7 +101,8 @@ export const OPENING = {
   // two caption lines at the top of the first screen
   captions: [["Life balance tracker.", "6 areas, one score."], ["Goals, habits and tasks.", "iOS & Android."]],
   // statement under the first screen: the first part bright, the rest muted
-  statement: { label: "What is Elegix", lead: "Elegix tracks your goals, habits and tasks across 6 life areas", rest: " and shows which part of your life you're neglecting, before it turns into burnout." },
+  // *word* = lime accent; the lead is bright, the rest muted
+  statement: { label: "What is Elegix", lead: "Elegix tracks your goals, habits and tasks across *6 life areas*", rest: " and shows which part of your life you're *neglecting*, before it turns into *burnout*." },
   // photo strip under the statement (the middle one is larger), then a short text under the middle photo
   strip: [
     { src: "/images/ready/hobby.jpg", alt: "Hands playing a guitar" },

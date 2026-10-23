@@ -4,6 +4,20 @@ import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Opening.module.css";
 
+/** Copy split into word spans for the scroll-scrubbed reveal; *word* becomes a lime accent. */
+function Words({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/(\*[^*]+\*)/).filter(Boolean).flatMap((part, i) => {
+        const accent = part.startsWith("*") && part.endsWith("*");
+        return (accent ? part.slice(1, -1) : part).split(/(\s+)/).map((w, j) =>
+          /^\s+$/.test(w) || !w ? w : <span key={`${i}-${j}`} className={accent ? styles.accent : undefined} data-word>{w}</span>,
+        );
+      })}
+    </>
+  );
+}
+
 /**
  * Black opening of the home page (Duna style): a full-screen photo behind the headline (the page's h1) and caption row,
  * the statement and the early-access form.
@@ -35,12 +49,15 @@ export function Opening() {
 
       <div className={styles.statementWrap}>
         <span className="label" data-reveal>{OPENING.statement.label}</span>
-        <p className={styles.statement} data-reveal>{OPENING.statement.lead}<span>{OPENING.statement.rest}</span></p>
+        <p className={styles.statement} data-split-words>
+          <Words text={OPENING.statement.lead} />
+          <span className={styles.muted}><Words text={OPENING.statement.rest} /></span>
+        </p>
       </div>
 
-      <ul className={styles.strip}>
+      <ul className={styles.strip} data-strip>
         {OPENING.strip.map((p, i) => (
-          <li key={p.src} className={`${styles.stripItem} ${i === 2 ? styles.stripMain : ""}`} data-reveal>
+          <li key={p.src} className={`${styles.stripItem} ${i === 2 ? styles.stripMain : ""}`}>
             <Image src={p.src} alt={p.alt} fill sizes={i === 2 ? "(max-width: 767px) 70vw, 30vw" : "(max-width: 767px) 50vw, 20vw"} />
           </li>
         ))}
