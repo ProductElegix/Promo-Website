@@ -8,21 +8,19 @@
 .onPhoto {
   opacity: 1;
   background:
-    radial-gradient(55% 60% at 8% 95%, rgba(0, 154, 68, .35), transparent 70%),
     radial-gradient(60% 45% at 50% 62%, rgba(11, 15, 13, .38), transparent 75%),
     linear-gradient(180deg, rgba(11, 15, 13, .5) 0%, rgba(11, 15, 13, .2) 35%, rgba(11, 15, 13, .35) 60%, rgba(11, 15, 13, .78) 100%);
 }
 .content { width: 100%; max-width: 860px; margin: 0 auto; padding: 160px var(--gutter) clamp(72px, 12vh, 120px); display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 22px; text-align: center; }
-.title { font-size: clamp(2.8rem, 7vw, 6rem); letter-spacing: -0.045em; text-shadow: 0 2px 30px rgba(0, 0, 0, .15); }
-.title em { color: var(--lime); }
+.title { font-size: clamp(48px, 8vw, 140px); letter-spacing: -0.055em; line-height: .88; }
 .lede { font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.55; max-width: 34rem; color: rgba(255, 255, 255, .82); }
 .actions { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 22px; width: 100%; }
 .form { width: min(460px, 100%); margin-top: 6px; }
 .trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; font-size: 0.82rem; color: rgba(255, 255, 255, .7); }
 .trust li { display: inline-flex; align-items: center; gap: 7px; }
 .trust li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
-.eyebrow { font-size: 0.8rem; padding: 7px 14px; border-radius: 999px; color: rgba(255, 255, 255, .9); }
-.card { position: absolute; right: clamp(16px, 3vw, 36px); bottom: clamp(16px, 3vw, 36px); width: 250px; margin: 0; display: grid; gap: 12px; padding: 14px; border-radius: 20px; }
+.eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 6px 9px 5px; border-radius: 0; color: #fff; }
+.card { position: absolute; right: clamp(16px, 3vw, 36px); bottom: clamp(16px, 3vw, 36px); width: 250px; margin: 0; display: grid; gap: 12px; padding: 14px; border-radius: 16px; }
 .cardHead { display: flex; gap: 12px; align-items: center; }
 .cardHead > div { display: grid; line-height: 1.1; margin-right: auto; }
 .cardTitle { font-size: 0.72rem; color: rgba(255, 255, 255, .7); }

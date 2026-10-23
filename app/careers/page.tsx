@@ -39,7 +39,7 @@ export default function Careers() {
           <ul className={styles.items}>
             {C.how.items.map((it, i) => (
               <li key={it.title} className={styles.item} data-reveal>
-                <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
+                <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
                 <h3>{it.title}</h3>
                 <p>{it.text}</p>
               </li>

@@ -96,16 +96,47 @@ export const HERO = {
   },
 };
 
+/** Home opening (black, Duna style): two caption lines under the headline and the facts row next to the form. */
+export const OPENING = {
+  // two caption lines at the top of the first screen
+  captions: [["Life balance tracker.", "6 areas, one score."], ["Goals, habits and tasks.", "iOS & Android."]],
+  // statement under the first screen: the first part bright, the rest muted
+  // *word* = lime accent; the lead is bright, the rest muted
+  statement: { label: "What is Elegix", lead: "Elegix tracks your goals, habits and tasks across *6 life areas*", rest: " and shows which part of your life you're *neglecting*, before it turns into *burnout*." },
+  // photo strip under the statement (the middle one is larger), then a short text under the middle photo
+  strip: [
+    { src: "/images/ready/hobby.jpg", alt: "Hands playing a guitar" },
+    { src: "/images/area-health.jpg", alt: "A man running on a track at sunrise" },
+    { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen" },
+    { src: "/images/area-growth.jpg", alt: "A stack of books on a green armchair" },
+    { src: "/images/ready/career.jpg", alt: "A laptop on a desk" },
+  ],
+  about: {
+    title: "Not another planner. A *mirror* for your whole life.",
+    text: "Most apps reward you for doing more. Elegix shows what doing more is costing you: a 1-minute weekly check-in, one Life Balance score and one small next step for the area that needs you most.",
+  },
+  card: { title: "Ready to get started?", text: "Join the early access list. We'll email you once, when your spot opens." },
+};
+
+/** Facts ticker under the hero: a value and a short caption, scrolling on a dark strip. */
+export const FACTS = [
+  { value: "6", caption: "life areas" },
+  { value: "1", caption: "balance score" },
+  { value: "2 min", caption: "to set up" },
+  { value: "1 min", caption: "weekly check-in" },
+  { value: "Free", caption: "iOS & Android" },
+];
+
 // 2
 export const PROBLEM = {
   eyebrow: "Sound familiar?",
   title: "You close every task. So why does life feel *off*?",
   text: "Your inbox is at zero. Your gym bag hasn't moved in three weeks. You keep meaning to call your parents. You're ==productive==, just not ==balanced==.",
   cards: [
-    { area: "meaning" as AreaKey, text: "Your last real day off? Can't remember." },
-    { area: "health" as AreaKey, text: "Sleep is the first thing to go." },
-    { area: "people" as AreaKey, text: "Friends stopped asking you out." },
-    { area: "hobby" as AreaKey, text: "Hobbies turned into someday." },
+    { area: "meaning" as AreaKey, text: "Your last real day off? Can't remember.", src: "/images/area-meaning.jpg" },
+    { area: "health" as AreaKey, text: "Sleep is the first thing to go.", src: "/images/how-score.jpg" },
+    { area: "people" as AreaKey, text: "Friends stopped asking you out.", src: "/images/area-people.jpg" },
+    { area: "hobby" as AreaKey, text: "Hobbies turned into someday.", src: "/images/area-hobby.jpg" },
   ],
   closing: "Burnout doesn't arrive in a day. It builds quietly in the parts of your life you stopped looking at.",
 };
@@ -182,6 +213,30 @@ export const AREAS_SECTION = {
   } as Record<AreaKey, MediaSlot>,
 };
 
+/**
+ * "One picture" block (after Problem): a big ring with the logo mark in the middle and round photos of
+ * every life area scattered around it. x/y are the circle centre in % of the stage, size in % of its width.
+ */
+export const ORBIT = {
+  label: "Six areas, one view",
+  title: "Elegix brings work, health, people and everything in between into *one picture*",
+  caption: "Six life areas, one balance score. See where your energy goes, and what is quietly slipping.",
+  photos: [
+    { area: "health", src: "/images/area-health.jpg", x: 27, y: 30, size: 7.6 },
+    { area: "people", src: "/images/area-people.jpg", x: 22, y: 52, size: 7.6 },
+    { area: "hobby", src: "/images/ready/hobby.jpg", x: 22, y: 76, size: 7.6 },
+    { area: "growth", src: "/images/area-growth.jpg", x: 37, y: 86, size: 7.6 },
+    { area: "meaning", src: "/images/ready/meaning.jpg", x: 50, y: 98, size: 7.6 },
+    { area: "career", src: "/images/area-career.jpg", x: 63, y: 12, size: 7.6 },
+    { area: "people", src: "/images/ready/people.jpg", x: 75, y: 22, size: 7.6 },
+    { area: "hobby", src: "/images/area-hobby.jpg", x: 72, y: 46, size: 7.6 },
+    { area: "hobby", src: "/images/area-home.jpg", x: 66, y: 66, size: 7.6 },
+    { area: "meaning", src: "/images/area-meaning.jpg", x: 71, y: 94, size: 7.6 },
+    { area: "health", src: "/images/ready/health.jpg", x: 34, y: 14, size: 6 },
+    { area: "growth", src: "/images/ready/growth.jpg", x: 84, y: 70, size: 6 },
+  ] as { area: AreaKey; src: string; x: number; y: number; size: number }[],
+};
+
 /** Real app screenshots: the hero phone, the How it works cards, the About hero and Ready. */
 export const APP = {
   screens: [
@@ -239,7 +294,9 @@ export const PRINCIPLES: { title: string; text: string; dark?: boolean }[] = [
 // 10
 export const JOIN = {
   eyebrow: "Early access",
-  title: "Join before launch. Get *founding member* perks.",
+  title: "Join before *launch*.",
+  // one plain line under the title instead of a perks list
+  sub: "First access and a founding member price, locked for life.",
   perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "Behind-the-scenes updates as it's built"],
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
@@ -266,16 +323,13 @@ export const FAQ = [
 ];
 
 export const FOOTER = {
-  slogan: "Design a life you're *proud of*",
+  caption: "Elegix",
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
-  columns: [
-    { title: "Product", links: [{ href: "/#how", label: "How it works" }, { href: "/#areas", label: "Life areas" }, { href: "/#check", label: "Life Balance Check" }, { href: "/#faq", label: "FAQ" }] },
-    { title: "Guides", links: [{ href: "/guides/wheel-of-life", label: "Wheel of Life" }, { href: "/guides/signs-of-burnout", label: "Signs of burnout" }, { href: "/guides/work-life-balance", label: "Work-life balance" }, { href: "/life-areas", label: "The 6 life areas" }, { href: "/guides", label: "All guides" }] },
-    { title: "Company", links: [{ href: "/about", label: "About" }, { href: "/about#story", label: "Founder's story" }, { href: "/careers", label: "Careers" }, { href: "/#join", label: "Early access" }, { href: "mailto:hello@elegix.net", label: "Contact" }] },
-    { title: "Legal", links: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms of Service" }] },
-  ],
+  email: "hello@elegix.net",
+  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Early access" }],
+  legal: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms" }],
   socials: SOCIALS,
-  wordmark: "elegix",
+  wordmark: "Elegix",
 };
 
 /**
@@ -404,6 +458,7 @@ export const ABOUT_PAGE = {
 
 /** Closing "Ready when you are": the app in the middle, one everyday object per life area around it. */
 export const READY = {
+  label: "Get started",
   title: "Ready when *you* are",
   lede: "A good life isn't the most productive one. It's a ==balanced== one.",
   cta: "Get early access",

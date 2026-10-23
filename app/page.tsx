@@ -1,12 +1,13 @@
-import { Hero } from "@/components/sections/Hero";
+import { Opening } from "@/components/sections/Opening";
+import { FactsTicker } from "@/components/sections/FactsTicker";
 import { Problem } from "@/components/sections/Problem";
+import { Orbit } from "@/components/sections/Orbit";
 import { Compare } from "@/components/sections/Compare";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { AreasList } from "@/components/sections/AreasList";
 import { BalanceCheck } from "@/components/sections/BalanceCheck";
 import { Trust } from "@/components/sections/Trust";
 import { Join } from "@/components/sections/Join";
-import { Ready } from "@/components/sections/Ready";
 import { Faq } from "@/components/sections/Faq";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { FAQ } from "@/lib/content";
@@ -21,16 +22,17 @@ export default function Home() {
   return (
     <main id="top">
       <JsonLd data={FAQ_DATA} />
-      <Hero />
+      <Opening />
+      <FactsTicker />
       <Problem />
-      <Compare />
       <HowItWorks />
+      <Orbit />
+      <Compare />
       <AreasList />
       <BalanceCheck />
       <Trust />
-      <Join />
       <Faq />
-      <Ready />
+      <Join />
     </main>
   );
 }

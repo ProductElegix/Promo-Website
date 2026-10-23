@@ -1,12 +1,21 @@
-.head { display: grid; gap: 22px; justify-items: start; max-width: 56rem; margin-bottom: clamp(40px, 6vw, 64px); }
-.head :global(.h2) em { color: var(--green); }
-.text { font-size: clamp(1.2rem, 2.1vw, 1.65rem); line-height: 1.5; letter-spacing: -0.02em; color: var(--muted); max-width: 46rem; }
+.head { display: grid; gap: 22px; justify-items: center; text-align: center; max-width: 56rem; margin: 0 auto clamp(40px, 6vw, 72px); }
+.text { font-size: var(--fs-lead); line-height: 1.45; letter-spacing: -0.02em; color: var(--muted); max-width: 40rem; }
+
+/* four photo cards: what slips first */
 .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.card { background: var(--paper); border-radius: 20px; padding: 22px; min-height: 180px; display: grid; align-content: space-between; gap: 24px; transition: transform .2s ease, box-shadow .2s ease; }
-.card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -28px rgba(20, 26, 23, .45); }
-.card p { font-size: 1.15rem; font-weight: 500; line-height: 1.3; letter-spacing: -0.02em; }
-.icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--t); color: var(--s); }
-.icon svg { width: 16px; height: 16px; }
-.closing { margin-top: clamp(40px, 5vw, 64px); max-width: 40rem; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.5; color: var(--ink-2); padding-left: 18px; border-left: 2px solid var(--green); }
-@media (max-width: 1024px) { .cards { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .card { min-height: 150px; padding: 18px; } .card p { font-size: 1rem; } }
+.card { display: grid; gap: 14px; align-content: start; }
+.cardPhoto { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-m); overflow: hidden; }
+.cardPhoto img { object-fit: cover; }
+.top { position: absolute; z-index: 1; left: 12px; right: 12px; top: 12px; display: flex; justify-content: space-between; align-items: center; }
+.card p { font-size: var(--fs-h3); font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; padding-right: 12px; }
+.icon { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: var(--t); color: var(--s); }
+.icon svg { width: 15px; height: 15px; }
+
+@media (max-width: 860px) {
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
+}
+@media (max-width: 480px) { .card p { font-size: 20px; } }
+
+/* the closing line: a compact soft card under the photos, a green dot in front */
+.closing { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; padding: clamp(18px, 2vw, 28px) clamp(20px, 2.4vw, 32px); border-radius: var(--radius-m); background: var(--paper); font-size: var(--fs-lead); line-height: 1.4; letter-spacing: -0.015em; color: var(--ink-2); }
+.closing::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--green); transform: translateY(-2px); }

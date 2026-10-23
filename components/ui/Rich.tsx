@@ -1,7 +1,7 @@
 /**
  * Renders copy from lib/content.ts:
- *   *word*   → italic serif accent (<em>)
- *   ==word== → highlighted word in a small pill (<mark class="hl">)
+ *   *word*   → accent word in muted gray (<em>)
+ *   ==word== → word set in ink with a hairline underline (<mark class="hl">)
  */
 export function Rich({ text }: { text: string }) {
   return (

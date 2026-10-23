@@ -16,15 +16,15 @@ type Props = {
    */
   titlePrefix?: string;
   lede: string;
-  /** app screenshot shown in the phone peeking up from the bottom */
-  screen: MediaSlot;
+  /** optional app screenshot shown in a phone peeking up from the bottom */
+  screen?: MediaSlot;
   /** form or buttons under the lede */
   children: ReactNode;
   /** optional glass card, shown only where the phone is hidden (tablet widths) */
   card?: ReactNode;
 };
 
-/** Full-bleed photo hero with a white headline and the app peeking in: used on the home and About pages. */
+/** Full-bleed photo hero with a white headline and, optionally, the app peeking in. */
 export function PhotoHero({ id, media, eyebrow, title, titlePrefix, lede, screen, children, card }: Props) {
   return (
     <section className={`on-dark ${styles.hero}`} aria-labelledby={id}>
@@ -40,7 +40,7 @@ export function PhotoHero({ id, media, eyebrow, title, titlePrefix, lede, screen
           <p className={styles.lede} data-hero-item>{lede}</p>
           <div className={styles.actions} data-hero-item>{children}</div>
         </div>
-        <div className={styles.device}><div data-hero-phone><Phone screen={screen} priority className={styles.phone} /></div></div>
+        {screen && <div className={styles.device}><div data-hero-phone><Phone screen={screen} priority className={styles.phone} /></div></div>}
         {card}
       </div>
     </section>

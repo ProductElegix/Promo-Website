@@ -9,9 +9,12 @@ import { usePathname } from "next/navigation";
  * - [data-hero-phone]: the phone slides up and tilts into place
  * - [data-hero-photo]: gentle parallax while scrolling past the hero
  * - [data-parallax]: the same for section photos (Early access)
+ * - [data-scale-in]: a full-bleed photo eases from slightly zoomed in to its natural size as it scrolls into view
  * - [data-drift]: objects around the phone in the closing block drift in from the sides
  * - [data-reveal]: headings and cards fade up once as they scroll into view
  * - svg[data-wheel] path: wheel-of-life segments draw in from the centre
+ * - [data-split-words]: words light up one after another as the paragraph scrolls through the screen
+ * - [data-strip]: the photo strip opens up from behind the middle photo while scrolling
  * Content is fully visible without JavaScript and with prefers-reduced-motion; only transforms
  * and opacity are animated, so nothing shifts the layout.
  */
@@ -29,7 +32,8 @@ export function Motion() {
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
-        const ease = "power3.out";
+        // close to the CSS --ease, cubic-bezier(0.22, 1, 0.36, 1): fast start, long soft landing
+        const ease = "expo.out";
 
         const heroItems = gsap.utils.toArray<HTMLElement>("[data-hero-item]");
         if (heroItems.length) gsap.from(heroItems, { y: 28, opacity: 0, duration: 0.9, ease, stagger: 0.09, delay: 0.05 });
@@ -47,6 +51,10 @@ export function Motion() {
           gsap.fromTo(el, { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } }),
         );
 
+        gsap.utils.toArray<HTMLElement>("[data-scale-in]").forEach((el) =>
+          gsap.fromTo(el, { scale: 1.18 }, { scale: 1, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "top 20%", scrub: true } }),
+        );
+
         // everyday objects around the phone drift in from the sides
         gsap.utils.toArray<HTMLElement>("[data-drift]").forEach((el, i) =>
           gsap.from(el, { x: (el.getBoundingClientRect().left < window.innerWidth / 2 ? -1 : 1) * 60, y: 30, opacity: 0, duration: 1.1, ease, delay: (i % 3) * 0.08, scrollTrigger: { trigger: el, start: "top 95%", once: true } }),
@@ -55,7 +63,24 @@ export function Motion() {
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
           // what is already on screen when the page opens shows immediately, no flash
           if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
-          gsap.from(el, { y: 32, opacity: 0, duration: 0.8, ease, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+          gsap.from(el, { y: 28, opacity: 0, duration: 1.1, ease, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-split-words]").forEach((el) =>
+          gsap.fromTo(el.querySelectorAll("[data-word]"), { opacity: 0.12 }, {
+            opacity: 1, ease: "none", stagger: 0.1,
+            scrollTrigger: { trigger: el, start: "top 85%", end: "bottom 40%", scrub: 0.6 },
+          }),
+        );
+
+        gsap.utils.toArray<HTMLElement>("[data-strip]").forEach((strip) => {
+          const items = Array.from(strip.children) as HTMLElement[];
+          const mid = (items.length - 1) / 2;
+          items.forEach((item, i) =>
+            gsap.fromTo(item,
+              { xPercent: (mid - i) * 55, scale: i === mid ? 0.9 : 0.8, opacity: i === mid ? 1 : 0.4 },
+              { xPercent: 0, scale: 1, opacity: 1, ease: "none", scrollTrigger: { trigger: strip, start: "top 95%", end: "top 30%", scrub: 0.8 } }),
+          );
         });
 
         gsap.utils.toArray<SVGSVGElement>("svg[data-wheel]").forEach((svg) => {

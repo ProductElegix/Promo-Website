@@ -14,7 +14,7 @@
 .ph::before {
   content: "";
   width: 22px; height: 18px;
-  border: 1.5px solid currentColor; border-radius: 3px;
+  border: 1.5px solid currentColor; border-radius: 8px;
   opacity: 0.5;
   background:
     radial-gradient(circle at 30% 35%, currentColor 0 2px, transparent 2.5px),

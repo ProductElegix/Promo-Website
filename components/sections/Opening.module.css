@@ -1,0 +1,61 @@
+.opening { --gap: var(--gutter); background: #000; color: #fff; padding-bottom: clamp(48px, 6vw, 96px); }
+
+/* first screen: full-bleed photo, a centred two-tone headline, the early access card at the bottom centre */
+.stage {
+  position: relative; isolation: isolate; display: grid; grid-template-rows: auto 1fr auto; justify-items: center;
+  min-height: max(680px, calc(100svh - 2 * var(--frame))); padding: 120px var(--gap) clamp(20px, 3vw, 40px); overflow: hidden;
+}
+.bg { position: absolute; inset: -8% 0; z-index: -2; will-change: transform; }
+.bgImage { object-fit: cover; object-position: 60% 40%; }
+.stage::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, .4) 0%, rgba(0, 0, 0, .15) 40%, rgba(0, 0, 0, .35) 80%, rgba(0, 0, 0, .6) 100%); }
+.title {
+  align-self: center; max-width: 16ch; text-align: center; text-wrap: balance;
+  font-size: clamp(38px, 5vw, 84px); font-weight: 400; line-height: 1.02; letter-spacing: -0.035em;
+}
+.title em { font-style: normal; color: var(--lime); }
+
+/* caption row at the top, under the header */
+.captions { justify-self: stretch; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; color: rgba(255, 255, 255, .85); }
+
+/* white early access card */
+.card {
+  width: min(100%, 520px); display: grid; gap: 14px; padding: 18px; border-radius: var(--radius-l);
+  background: #fff; color: var(--ink); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .5);
+}
+.cardTitle { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+.cardText { font-size: var(--fs-small); color: var(--muted); margin-top: 2px; }
+.trust { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); }
+.trust li { display: inline-flex; align-items: center; gap: 7px; }
+.trust li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+/* statement under the first screen: centred, small tag on top, the first part bright and the rest muted */
+.statementWrap { display: grid; justify-items: center; gap: 22px; padding: clamp(72px, 9vw, 150px) var(--gap) clamp(48px, 6vw, 96px); text-align: center; }
+.statement { max-width: 28ch; font-size: clamp(26px, 3.2vw, 50px); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; color: #f2f2f0; text-wrap: balance; }
+.muted { color: inherit; }
+.statement .accent { color: var(--lime); }
+.statement [data-word] { display: inline-block; }
+
+/* photo strip: five photos edge to edge, the middle one larger */
+.strip { display: grid; grid-template-columns: 1fr 1fr 1.45fr 1fr 1fr; gap: clamp(8px, 1vw, 14px); align-items: center; }
+.stripItem { position: relative; aspect-ratio: 4 / 3.3; overflow: hidden; border-radius: var(--radius-m); }
+.stripItem img { object-fit: cover; transition: transform 1.1s var(--ease); }
+.stripItem:hover img { transform: scale(1.04); }
+.stripMain { aspect-ratio: 4 / 3.5; z-index: 1; }
+.strip li:first-child { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.strip li:last-child { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+
+/* short text under the middle photo */
+.about { display: grid; grid-template-columns: 1fr 1fr 1.45fr 1fr 1fr; gap: clamp(8px, 1vw, 14px); margin-top: clamp(28px, 3vw, 44px); }
+.aboutTitle, .aboutText { grid-column: 3 / span 2; max-width: 30rem; }
+.aboutTitle { font-size: var(--fs-h3); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
+.aboutTitle em { font-style: normal; color: var(--lime); }
+.aboutText { margin-top: 14px; font-size: var(--fs-body); line-height: 1.55; color: rgba(255, 255, 255, .62); }
+
+@media (max-width: 767px) {
+  .strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-inline: var(--gap); }
+  .strip::-webkit-scrollbar { display: none; }
+  .stripItem { flex: none; width: 46vw; scroll-snap-align: center; border-radius: var(--radius-m) !important; }
+  .stripMain { width: 70vw; order: -1; }
+  .about { display: block; padding: 0 var(--gap); }
+}
+.nowrap { white-space: nowrap; }

@@ -11,9 +11,10 @@ export function Ready() {
     <section className={`section ${styles.ready}`} aria-labelledby="ready-title">
       <div className="container">
         <div className={`section-head center ${styles.head}`} data-reveal>
+          <span className="label">{READY.label}</span>
           <h2 id="ready-title" className="display h2"><Rich text={READY.title} /></h2>
           <p className={`lede ${styles.lede}`}><Rich text={READY.lede} /></p>
-          <a href="#join" className="btn dark">{READY.cta}</a>
+          <a href="#join" className="btn">{READY.cta}</a>
         </div>
       </div>
       <div className={styles.table}>

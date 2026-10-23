@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
+import { ABOUT_PAGE as A, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Wheel } from "@/components/ui/Wheel";
@@ -26,13 +26,12 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
-  const lifeArea = APP.screens.find((s) => s.label === "Life Area") ?? APP.screens[0];
   const photo = TRUST.founder.media;
   return (
     <main>
       <Breadcrumbs name="About" path="/about" />
       {/* 1. Hero: what Elegix is and the mission */}
-      <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede} screen={lifeArea.media}>
+      <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede}>
         <a href="#join" className="btn lime">{A.hero.cta}</a>
       </PhotoHero>
       {/* 2. The 6 areas */}
@@ -70,7 +69,7 @@ export default function About() {
           <ul className={styles.audience}>
             {A.audience.items.map((a, i) => (
               <li key={a.title} className={styles.audienceCard} data-reveal>
-                <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
+                <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
                 <h3>{a.title}</h3>
                 <p>{a.text}</p>
               </li>
