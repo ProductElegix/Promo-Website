@@ -102,6 +102,18 @@ export const OPENING = {
   captions: [["Life balance tracker.", "6 areas, one score."], ["Goals, habits and tasks.", "iOS & Android."]],
   // statement under the first screen: the first part bright, the rest muted
   statement: { label: "What is Elegix", lead: "Elegix tracks your goals, habits and tasks across 6 life areas", rest: " and shows which part of your life you're neglecting, before it turns into burnout." },
+  // photo strip under the statement (the middle one is larger), then a short text under the middle photo
+  strip: [
+    { src: "/images/ready/hobby.jpg", alt: "Hands playing a guitar" },
+    { src: "/images/area-health.jpg", alt: "A man running on a track at sunrise" },
+    { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen" },
+    { src: "/images/area-growth.jpg", alt: "A stack of books on a green armchair" },
+    { src: "/images/ready/career.jpg", alt: "A laptop on a desk" },
+  ],
+  about: {
+    title: "Not another planner. A *mirror* for your whole life.",
+    text: "Most apps reward you for doing more. Elegix shows what doing more is costing you: a 1-minute weekly check-in, one Life Balance score and one small next step for the area that needs you most.",
+  },
   card: { title: "Ready to get started?", text: "Join the early access list. We'll email you once, when your spot opens." },
 };
 

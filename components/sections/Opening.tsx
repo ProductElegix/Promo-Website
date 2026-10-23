@@ -37,6 +37,18 @@ export function Opening() {
         <span className="label" data-reveal>{OPENING.statement.label}</span>
         <p className={styles.statement} data-reveal>{OPENING.statement.lead}<span>{OPENING.statement.rest}</span></p>
       </div>
+
+      <ul className={styles.strip}>
+        {OPENING.strip.map((p, i) => (
+          <li key={p.src} className={`${styles.stripItem} ${i === 2 ? styles.stripMain : ""}`} data-reveal>
+            <Image src={p.src} alt={p.alt} fill sizes={i === 2 ? "(max-width: 767px) 70vw, 30vw" : "(max-width: 767px) 50vw, 20vw"} />
+          </li>
+        ))}
+      </ul>
+      <div className={styles.about} data-reveal>
+        <h2 className={styles.aboutTitle}><Rich text={OPENING.about.title} /></h2>
+        <p className={styles.aboutText}>{OPENING.about.text}</p>
+      </div>
     </section>
   );
 }
