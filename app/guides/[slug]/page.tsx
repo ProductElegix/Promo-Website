@@ -16,6 +16,6 @@ export default async function GuidePage({ params }: Props) {
   const g = guideBySlug((await params).slug);
   if (!g) notFound();
   const related = g.related.map(guideBySlug).filter((r) => r !== undefined)
-    .map((r) => ({ href: `/guides/${r.slug}`, label: `${r.minutes} min read`, title: r.title }));
+    .map((r) => ({ href: `/guides/${r.slug}`, label: `${r.minutes} min read`, title: r.title, media: r.media }));
   return <Article guide={g} path={`/guides/${g.slug}`} parent={{ name: "Guides", path: "/guides" }} related={related} />;
 }

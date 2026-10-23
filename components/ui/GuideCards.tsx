@@ -7,9 +7,9 @@ import styles from "@/app/guides/hub.module.css";
 export type Card = { href: string; title: string; text: string; media: MediaSlot; meta: string; area?: AreaKey };
 
 /** A grid of photo cards linking to guides or life area pages. */
-export function GuideCards({ cards }: { cards: Card[] }) {
+export function GuideCards({ cards, two = false }: { cards: Card[]; two?: boolean }) {
   return (
-    <ul className={styles.grid}>
+    <ul className={`${styles.grid} ${two ? styles.two : ""}`}>
       {cards.map((c) => (
         <li key={c.href}>
           <Link href={c.href} className={styles.card}>

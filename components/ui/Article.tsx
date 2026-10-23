@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { TRUST, type AreaKey } from "@/lib/content";
+import Image from "next/image";
+import { TRUST, type AreaKey, type MediaSlot } from "@/lib/content";
 import type { Block, Guide } from "@/lib/guides";
 import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
@@ -16,7 +17,7 @@ type Props = {
   guide: Omit<Guide, "related"> & { area?: AreaKey };
   path: string;
   parent: Parent;
-  related: { href: string; label: string; title: string }[];
+  related: { href: string; label: string; title: string; media?: MediaSlot }[];
 };
 
 /** Metadata for a guide or life area page: its own title, canonical URL and article share card. */
@@ -51,6 +52,9 @@ function BlockView({ b }: { b: Block }) {
   if ("tip" in b) return <p className={styles.tip}><Inline text={b.tip} /></p>;
   return <p><Inline text={b.p} /></p>;
 }
+
+/** Anchor id for a section heading, e.g. "How to read your wheel" → "how-to-read-your-wheel". */
+const anchor = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const date = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
@@ -90,7 +94,8 @@ export function Article({ guide: g, path, parent, related }: Props) {
           <h1 id="article-title" className={`display ${styles.title}`}>{g.title}</h1>
           <p className={styles.lede}>{g.lede}</p>
           <p className={styles.meta}>
-            By <Link href="/about#story">{TRUST.founder.name}</Link>, founder of Elegix · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read
+            {TRUST.founder.media.src && <Image src={TRUST.founder.media.src} alt="" width={32} height={32} className={styles.metaPhoto} />}
+            <span>By <Link href="/about#story">{TRUST.founder.name}</Link>, founder of Elegix · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
           </p>
         </header>
 
@@ -99,26 +104,43 @@ export function Article({ guide: g, path, parent, related }: Props) {
         </div>
 
         <div className={`container ${styles.body}`}>
+          <nav className={styles.toc} aria-labelledby="toc-title">
+            <p id="toc-title" className={styles.tocTitle}>In this guide</p>
+            <ol>
+              {g.sections.map((s) => <li key={s.h2}><a href={`#${anchor(s.h2)}`}>{s.h2}</a></li>)}
+              {g.faq && <li><a href="#questions">Questions people ask</a></li>}
+            </ol>
+          </nav>
           {g.sections.map((s) => (
-            <section key={s.h2}>
+            <section key={s.h2} id={anchor(s.h2)}>
               <h2>{s.h2}</h2>
               {s.blocks.map((b, i) => <BlockView key={i} b={b} />)}
             </section>
           ))}
 
           {g.faq && (
-            <section>
+            <section id="questions">
               <h2>Questions people ask</h2>
               <div className={styles.faq}>
                 {g.faq.map((f) => (
                   <details key={f.q}>
-                    <summary>{f.q}</summary>
+                    <summary>{f.q}<span className={styles.plus} aria-hidden="true" /></summary>
                     <p>{f.a}</p>
                   </details>
                 ))}
               </div>
             </section>
           )}
+
+          <aside className={styles.author} aria-label="About the author">
+            {TRUST.founder.media.src && <div className={styles.authorPhoto}><Image src={TRUST.founder.media.src} alt={TRUST.founder.media.alt} fill sizes="96px" /></div>}
+            <div>
+              <p className={styles.authorName}>{TRUST.founder.name}</p>
+              <p className={styles.authorRole}>Founder of Elegix</p>
+              <p className={styles.authorBio}>{TRUST.founder.quote}</p>
+              <Link href={TRUST.founder.storyLink.href} className={styles.authorLink}>{TRUST.founder.storyLink.label} →</Link>
+            </div>
+          </aside>
         </div>
       </article>
 
@@ -139,7 +161,10 @@ export function Article({ guide: g, path, parent, related }: Props) {
             <ul className={styles.related}>
               {related.map((r) => (
                 <li key={r.href}>
-                  <Link href={r.href}><span className={styles.relatedLabel}>{r.label}</span><span>{r.title}</span></Link>
+                  <Link href={r.href}>
+                    {r.media?.src && <span className={styles.relatedPhoto}><Image src={r.media.src} alt="" fill sizes="(max-width: 860px) 100vw, 33vw" /></span>}
+                    <span className={styles.relatedText}><span className={styles.relatedLabel}>{r.label}</span><span>{r.title}</span></span>
+                  </Link>
                 </li>
               ))}
             </ul>
