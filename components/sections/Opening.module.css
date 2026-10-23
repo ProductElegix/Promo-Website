@@ -1,20 +1,18 @@
 .opening { --gap: var(--gutter); background: #000; color: #fff; padding-bottom: var(--section-y); }
 
-/* headline: huge and tight, filling the width of the page card */
-.titleWrap { padding: clamp(120px, 11vw, 160px) var(--gap) 0; }
+/* first screen: full-bleed photo with a dark gradient, headline and captions sit at the bottom */
+.stage { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; min-height: max(640px, calc(100svh - 2 * var(--frame))); overflow: hidden; }
+.bg { position: absolute; inset: -8% 0; z-index: -2; will-change: transform; }
+.bgImage { object-fit: cover; object-position: 60% 40%; }
+.stage::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, .45) 0%, rgba(0, 0, 0, .15) 35%, rgba(0, 0, 0, .55) 75%, #000 100%); }
+.titleWrap { padding: 140px var(--gap) 0; }
 .title { font-size: clamp(56px, 10.5vw, 200px); line-height: 0.88; letter-spacing: -0.055em; max-width: 12ch; }
 
 .captions {
   display: grid; grid-template-columns: 220px 1fr auto; gap: 24px; align-items: end;
-  padding: clamp(48px, 7vw, 120px) var(--gap) 18px; color: rgba(255, 255, 255, 0.85);
+  padding: clamp(32px, 4vw, 64px) var(--gap) clamp(20px, 2.4vw, 32px); color: rgba(255, 255, 255, 0.85);
 }
 .down { text-decoration: none; font-size: 14px; }
-
-/* cinematic photo band */
-.band { position: relative; aspect-ratio: 21 / 9; max-height: 78vh; width: calc(100% - 2 * var(--gap)); margin-inline: var(--gap); border-radius: var(--radius-l); overflow: hidden; background: #111; }
-.bandMedia { position: absolute; inset: -8% 0; will-change: transform; }
-.bandImage { object-fit: cover; object-position: 60% 45%; filter: saturate(0.9) brightness(0.92); transition: transform 1.6s var(--ease); }
-.band:hover .bandImage { transform: scale(1.03); }
 
 /* statement: the page h1 */
 .statementWrap { padding: clamp(56px, 7vw, 110px) var(--gap) clamp(48px, 6vw, 96px); }
@@ -32,7 +30,6 @@
 
 @media (max-width: 767px) {
   .captions { grid-template-columns: 1fr 1fr auto; gap: 14px; }
-  .band { aspect-ratio: 4 / 5; }
   .statementWrap p { text-indent: 18%; }
   .facts { grid-template-columns: 1fr; }
 }
