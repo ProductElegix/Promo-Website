@@ -1,23 +1,30 @@
-.footer { margin: 0 var(--frame) var(--frame); padding: clamp(56px, 8vw, 120px) var(--gutter) var(--gutter); border-radius: var(--radius-page); background: #000; color: #fff; overflow: hidden; }
-.top { display: grid; grid-template-columns: 2fr repeat(5, 1fr); gap: 32px; padding-bottom: clamp(48px, 7vw, 96px); }
-.brand { display: grid; gap: 18px; align-content: start; max-width: 26rem; }
-.lead { font-size: clamp(22px, 2vw, 30px); line-height: 1.1; letter-spacing: -0.03em; max-width: 22ch; }
-.about { font-size: 0.92rem; color: rgba(255, 255, 255, .6); }
-.signup { margin-top: 8px; }
-.col h2 { margin-bottom: 18px; color: var(--muted); font-weight: 500; }
-.col li + li { margin-top: 8px; }
-.col a { text-decoration: none; transition: opacity .2s; }
-.col a:hover { opacity: .6; }
+.footer { margin: 0 var(--frame) var(--frame); padding: clamp(28px, 3vw, 44px) var(--gutter) 0; border-radius: var(--radius-page); background: #000; color: #fff; overflow: hidden; }
+
+/* four small uppercase columns, like a colophon */
+.top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px; }
+.head { margin-bottom: 10px; font: inherit; color: rgba(255, 255, 255, .45); }
+.about { display: grid; gap: 10px; align-content: start; max-width: 22rem; }
+.about p { margin: 0; }
+.email { justify-self: start; text-decoration: underline; text-underline-offset: 3px; }
+.top ul { display: grid; gap: 4px; }
+.top a { text-decoration: none; transition: color .2s; }
+.top a:hover { color: var(--lime); }
+.legal { text-align: right; }
+
+/* the logo mark sitting in the empty space above the wordmark */
+.mark { display: flex; justify-content: center; padding-top: clamp(120px, 16vw, 260px); color: #fff; line-height: 0; }
+.mark svg { width: 22px; height: auto; }
+
+/* giant wordmark with a faded echo of its top half above it */
 .wordmark {
-  display: block; margin: 0 -0.04em; font-size: clamp(96px, 33.5vw, 900px); font-weight: 500; line-height: 0.74;
-  letter-spacing: -0.075em; text-transform: uppercase; white-space: nowrap; user-select: none;
+  display: grid; margin: clamp(16px, 2vw, 32px) -0.03em 0; font-size: clamp(96px, 32.5vw, 880px); font-weight: 500;
+  line-height: .8; letter-spacing: -0.06em; text-transform: uppercase; white-space: nowrap; user-select: none; text-align: center;
 }
-.base { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-top: clamp(24px, 3vw, 40px); padding-top: 16px; border-top: 1px solid var(--line-dark); color: var(--muted); }
-.base a { text-decoration: none; }
-.base a:hover { color: #fff; }
-.baseLinks { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-.logo { display: inline-flex; color: #fff; }
-.logo svg { height: 16px; width: auto; }
-@media (max-width: 1024px) { .top { grid-template-columns: repeat(3, 1fr); } .brand { grid-column: 1 / -1; max-width: none; } }
-@media (max-width: 600px) { .top { grid-template-columns: 1fr 1fr; } .base { flex-direction: column; align-items: flex-start; } }
-.lead em { font-style: normal; color: var(--lime); }
+.echo { display: block; height: .38em; overflow: hidden; color: rgba(255, 255, 255, .38); }
+.solid { display: block; margin-top: -.12em; padding-bottom: .02em; }
+
+@media (max-width: 860px) {
+  .top { grid-template-columns: 1fr 1fr; row-gap: 32px; }
+  .about { grid-column: 1 / -1; max-width: none; }
+  .legal { text-align: left; }
+}

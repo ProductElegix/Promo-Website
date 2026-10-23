@@ -1,38 +1,40 @@
-import Link from "next/link";
 import { FOOTER } from "@/lib/content";
-import { Logo } from "@/components/ui/Logo";
+import { LogoMark } from "@/components/ui/Logo";
 import { NavLink } from "@/components/ui/NavLink";
-import { Rich } from "@/components/ui/Rich";
-import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Footer.module.css";
 
+/** Black footer: four small caption columns, the logo mark, and a giant wordmark with a faded echo above it. */
 export function Footer() {
   return (
     <footer className={`on-dark ${styles.footer}`} data-theme="dark">
-      <div className={styles.top}>
-        <div className={styles.brand}>
-          <p className={styles.lead}><Rich text={FOOTER.slogan} /></p>
-          <p className={styles.about}>{FOOTER.about}</p>
-          <div className={styles.signup}><WaitlistForm source="footer" variant="underline" placeholder="Your email" buttonLabel="Join" /></div>
+      <div className={`${styles.top} caption`}>
+        <div className={styles.about}>
+          <h2 className={styles.head}>{FOOTER.caption}</h2>
+          <p>{FOOTER.about}</p>
+          <a href={`mailto:${FOOTER.email}`} className={styles.email}>Email us</a>
         </div>
-        {FOOTER.columns.map((c) => (
-          <nav key={c.title} className={styles.col} aria-label={c.title}>
-            <h2 className="caption">{c.title}</h2>
-            <ul className="caption">{c.links.map((l) => <li key={l.label}>{l.href.startsWith("/") ? <NavLink href={l.href}>{l.label}</NavLink> : <a href={l.href}>{l.label}</a>}</li>)}</ul>
-          </nav>
-        ))}
-        <nav className={styles.col} aria-label="Social">
-          <h2 className="caption">Follow</h2>
-          <ul className="caption">{FOOTER.socials.map((s) => <li key={s.label}><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
+        <nav aria-label="Social">
+          <h2 className={styles.head}>Follow</h2>
+          <ul>{FOOTER.socials.map((s) => <li key={s.label}><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
         </nav>
+        <nav aria-label="Footer">
+          <h2 className={styles.head}>Navigation</h2>
+          <ul>{FOOTER.nav.map((l) => <li key={l.href}><NavLink href={l.href}>{l.label}</NavLink></li>)}</ul>
+        </nav>
+        <div className={styles.legal}>
+          <h2 className={styles.head}>© {new Date().getFullYear()} Elegix. All rights reserved</h2>
+          <ul>
+            {FOOTER.legal.map((l) => <li key={l.href}><NavLink href={l.href}>{l.label}</NavLink></li>)}
+            <li><a href="#top">Back to top</a></li>
+          </ul>
+        </div>
       </div>
-      <div className={styles.wordmark} aria-hidden="true">{FOOTER.wordmark}</div>
-      <div className={`${styles.base} caption`}>
-        <span>© {new Date().getFullYear()} Elegix. All rights reserved.</span>
-        <span className={styles.baseLinks}>
-          <Link href="/" aria-label="Elegix home" className={styles.logo}><Logo /></Link>
-          <a href="https://unsplash.com" rel="noopener">Photos: Unsplash</a><a href="mailto:hello@elegix.net">hello@elegix.net</a>
-        </span>
+
+      <div className={styles.mark} aria-hidden="true"><LogoMark /></div>
+
+      <div className={styles.wordmark} aria-hidden="true">
+        <span className={styles.echo}>{FOOTER.wordmark}</span>
+        <span className={styles.solid}>{FOOTER.wordmark}</span>
       </div>
     </footer>
   );
