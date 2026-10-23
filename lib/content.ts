@@ -483,20 +483,57 @@ export const READY = {
 /** Careers (/careers): honest for an early team. No listings until there are real roles. */
 export const CAREERS = {
   meta: {
-    title: "Careers",
-    description: "Work on Elegix, the life balance tracker. There are no open roles right now, but we'd like to hear from people who care about this problem.",
+    title: "Careers at Elegix: work on a life balance app",
+    description: "Careers at Elegix, the life balance tracker for iOS and Android. A small, early-stage team with a 4-day week, building in public. No open roles right now, but we'd like to hear from people who care about burnout and balance.",
   },
   label: "Careers",
+  h1Prefix: "Careers at Elegix",
   title: "Help build a *calmer* way to live",
   lede: "Elegix helps people see all 6 areas of their life and grow without burning out. We're a small, early-stage team, building it in public.",
+  media: { src: "/images/area-career.jpg", alt: "A woman working on a laptop at a wooden table", brief: "Careers hero", ratio: "3 / 2" } as MediaSlot,
+  cta: "Introduce yourself",
+  statement: {
+    label: "Why we build it",
+    text: "Most apps reward people for doing more. We're building one that shows what doing more is *costing* them, and helps them *grow* without *burning out*.",
+    strip: [
+      { src: "/images/ready/growth.jpg", alt: "A handwritten notebook page with a pen" },
+      { src: "/images/ready/career.jpg", alt: "A laptop on a desk next to a small model motorbike" },
+      { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen" },
+      { src: "/images/ready/people.jpg", alt: "Two cups of coffee on a wooden tray" },
+      { src: "/images/ready/health.jpg", alt: "A glass water bottle on a table by an open window" },
+    ],
+  },
   how: {
     label: "Our culture",
     title: "What it's like to build *Elegix*",
+    lede: "We're building a product against burnout, so the way we work has to match it.",
     items: [
-      { title: "Calm over hustle", text: "We're building a product against burnout, so we try not to run on it ourselves: clear priorities and one next step." },
-      { title: "Built in public", text: "We share progress and decisions openly, with our early members and on our socials." },
-      { title: "Small team, real ownership", text: "Everyone works close to the product and to the people who use it." },
-      { title: "A 4-day week", text: "We work four days a week, with Wednesday off. Nobody goes more than two days without a break." },
+      { title: "Calm over hustle", text: "We're building a product against burnout, so we try not to run on it ourselves: clear priorities and one next step.", src: "/images/ready/meaning.jpg", alt: "Two candles glowing on a wooden table" },
+      { title: "Built in public", text: "We share progress and decisions openly, with our early members and on our socials.", src: "/images/how-next.jpg", alt: "A notebook, pen and laptop on a wooden desk" },
+      { title: "Small team, real ownership", text: "Everyone works close to the product and to the people who use it.", src: "/images/ready/people.jpg", alt: "Two cups of coffee on a wooden tray" },
+      { title: "A 4-day week", text: "We work four days a week, with Wednesday off. Nobody goes more than two days without a break.", src: "/images/how-score.jpg", alt: "A person walking along a waterfront path at sunset" },
+    ],
+  },
+  product: {
+    label: "What you'd work on",
+    title: "A life balance tracker for *iOS and Android*",
+    text: "Elegix links goals, habits and tasks to 6 life areas: Health, Relationship, Spirituality, Leisure, Personal Growth and Finance & Career. One Life Balance score shows which part of life needs attention next.",
+    points: [
+      "One Life Balance score and 6 area scores",
+      "Goals, habits and tasks linked to an area and a “why”",
+      "A 1-minute weekly check-in and a 10-minute monthly review",
+      "Free to use, with an optional Premium plan",
+    ],
+    link: { href: "/about", label: "More about Elegix" },
+  },
+  faq: {
+    title: "Questions about *working* with us",
+    items: [
+      { q: "Is Elegix hiring right now?", a: "Not for specific roles yet. We're a small, early-stage team. When a role opens, we'll post it on this page and on our socials first." },
+      { q: "How can I get in touch about a job?", a: "Email hello@elegix.net with the subject “Careers”. Tell us what you do, what you'd like to work on and why this problem matters to you. A link to your work helps." },
+      { q: "What does the Elegix team work on?", a: "A life balance tracker for iOS and Android. It links goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next." },
+      { q: "What is the work week like?", a: "We work four days a week, with Wednesday off, so nobody goes more than two days without a break. We try to keep clear priorities and one next step, the same way the app does." },
+      { q: "Who is on the team?", a: "Edward Korytskyi (founder), Alina Krupa (CMO) and Yevhenii Bohomol. You can meet the team on the About page." },
     ],
   },
   open: {
@@ -508,3 +545,4 @@ export const CAREERS = {
     team: { href: "/about#team", label: "Meet the team" },
   },
 };
+
