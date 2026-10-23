@@ -34,7 +34,7 @@
 .tick { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--mint); color: var(--green); font-size: 0.75rem; font-weight: 500; }
 .modeDark .tick { background: rgba(213, 244, 94, .2); color: var(--lime); }
 
-.ideaSection { background: var(--paper); }
+.ideaSection { background: transparent; }
 .idea { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
 .ideaVisual { display: grid; justify-items: center; gap: 24px; }
 .wheel { padding: 18px; border-radius: 50%; background: var(--cream); display: grid; }
