@@ -256,7 +256,9 @@ export const PRINCIPLES: { title: string; text: string; dark?: boolean }[] = [
 // 10
 export const JOIN = {
   eyebrow: "Early access",
-  title: "Join before launch. Get *founding member* perks.",
+  title: "Join before *launch*.",
+  // one plain line under the title instead of a perks list
+  sub: "First access and a founding member price, locked for life.",
   perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "Behind-the-scenes updates as it's built"],
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
