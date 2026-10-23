@@ -1,6 +1,7 @@
 import { Opening } from "@/components/sections/Opening";
 import { FactsTicker } from "@/components/sections/FactsTicker";
 import { Problem } from "@/components/sections/Problem";
+import { Orbit } from "@/components/sections/Orbit";
 import { Compare } from "@/components/sections/Compare";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { AreasList } from "@/components/sections/AreasList";
@@ -25,6 +26,7 @@ export default function Home() {
       <Opening />
       <FactsTicker />
       <Problem />
+      <Orbit />
       <Compare />
       <HowItWorks />
       <AreasList />

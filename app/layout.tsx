@@ -64,7 +64,7 @@ export const viewport: Viewport = { themeColor: "#2a2a2a", width: "device-width"
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" data-scroll-behavior="smooth" className={sans.variable}>
-      <body id="top">
+      <body>
         <JsonLd data={ORGANIZATION} />
         <Attribution />
         <Motion />

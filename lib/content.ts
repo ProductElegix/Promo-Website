@@ -197,6 +197,29 @@ export const AREAS_SECTION = {
   } as Record<AreaKey, MediaSlot>,
 };
 
+/**
+ * "One picture" block (after Problem): a big ring with the logo mark in the middle and round photos of
+ * every life area scattered around it. x/y are the circle centre in % of the stage, size in % of its width.
+ */
+export const ORBIT = {
+  title: "Elegix brings work, health, people and everything in between into one picture",
+  caption: "Six life areas, one balance score. See where your energy goes, and what is quietly slipping.",
+  photos: [
+    { area: "health", src: "/images/area-health.jpg", x: 27, y: 30, size: 7.6 },
+    { area: "people", src: "/images/area-people.jpg", x: 22, y: 52, size: 7.6 },
+    { area: "hobby", src: "/images/ready/hobby.jpg", x: 22, y: 76, size: 7.6 },
+    { area: "growth", src: "/images/area-growth.jpg", x: 37, y: 86, size: 7.6 },
+    { area: "meaning", src: "/images/ready/meaning.jpg", x: 50, y: 98, size: 7.6 },
+    { area: "career", src: "/images/area-career.jpg", x: 63, y: 12, size: 7.6 },
+    { area: "people", src: "/images/ready/people.jpg", x: 75, y: 22, size: 7.6 },
+    { area: "hobby", src: "/images/area-hobby.jpg", x: 72, y: 46, size: 7.6 },
+    { area: "hobby", src: "/images/area-home.jpg", x: 66, y: 66, size: 7.6 },
+    { area: "meaning", src: "/images/area-meaning.jpg", x: 71, y: 94, size: 7.6 },
+    { area: "health", src: "/images/ready/health.jpg", x: 34, y: 14, size: 6 },
+    { area: "growth", src: "/images/ready/growth.jpg", x: 84, y: 70, size: 6 },
+  ] as { area: AreaKey; src: string; x: number; y: number; size: number }[],
+};
+
 /** Real app screenshots: the hero phone, the How it works cards, the About hero and Ready. */
 export const APP = {
   screens: [
