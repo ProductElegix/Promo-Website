@@ -1,6 +1,11 @@
-.card { background: var(--paper); border-radius: 14px; padding: clamp(24px, 4vw, 56px); display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 5vw, 72px); }
-.intro { display: grid; gap: 18px; align-content: start; justify-items: start; }
-.wheel { margin-top: 12px; padding: 14px; border-radius: 50%; background: var(--cream); display: grid; }
+/* header across the top (title left, lede right), then the live wheel and the sliders side by side */
+.card { background: var(--paper); border-radius: var(--radius-l); padding: clamp(24px, 4vw, 56px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 40px); }
+.intro { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: end; margin-bottom: clamp(8px, 2vw, 24px); }
+.titleCol { display: grid; gap: 18px; justify-items: start; }
+.titleCol :global(.h2) { font-size: clamp(40px, 5.4vw, 92px); }
+.wheelPanel { display: grid; place-items: center; padding: clamp(24px, 3vw, 48px); border-radius: var(--radius-m); background: var(--cream); }
+.wheel { width: min(100%, 340px); display: grid; }
+.wheel svg { width: 100%; height: auto; }
 .form { display: grid; gap: 16px; align-content: start; }
 .sliders { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
 .sliders legend { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; padding: 0; }
@@ -33,7 +38,8 @@
 .done { font-size: 0.92rem; color: rgba(255,255,255,.85); }
 @media (max-width: 960px) {
   .card { grid-template-columns: minmax(0, 1fr); }
-  .wheel { display: none; }
+  .intro { grid-template-columns: 1fr; }
+  .wheelPanel { display: none; }
 }
 @media (max-width: 480px) {
   .slider { grid-template-columns: 1fr 1.6rem; gap: 6px 10px; }

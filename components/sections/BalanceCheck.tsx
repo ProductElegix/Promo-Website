@@ -56,10 +56,15 @@ export function BalanceCheck() {
       <div className="container">
         <div className={styles.card} data-reveal>
           <div className={styles.intro}>
-            <span className="label">{CHECK.eyebrow}</span>
-            <h2 id="check-title" className="display h2"><Rich text={CHECK.title} /></h2>
+            <div className={styles.titleCol}>
+              <span className="label">{CHECK.eyebrow}</span>
+              <h2 id="check-title" className="display h2"><Rich text={CHECK.title} /></h2>
+            </div>
             <p className="lede">{CHECK.text}</p>
-            <div className={styles.wheel}><Wheel scores={AREA_ORDER.map((a) => scores[a])} size={180} label="Your ratings as a wheel of life" /></div>
+          </div>
+          {/* live preview: the wheel redraws as the sliders move */}
+          <div className={styles.wheelPanel}>
+            <div className={styles.wheel}><Wheel scores={AREA_ORDER.map((a) => scores[a])} size={300} label="Your ratings as a wheel of life" /></div>
           </div>
 
           {result ? (
