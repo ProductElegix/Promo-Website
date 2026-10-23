@@ -14,9 +14,12 @@ export function Problem() {
           <p className={styles.text}><Rich text={PROBLEM.text} /></p>
         </div>
         <ul className={styles.cards}>
-          {PROBLEM.cards.map((c) => (
+          {PROBLEM.cards.map((c, i) => (
             <li key={c.text} className={styles.card} style={areaVars(c.area)} data-reveal>
-              <span className={styles.icon} aria-hidden="true"><AreaIcon area={c.area} /></span>
+              <div className={styles.top}>
+                <span className="num">{String(i + 1).padStart(2, "0")}</span>
+                <span className={styles.icon} aria-hidden="true"><AreaIcon area={c.area} /></span>
+              </div>
               <p>{c.text}</p>
             </li>
           ))}

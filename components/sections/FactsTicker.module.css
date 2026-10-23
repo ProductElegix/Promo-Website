@@ -1,0 +1,10 @@
+.ticker { overflow: hidden; margin: 8px; border-radius: var(--radius-l); padding: clamp(28px, 3.5vw, 48px) 0; background: var(--black); color: #f1f1ec; }
+.track { display: flex; width: max-content; animation: ticker 38s linear infinite; }
+.ticker:hover .track { animation-play-state: paused; }
+.row { display: flex; flex-shrink: 0; }
+.item { display: flex; align-items: baseline; gap: 14px; padding-right: clamp(24px, 3vw, 48px); white-space: nowrap; }
+.item b { font-size: clamp(40px, 5.2vw, 92px); font-weight: 500; line-height: 0.9; letter-spacing: -0.05em; }
+.item span { color: #a9b0ab; }
+.item i { font-style: normal; font-size: clamp(36px, 4.4vw, 76px); font-weight: 300; color: var(--lime); padding-left: clamp(24px, 3vw, 48px); }
+@keyframes ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } }

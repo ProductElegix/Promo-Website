@@ -65,7 +65,7 @@ export function HowItWorks({ learnMore = true, chips = true }: { learnMore?: boo
             return (
               <li key={c.key} className={styles.card} data-reveal
                 style={{ ["--a" as string]: `var(--${a}-t)`, ["--b" as string]: `var(--${b}-t)` }}>
-                <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
+                <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
                 <h3 className={styles.title}>{c.title}</h3>
                 <p className={styles.text}>{c.text}</p>
                 <div className={styles.device}>

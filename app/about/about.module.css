@@ -21,7 +21,7 @@
 .audienceCard { border-radius: 20px; padding: 26px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); display: grid; gap: 12px; align-content: start; }
 .audienceCard h3 { font-size: 1.3rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 18px; }
 .audienceCard p { color: #a9b0ab; }
-.n { font-size: 0.8rem; color: var(--lime); }
+.n { justify-self: start; background: var(--lime); color: var(--black); }
 
 .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .mode { background: var(--paper); border-radius: var(--radius-l); padding: clamp(24px, 3vw, 36px); display: grid; gap: 24px; align-content: start; }

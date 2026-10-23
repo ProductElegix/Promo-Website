@@ -1,4 +1,4 @@
-.footer { background: var(--black); color: #d8d8d2; padding-top: clamp(64px, 8vw, 96px); overflow: hidden; }
+.footer { background: var(--black); color: #d8d8d2; margin: 0 var(--frame) var(--frame); border-radius: var(--radius-page); padding-top: clamp(64px, 8vw, 96px); overflow: hidden; }
 .slogan { font-size: clamp(2.2rem, 5vw, 4.2rem); color: #f1f1ec; padding-bottom: clamp(48px, 6vw, 72px); }
 .slogan em { color: var(--lime); }
 .grid { display: grid; grid-template-columns: 2fr repeat(5, 1fr); gap: 40px; padding-bottom: 56px; }

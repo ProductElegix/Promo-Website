@@ -1,12 +1,17 @@
 .head { display: grid; gap: 22px; justify-items: start; max-width: 56rem; margin-bottom: clamp(40px, 6vw, 64px); }
 .head :global(.h2) em { color: var(--green); }
 .text { font-size: clamp(1.2rem, 2.1vw, 1.65rem); line-height: 1.5; letter-spacing: -0.02em; color: var(--muted); max-width: 46rem; }
-.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.card { background: var(--paper); border-radius: 20px; padding: 22px; min-height: 180px; display: grid; align-content: space-between; gap: 24px; transition: transform .2s ease, box-shadow .2s ease; }
-.card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -28px rgba(20, 26, 23, .45); }
-.card p { font-size: 1.15rem; font-weight: 500; line-height: 1.3; letter-spacing: -0.02em; }
-.icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--t); color: var(--s); }
-.icon svg { width: 16px; height: 16px; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.card { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 220px; padding: 16px 18px 20px 0; }
+.card + .card { padding-left: 18px; border-left: 1px solid var(--line); }
+.top { display: flex; justify-content: space-between; align-items: center; }
+.card p { font-size: clamp(1.15rem, 1.7vw, 1.5rem); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
+.icon { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: var(--t); color: var(--s); }
+.icon svg { width: 15px; height: 15px; }
 .closing { margin-top: clamp(40px, 5vw, 64px); max-width: 40rem; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.5; color: var(--ink-2); padding-left: 18px; border-left: 2px solid var(--green); }
-@media (max-width: 1024px) { .cards { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .card { min-height: 150px; padding: 18px; } .card p { font-size: 1rem; } }
+@media (max-width: 1024px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .card:nth-child(3) { padding-left: 0; border-left: 0; }
+  .card:nth-child(n + 3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 480px) { .card { min-height: 170px; } .card p { font-size: 1.05rem; } }

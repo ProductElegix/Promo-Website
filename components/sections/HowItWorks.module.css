@@ -1,6 +1,6 @@
 .head :global(.h2) em { color: var(--green); }
 .areas { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; }
-.n { font-size: 0.75rem; color: var(--ink-2); font-variant-numeric: tabular-nums; opacity: .7; }
+.n { align-self: flex-start; }
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .card {
   position: relative; overflow: hidden; isolation: isolate; border-radius: var(--radius-l);

@@ -96,6 +96,15 @@ export const HERO = {
   },
 };
 
+/** Facts ticker under the hero: a value and a short caption, scrolling on a dark strip. */
+export const FACTS = [
+  { value: "6", caption: "life areas" },
+  { value: "1", caption: "balance score" },
+  { value: "2 min", caption: "to set up" },
+  { value: "1 min", caption: "weekly check-in" },
+  { value: "Free", caption: "iOS & Android" },
+];
+
 // 2
 export const PROBLEM = {
   eyebrow: "Sound familiar?",

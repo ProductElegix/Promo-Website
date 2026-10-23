@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Instrument_Serif, Inter_Tight } from "next/font/google";
 import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
 import { Motion } from "@/components/ui/Motion";
@@ -15,7 +15,7 @@ import { INDEXABLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-instrument", display: "swap" });
-const sans = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -60,7 +60,7 @@ const ORGANIZATION = {
   ],
 };
 
-export const viewport: Viewport = { themeColor: "#f6f5ef", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#2a2a2a", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CloudflareAnalytics />
         <GoogleAnalytics />
         <Header />
-        {children}
+        <div className="page">{children}</div>
         <Footer />
       </body>
     </html>

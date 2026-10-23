@@ -23,7 +23,7 @@ export function Principles({ className = "" }: { className?: string }) {
       {PRINCIPLES.map((p, i) => (
         <li key={p.title} className={`${styles.principle} ${p.dark ? `on-dark ${styles.privacy}` : ""}`} data-reveal>
           {p.dark && <Lock />}
-          <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
+          <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
           <h3>{p.title}</h3>
           <p>{p.text}</p>
         </li>

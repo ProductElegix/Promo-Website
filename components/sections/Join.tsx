@@ -12,7 +12,7 @@ export function Join() {
   return (
     <section id="join" className={styles.join} aria-labelledby="join-title">
       <div className={styles.stage}>
-        <div className={styles.photo} data-parallax><Media media={JOIN.media} fill sizes="100vw" /></div>
+        <div className={styles.photo} data-parallax data-scale-in><Media media={JOIN.media} fill sizes="100vw" /></div>
         <div className={styles.panel} data-reveal>
           <span className="label">{JOIN.eyebrow}</span>
           <h2 id="join-title" className={`display ${styles.title}`}><Rich text={JOIN.title} /></h2>

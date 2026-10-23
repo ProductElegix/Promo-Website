@@ -70,7 +70,7 @@ export default function About() {
           <ul className={styles.audience}>
             {A.audience.items.map((a, i) => (
               <li key={a.title} className={styles.audienceCard} data-reveal>
-                <span className={styles.n}>{String(i + 1).padStart(2, "0")}</span>
+                <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
                 <h3>{a.title}</h3>
                 <p>{a.text}</p>
               </li>

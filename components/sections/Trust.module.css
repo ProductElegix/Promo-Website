@@ -11,7 +11,7 @@
 .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .principle { background: var(--cream-2); border-radius: 20px; padding: 22px; display: grid; gap: 8px; align-content: start; transition: background-color .2s; }
 .principle:hover { background: #e2e1da; }
-.n { font-size: 0.75rem; color: var(--green); }
+.n { justify-self: start; }
 .principle h3 { font-size: 1.1rem; font-weight: 500; letter-spacing: -0.02em; margin-top: 18px; }
 .principle p { font-size: 0.92rem; color: var(--ink-2); }
 @media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }
@@ -27,7 +27,7 @@
 /* privacy principle: dark card with a faint embossed lock */
 .privacy { position: relative; overflow: hidden; isolation: isolate; color: #f1f1ec; background: radial-gradient(70% 80% at 100% 100%, rgba(0, 154, 68, .45), transparent 70%), #121614; }
 .privacy:hover { background: radial-gradient(70% 80% at 100% 100%, rgba(0, 154, 68, .55), transparent 70%), #121614; }
-.privacy .n { color: var(--lime); }
+.privacy .n { background: var(--lime); color: var(--black); }
 .privacy p { color: #a9b0ab; }
 .lock { position: absolute; right: -40px; bottom: -70px; width: 220px; z-index: -1; }
 .lock svg { display: block; width: 100%; height: auto; overflow: visible; }
