@@ -18,7 +18,7 @@
 
 .footer { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .28); }
 .person { display: flex; align-items: center; gap: 14px; }
-.thumb { width: 44px; height: 44px; border-radius: 3px; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.05); }
+.thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.05); }
 .person div { display: grid; gap: 2px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
 .person b { font-weight: 500; }
 .person span { color: rgba(255, 255, 255, .6); }

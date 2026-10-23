@@ -11,7 +11,7 @@
 .down { text-decoration: none; font-size: 14px; }
 
 /* cinematic photo band */
-.band { position: relative; aspect-ratio: 21 / 9; max-height: 78vh; width: 100%; overflow: hidden; background: #111; }
+.band { position: relative; aspect-ratio: 21 / 9; max-height: 78vh; width: calc(100% - 2 * var(--gap)); margin-inline: var(--gap); border-radius: var(--radius-l); overflow: hidden; background: #111; }
 .bandMedia { position: absolute; inset: -8% 0; will-change: transform; }
 .bandImage { object-fit: cover; object-position: 60% 45%; filter: saturate(0.9) brightness(0.92); transition: transform 1.6s var(--ease); }
 .band:hover .bandImage { transform: scale(1.03); }
@@ -35,7 +35,7 @@
 .highlightsHead { display: flex; justify-content: space-between; padding-bottom: 14px; }
 .highlightsHead a { text-decoration: none; }
 .highlightsHead a:hover { text-decoration: underline; }
-.card { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 4px; }
+.card { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-l); }
 .cardImage { object-fit: cover; transition: transform 1.4s var(--ease); }
 .card:hover .cardImage { transform: scale(1.03); }
 .cardMark { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); color: #fff; line-height: 0; }

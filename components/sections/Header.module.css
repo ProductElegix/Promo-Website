@@ -7,7 +7,7 @@
 .row {
   --row-max: calc(100vw - var(--frame) * 2 - 20px);
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
-  max-width: var(--row-max); margin: 10px auto; padding: 10px 10px 10px 18px; border-radius: 4px;
+  max-width: var(--row-max); margin: 10px auto; padding: 10px 10px 10px 18px; border-radius: 12px;
   transition: max-width .6s var(--ease), gap .6s var(--ease), margin .6s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease), color .4s;
 }
 /* …and a compact, centred bar once the page scrolls */
@@ -32,13 +32,13 @@
 
 .actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 .cta {
-  display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px 11px; border-radius: 3px;
+  display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px 11px; border-radius: 8px;
   background: var(--green); color: #fff; text-decoration: none; transition: opacity .3s, background .4s, color .4s;
 }
 .onDark .cta, .open .cta { background: var(--lime); color: var(--black); }
 .cta:hover { opacity: .8; }
 
-.burger { display: none; align-items: center; gap: 10px; padding: 12px 14px 11px; border: 1px solid currentColor; border-radius: 3px; background: none; color: inherit; cursor: pointer; }
+.burger { display: none; align-items: center; gap: 10px; padding: 12px 14px 11px; border: 1px solid currentColor; border-radius: 8px; background: none; color: inherit; cursor: pointer; }
 .burgerIcon { position: relative; width: 14px; height: 7px; }
 .burgerIcon::before, .burgerIcon::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: currentColor; transition: transform .4s var(--ease), top .4s var(--ease); }
 .burgerIcon::before { top: 0; }

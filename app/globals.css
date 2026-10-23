@@ -37,15 +37,15 @@
 
   --font-sans: var(--font-inter), "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
 
-  --radius-s: 3px;
-  --radius-m: 6px;
-  --radius-l: 10px;
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 20px;
   --page: 1600px;
   --gutter: clamp(16px, 3vw, 48px);
   --section-y: clamp(88px, 12vw, 200px);
   --header-h: 76px;
   --frame: 8px;
-  --radius-page: 14px;
+  --radius-page: 22px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* dark grounds: flat black, used where photos would be and for dark sections */
@@ -107,7 +107,7 @@ button { font: inherit; }
 /* section tag: small black box, white uppercase text, preceded by a dot */
 .label {
   display: inline-flex; align-items: center; gap: 8px; padding: 6px 9px 5px;
-  background: var(--ink); color: var(--paper); text-decoration: none;
+  border-radius: 6px; background: var(--ink); color: var(--paper); text-decoration: none;
   font-size: 11px; font-weight: 500; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
 }
 .label::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
@@ -116,7 +116,7 @@ button { font: inherit; }
 .eyebrow, .caption { font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: 0.08em; text-transform: uppercase; }
 /* numbered square, e.g. 01 */
 .num {
-  display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 5px;
+  display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 5px; border-radius: 6px;
   background: var(--ink); color: var(--paper);
   font-size: 11px; font-weight: 500; letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
 }

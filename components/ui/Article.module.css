@@ -29,7 +29,7 @@
 .tip { background: var(--mint); border-radius: var(--radius-m); padding: 18px 20px; }
 
 .faq { display: grid; gap: 8px; }
-.faq details { background: var(--cream-2); border-radius: 8px; }
+.faq details { background: var(--cream-2); border-radius: 16px; }
 .faq summary { cursor: pointer; padding: 18px 20px; font-weight: 500; font-size: 1.02rem; }
 .faq details p { padding: 0 20px 20px; }
 
