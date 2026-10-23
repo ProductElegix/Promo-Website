@@ -30,21 +30,9 @@
 .trust li { display: inline-flex; align-items: center; gap: 7px; }
 .trust li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
 
-/* highlight card */
-.highlights { margin-top: clamp(96px, 12vw, 200px); padding: 0 var(--gap); }
-.highlightsHead { display: flex; justify-content: space-between; padding-bottom: 14px; }
-.highlightsHead a { text-decoration: none; }
-.highlightsHead a:hover { text-decoration: underline; }
-.card { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-l); }
-.cardImage { object-fit: cover; transition: transform 1.4s var(--ease); }
-.card:hover .cardImage { transform: scale(1.03); }
-.cardMark { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); color: #fff; line-height: 0; }
-.cardMark svg { width: 34px; height: auto; }
-
 @media (max-width: 767px) {
   .captions { grid-template-columns: 1fr 1fr auto; gap: 14px; }
   .band { aspect-ratio: 4 / 5; }
   .statementWrap p { text-indent: 18%; }
   .facts { grid-template-columns: 1fr; }
-  .card { aspect-ratio: 4 / 5; }
 }

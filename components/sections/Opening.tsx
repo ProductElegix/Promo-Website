@@ -1,14 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
 import { HERO, OPENING } from "@/lib/content";
-import { LogoMark } from "@/components/ui/Logo";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Opening.module.css";
 
 /**
  * Black opening of the home page (Duna style): the headline (the page's h1) at full width, caption row,
- * a cinematic photo band, the statement and the early-access form, then a highlight card.
+ * a cinematic photo band, the statement and the early-access form.
  */
 export function Opening() {
   return (
@@ -43,16 +41,6 @@ export function Opening() {
         </div>
       </div>
 
-      <div className={styles.highlights}>
-        <div className={`${styles.highlightsHead} caption`}>
-          <p>{OPENING.highlights.label}</p>
-          <Link href={OPENING.highlights.link.href}>{OPENING.highlights.link.label} <span aria-hidden="true">↗</span></Link>
-        </div>
-        <Link href={OPENING.highlights.link.href} className={styles.card} aria-label={OPENING.highlights.link.label}>
-          <Image src={OPENING.highlight.src} alt={OPENING.highlight.alt} fill sizes="100vw" className={styles.cardImage} />
-          <span className={styles.cardMark}><LogoMark /></span>
-        </Link>
-      </div>
     </section>
   );
 }
