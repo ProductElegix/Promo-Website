@@ -3,7 +3,7 @@
 .list { display: grid; gap: 8px; }
 .item { padding: 0 clamp(18px, 2vw, 28px); border-radius: var(--radius-m); background: var(--paper); transition: background-color .3s var(--ease); }
 .item:hover, .item[open] { background: #fff; }
-.item summary { cursor: pointer; list-style: none; display: flex; gap: 24px; align-items: center; justify-content: space-between; padding: 22px 0; font-size: clamp(18px, 1.6vw, 24px); font-weight: 500; line-height: 1.05; letter-spacing: -0.03em; }
+.item summary { cursor: pointer; list-style: none; display: flex; gap: 24px; align-items: center; justify-content: space-between; padding: 22px 0; font-size: var(--fs-h3); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
 .item summary::-webkit-details-marker { display: none; }
 .plus { position: relative; width: 22px; height: 22px; flex: none; transition: transform .3s var(--ease); }
 .plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 18px; height: 1px; background: var(--ink); transform: translate(-50%, -50%); }

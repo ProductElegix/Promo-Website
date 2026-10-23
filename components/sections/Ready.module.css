@@ -32,4 +32,4 @@
   .o4 { right: -18px; top: 50%; }
   .o5 { right: -40px; top: 2%; }
 }
-.lede { font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; color: var(--muted); }
+.lede { font-size: var(--fs-lead); line-height: 1.4; color: var(--muted); }

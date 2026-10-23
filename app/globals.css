@@ -9,6 +9,15 @@
   Area colours only on area pills, the wheel and time circles.
 */
 :root {
+  /* type scale: every text size on the site comes from these */
+  --fs-xs: 12px;                          /* tags, captions, small caps */
+  --fs-ui: 13px;                          /* buttons */
+  --fs-small: 14px;                       /* consent, footnotes */
+  --fs-body: 16px;                        /* card and paragraph text */
+  --fs-lead: clamp(17px, 1.35vw, 20px);   /* intro line under a heading */
+  --fs-h3: clamp(22px, 2vw, 30px);        /* card titles, questions */
+  --fs-h3-l: clamp(26px, 2.6vw, 40px);    /* big card titles, lists */
+  --fs-h2: clamp(34px, 4.4vw, 72px);
   --cream: #e9e9e5;
   --cream-2: #dfdfda;
   --paper: #f2f2f0;
@@ -98,10 +107,10 @@ button { font: inherit; }
 .display em, .accent { font-style: normal; color: var(--green); }
 .on-dark .display em, .on-dark .accent { color: var(--lime); }
 /* one heading scale for every section title */
-.h2 { font-size: clamp(34px, 4.4vw, 72px); line-height: .98; letter-spacing: -0.04em; }
+.h2 { font-size: var(--fs-h2); line-height: .98; letter-spacing: -0.04em; }
 .title { font-size: clamp(24px, 2.4vw, 36px); font-weight: 500; line-height: 1; letter-spacing: -0.03em; }
 .statement { font-size: clamp(24px, 3vw, 44px); font-weight: 300; line-height: 1.12; letter-spacing: -0.025em; }
-.lede { font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; letter-spacing: -0.01em; color: var(--muted); max-width: 36rem; }
+.lede { font-size: var(--fs-lead); line-height: 1.4; letter-spacing: -0.01em; color: var(--muted); max-width: 36rem; }
 .on-dark .lede { color: rgba(255, 255, 255, 0.62); }
 .on-dark { color: var(--paper); }
 
@@ -109,17 +118,17 @@ button { font: inherit; }
 .label {
   display: inline-flex; align-items: center; gap: 8px; padding: 6px 9px 5px;
   border-radius: 6px; background: var(--ink); color: var(--paper); text-decoration: none;
-  font-size: 11px; font-weight: 500; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+  font-size: var(--fs-xs); font-weight: 500; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
 }
 .label::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
 .on-dark .label { background: var(--paper); color: var(--ink); }
 .on-dark .label::before { background: var(--green); }
-.eyebrow, .caption { font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: 0.08em; text-transform: uppercase; }
+.eyebrow, .caption { font-size: var(--fs-xs); font-weight: 500; line-height: 1.4; letter-spacing: 0.08em; text-transform: uppercase; }
 /* numbered square, e.g. 01 */
 .num {
   display: inline-grid; place-items: center; min-width: 26px; height: 22px; padding: 0 5px; border-radius: 6px;
   background: var(--ink); color: var(--paper);
-  font-size: 11px; font-weight: 500; letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
+  font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
 }
 .on-dark .num { background: var(--paper); color: var(--ink); }
 .muted { color: var(--muted); }
@@ -142,7 +151,7 @@ button { font: inherit; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 12px;
   border: 0; border-radius: var(--radius-s); cursor: pointer; text-decoration: none; white-space: nowrap;
-  font-weight: 500; font-size: 12px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
+  font-weight: 500; font-size: var(--fs-ui); line-height: 1; letter-spacing: 0.08em; text-transform: uppercase;
   padding: 16px 22px 15px; background: var(--green); color: #fff;
   transition: opacity .3s var(--ease), background-color .4s var(--ease), color .4s var(--ease), box-shadow .3s var(--ease);
 }
@@ -154,7 +163,7 @@ button { font: inherit; }
 .btn.white { background: var(--paper); color: var(--ink); }
 .btn.dark { background: var(--ink); color: var(--paper); }
 /* secondary: outlined pill (Duna ButtonLink) */
-.btn.ghost { background: transparent; color: inherit; border-radius: 999px; padding: 14px 20px 13px; font-size: 11px; box-shadow: inset 0 0 0 1px currentColor; }
+.btn.ghost { background: transparent; color: inherit; border-radius: 999px; padding: 14px 20px 13px; font-size: var(--fs-xs); box-shadow: inset 0 0 0 1px currentColor; }
 .btn.ghost:hover { opacity: 1; background: var(--ink); color: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); }
 .on-dark .btn.ghost:hover { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px var(--paper); }
 
@@ -162,7 +171,7 @@ button { font: inherit; }
 .pill {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 9px 4px 7px; border-radius: var(--radius-s);
-  font-size: 11px; font-weight: 500; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+  font-size: var(--fs-xs); font-weight: 500; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
   background: var(--t); color: var(--s);
 }
 .pill.strong { background: var(--s); color: var(--t); }

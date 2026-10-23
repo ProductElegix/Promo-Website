@@ -64,7 +64,7 @@
 }
 .open .menuLink > span { opacity: 1; transform: none; }
 .menuLink[aria-current="page"] { color: var(--muted); }
-.menuLink small { font-size: 11px; letter-spacing: .08em; transform: translateY(-1.6em); }
+.menuLink small { font-size: var(--fs-xs); letter-spacing: .08em; transform: translateY(-1.6em); }
 .menuFoot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
 .menuFoot a { text-decoration: none; }
 .socials { display: flex; gap: 16px; }

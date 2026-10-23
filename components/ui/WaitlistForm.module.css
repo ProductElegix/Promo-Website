@@ -4,13 +4,13 @@
 .form input[type="email"]::placeholder { color: var(--muted); }
 .form input[type="email"]:focus { outline: none; }
 .underline { border-bottom: 1px solid currentColor; padding-bottom: 8px; }
-.underline input[type="email"] { font-size: clamp(18px, 1.5vw, 22px); letter-spacing: -0.01em; }
+.underline input[type="email"] { font-size: var(--fs-lead); letter-spacing: -0.01em; }
 .underline:focus-within { border-bottom-color: var(--lime); }
 .bar { background: var(--black); color: #fff; border-radius: 8px; padding: 5px 5px 5px 18px; overflow: hidden; gap: 0; }
 .bar input[type="email"] { padding: 10px 0; }
 .bar .barBtn { border-radius: 6px; padding: 14px 18px 13px; white-space: nowrap; }
 .bar input[type="email"]::placeholder { color: #8d948f; }
-.barBtn { align-self: stretch; border: 0; background: var(--lime); color: var(--black); font-weight: 500; font-size: 12px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 16px; cursor: pointer; transition: opacity .3s; }
+.barBtn { align-self: stretch; border: 0; background: var(--lime); color: var(--black); font-weight: 500; font-size: var(--fs-ui); line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 16px; cursor: pointer; transition: opacity .3s; }
 .barBtn:hover { opacity: .82; }
 .barBtn::after { content: " →"; }
 .barBtn:disabled { opacity: 0.6; cursor: progress; }
@@ -25,7 +25,7 @@
 .err { color: var(--danger); }
 .glass + .ok { color: var(--lime); }
 .glass + .err { color: #ffb4a8; }
-.consent { font-size: 0.75rem; line-height: 1.4; opacity: 0.7; margin: 2px 0 0; }
+.consent { font-size: var(--fs-xs); line-height: 1.4; opacity: 0.7; margin: 2px 0 0; }
 .consent a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .wrap:has(.glass) .consent { text-align: center; color: rgba(255, 255, 255, 0.85); }
 .community { font-size: 0.8rem; margin: 0; }

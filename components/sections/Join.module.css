@@ -9,5 +9,5 @@
 
 .panel { width: 100%; max-width: 760px; padding: var(--gutter); padding-bottom: clamp(40px, 6vw, 88px); display: grid; gap: 20px; justify-items: start; }
 .title { margin: 0; }
-.sub { font-size: clamp(17px, 1.4vw, 20px); color: rgba(255, 255, 255, .75); max-width: 30rem; }
+.sub { font-size: var(--fs-lead); color: rgba(255, 255, 255, .75); max-width: 30rem; }
 .form { width: 100%; max-width: 520px; margin-top: 12px; }

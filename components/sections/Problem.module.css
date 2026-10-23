@@ -1,5 +1,5 @@
 .head { display: grid; gap: 22px; justify-items: center; text-align: center; max-width: 56rem; margin: 0 auto clamp(40px, 6vw, 72px); }
-.text { font-size: clamp(1.15rem, 1.8vw, 1.5rem); line-height: 1.5; letter-spacing: -0.02em; color: var(--muted); max-width: 40rem; }
+.text { font-size: var(--fs-lead); line-height: 1.45; letter-spacing: -0.02em; color: var(--muted); max-width: 40rem; }
 
 /* four photo cards: what slips first */
 .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -7,15 +7,15 @@
 .cardPhoto { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-m); overflow: hidden; }
 .cardPhoto img { object-fit: cover; }
 .top { position: absolute; z-index: 1; left: 12px; right: 12px; top: 12px; display: flex; justify-content: space-between; align-items: center; }
-.card p { font-size: clamp(1.1rem, 1.5vw, 1.4rem); font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; padding-right: 12px; }
+.card p { font-size: var(--fs-h3); font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; padding-right: 12px; }
 .icon { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: var(--t); color: var(--s); }
 .icon svg { width: 15px; height: 15px; }
 
 @media (max-width: 860px) {
   .cards { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
 }
-@media (max-width: 480px) { .card p { font-size: 1.05rem; } }
+@media (max-width: 480px) { .card p { font-size: 20px; } }
 
 /* the closing line: a compact soft card under the photos, a green dot in front */
-.closing { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; padding: clamp(18px, 2vw, 28px) clamp(20px, 2.4vw, 32px); border-radius: var(--radius-m); background: var(--paper); font-size: clamp(17px, 1.4vw, 21px); line-height: 1.4; letter-spacing: -0.015em; color: var(--ink-2); }
+.closing { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; padding: clamp(18px, 2vw, 28px) clamp(20px, 2.4vw, 32px); border-radius: var(--radius-m); background: var(--paper); font-size: var(--fs-lead); line-height: 1.4; letter-spacing: -0.015em; color: var(--ink-2); }
 .closing::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--green); transform: translateY(-2px); }

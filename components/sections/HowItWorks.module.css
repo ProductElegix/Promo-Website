@@ -11,8 +11,8 @@
     radial-gradient(80% 70% at 90% 100%, color-mix(in srgb, var(--b) 75%, #fff), transparent 75%),
     linear-gradient(180deg, color-mix(in srgb, var(--a) 35%, #fff), color-mix(in srgb, var(--b) 45%, #fff));
 }
-.title { font-size: clamp(28px, 2.8vw, 44px); font-weight: 500; letter-spacing: -0.045em; line-height: .95; margin-top: 18px; }
-.text { font-size: 0.98rem; line-height: 1.45; color: var(--ink-2); max-width: 22rem; }
+.title { font-size: var(--fs-h3-l); font-weight: 500; letter-spacing: -0.045em; line-height: .95; margin-top: 18px; }
+.text { font-size: var(--fs-body); line-height: 1.45; color: var(--ink-2); max-width: 22rem; }
 
 .device { position: relative; margin-top: auto; height: clamp(300px, 28vw, 380px); display: grid; justify-items: center; }
 .phoneWrap { position: absolute; top: 0; }
@@ -47,6 +47,6 @@
   .card { flex: none; width: 82vw; scroll-snap-align: start; min-height: 540px; }
   .device { height: 320px; }
 }
-.more { margin-top: clamp(28px, 4vw, 44px); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.more { margin-top: clamp(28px, 4vw, 44px); font-size: var(--fs-ui); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
 .more a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .3em; }
 .more a:hover { opacity: .6; }
