@@ -25,8 +25,8 @@ export default function Home() {
       <Opening />
       <FactsTicker />
       <Problem />
-      <Orbit />
       <HowItWorks />
+      <Orbit />
       <Compare />
       <AreasList />
       <BalanceCheck />

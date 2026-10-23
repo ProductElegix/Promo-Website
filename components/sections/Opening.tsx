@@ -1,19 +1,32 @@
 import Image from "next/image";
-import { HERO, OPENING } from "@/lib/content";
+import { APP, HERO, OPENING } from "@/lib/content";
+import { Phone } from "@/components/ui/Phone";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Opening.module.css";
 
 /** Copy split into word spans for the scroll-scrubbed reveal; *word* becomes a lime accent. */
 function Words({ text }: { text: string }) {
+  // tokens with their accent flag; punctuation right after an accent stays glued to it (no break before ",")
+  const tokens = text.split(/(\*[^*]+\*)/).filter(Boolean).flatMap((part) => {
+    const accent = part.startsWith("*") && part.endsWith("*");
+    return (accent ? part.slice(1, -1) : part).split(/(\s+)/).filter(Boolean).map((w) => ({ w, accent }));
+  });
+  const groups: { w: string; accent: boolean }[][] = [];
+  tokens.forEach((t, i) => {
+    if (/^\s+$/.test(t.w)) groups.push([t]);
+    else if (i > 0 && !/^\s+$/.test(tokens[i - 1].w)) groups[groups.length - 1].push(t);
+    else groups.push([t]);
+  });
   return (
     <>
-      {text.split(/(\*[^*]+\*)/).filter(Boolean).flatMap((part, i) => {
-        const accent = part.startsWith("*") && part.endsWith("*");
-        return (accent ? part.slice(1, -1) : part).split(/(\s+)/).map((w, j) =>
-          /^\s+$/.test(w) || !w ? w : <span key={`${i}-${j}`} className={accent ? styles.accent : undefined} data-word>{w}</span>,
-        );
-      })}
+      {groups.map((g, i) =>
+        /^\s+$/.test(g[0].w) ? g[0].w : (
+          <span key={i} className={styles.nowrap}>
+            {g.map((t, j) => <span key={j} className={t.accent ? styles.accent : undefined} data-word>{t.w}</span>)}
+          </span>
+        ),
+      )}
     </>
   );
 }
@@ -58,7 +71,14 @@ export function Opening() {
       <ul className={styles.strip} data-strip>
         {OPENING.strip.map((p, i) => (
           <li key={p.src} className={`${styles.stripItem} ${i === 2 ? styles.stripMain : ""}`}>
-            <Image src={p.src} alt={p.alt} fill sizes={i === 2 ? "(max-width: 767px) 70vw, 30vw" : "(max-width: 767px) 50vw, 20vw"} />
+            {i === 2 ? (
+              <>
+                <div className={styles.stripClip}><Image src={p.src} alt={p.alt} fill sizes="(max-width: 767px) 70vw, 30vw" /></div>
+                <Phone screen={APP.screens[0].media} className={styles.stripPhone} />
+              </>
+            ) : (
+              <Image src={p.src} alt={p.alt} fill sizes="(max-width: 767px) 50vw, 20vw" />
+            )}
           </li>
         ))}
       </ul>
