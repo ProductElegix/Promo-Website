@@ -11,7 +11,7 @@
     radial-gradient(80% 70% at 90% 100%, color-mix(in srgb, var(--b) 75%, #fff), transparent 75%),
     linear-gradient(180deg, color-mix(in srgb, var(--a) 35%, #fff), color-mix(in srgb, var(--b) 45%, #fff));
 }
-.title { font-size: clamp(32px, 3.4vw, 56px); font-weight: 500; letter-spacing: -0.045em; line-height: .95; margin-top: 18px; }
+.title { font-size: clamp(28px, 2.8vw, 44px); font-weight: 500; letter-spacing: -0.045em; line-height: .95; margin-top: 18px; }
 .text { font-size: 0.98rem; line-height: 1.45; color: var(--ink-2); max-width: 22rem; }
 
 .device { position: relative; margin-top: auto; height: clamp(300px, 28vw, 380px); display: grid; justify-items: center; }

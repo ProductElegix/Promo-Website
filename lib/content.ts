@@ -205,6 +205,7 @@ export const AREAS_SECTION = {
  * every life area scattered around it. x/y are the circle centre in % of the stage, size in % of its width.
  */
 export const ORBIT = {
+  label: "Six areas, one view",
   title: "Elegix brings work, health, people and everything in between into one picture",
   caption: "Six life areas, one balance score. See where your energy goes, and what is quietly slipping.",
   photos: [
@@ -444,6 +445,7 @@ export const ABOUT_PAGE = {
 
 /** Closing "Ready when you are": the app in the middle, one everyday object per life area around it. */
 export const READY = {
+  label: "Get started",
   title: "Ready when *you* are",
   lede: "A good life isn't the most productive one. It's a ==balanced== one.",
   cta: "Get early access",

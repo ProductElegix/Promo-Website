@@ -8,6 +8,6 @@
 .stage::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, .25) 0%, rgba(0, 0, 0, .4) 45%, rgba(0, 0, 0, .8) 100%); }
 
 .panel { width: 100%; max-width: 760px; padding: var(--gutter); padding-bottom: clamp(40px, 6vw, 88px); display: grid; gap: 20px; justify-items: start; }
-.title { font-size: clamp(48px, 7vw, 120px); line-height: .9; letter-spacing: -0.055em; }
+.title { margin: 0; }
 .sub { font-size: clamp(17px, 1.4vw, 20px); color: rgba(255, 255, 255, .75); max-width: 30rem; }
 .form { width: 100%; max-width: 520px; margin-top: 12px; }

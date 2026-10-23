@@ -9,7 +9,8 @@ export function Orbit() {
   return (
     <section className={`section ${styles.orbit}`} aria-labelledby="orbit-title">
       <div className="container">
-        <h2 id="orbit-title" className={styles.title} data-reveal>{ORBIT.title}</h2>
+        <span className="label" data-reveal>{ORBIT.label}</span>
+        <h2 id="orbit-title" className={`display h2 ${styles.title}`} data-reveal>{ORBIT.title}</h2>
         <div className={styles.stage} data-reveal>
           <span className={styles.ring} aria-hidden="true" />
           <span className={styles.mark} aria-hidden="true"><LogoMark /></span>

@@ -2,7 +2,6 @@
 .card { background: var(--paper); border-radius: var(--radius-l); padding: clamp(24px, 4vw, 56px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 3vw, 40px); }
 .intro { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: end; margin-bottom: clamp(8px, 2vw, 24px); }
 .titleCol { display: grid; gap: 18px; justify-items: start; }
-.titleCol :global(.h2) { font-size: clamp(40px, 5.4vw, 92px); }
 .wheelPanel { display: grid; place-items: center; padding: clamp(24px, 3vw, 48px); border-radius: var(--radius-m); background: var(--cream); }
 .wheel { width: min(100%, 340px); display: grid; }
 .wheel svg { width: 100%; height: auto; }

@@ -27,7 +27,7 @@ export function Compare() {
             </div>
           ))}
         </div>
-        <p className={`display ${styles.line}`} data-reveal><Rich text={COMPARE.line} /></p>
+        <p className={`display h2 ${styles.line}`} data-reveal><Rich text={COMPARE.line} /></p>
       </div>
     </section>
   );

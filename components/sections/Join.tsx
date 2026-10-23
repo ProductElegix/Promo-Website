@@ -11,7 +11,7 @@ export function Join() {
       <div className={styles.stage}>
         <div className={styles.photo} data-parallax data-scale-in><Media media={JOIN.media} fill sizes="100vw" /></div>
         <div className={styles.panel} data-reveal>
-          <h2 id="join-title" className={`display ${styles.title}`}><Rich text={JOIN.title} /></h2>
+          <h2 id="join-title" className={`display h2 ${styles.title}`}><Rich text={JOIN.title} /></h2>
           <p className={styles.sub}>{JOIN.sub}</p>
           <div id="join-form" className={styles.form}>
             <WaitlistForm source="join" variant="underline" placeholder="Your email" buttonLabel={JOIN.button} />

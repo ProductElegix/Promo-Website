@@ -34,7 +34,7 @@ export function Opening() {
       </div>
 
       <div className={styles.statementWrap}>
-        <p className={`caption ${styles.statementLabel}`} data-reveal>{OPENING.statement.label}</p>
+        <span className="label" data-reveal>{OPENING.statement.label}</span>
         <p className={styles.statement} data-reveal>{OPENING.statement.lead}<span>{OPENING.statement.rest}</span></p>
       </div>
     </section>
