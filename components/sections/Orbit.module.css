@@ -5,18 +5,9 @@
 .stage { position: relative; aspect-ratio: 16 / 8; margin-top: clamp(-40px, -2vw, 0px); }
 .ring {
   position: absolute; left: 50%; top: 52%; width: 36%; aspect-ratio: 1; translate: -50% -50%;
-  border-radius: 50%;
-  /* a ring in all six area colours */
-  background: conic-gradient(from -30deg, var(--health-s), var(--people-s), var(--meaning-s), var(--growth-s), var(--career-s), var(--hobby-s), var(--health-s));
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - clamp(6px, .7vw, 12px)), #000 calc(100% - clamp(6px, .7vw, 12px) + 1px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - clamp(6px, .7vw, 12px)), #000 calc(100% - clamp(6px, .7vw, 12px) + 1px));
+  border: clamp(6px, .7vw, 12px) solid var(--lime); border-radius: 50%;
 }
-/* soft colour glow inside the ring */
-.stage::before {
-  content: ""; position: absolute; left: 50%; top: 52%; width: 34%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--lime) 35%, transparent), transparent 70%); pointer-events: none;
-}
-.mark { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); line-height: 0; color: var(--ink); }
+.mark { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); line-height: 0; color: var(--green); }
 .mark svg { width: clamp(44px, 6vw, 96px); height: auto; }
 
 /* round photos: grayscale, colour and their area name on hover, a slow float */
@@ -41,6 +32,3 @@
   .ring { width: 62%; }
   .photo { width: 15% !important; }
 }
-/* the colour ring turns slowly */
-.ring { animation: spin 40s linear infinite; }
-@keyframes spin { to { rotate: 360deg; } }
