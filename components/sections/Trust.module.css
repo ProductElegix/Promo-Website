@@ -34,3 +34,10 @@
 .lock { position: absolute; right: -40px; bottom: -70px; width: 220px; z-index: -1; }
 .lock svg { display: block; width: 100%; height: auto; overflow: visible; }
 .lock path, .lock rect { stroke: rgba(255, 255, 255, .07); stroke-width: 22; }
+
+/* home page: just the founder, photo and quote side by side, in colour */
+.solo { grid-template-columns: minmax(0, 0.8fr) 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: stretch; }
+.solo .photo { min-height: 0; aspect-ratio: 4 / 5; height: auto; }
+.solo .photo img { filter: none; }
+.solo .quote { font-size: clamp(26px, 3vw, 46px) !important; max-width: 22ch; }
+@media (max-width: 600px) { .solo { grid-template-columns: 1fr; } }

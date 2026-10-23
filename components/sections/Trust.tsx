@@ -41,16 +41,13 @@ export function Trust() {
           <span className="label">{TRUST.eyebrow}</span>
           <h2 id="trust-title" className="display h2"><Rich text={TRUST.title} /></h2>
         </div>
-        <div className={styles.grid}>
-          <figure className={styles.founder} data-reveal>
-            <div className={styles.photo}><Media media={f.media} fill sizes="(max-width: 860px) 100vw, 360px" /></div>
+        <figure className={`${styles.founder} ${styles.solo}`} data-reveal>
+          <div className={styles.photo}><Media media={f.media} fill sizes="(max-width: 860px) 100vw, 360px" /></div>
             <div className={styles.note}>
               <blockquote className={styles.quote}>{f.quote || f.fallback}</blockquote>
               <figcaption><b>{f.name}</b>, {f.role} · <Link href={f.storyLink.href} className={styles.story}>{f.storyLink.label} →</Link></figcaption>
             </div>
-          </figure>
-          <Principles />
-        </div>
+        </figure>
       </div>
     </section>
   );
