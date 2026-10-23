@@ -117,11 +117,12 @@ export const PROBLEM = {
   title: "You close every task. So why does life feel *off*?",
   text: "Your inbox is at zero. Your gym bag hasn't moved in three weeks. You keep meaning to call your parents. You're ==productive==, just not ==balanced==.",
   cards: [
-    { area: "meaning" as AreaKey, text: "Your last real day off? Can't remember." },
-    { area: "health" as AreaKey, text: "Sleep is the first thing to go." },
-    { area: "people" as AreaKey, text: "Friends stopped asking you out." },
-    { area: "hobby" as AreaKey, text: "Hobbies turned into someday." },
+    { area: "meaning" as AreaKey, text: "Your last real day off? Can't remember.", src: "/images/area-meaning.jpg" },
+    { area: "health" as AreaKey, text: "Sleep is the first thing to go.", src: "/images/how-score.jpg" },
+    { area: "people" as AreaKey, text: "Friends stopped asking you out.", src: "/images/area-people.jpg" },
+    { area: "hobby" as AreaKey, text: "Hobbies turned into someday.", src: "/images/area-hobby.jpg" },
   ],
+  media: { src: "/images/how-next.jpg", alt: "A journal, a notebook and a laptop on a wooden desk" },
   closing: "Burnout doesn't arrive in a day. It builds quietly in the parts of your life you stopped looking at.",
 };
 
