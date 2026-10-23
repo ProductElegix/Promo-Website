@@ -8,7 +8,6 @@ import { AreasList } from "@/components/sections/AreasList";
 import { BalanceCheck } from "@/components/sections/BalanceCheck";
 import { Trust } from "@/components/sections/Trust";
 import { Join } from "@/components/sections/Join";
-import { Ready } from "@/components/sections/Ready";
 import { Faq } from "@/components/sections/Faq";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { FAQ } from "@/lib/content";
@@ -27,14 +26,13 @@ export default function Home() {
       <FactsTicker />
       <Problem />
       <Orbit />
-      <Compare />
       <HowItWorks />
+      <Compare />
       <AreasList />
       <BalanceCheck />
       <Trust />
-      <Join />
       <Faq />
-      <Ready />
+      <Join />
     </main>
   );
 }
