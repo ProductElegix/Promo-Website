@@ -1,35 +1,34 @@
 .opening { --gap: var(--gutter); background: #000; color: #fff; padding-bottom: var(--section-y); }
 
-/* first screen: full-bleed photo with a dark gradient, headline and captions sit at the bottom */
-.stage { position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; min-height: max(640px, calc(100svh - 2 * var(--frame))); overflow: hidden; }
+/* first screen: full-bleed photo, a centred two-tone headline, the early access card at the bottom centre */
+.stage {
+  position: relative; isolation: isolate; display: grid; grid-template-rows: 1fr auto; justify-items: center;
+  min-height: max(680px, calc(100svh - 2 * var(--frame))); padding: 120px var(--gap) clamp(20px, 3vw, 40px); overflow: hidden;
+}
 .bg { position: absolute; inset: -8% 0; z-index: -2; will-change: transform; }
 .bgImage { object-fit: cover; object-position: 60% 40%; }
-.stage::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, .45) 0%, rgba(0, 0, 0, .15) 35%, rgba(0, 0, 0, .55) 75%, #000 100%); }
-.titleWrap { padding: 140px var(--gap) 0; }
-.title { font-size: clamp(56px, 10.5vw, 200px); line-height: 0.88; letter-spacing: -0.055em; max-width: 12ch; }
-
-.captions {
-  display: grid; grid-template-columns: 220px 1fr auto; gap: 24px; align-items: end;
-  padding: clamp(32px, 4vw, 64px) var(--gap) clamp(20px, 2.4vw, 32px); color: rgba(255, 255, 255, 0.85);
+.stage::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, .4) 0%, rgba(0, 0, 0, .15) 40%, rgba(0, 0, 0, .35) 80%, rgba(0, 0, 0, .6) 100%); }
+.title {
+  align-self: center; max-width: 16ch; text-align: center; text-wrap: balance;
+  font-size: clamp(36px, 4.4vw, 72px); font-weight: 400; line-height: 1.02; letter-spacing: -0.035em;
 }
-.down { text-decoration: none; font-size: 14px; }
+.title em { font-style: normal; color: var(--lime); }
 
-/* statement: the page h1 */
-.statementWrap { padding: clamp(56px, 7vw, 110px) var(--gap) clamp(48px, 6vw, 96px); }
+/* white early access card */
+.card {
+  width: min(100%, 520px); display: grid; gap: 14px; padding: 18px; border-radius: var(--radius-l);
+  background: #fff; color: var(--ink); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .5);
+}
+.cardTitle { font-size: 1.15rem; font-weight: 500; letter-spacing: -0.02em; }
+.cardText { font-size: 0.88rem; color: var(--muted); margin-top: 2px; }
+.trust { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); }
+.trust li { display: inline-flex; align-items: center; gap: 7px; }
+.trust li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+/* statement under the first screen */
+.statementWrap { padding: clamp(64px, 8vw, 130px) var(--gap) clamp(48px, 6vw, 96px); }
 .statementWrap p { max-width: 1200px; text-indent: 25%; }
 
-/* facts row with the form */
-.facts {
-  display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap);
-  margin: 0 var(--gap); padding: clamp(20px, 2.4vw, 32px); border-radius: var(--radius-l); background: rgba(255, 255, 255, .07);
-}
-.form { max-width: 460px; display: grid; gap: 16px; }
-.trust { display: flex; flex-wrap: wrap; gap: 6px 18px; color: rgba(255, 255, 255, 0.62); }
-.trust li { display: inline-flex; align-items: center; gap: 7px; }
-.trust li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
-
 @media (max-width: 767px) {
-  .captions { grid-template-columns: 1fr 1fr auto; gap: 14px; }
   .statementWrap p { text-indent: 18%; }
-  .facts { grid-template-columns: 1fr; }
 }

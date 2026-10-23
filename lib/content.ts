@@ -98,8 +98,7 @@ export const HERO = {
 
 /** Home opening (black, Duna style): two caption lines under the headline and the facts row next to the form. */
 export const OPENING = {
-  captions: [["Life balance tracker.", "6 areas, one score."], ["Goals, habits and tasks.", "iOS & Android."]],
-  formCaption: "Early access · free app",
+  card: { title: "Ready to get started?", text: "Join the early access list. We'll email you once, when your spot opens." },
 };
 
 /** Facts ticker under the hero: a value and a short caption, scrolling on a dark strip. */
