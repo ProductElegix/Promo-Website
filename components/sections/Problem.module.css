@@ -16,6 +16,6 @@
 }
 @media (max-width: 480px) { .card p { font-size: 1.05rem; } }
 
-/* the closing line: a wide soft card under the photos */
-.closing { margin-top: 16px; padding: clamp(28px, 4vw, 64px); border-radius: var(--radius-l); background: var(--paper); max-width: none; }
-.closing::first-line { color: var(--green); }
+/* the closing line: a compact soft card under the photos, a green dot in front */
+.closing { display: flex; align-items: baseline; gap: 12px; margin-top: 16px; padding: clamp(18px, 2vw, 28px) clamp(20px, 2.4vw, 32px); border-radius: var(--radius-m); background: var(--paper); font-size: clamp(17px, 1.4vw, 21px); line-height: 1.4; letter-spacing: -0.015em; color: var(--ink-2); }
+.closing::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--green); transform: translateY(-2px); }

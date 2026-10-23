@@ -29,7 +29,7 @@ export function Problem() {
             </li>
           ))}
         </ul>
-        <p className={`statement ${styles.closing}`} data-reveal>{PROBLEM.closing}</p>
+        <p className={styles.closing} data-reveal>{PROBLEM.closing}</p>
       </div>
     </section>
   );
