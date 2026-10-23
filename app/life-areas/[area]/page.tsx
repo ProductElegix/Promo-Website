@@ -17,6 +17,6 @@ export default async function AreaPage({ params }: Props) {
   const g = areaGuideBySlug((await params).area);
   if (!g) notFound();
   const related = AREA_GUIDES.filter((o) => o.slug !== g.slug)
-    .map((o) => ({ href: areaGuideHref(o.area), label: o.label.replace("Life area · ", "Life area: "), title: o.title }));
+    .map((o) => ({ href: areaGuideHref(o.area), label: o.label.replace("Life area · ", "Life area: "), title: o.title, media: o.media }));
   return <Article guide={g} path={`/life-areas/${g.slug}`} parent={{ name: "Life areas", path: "/life-areas" }} related={related} />;
 }

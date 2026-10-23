@@ -30,6 +30,30 @@ function Words({ text }: { text: string }) {
   );
 }
 
+/** Centred statement revealed word by word, then five photos that open up from the middle one. Sits on a black section. */
+export function StatementStrip({ label, text, photos }: { label: string; text: string; photos: { src: string; alt: string }[] }) {
+  return (
+    <>
+      <div className={styles.statementWrap}>
+        <span className="label" data-reveal>{label}</span>
+        <p className={styles.statement} data-split-words><Words text={text} /></p>
+      </div>
+      <ul className={styles.strip} data-strip>
+        {photos.map((p, i) => (
+          <li key={p.src} className={`${styles.stripItem} ${i === 2 ? styles.stripMain : ""}`}>
+            <Image src={p.src} alt={p.alt} fill sizes={i === 2 ? "(max-width: 767px) 70vw, 30vw" : "(max-width: 767px) 50vw, 20vw"} />
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+/** Black section wrapper for StatementStrip on pages other than home. */
+export function StatementSection({ id, children }: { id?: string; children: React.ReactNode }) {
+  return <section id={id} className={`on-dark ${styles.opening}`} data-theme="dark">{children}</section>;
+}
+
 /**
  * Black opening of the home page (Duna style): a full-screen photo behind the headline (the page's h1) and caption row,
  * the statement and the early-access form.
@@ -59,21 +83,7 @@ export function Opening() {
         </div>
       </div>
 
-      <div className={styles.statementWrap}>
-        <span className="label" data-reveal>{OPENING.statement.label}</span>
-        <p className={styles.statement} data-split-words>
-          <Words text={OPENING.statement.lead} />
-          <span className={styles.muted}><Words text={OPENING.statement.rest} /></span>
-        </p>
-      </div>
-
-      <ul className={styles.strip} data-strip>
-        {OPENING.strip.map((p, i) => (
-          <li key={p.src} className={`${styles.stripItem} ${i === 2 ? styles.stripMain : ""}`}>
-            <Image src={p.src} alt={p.alt} fill sizes={i === 2 ? "(max-width: 767px) 70vw, 30vw" : "(max-width: 767px) 50vw, 20vw"} />
-          </li>
-        ))}
-      </ul>
+      <StatementStrip label={OPENING.statement.label} text={OPENING.statement.lead + OPENING.statement.rest} photos={OPENING.strip} />
       <div className={styles.about} data-reveal>
         <h2 className={styles.aboutTitle}><Rich text={OPENING.about.title} /></h2>
         <p className={styles.aboutText}>{OPENING.about.text}</p>

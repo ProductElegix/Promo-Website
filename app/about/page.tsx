@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ABOUT_PAGE as A, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
+import { ABOUT_PAGE as A, AREAS, AREAS_SECTION, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Pill, areaVars } from "@/components/ui/Pill";
 import { Wheel } from "@/components/ui/Wheel";
@@ -9,7 +9,8 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Faq } from "@/components/sections/Faq";
 import { Avatar } from "@/components/ui/Avatar";
 import { Rich } from "@/components/ui/Rich";
-import { WaitlistForm } from "@/components/ui/WaitlistForm";
+import { Join } from "@/components/sections/Join";
+import { StatementSection, StatementStrip } from "@/components/sections/Opening";
 import { Principles } from "@/components/sections/Trust";
 import { PhotoHero } from "@/components/sections/PhotoHero";
 import { Breadcrumbs } from "@/components/ui/JsonLd";
@@ -34,10 +35,14 @@ export default function About() {
       <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede}>
         <a href="#join" className="btn lime">{A.hero.cta}</a>
       </PhotoHero>
+      {/* 1b. Mission, revealed word by word, with the photo strip (same as the home page) */}
+      <StatementSection>
+        <StatementStrip label={A.hero.mission.label} text={A.hero.mission.text} photos={A.hero.strip} />
+      </StatementSection>
       {/* 2. The 6 areas */}
       <section className="section" aria-labelledby="areas-title">
         <div className="container">
-          <div className="section-head" data-reveal>
+          <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{A.areas.label}</span>
             <h2 id="areas-title" className="display h2"><Rich text={A.areas.title} /></h2>
             <p className="lede">{A.areas.lede}</p>
@@ -45,7 +50,10 @@ export default function About() {
           <ul className={styles.areas}>
             {AREA_ORDER.map((a) => (
               <li key={a} className={styles.area} style={areaVars(a)} data-reveal>
-                <span className={styles.areaIcon} aria-hidden="true"><AreaIcon area={a} /></span>
+                <div className={styles.areaPhoto}>
+                  <Image src={AREAS_SECTION.media[a].src!} alt={AREAS_SECTION.media[a].alt} fill sizes="(max-width: 860px) 100vw, 33vw" />
+                  <span className={styles.areaIcon} aria-hidden="true"><AreaIcon area={a} /></span>
+                </div>
                 <h3>{AREAS[a].name}</h3>
                 <p>{AREAS[a].description}</p>
                 <Link href={areaGuideHref(a)} className={styles.areaLink}>Read the guide<span className="visually-hidden"> to {AREAS[a].name}</span> →</Link>
@@ -61,7 +69,7 @@ export default function About() {
       {/* 4. Who it's for */}
       <section className={`section on-dark ${styles.dark}`} aria-labelledby="audience-title">
         <div className="container">
-          <div className="section-head" data-reveal>
+          <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{A.audience.label}</span>
             <h2 id="audience-title" className="display h2"><Rich text={A.audience.title} /></h2>
             <p className="lede">{A.audience.lede}</p>
@@ -81,7 +89,7 @@ export default function About() {
       {/* 5. The rhythm */}
       <section className="section" aria-labelledby="modes-title">
         <div className="container">
-          <div className="section-head" data-reveal>
+          <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{A.modes.label}</span>
             <h2 id="modes-title" className="display h2"><Rich text={A.modes.title} /></h2>
             <p className="lede">{A.modes.lede}</p>
@@ -148,7 +156,7 @@ export default function About() {
       {/* 9. Team */}
       <section id="team" className={`section ${styles.teamSection}`} aria-labelledby="team-title" style={{ scrollMarginTop: "var(--header-h)" }}>
         <div className="container">
-          <div className="section-head" data-reveal>
+          <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{TEAM.label}</span>
             <h2 id="team-title" className="display h2"><Rich text={TEAM.title} /></h2>
           </div>
@@ -167,7 +175,7 @@ export default function About() {
       {/* 10. What we believe */}
       <section className={`section ${styles.beliefsSection}`} aria-labelledby="beliefs-title">
         <div className="container">
-          <div className="section-head" data-reveal>
+          <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{A.beliefs.label}</span>
             <h2 id="beliefs-title" className="display h2"><Rich text={A.beliefs.title} /></h2>
           </div>
@@ -182,17 +190,8 @@ export default function About() {
       {/* 11. FAQ */}
       <Faq only={A.faq} />
 
-      {/* 12. Early access */}
-      <section id="join" className="section" aria-labelledby="cta-title" style={{ scrollMarginTop: "var(--header-h)" }}>
-        <div className="container">
-          <div className={`on-dark grain ${styles.cta}`} data-reveal>
-            <h2 id="cta-title" className="display h2"><Rich text={A.cta.title} /></h2>
-            <p className="lede">{A.cta.text}</p>
-            <div className={styles.ctaForm}><WaitlistForm source="about" variant="glass" placeholder="Your email" buttonLabel={A.hero.cta} /></div>
-          </div>
-        </div>
-      </section>
-
+      {/* 12. Early access (same block as the home page) */}
+      <Join />
     </main>
   );
 }
