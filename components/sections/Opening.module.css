@@ -31,7 +31,7 @@
 /* statement under the first screen: centred, small tag on top, the first part bright and the rest muted */
 .statementWrap { display: grid; justify-items: center; gap: 22px; padding: clamp(72px, 9vw, 150px) var(--gap) clamp(48px, 6vw, 96px); text-align: center; }
 .statement { max-width: 28ch; font-size: clamp(26px, 3.2vw, 50px); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; color: #f2f2f0; text-wrap: balance; }
-.muted { color: rgba(242, 242, 240, .45); }
+.muted { color: inherit; }
 .statement .accent { color: var(--lime); }
 .statement [data-word] { display: inline-block; }
 
