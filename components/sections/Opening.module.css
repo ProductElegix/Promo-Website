@@ -1,4 +1,4 @@
-.opening { --gap: var(--gutter); background: #000; color: #fff; padding-bottom: var(--section-y); }
+.opening { --gap: var(--gutter); background: #000; color: #fff; padding-bottom: clamp(48px, 6vw, 96px); }
 
 /* first screen: full-bleed photo, a centred two-tone headline, the early access card at the bottom centre */
 .stage {
@@ -25,10 +25,9 @@
 .trust li { display: inline-flex; align-items: center; gap: 7px; }
 .trust li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
 
-/* statement under the first screen */
-.statementWrap { padding: clamp(64px, 8vw, 130px) var(--gap) clamp(48px, 6vw, 96px); }
-.statementWrap p { max-width: 1200px; text-indent: 25%; }
-
-@media (max-width: 767px) {
-  .statementWrap p { text-indent: 18%; }
-}
+/* statement under the first screen: centred, small tag on top, the first part bright and the rest muted */
+.statementWrap { display: grid; justify-items: center; gap: 22px; padding: clamp(72px, 9vw, 150px) var(--gap) clamp(40px, 5vw, 80px); text-align: center; }
+.statementLabel { display: inline-flex; align-items: center; gap: 8px; color: rgba(255, 255, 255, .7); }
+.statementLabel::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--lime); }
+.statement { max-width: 28ch; font-size: clamp(28px, 3.8vw, 60px); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; color: #f2f2f0; text-wrap: balance; }
+.statement span { color: rgba(242, 242, 240, .45); }

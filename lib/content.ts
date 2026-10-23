@@ -98,6 +98,8 @@ export const HERO = {
 
 /** Home opening (black, Duna style): two caption lines under the headline and the facts row next to the form. */
 export const OPENING = {
+  // statement under the first screen: the first part bright, the rest muted
+  statement: { label: "What is Elegix", lead: "Elegix tracks your goals, habits and tasks across 6 life areas", rest: " and shows which part of your life you're neglecting, before it turns into burnout." },
   card: { title: "Ready to get started?", text: "Join the early access list. We'll email you once, when your spot opens." },
 };
 
