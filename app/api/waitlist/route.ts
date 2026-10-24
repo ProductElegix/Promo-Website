@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { addToWaitlist, mailgunConfig, sendConfirmation, type Signup } from "@/lib/mailgun";
+import { addToWaitlist, mailgunConfig, notifyTeam, sendConfirmation, type Signup } from "@/lib/mailgun";
 import { POLICY_VERSION } from "@/lib/content";
 import { communityUrl } from "@/lib/email/template";
 
@@ -86,9 +86,10 @@ export async function POST(request: Request) {
 
   // Store: the Mailgun mailing list is the waitlist; the webhook is an optional extra copy.
   let stored = false;
+  let isNew = true;
   if (mailgun) {
     try {
-      await addToWaitlist(mailgun, signup);
+      isNew = await addToWaitlist(mailgun, signup);
       stored = true;
     } catch (err) {
       console.error("[waitlist] mailgun list failed", err);
@@ -114,11 +115,11 @@ export async function POST(request: Request) {
   // A failed email never fails the signup: the person is already on the list.
   let emailed = false;
   if (mailgun) {
-    try {
-      emailed = await sendConfirmation(mailgun, signup, process.env.MAILGUN_TEST_MODE === "yes");
-    } catch (err) {
-      console.error("[waitlist] email failed", err);
-    }
+    const testMode = process.env.MAILGUN_TEST_MODE === "yes";
+    const [confirmation, notified] = await Promise.allSettled([sendConfirmation(mailgun, signup, testMode), notifyTeam(mailgun, signup, isNew, testMode)]);
+    if (confirmation.status === "fulfilled") emailed = confirmation.value;
+    else console.error("[waitlist] email failed", confirmation.reason);
+    if (notified.status === "rejected") console.error("[waitlist] team notification failed", notified.reason);
   }
 
   // the invite itself only travels by email; the site just says to check the inbox

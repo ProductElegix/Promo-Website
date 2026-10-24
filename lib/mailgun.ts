@@ -99,9 +99,13 @@ export function mergeVars(old: MemberVars, s: Signup): MemberVars {
   };
 }
 
-/** Adds the signup to the waitlist mailing list, or updates the existing member, creating the list on first use. */
-export async function addToWaitlist(cfg: Config, s: Signup): Promise<void> {
-  const vars = mergeVars(await readVars(cfg, s.email), s);
+/**
+ * Adds the signup to the waitlist mailing list, or updates the existing member, creating the list on first use.
+ * Returns true when the person wasn't on the list before.
+ */
+export async function addToWaitlist(cfg: Config, s: Signup): Promise<boolean> {
+  const old = await readVars(cfg, s.email);
+  const vars = mergeVars(old, s);
   const member = { address: s.email, subscribed: "yes", upsert: "yes", vars: JSON.stringify(vars) };
   let res = await call(cfg, `/v3/lists/${cfg.list}/members`, member);
   if (res.status === 404) {
@@ -111,6 +115,7 @@ export async function addToWaitlist(cfg: Config, s: Signup): Promise<void> {
   }
   // status only: Mailgun's error body can contain the email address
   if (!res.ok) throw new Error(`list add failed: ${res.status}`);
+  return Object.keys(old).length === 0;
 }
 
 /** Marks the person unsubscribed on the waitlist list (kept as a member, so their history stays). */
@@ -147,5 +152,40 @@ export async function sendConfirmation(cfg: Config, s: Signup, testMode = false)
     body: form,
   });
   if (!res.ok) console.error("[waitlist] email failed", res.status);
+  return res.ok;
+}
+
+/**
+ * Tells the team about a signup: a plain-text email to WAITLIST_NOTIFY_TO (default mail@elegix.net),
+ * with Reply-To set to the person, so answering the notification writes to them directly.
+ * Set WAITLIST_NOTIFY_TO=off to stop these emails. Returns true when Mailgun accepted the message.
+ */
+export async function notifyTeam(cfg: Config, s: Signup, isNew: boolean, testMode = false): Promise<boolean> {
+  const to = process.env.WAITLIST_NOTIFY_TO?.trim() || "mail@elegix.net";
+  if (to === "off") return false;
+  const a = s.attribution ?? {};
+  const lines = [
+    `${isNew ? "New signup" : "Repeat signup (already on the list)"}: ${s.email}`,
+    "",
+    `Form: ${s.source}`,
+    s.start ? `Wants to start with: ${s.start}` : "",
+    s.scores ? `Balance check: ${Object.entries(s.scores).map(([k, v]) => `${k} ${v}`).join(", ")}` : "",
+    s.consent ? `Page: ${s.consent.page}` : "",
+    a.utm_source || a.utm_medium || a.utm_campaign ? `UTM: ${[a.utm_source, a.utm_medium, a.utm_campaign].map((v) => v ?? "-").join(" / ")}` : "",
+    a.referrer ? `Referrer: ${a.referrer}` : "",
+    a.landing ? `Landing: ${a.landing}` : "",
+    `Time: ${s.joinedAt}`,
+  ].filter((l, i) => l || i === 1);
+  const form = new FormData();
+  form.append("from", cfg.from);
+  form.append("to", to);
+  form.append("subject", `${isNew ? "New waitlist signup" : "Waitlist signup again"}: ${s.email}`);
+  form.append("text", lines.join("\n"));
+  form.append("h:Reply-To", s.email);
+  form.append("o:tag", "waitlist-notify");
+  form.append("o:tracking", "no");
+  if (testMode) form.append("o:testmode", "yes");
+  const res = await fetch(`${cfg.base}/v3/${cfg.domain}/messages`, { method: "POST", headers: auth(cfg), body: form });
+  if (!res.ok) console.error("[waitlist] team notification failed", res.status);
   return res.ok;
 }
