@@ -31,6 +31,7 @@ Environment variables (already set in Vercel for Production and for the `dev` pr
 | `MAIL_FROM` | `Edward from Elegix <edward@mail.elegix.net>` |
 | `UNSUBSCRIBE_SECRET` | Random secret that signs unsubscribe links (sensitive) |
 | `MAILGUN_TEST_MODE` | `yes` only in `.env.local`: Mailgun accepts emails but doesn't deliver them, so local testing never emails anyone. List signups are still real. |
+| `WAITLIST_NOTIFY_TO` | Optional. Where the "new signup" notification goes (one email per signup, Reply-To is the person). Default `mail@elegix.net`; `off` turns it off. |
 | `WAITLIST_WEBHOOK_URL` | Optional. Also forwards every signup as a JSON POST, for example to Google Sheets via Make or Zapier. |
 
 Webhook payload (balance-check signups include `scores`):
