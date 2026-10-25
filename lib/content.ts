@@ -278,7 +278,7 @@ export const TEAM = {
   title: "The people behind *Elegix*",
   members: [
     { name: "Edward Korytskyi", role: "Founder", photo: "/images/founder.jpg" },
-    { name: "Alina Krupa", role: "CMO" },
+    { name: "Alina Krupa", role: "CMO", photo: "/images/alina-krupa.jpg" },
     { name: "Yevhenii Bohomol", role: "Product Analyst" }, // placeholder title, to confirm with Edward
   ] as { name: string; role: string; photo?: string; linkedin?: string }[],
 };
