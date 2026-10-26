@@ -11,7 +11,8 @@
 .photo.photo { max-width: calc(1100px + 2 * var(--gutter)); margin-block: clamp(32px, 5vw, 56px); }
 .photo > * { border-radius: var(--radius-l); overflow: hidden; }
 
-.body.body { max-width: calc(44rem + 2 * var(--gutter)); display: grid; gap: clamp(36px, 5vw, 56px); }
+.layout.layout { max-width: calc(44rem + 2 * var(--gutter)); display: grid; gap: clamp(36px, 5vw, 56px); }
+.body { display: grid; gap: clamp(36px, 5vw, 56px); min-width: 0; }
 .body section { display: grid; gap: 18px; }
 .body section { scroll-margin-top: calc(var(--header-h) + 24px); }
 .body h2 { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; }
@@ -65,6 +66,13 @@
 .toc li::before { content: counter(toc, decimal-leading-zero); font-size: var(--fs-xs); font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
 .toc a { color: var(--ink) !important; text-decoration: none; }
 .toc a:hover { color: var(--green) !important; }
+
+/* wide screens: the table of contents sits beside the article and follows the reader */
+@media (min-width: 1100px) {
+  .layout.layout { max-width: calc(44rem + 260px + 64px + 2 * var(--gutter)); grid-template-columns: 260px minmax(0, 44rem); column-gap: 64px; align-items: start; }
+  .toc { position: sticky; top: calc(var(--header-h) + 24px); max-height: calc(100vh - var(--header-h) - 48px); overflow-y: auto; }
+  .toc li { font-size: var(--fs-small) !important; }
+}
 
 /* author box at the end of the article */
 .author { display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start; background: var(--paper); border-radius: var(--radius-l); padding: clamp(20px, 2.4vw, 28px); }

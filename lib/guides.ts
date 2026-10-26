@@ -592,6 +592,139 @@ export const GUIDES: Guide[] = [
     related: ["how-to-choose-what-to-focus-on", "signs-of-burnout", "weekly-review"],
     cta: CTA,
   },
+  {
+    slug: "ai-time-savings-work-life-balance",
+    title: "AI saved you hours this week. Where did they go?",
+    metaTitle: "AI saves you time at work. How to keep it for your life",
+    description: "AI tools save workers about 3 hours a week, yet most say their workload went up. Why saved time disappears back into work, and a 4-step way to choose where it goes instead.",
+    label: "Guide · AI and balance",
+    lede: "AI drafts your emails, summarises your meetings and writes the first version of the report. You should have hours back. Instead, most weeks feel just as full. The time didn't vanish: work took it, because nobody chose where it should go.",
+    published: "2026-10-26",
+    updated: "2026-10-26",
+    minutes: 6,
+    media: PHOTO("/images/ready/career.jpg", "A laptop on a desk next to a small model motorbike"),
+    sections: [
+      {
+        h2: "The numbers: time saved, workload up",
+        blocks: [
+          { p: "Research by economists at the European Central Bank found that people who use AI at work report saving a median of **three hours a week** ([Cyprus Mail on the ECB study, August 2026](https://cyprus-mail.com/2026/08/28/ai-use-at-work-doubles-in-two-years-ecb-survey-finds)). That's a long evening, every week." },
+          { p: "Yet in a survey of 2,500 workers by the Upwork Research Institute, **77% of employees using AI said these tools had added to their workload**, and 71% of full-time employees said they were burned out ([Upwork, July 2024](https://investors.upwork.com/news-releases/news-release-details/upwork-study-finds-employee-workloads-rising-despite-increased-c))." },
+          { p: "Both can be true at once. AI makes each task faster, and the freed time is immediately filled with more tasks: more drafts to review, more messages, faster deadlines because “it only takes a minute now”." },
+        ],
+      },
+      {
+        h2: "Why saved time goes back to work",
+        blocks: [
+          { list: [
+            "**Work has a queue; your life doesn't.** There is always a next task waiting at work. Nothing in your calendar is waiting to claim a free hour for sleep, friends or a hobby.",
+            "**Saved minutes are scattered.** Ten minutes here, twenty there. Small gaps get filled with email, not with a walk.",
+            "**Expectations reset.** When a report takes one hour instead of three, people start expecting three reports.",
+            "**Nobody decided.** Time you don't assign on purpose gets assigned by default, and the default is work.",
+          ] },
+          { p: "The result is a quiet trade. You become more productive at work while the rest of your life, your [health](/life-areas/health), [relationships](/life-areas/relationships) and [leisure](/life-areas/leisure), gets nothing from the gain." },
+        ],
+      },
+      {
+        h2: "How to keep the hours AI saves you",
+        blocks: [
+          { steps: [
+            { title: "Measure what you saved (5 minutes)", text: "At the end of the week, list the tasks AI helped with and estimate the time saved. Be honest and round down. Most people find two to four hours." },
+            { title: "Choose one area of life for that time (2 minutes)", text: "Rate your 6 areas of life from 1 to 10, or use the [Wheel of Life](/guides/wheel-of-life). Pick the lowest one. That area gets the saved hours, not your inbox." },
+            { title: "Book it as a block (2 minutes)", text: "Turn the scattered minutes into one or two fixed blocks: Thursday 18:00–20:00 for a run and dinner with a friend. A block in the calendar is protected; loose minutes are not." },
+            { title: "Hold the line at work", text: "Keep your old end-of-day time instead of using the extra speed to take on more. If your role really needs more output, agree it with your manager on purpose, not by drift." },
+          ] },
+          { tip: "Say it once a week: “AI saved me ___ hours. This week they go to ___.” Choosing the area in advance is what turns saved time into a better life instead of a fuller inbox." },
+        ],
+      },
+      {
+        h2: "Why it matters",
+        blocks: [
+          { p: "Longer hours have a real cost. The WHO and ILO found that working 55 hours or more a week is linked to a 35% higher risk of stroke and a 17% higher risk of dying from heart disease, compared with 35–40 hours ([WHO, 2021](https://www.who.int/news/item/17-05-2021-long-working-hours-increasing-deaths-from-heart-disease-and-stroke-who-ilo)). AI could pull hours down. It only does if you decide it should." },
+          { p: "If you already feel the cost, read the [12 signs of burnout in high achievers](/guides/signs-of-burnout)." },
+        ],
+      },
+      {
+        h2: "How Elegix helps",
+        blocks: [
+          { p: "[Elegix](/about) shows your 6 life areas side by side, so you see which one is slipping while work speeds up. In the 1-minute weekly check-in you choose the area that gets your time next week. The name says it: in Valencian, “elegix” means “choose”." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "Does AI reduce workload?", a: "It reduces the time each task takes. Whether your overall workload drops depends on what happens to the saved time. In Upwork's 2024 survey, 77% of employees using AI said their workload went up." },
+      { q: "How much time does AI save at work?", a: "In research by ECB economists published in 2026, workers who use AI reported saving a median of three hours a week. Your number depends on your job and how you use the tools." },
+      { q: "How do I stop saved time from turning into more work?", a: "Decide in advance where it goes. Choose one area of life each week, book the saved hours as a fixed block in your calendar, and keep your usual end-of-day time." },
+    ],
+    related: ["how-to-choose-what-to-focus-on", "signs-of-burnout", "work-life-balance"],
+    cta: CTA,
+  },
+  {
+    slug: "plan-next-year-by-area-of-life",
+    title: "How to plan 2027 by area of life, not just by work goals",
+    metaTitle: "How to plan 2027 by area of life: a simple yearly plan",
+    description: "Plan 2027 across 6 areas of life instead of a list of resolutions: review 2026, choose 2 focus areas, set one goal and one micro-habit per area, and check in weekly. Takes about an hour.",
+    label: "Guide · Yearly planning",
+    lede: "Most yearly plans are work plans with a gym resolution attached. By February the resolution is gone and work has the whole year again. Planning by area of life gives every part of your life a place in 2027, and choosing two focus areas keeps the plan small enough to last.",
+    published: "2026-10-26",
+    updated: "2026-10-26",
+    minutes: 7,
+    media: PHOTO("/images/ready/growth.jpg", "A handwritten notebook page with a pen"),
+    sections: [
+      {
+        h2: "Why resolutions fail and area plans don't",
+        blocks: [
+          { p: "Resolutions are big, vague and all start on the same day: “get fit”, “read more”, “be present”. They compete with work for the same hours, and work has deadlines. A plan by area of life is different in three ways." },
+          { list: [
+            "**It covers your whole life.** You look at [health](/life-areas/health), [relationships](/life-areas/relationships), [spirituality](/life-areas/spirituality), [leisure](/life-areas/leisure), [personal growth](/life-areas/personal-growth) and [finance & career](/life-areas/finance-and-career), so nothing is forgotten by default.",
+            "**It makes you choose.** You pick two focus areas for the year instead of promising to fix everything.",
+            "**It runs on small steps.** Each goal is tied to a micro-habit you can keep on a busy week.",
+          ] },
+        ],
+      },
+      {
+        h2: "The plan in 5 steps (about an hour)",
+        blocks: [
+          { steps: [
+            { title: "Review 2026 (15 minutes)", text: "For each of the 6 areas, write one high point, one low point and a score from 1 to 10 for the year. The [Wheel of Life](/guides/wheel-of-life) makes this visual." },
+            { title: "Choose 2 focus areas (5 minutes)", text: "Pick the two areas where change would matter most. Usually that's your lowest score plus the one you care about most. The other four get a maintenance goal: keep them from slipping." },
+            { title: "One goal per area (15 minutes)", text: "Write one concrete goal for each area, ambitious for the two focus areas and modest for the rest. Add a one-line why. See [examples of goals for every area of life](/guides/goals-for-every-area-of-life)." },
+            { title: "One micro-habit per goal (15 minutes)", text: "A small action you can do even on your worst week: 10 minutes of reading, one call on Sunday, a fixed time to close the laptop. Small habits are what keep a plan alive after January." },
+            { title: "Put the check-ins in the calendar (10 minutes)", text: "A 10-minute [weekly review](/guides/weekly-review) every Sunday and a longer review on the last day of each quarter. A plan without check-ins is a wish list." },
+          ] },
+          { tip: "Write the year in one sentence: “In 2027 I choose ___ and ___.” If a new opportunity doesn't serve those two areas or your basics, it's easier to say no." },
+        ],
+      },
+      {
+        h2: "An example plan",
+        blocks: [
+          { p: "A product manager who scored their 2026 at Health 4, Relationships 5, Spirituality 6, Leisure 3, Personal growth 6 and Finance & career 9 might plan 2027 like this:" },
+          { list: [
+            "**Focus: Health.** Goal: sleep 7 hours on weeknights. Habit: laptop closed by 22:00.",
+            "**Focus: Leisure.** Goal: play in a weekly five-a-side league. Habit: Tuesday evening is blocked.",
+            "**Relationships (maintain).** Goal: dinner with close friends once a month. Habit: a standing first-Friday booking.",
+            "**Spirituality (maintain).** Goal: keep a short weekly journal. Habit: 10 minutes on Sunday.",
+            "**Personal growth (maintain).** Goal: read 12 books. Habit: 20 pages before bed.",
+            "**Finance & career (maintain).** Goal: keep performance, no extra hours. Habit: stop work at 18:30.",
+          ] },
+          { p: "Notice that career, the highest score, gets a maintenance goal. Choosing not to push an area that's already strong is how the others get room to grow." },
+        ],
+      },
+      {
+        h2: "Keep it alive after January",
+        blocks: [
+          { p: "Most plans don't fail in December; they fade in February, when the first busy month arrives. Three things help: re-score your areas every week so a drop is visible early, shrink a habit instead of dropping it when life gets heavy, and choose a [weekly focus](/guides/how-to-choose-what-to-focus-on) from your two focus areas." },
+          { p: "[Elegix](/about) is built for exactly this. Your goals and habits live inside your 6 life areas, a 1-minute weekly check-in shows which area is slipping, and a monthly review keeps the year on track." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "When should I start planning next year?", a: "Late November or December works well: the year is nearly over, so the review is honest, and you have time to set up habits before January." },
+      { q: "How many goals should I set for the year?", a: "One per area of life, with only two of them ambitious. Six small, clear goals are easier to keep than one long list of resolutions." },
+      { q: "What if I fall behind in March?", a: "Make the habit smaller rather than dropping the goal, and use your next weekly review to choose one step. A plan by area of life is meant to be adjusted, not followed perfectly." },
+    ],
+    related: ["goals-for-every-area-of-life", "wheel-of-life", "weekly-review"],
+    cta: CTA,
+  },
 ];
 
 const AREA_SLUGS: Record<AreaKey, string> = {
