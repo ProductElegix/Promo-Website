@@ -7,6 +7,7 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { HashScroll } from "@/components/ui/HashScroll";
 import { Clarity } from "@/components/ui/Clarity";
 import { CloudflareAnalytics } from "@/components/ui/CloudflareAnalytics";
+import { AhrefsAnalytics } from "@/components/ui/AhrefsAnalytics";
 import { GoogleAnalytics } from "@/components/ui/GoogleAnalytics";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HashScroll />
         <Clarity />
         <CloudflareAnalytics />
+        <AhrefsAnalytics />
         <GoogleAnalytics />
         <Header />
         <div className="page">{children}</div>

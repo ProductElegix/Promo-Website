@@ -73,7 +73,7 @@ export const COMMUNITY = {
 };
 
 /** Shown under every signup form. Bump POLICY_VERSION whenever the privacy policy text changes. */
-export const POLICY_VERSION = "2026-10-14.7";
+export const POLICY_VERSION = "2026-10-26.1";
 
 /** Who runs Elegix, shown in the privacy policy: an individual entrepreneur (FOP) in Ukraine. */
 export const LEGAL_ENTITY = { name: "Eduard Korytskyi", form: "an individual entrepreneur (FOP)", city: "Lutsk", country: "Ukraine" };
