@@ -320,11 +320,13 @@ export const FAQ = [
   { q: "Which platforms?", a: "iOS and Android, one account on all your devices." },
   { q: "What happens to my data?", a: "It's used only to run the app for you. It's never sold, and you can delete it any time." },
   { q: "What do I get for joining early?", a: "First access, a founding member price and a say in what we build next." },
+  { q: "What does Elegix mean?", a: "It comes from Valencian and Western Catalan, where elegix means “choose”. We picked it because Elegix is about consciously choosing how you spend your time and energy across the areas of your life." },
 ];
 
 export const FOOTER = {
   caption: "Elegix",
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
+  name: "Elegix: Valencian for “choose”.",
   email: "hello@elegix.net",
   nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Early access" }],
   legal: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms" }],
@@ -457,7 +459,12 @@ export const ABOUT_PAGE = {
     title: "Free to use. *Premium* if you want more.",
     text: "Elegix is free to download and use. An optional Premium plan adds more, and its pricing will be announced before launch. Waitlist members hear first.",
   },
-  faq: ["How is Elegix different from Todoist or Notion?", "Is the Life Balance score real or just a number?", "I've given up on every planner. Why would this one stick?", "Is it free?", "Which platforms?", "What happens to my data?"],
+  name: {
+    label: "Why the name",
+    title: "Why “Elegix”?",
+    text: ["In Valencian and Western Catalan, ", "elegix", " means “choose”, and also “she chooses”. That’s the whole idea behind the app: a balanced life isn’t something you find. It’s something you choose, one week at a time."],
+  },
+  faq: ["How is Elegix different from Todoist or Notion?", "Is the Life Balance score real or just a number?", "I've given up on every planner. Why would this one stick?", "Is it free?", "Which platforms?", "What happens to my data?", "What does Elegix mean?"],
   story: { label: "Our story", id: "story" },
   beliefs: { label: "What we believe", title: "Our *principles*" },
   publicBuild: { title: "Built in public", text: "Elegix is in development and we share every step. Follow along:" },

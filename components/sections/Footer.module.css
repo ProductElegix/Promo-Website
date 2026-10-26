@@ -5,6 +5,7 @@
 .head { margin-bottom: 10px; font: inherit; color: rgba(255, 255, 255, .45); }
 .about { display: grid; gap: 10px; align-content: start; max-width: 22rem; }
 .about p { margin: 0; }
+.name { color: rgba(255, 255, 255, .45); }
 .email { justify-self: start; text-decoration: underline; text-underline-offset: 3px; }
 .top ul { display: grid; gap: 4px; }
 .top a { text-decoration: none; transition: color .2s; }

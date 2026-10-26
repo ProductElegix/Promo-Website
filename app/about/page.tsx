@@ -133,6 +133,17 @@ export default function About() {
         </div>
       </section>
 
+      {/* 7b. Why the name */}
+      <section className={`section ${styles.pricingSection}`} aria-labelledby="name-title">
+        <div className="container">
+          <div className={styles.pricing} data-reveal>
+            <span className="label">{A.name.label}</span>
+            <h2 id="name-title" className="display h2">{A.name.title}</h2>
+            <p className="lede">{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
+          </div>
+        </div>
+      </section>
+
       {/* 8. Our story */}
       <section id={A.story.id} className="section" aria-labelledby="story-title" style={{ scrollMarginTop: "var(--header-h)" }}>
         <div className={`container ${styles.story}`}>
