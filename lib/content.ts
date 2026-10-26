@@ -38,6 +38,12 @@ export const META = {
   keywords: ["life balance tracker", "life balance app", "work-life balance app", "wheel of life app", "balance wheel", "habit tracker", "goal tracker", "burnout prevention", "life areas", "personal growth app"],
 };
 
+/** What the name means and the brand line: used in the Organization schema and llms.txt. Keep in sync with the About "Why the name" block. */
+export const BRAND = {
+  slogan: "Choose your balance.",
+  nameMeaning: "The name Elegix comes from Valencian and Western Catalan, where elegix means “choose” (and “he or she chooses”). A balanced life isn't something you find. It's something you choose, one week at a time.",
+};
+
 export const NAV = [
   { href: "/about", label: "About" },
   { href: "/guides", label: "Guides" },
