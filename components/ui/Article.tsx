@@ -103,7 +103,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
           <Media media={g.media} priority sizes="(max-width: 1100px) 100vw, 1100px" />
         </div>
 
-        <div className={`container ${styles.body}`}>
+        <div className={`container ${styles.layout}`}>
           <nav className={styles.toc} aria-labelledby="toc-title">
             <p id="toc-title" className={styles.tocTitle}>In this guide</p>
             <ol>
@@ -111,6 +111,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
               {g.faq && <li><a href="#questions">Questions people ask</a></li>}
             </ol>
           </nav>
+          <div className={styles.body}>
           {g.sections.map((s) => (
             <section key={s.h2} id={anchor(s.h2)}>
               <h2>{s.h2}</h2>
@@ -141,6 +142,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
               <Link href={TRUST.founder.storyLink.href} className={styles.authorLink}>{TRUST.founder.storyLink.label} →</Link>
             </div>
           </aside>
+          </div>
         </div>
       </article>
 
