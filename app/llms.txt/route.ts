@@ -1,5 +1,5 @@
 import { AREA_GUIDES, GUIDES } from "@/lib/guides";
-import { META } from "@/lib/content";
+import { BRAND, META } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -13,6 +13,8 @@ export function GET() {
     `> ${META.description}`,
     "",
     "Elegix is a free life balance tracker app for iOS and Android, currently in early access (waitlist). It links goals, habits and tasks to 6 life areas (Health, Relationships, Spirituality, Leisure, Personal Growth, Finance & Career), uses a 1-minute weekly check-in and a monthly review, and shows a Life Balance score.",
+    "",
+    `${BRAND.nameMeaning} Slogan: ${BRAND.slogan}`,
     "",
     "## Pages",
     line("/", "Home", "what Elegix does, the free Life Balance Check and the waitlist"),
