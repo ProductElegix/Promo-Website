@@ -344,6 +344,254 @@ export const GUIDES: Guide[] = [
     related: ["wheel-of-life", "goals-for-every-area-of-life", "signs-of-burnout"],
     cta: CTA,
   },
+  {
+    slug: "how-to-choose-what-to-focus-on",
+    title: "How to choose what to focus on this week",
+    metaTitle: "How to choose what to focus on this week: a 5-minute method",
+    description: "Too many goals and not enough week? A 5-minute Sunday method to choose one focus area of your life, one small action for it, and what to let go of.",
+    label: "Guide · Weekly focus",
+    lede: "Most weeks don't fail because you were lazy. They fail because you tried to move everything at once, so work took every hour by default. Choosing one focus for the week is the fastest way to make progress without dropping the rest of your life.",
+    published: "2026-10-26",
+    updated: "2026-10-26",
+    minutes: 5,
+    media: PHOTO("/images/how-next.jpg", "A notebook, pen and laptop on a wooden desk"),
+    sections: [
+      {
+        h2: "Why one focus beats a long list",
+        blocks: [
+          { p: "A to-do list treats every item as equal. Your week isn't. Work arrives with deadlines and other people's urgency, so it always wins the fight for your time. Everything without a deadline, such as sleep, friends, reading or a hobby, quietly loses." },
+          { p: "Choosing one focus area for the week flips that. You still do your job, but one other part of your life gets a protected place in the calendar. Over a month that's four areas that moved, instead of none." },
+        ],
+      },
+      {
+        h2: "The 5-minute method",
+        blocks: [
+          { steps: [
+            { title: "Score your areas (1 minute)", text: "Rate [health](/life-areas/health), [relationships](/life-areas/relationships), [spirituality](/life-areas/spirituality), [leisure](/life-areas/leisure), [personal growth](/life-areas/personal-growth) and [finance & career](/life-areas/finance-and-career) from 1 to 10. Go with your first answer." },
+            { title: "Choose one area (1 minute)", text: "Pick the lowest score, or the area that would lift others if it moved. Tired and short-tempered? Health usually comes first, because sleep improves everything else." },
+            { title: "Choose one action (2 minutes)", text: "Make it small and specific: “two 30-minute walks, Tuesday and Thursday at 7pm”, not “exercise more”. If you can't fail at it, it's the right size." },
+            { title: "Put it in the calendar (1 minute)", text: "Give the action a day and a time, like a meeting. An action without a slot is a wish." },
+          ] },
+          { tip: "Write the sentence down: “This week I choose ___.” Saying it out loud, or to a friend, makes it much harder to drift away from by Wednesday." },
+        ],
+      },
+      {
+        h2: "What to let go of",
+        blocks: [
+          { p: "Choosing a focus also means choosing what not to push this week. That's not giving up. It's being honest about what fits in seven days." },
+          { list: [
+            "**Park, don't delete.** Move other goals to a “next weeks” list so they don't nag you.",
+            "**Keep the basics running.** A focus on relationships doesn't mean you stop sleeping or working. It means one area gets extra attention.",
+            "**Say one no.** Find one meeting, favour or late evening you can decline to make room for your action.",
+          ] },
+        ],
+      },
+      {
+        h2: "At the end of the week",
+        blocks: [
+          { p: "Next Sunday, before you choose again, check one thing: did you keep your choice? If you did, notice how that area feels now. If you didn't, ask what got in the way and make next week's action smaller. Our [10-minute weekly review](/guides/weekly-review) turns this into a simple routine." },
+          { p: "This is the loop [Elegix](/about) is built around. The name even comes from it: in Valencian, “elegix” means “choose”. Each week you choose the area that needs you, and the app shows whether your week matched your choice." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "What if two areas are equally low?", a: "Choose the one with the smallest first step, or the one that feeds the other. Better sleep, for example, often lifts both health and leisure. You can take the other area next week." },
+      { q: "Should work ever be my weekly focus?", a: "Yes, if finance & career is the area that's truly behind, for example money stress or a stalled skill. The point is to choose it on purpose, not to let work win by default." },
+      { q: "How is this different from setting goals?", a: "Goals describe where you want to be in months or years. A weekly focus is the small step you take this week toward one of them. Read [how to set goals for every area of life](/guides/goals-for-every-area-of-life)." },
+    ],
+    related: ["weekly-review", "how-to-choose-priorities-in-life", "wheel-of-life"],
+    cta: CTA,
+  },
+  {
+    slug: "how-to-choose-priorities-in-life",
+    title: "How to choose your priorities in life: a simple method across 6 areas",
+    metaTitle: "How to choose your priorities in life: a simple 6-area method",
+    description: "How to decide what matters most when everything feels important: score 6 areas of life, find your values, choose 2 priorities for the season and turn them into weekly steps.",
+    label: "Guide · Priorities",
+    lede: "When everything feels like a priority, nothing is. Choosing your priorities isn't about ranking your whole life once and forever. It's about choosing what gets your best time and energy for the next few months, and being at peace with what waits.",
+    published: "2026-10-26",
+    updated: "2026-10-26",
+    minutes: 7,
+    media: PHOTO("/images/hero.jpg", "A woman in a grey sweater looking out at the sea"),
+    sections: [
+      {
+        h2: "Why choosing priorities feels so hard",
+        blocks: [
+          { p: "Most people don't lack priorities. They have too many, and they never chose them. Some came from a job description, some from parents, some from social media. When you never choose, the loudest one wins, and the loudest one is usually work." },
+          { p: "The method below takes about 20 minutes. You only need a pen and an honest hour of quiet." },
+        ],
+      },
+      {
+        h2: "Step 1. See the whole picture",
+        blocks: [
+          { p: "Before choosing, look at all of your life, not just the part that shouts. Score each of the 6 areas from 1 to 10 for how satisfied you are right now:" },
+          { list: [
+            "**[Health](/life-areas/health):** sleep, movement, food and energy.",
+            "**[Relationships](/life-areas/relationships):** family, friends, partner and community.",
+            "**[Spirituality](/life-areas/spirituality):** values, reflection, mindfulness and inner calm.",
+            "**[Leisure](/life-areas/leisure):** rest, play, creativity and fun.",
+            "**[Personal growth](/life-areas/personal-growth):** learning, skills and new challenges.",
+            "**[Finance & career](/life-areas/finance-and-career):** work, income, savings and business.",
+          ] },
+          { tip: "This is the [Wheel of Life](/guides/wheel-of-life). You can also take the free [Life Balance Check](/#check) and get your scores by email." },
+        ],
+      },
+      {
+        h2: "Step 2. Ask what matters, not what's urgent",
+        blocks: [
+          { p: "For each area, answer two questions in one line each:" },
+          { list: [
+            "**How important is this area to me right now, from 1 to 10?** Not how important it should be. How important it is to you.",
+            "**If nothing changes here for a year, how will I feel?** This one cuts through. Some low scores you can live with. Others hurt to imagine.",
+          ] },
+          { p: "An area with high importance and a low score is a priority candidate. An area with low importance and a low score can wait, guilt-free." },
+        ],
+      },
+      {
+        h2: "Step 3. Choose two priorities for this season",
+        blocks: [
+          { p: "Pick no more than two areas for the next three months. One is usually the area that's hurting most. The other is often the one you keep postponing because it never feels urgent, such as relationships or growth." },
+          { p: "Write each one as a sentence with a reason: “For the next three months I choose health, because I want energy for my kids in the evening.” The reason is what keeps you going when the choice gets hard." },
+          { tip: "Two is a real limit. With three or more, you're back to a list where work wins by default." },
+        ],
+      },
+      {
+        h2: "Step 4. Turn priorities into weekly steps",
+        blocks: [
+          { p: "A priority you don't see in your calendar isn't a priority yet. For each one, set one goal for the season and one small habit for every week. Then each Sunday, [choose what to focus on this week](/guides/how-to-choose-what-to-focus-on) and give it a slot." },
+          { p: "Check in once a month: are your two areas moving? Did another area pay the price? Adjust and keep going. Our [goals for every area of life](/guides/goals-for-every-area-of-life) guide has examples for each area." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "Should my priorities stay the same forever?", a: "No. Priorities change with seasons of life: a launch, a new baby, a move. Re-choose them every three months, and check them in a monthly review." },
+      { q: "What if my job leaves no time for my priorities?", a: "Start smaller than you think: one 20-minute action a week. If even that doesn't fit for months, that's important information about your job, not about you. The [work-life balance guide](/guides/work-life-balance) can help." },
+      { q: "Is there an app for choosing priorities across life areas?", a: "Elegix is a free life balance tracker for iOS and Android. You score 6 life areas, link goals and habits to them and see your balance over time. Join the waitlist for early access." },
+    ],
+    related: ["how-to-choose-what-to-focus-on", "goals-for-every-area-of-life", "wheel-of-life"],
+    cta: CTA,
+  },
+  {
+    slug: "choosing-between-career-and-family",
+    title: "Choosing between career and family: a calmer way to decide",
+    metaTitle: "Choosing between career and family: how to decide calmly",
+    description: "Feel torn between your career and your family? Why it's rarely a one-time choice, how to decide season by season, and small steps that protect both.",
+    label: "Guide · Career and family",
+    lede: "“Career or family” sounds like one big decision you make once. In real life it's hundreds of small ones: this late meeting, that school play, this weekend trip. The good news is that small choices are easier to make well, and easier to change.",
+    published: "2026-10-26",
+    updated: "2026-10-26",
+    minutes: 6,
+    media: PHOTO("/images/how-areas.jpg", "Friends making pizza together at a kitchen counter"),
+    sections: [
+      {
+        h2: "Why it feels like either-or",
+        blocks: [
+          { p: "Work has clear signals: deadlines, reviews, money, people waiting for you. Family's signals are quieter until they're very loud. So each single day, work looks more urgent, and family gets what's left. After a year of that, it feels like you chose career, even though you never decided anything." },
+          { p: "The way out isn't a dramatic choice. It's making the small choices on purpose." },
+        ],
+      },
+      {
+        h2: "Decide by season, not forever",
+        blocks: [
+          { p: "Think in seasons of three to six months. Some seasons lean toward work: a launch, a new role, a busy quarter. Some lean toward family: a new baby, a parent who needs you, a child starting school. Leaning is fine. Leaning without noticing, for years, is the problem." },
+          { steps: [
+            { title: "Name the season", text: "Finish the sentence: “For the next three months, I lean toward ___, because ___.”" },
+            { title: "Set a floor for the other side", text: "Decide the minimum you protect no matter what. For example: dinner at home four nights a week, or no work on Sundays." },
+            { title: "Tell the people involved", text: "Share your season with your partner and your manager. Most conflicts come from surprises, not from the choice itself." },
+            { title: "Set an end date", text: "Put the end of the season in your calendar. On that day, choose again." },
+          ] },
+        ],
+      },
+      {
+        h2: "Questions that make the choice clearer",
+        blocks: [
+          { list: [
+            "Ten years from now, which of these two weeks will I remember?",
+            "Is this work urgent, or just loud?",
+            "What does my family actually need from me now: more hours, or more attention in the hours I have?",
+            "If a friend described my week to me, what would I tell them?",
+          ] },
+        ],
+      },
+      {
+        h2: "Small steps that protect both",
+        blocks: [
+          { list: [
+            "**A hard stop.** End work at a set time on most days and keep your phone away for the first hour at home.",
+            "**One fixed family ritual.** A weekly dinner, a Saturday walk, bedtime stories. Fixed rituals survive busy seasons.",
+            "**A weekly check.** Score [relationships](/life-areas/relationships) and [finance & career](/life-areas/finance-and-career) every Sunday. When one drops two weeks in a row, it's time to rebalance.",
+            "**Watch your health.** When you feel torn for months, [burnout](/guides/signs-of-burnout) is often close. Sleep is usually the first thing to protect.",
+          ] },
+          { p: "[Elegix](/about) shows your career and relationships side by side with the other areas of your life, so you see the trade-off while you can still choose differently." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "Is it selfish to put my career first?", a: "No. A season focused on work can be the right choice, especially when your family agrees with it and it has an end date. What hurts is when it happens by default and never ends." },
+      { q: "How do I talk to my partner about this?", a: "Talk about seasons, not forever. Share what you're leaning toward, for how long, and what you'll protect for them no matter what. Then ask what they need from you." },
+    ],
+    related: ["work-life-balance", "how-to-choose-priorities-in-life", "signs-of-burnout"],
+    cta: CTA,
+  },
+  {
+    slug: "decision-fatigue",
+    title: "Decision fatigue: why choosing less makes you feel better",
+    metaTitle: "Decision fatigue: signs, causes and how to choose less",
+    description: "What decision fatigue is, what the research actually says, the signs to watch for, and simple ways to make fewer decisions so you can choose well on the ones that matter.",
+    label: "Guide · Decision fatigue",
+    lede: "By evening, choosing what to eat feels harder than a work meeting did at 10am. That heavy, foggy feeling is often called decision fatigue. You can't stop making choices, but you can make far fewer of them, and save your attention for the ones that shape your life.",
+    published: "2026-10-26",
+    updated: "2026-10-26",
+    minutes: 5,
+    media: PHOTO("/images/about-hero.jpg", "A man in a grey shirt sitting on a cliff, looking out"),
+    sections: [
+      {
+        h2: "What is decision fatigue?",
+        blocks: [
+          { p: "Decision fatigue is the idea that the quality of your choices drops after a long run of decisions. Late in the day, people tend to pick the default option, put things off, or decide on impulse." },
+          { p: "The science is debated. Early studies suggested willpower works like a battery that runs down, but later, larger studies couldn't always repeat those results. What most people recognise from their own life holds up well, though: when you're tired and overloaded, you choose worse, and too many small choices leave little energy for the big ones." },
+        ],
+      },
+      {
+        h2: "Signs you're running on empty",
+        blocks: [
+          { list: [
+            "You put off simple choices, like replying to a message or booking a doctor.",
+            "You say “whatever, you choose” more often than usual.",
+            "You buy on impulse late in the evening.",
+            "You stick to the default even when you know it's not what you want: another late night at work, another evening scrolling.",
+            "Small choices make you irritable.",
+          ] },
+          { tip: "If this feels like every day for weeks, it may be part of something bigger. Read the [12 signs of burnout in high achievers](/guides/signs-of-burnout)." },
+        ],
+      },
+      {
+        h2: "How to choose less",
+        blocks: [
+          { steps: [
+            { title: "Decide once, not daily", text: "Turn repeated choices into rules: the same breakfast on weekdays, gym on Monday and Thursday, no meetings before 10am. A rule is a choice you only make once." },
+            { title: "Make big choices in the morning", text: "Put important decisions where your head is clearest. Leave the evening for things that don't need choosing." },
+            { title: "Choose one focus a week", text: "Instead of deciding every day what matters, decide on Sunday. [Choosing one focus for the week](/guides/how-to-choose-what-to-focus-on) removes dozens of small daily debates." },
+            { title: "Limit the options", text: "Two or three good options are enough. More choice often feels worse, not better." },
+            { title: "Protect your defaults", text: "Make the healthy option the easy one: shoes by the door, phone charging outside the bedroom, a calendar block for family time." },
+          ] },
+        ],
+      },
+      {
+        h2: "Choose less, so the big choices are yours",
+        blocks: [
+          { p: "The point of choosing less isn't to stop caring. It's to keep your energy for the choices that shape your life: which area gets your attention, who you spend your evenings with, when work stops. Those are the ones that drift to the default when you're worn out." },
+          { p: "That's what [Elegix](/about) is for: a weekly moment to choose which part of your life needs you, so you don't have to fight the same battle every evening." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "Is decision fatigue real?", a: "The original lab research is contested, and some well-known findings haven't replicated. But feeling worse at choosing when you're tired and overloaded is a common experience, and reducing small decisions is a low-risk way to feel better." },
+      { q: "How many decisions do we make a day?", a: "You'll often see a number like 35,000, but it has no reliable source. What matters more than the count is how many choices you leave open every day that could be decided once." },
+    ],
+    related: ["how-to-choose-what-to-focus-on", "signs-of-burnout", "weekly-review"],
+    cta: CTA,
+  },
 ];
 
 const AREA_SLUGS: Record<AreaKey, string> = {

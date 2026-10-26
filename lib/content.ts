@@ -38,6 +38,12 @@ export const META = {
   keywords: ["life balance tracker", "life balance app", "work-life balance app", "wheel of life app", "balance wheel", "habit tracker", "goal tracker", "burnout prevention", "life areas", "personal growth app"],
 };
 
+/** What the name means and the brand line: used in the Organization schema and llms.txt. Keep in sync with the About "Why the name" block. */
+export const BRAND = {
+  slogan: "Choose your balance.",
+  nameMeaning: "The name Elegix comes from Valencian and Western Catalan, where elegix means “choose” (and “he or she chooses”). A balanced life isn't something you find. It's something you choose, one week at a time.",
+};
+
 export const NAV = [
   { href: "/about", label: "About" },
   { href: "/guides", label: "Guides" },
@@ -279,6 +285,7 @@ export const TEAM = {
   members: [
     { name: "Edward Korytskyi", role: "Founder", photo: "/images/founder.jpg" },
     { name: "Alina Krupa", role: "CMO", photo: "/images/alina-krupa.jpg" },
+    { name: "Maksym Zhuravskyi", role: "CTO" },
     { name: "Yevhenii Bohomol", role: "Product Analyst" }, // placeholder title, to confirm with Edward
   ] as { name: string; role: string; photo?: string; linkedin?: string }[],
 };
@@ -540,7 +547,7 @@ export const CAREERS = {
       { q: "How can I get in touch about a job?", a: "Email hello@elegix.net with the subject “Careers”. Tell us what you do, what you'd like to work on and why this problem matters to you. A link to your work helps." },
       { q: "What does the Elegix team work on?", a: "A life balance tracker for iOS and Android. It links goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next." },
       { q: "What is the work week like?", a: "We work four days a week, with Wednesday off, so nobody goes more than two days without a break. We try to keep clear priorities and one next step, the same way the app does." },
-      { q: "Who is on the team?", a: "Edward Korytskyi (founder), Alina Krupa (CMO) and Yevhenii Bohomol. You can meet the team on the About page." },
+      { q: "Who is on the team?", a: "Edward Korytskyi (founder), Alina Krupa (CMO), Maksym Zhuravskyi (CTO) and Yevhenii Bohomol. You can meet the team on the About page." },
     ],
   },
   open: {

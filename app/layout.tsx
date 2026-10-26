@@ -10,7 +10,7 @@ import { CloudflareAnalytics } from "@/components/ui/CloudflareAnalytics";
 import { GoogleAnalytics } from "@/components/ui/GoogleAnalytics";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
-import { META, SOCIALS } from "@/lib/content";
+import { BRAND, META, SOCIALS } from "@/lib/content";
 import { INDEXABLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -46,6 +46,8 @@ const ORGANIZATION = {
       logo: `${SITE_URL}/apple-icon.png`,
       email: "hello@elegix.net",
       description: META.description,
+      slogan: BRAND.slogan,
+      disambiguatingDescription: BRAND.nameMeaning,
       sameAs: SOCIALS.map((s) => s.href),
     },
     {
