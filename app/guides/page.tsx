@@ -65,7 +65,7 @@ export default function Guides() {
             <span className="label">Guides</span>
             <h2 id="all-guides" className="display h2"><Rich text="Burnout, balance and *goals*" /></h2>
           </div>
-          <GuideCards two={rest.length % 3 !== 0} cards={rest.map((g) => ({ href: `/guides/${g.slug}`, title: g.title, text: g.description, media: g.media, meta: `${g.minutes} min read` }))} />
+          <GuideCards cards={rest.map((g) => ({ href: `/guides/${g.slug}`, title: g.title, text: g.description, media: g.media, meta: `${g.minutes} min read` }))} />
         </div>
       </section>
 
