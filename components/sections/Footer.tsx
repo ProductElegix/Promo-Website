@@ -11,6 +11,7 @@ export function Footer() {
         <div className={styles.about}>
           <h2 className={styles.head}>{FOOTER.caption}</h2>
           <p>{FOOTER.about}</p>
+          <p className={styles.name}>{FOOTER.name}</p>
           <a href={`mailto:${FOOTER.email}`} className={styles.email}>Email us</a>
         </div>
         <nav aria-label="Social">
