@@ -725,6 +725,61 @@ export const GUIDES: Guide[] = [
     related: ["goals-for-every-area-of-life", "wheel-of-life", "weekly-review"],
     cta: CTA,
   },
+  {
+    slug: "four-day-work-week-extra-day",
+    title: "Four days for work. What is your fifth day for?",
+    metaTitle: "4-day work week: how to use your extra day off well",
+    description: "In the largest four-day week trial, 71% of employees reported less burnout. But the extra day fills up fast. How to choose what your fifth day is for, across 6 areas of life.",
+    label: "Guide · Four-day week",
+    lede: "A four-day week gives you something rare: a whole free day that isn't the weekend. In trials, most people spent it on life admin first. That's fine for a month. After that, the day is worth choosing on purpose, or it quietly turns into errands, or into a fifth workday from the sofa.",
+    published: "2026-10-27",
+    updated: "2026-10-27",
+    minutes: 6,
+    media: PHOTO("/images/how-score.jpg", "A person walking along a waterfront path at sunset"),
+    sections: [
+      {
+        h2: "What the trials found",
+        blocks: [
+          { p: "In the UK pilot run by 4 Day Week Global with researchers from the University of Cambridge and Boston College, 61 companies and about 2,900 employees cut a day of work for six months with no pay cut. **71% of employees reported lower burnout**, 39% were less stressed, sick days fell by 65%, and 56 of the 61 companies said they would continue ([Technology Networks, February 2023](https://www.technologynetworks.com/neuroscience/news/worlds-largest-trial-shows-four-day-working-week-a-resounding-win-for-wellbeing-and-productivity-370412))." },
+          { p: "A larger study in Nature Human Behaviour followed 2,896 employees at 141 companies in six countries and found less burnout and better sleep, with the biggest gains for people whose week shrank by eight hours or more ([SUCCESS, April 2026](https://www.success.com/4-day-work-week-research-2026))." },
+        ],
+      },
+      {
+        h2: "Where the extra day actually goes",
+        blocks: [
+          { p: "Asked how they used the day, UK trial participants most often said **life admin**: shopping, chores, appointments. That freed their weekends for rest, and 62% said work was easier to combine with their social life. Others did more sport, cooking, music or volunteering, or took a course." },
+          { p: "The risk is the same one as with [time saved by AI](/guides/ai-time-savings-work-life-balance): time nobody assigns gets assigned by default. For the fifth day, the defaults are errands, catching up on email, and scrolling." },
+        ],
+      },
+      {
+        h2: "Choose what your fifth day is for",
+        blocks: [
+          { steps: [
+            { title: "Score your 6 areas of life (5 minutes)", text: "Rate [health](/life-areas/health), [relationships](/life-areas/relationships), [spirituality](/life-areas/spirituality), [leisure](/life-areas/leisure), [personal growth](/life-areas/personal-growth) and [finance & career](/life-areas/finance-and-career) from 1 to 10. The [Wheel of Life](/guides/wheel-of-life) makes it visual." },
+            { title: "Give the day one main area (2 minutes)", text: "Pick the lowest area, or the one you miss most. That's what the day is for this month: a long run and cooking, time with a parent, a class, a project you keep postponing." },
+            { title: "Cap life admin at two hours", text: "Errands are a fair use of the morning. Put them in one block and stop at lunch, so the afternoon goes to the area you chose." },
+            { title: "Close work for the day", text: "No email, no “quick check”. A fifth day spent half-working gives you neither the rest nor the work." },
+            { title: "Rotate monthly", text: "At the end of each month, re-score your areas and choose again. Over a year, the fifth day can lift every area of your life, one at a time." },
+          ] },
+          { tip: "Name the day after the area: “Health Friday”, “People Friday”. A day with a name is much harder to fill with errands." },
+        ],
+      },
+      {
+        h2: "No four-day week? Build a fifth day anyway",
+        blocks: [
+          { p: "Most people don't have a four-day week yet. You can still claim part of one: two protected evenings and a weekend morning add up to about eight hours, the same amount that brought the biggest gains in the research. Give those hours one area of life, exactly as above." },
+          { p: "[Elegix](/about) is built around this choice. You see your 6 areas side by side, the weekly check-in shows which one is slipping, and you choose where your free time goes next. In Valencian, “elegix” means “choose”." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "Does a four-day work week reduce burnout?", a: "In the UK trial of 61 companies, 71% of employees reported lower burnout after six months. A study of 141 companies in Nature Human Behaviour also found lower burnout and better sleep." },
+      { q: "What should I do with my extra day off?", a: "Keep life admin to one short block, then give the rest of the day to one area of life you want to improve, such as health, relationships or a hobby. Choose a new area each month." },
+      { q: "How do I stop the extra day turning into work?", a: "Turn off work notifications for the day, don't schedule “just one call”, and plan the day in advance around one area of life so it already has a purpose." },
+    ],
+    related: ["ai-time-savings-work-life-balance", "signs-of-burnout", "wheel-of-life"],
+    cta: CTA,
+  },
 ];
 
 const AREA_SLUGS: Record<AreaKey, string> = {
