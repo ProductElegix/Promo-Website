@@ -15,7 +15,7 @@ export function LegalPage({ doc, version, extra = [] }: { doc: LegalDoc; version
   const sections = intro?.title === "Introduction" ? [intro, ...extra, ...rest] : [...extra, ...doc.sections];
   return (
     <main className="section" style={{ paddingTop: "calc(var(--header-h) + var(--section-y))" }}>
-      <article className="container" style={{ maxWidth: 820, display: "grid", gap: 28 }}>
+      <div className="container" style={{ maxWidth: 820, display: "grid", gap: 28 }}>
         <Link href="/" className="label" style={{ textDecoration: "none" }}>Back to Elegix</Link>
         <div style={{ display: "grid", gap: 12 }}>
           <h1 className="display h2">{doc.title}</h1>
@@ -29,7 +29,7 @@ export function LegalPage({ doc, version, extra = [] }: { doc: LegalDoc; version
             {s.blocks.map((b, i) => <Block key={i} b={b} />)}
           </section>
         ))}
-      </article>
+      </div>
     </main>
   );
 }

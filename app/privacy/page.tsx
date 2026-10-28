@@ -7,9 +7,9 @@ import { PRIVACY_POLICY, websiteSection } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
-  description: "How Elegix collects, uses and protects your personal data on the website, the waitlist and the app.",
+  description: "How Elegix collects, uses and protects your personal data on the website, the waitlist and the app, and the rights you have over it.",
   alternates: { canonical: "/privacy" },
-  openGraph: { title: "Privacy policy · Elegix", description: "How Elegix collects, uses and protects your personal data on the website, the waitlist and the app.", url: "/privacy", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
+  openGraph: { title: "Privacy policy · Elegix", description: "How Elegix collects, uses and protects your personal data on the website, the waitlist and the app, and the rights you have over it.", url: "/privacy", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
 };
 
 export default function Privacy() {
