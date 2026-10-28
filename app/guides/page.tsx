@@ -11,7 +11,7 @@ import { Join } from "@/components/sections/Join";
 import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import styles from "./hub.module.css";
 
-const TITLE = "Life balance guides: Wheel of Life, burnout and work-life balance";
+const TITLE = "Life balance guides: burnout, goals and balance";
 const DESCRIPTION = "Free guides from Elegix on the Wheel of Life, the signs of burnout, work-life balance, setting goals for every area of life and a 10-minute weekly review.";
 const HERO: MediaSlot = { src: "/images/how-next.jpg", alt: "A notebook, pen and laptop on a wooden desk", brief: "Guides hero", ratio: "3 / 2" };
 

@@ -6,7 +6,7 @@ import { Rich } from "@/components/ui/Rich";
 import { OG_IMAGE } from "@/lib/site";
 import styles from "../guides/hub.module.css";
 
-const TITLE = "The 6 areas of life: what each covers and how to balance it";
+const TITLE = "The 6 areas of life and how to balance each";
 const DESCRIPTION = "The 6 areas of life Elegix tracks, what each one covers, the signs it's being neglected and small habits that bring it back into balance.";
 
 export const metadata: Metadata = {

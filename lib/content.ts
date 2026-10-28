@@ -34,7 +34,7 @@ export const AREA_ORDER: AreaKey[] = ["health", "people", "meaning", "hobby", "g
 
 export const META = {
   title: "Elegix · Life balance tracker for 6 areas of your life",
-  description: "Elegix tracks your goals, habits and tasks across 6 life areas and shows which part of your life you're neglecting, before it turns into burnout. Join the waitlist.",
+  description: "Elegix tracks goals, habits and tasks across 6 life areas and shows which part of your life you're neglecting, before it turns into burnout.",
   keywords: ["life balance tracker", "life balance app", "work-life balance app", "wheel of life app", "balance wheel", "habit tracker", "goal tracker", "burnout prevention", "life areas", "personal growth app"],
 };
 
@@ -414,7 +414,7 @@ export const STORY = {
 export const ABOUT_PAGE = {
   meta: {
     title: "What is Elegix? About the life balance tracker",
-    description: "Elegix is a life balance tracker: goals, habits and tasks across 6 life areas, one Life Balance score, a 1-minute weekly check-in and a 10-minute monthly review. Free app, optional Premium. Meet the team behind it.",
+    description: "Elegix is a life balance tracker: goals, habits and tasks across 6 life areas, one Life Balance score and a 1-minute weekly check-in. Meet the team.",
   },
   hero: {
     label: "What is Elegix",
@@ -498,7 +498,7 @@ export const READY = {
 export const CAREERS = {
   meta: {
     title: "Careers at Elegix: work on a life balance app",
-    description: "Careers at Elegix, the life balance tracker for iOS and Android. A small, early-stage team with a 4-day week, building in public. No open roles right now, but we'd like to hear from people who care about burnout and balance.",
+    description: "Careers at Elegix, the life balance app. A small early-stage team with a 4-day week. No open roles yet, but we'd like to hear from you.",
   },
   label: "Careers",
   h1Prefix: "Careers at Elegix",

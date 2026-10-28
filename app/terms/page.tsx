@@ -6,9 +6,9 @@ import { TERMS } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "The terms that apply when you use the Elegix website, join the waitlist or use the app.",
+  description: "The terms that apply when you use the Elegix website, join the waitlist or use the app: your account, acceptable use and our liability.",
   alternates: { canonical: "/terms" },
-  openGraph: { title: "Terms of Service · Elegix", description: "The terms that apply when you use the Elegix website, join the waitlist or use the app.", url: "/terms", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
+  openGraph: { title: "Terms of Service · Elegix", description: "The terms that apply when you use the Elegix website, join the waitlist or use the app: your account, acceptable use and our liability.", url: "/terms", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
 };
 
 export default function Terms() {

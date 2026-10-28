@@ -151,7 +151,7 @@ export default function About() {
             {photo.src && <div className={styles.photo}><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 860px) 100vw, 420px" /></div>}
             <p className={styles.founder}><b>{TRUST.founder.name}</b>, {TRUST.founder.role}</p>
           </div>
-          <article className={styles.storyBody}>
+          <div className={styles.storyBody}>
             <span className="label">{A.story.label}</span>
             <h2 id="story-title" className="display h2"><Rich text={STORY.title} /></h2>
             {STORY.blocks.map((b, i) => {
@@ -160,7 +160,7 @@ export default function About() {
               return <p key={i} className={b.type === "lead" ? styles.lead : undefined} data-reveal>{b.text}</p>;
             })}
             <p className={styles.sign}>— {STORY.signature}</p>
-          </article>
+          </div>
         </div>
       </section>
 
