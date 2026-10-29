@@ -142,6 +142,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
               <p className={styles.authorRole}>Founder of Elegix</p>
               <p className={styles.authorBio}>{TRUST.founder.quote}</p>
               <Link href={TRUST.founder.storyLink.href} className={styles.authorLink}>{TRUST.founder.storyLink.label} →</Link>
+              {TRUST.founder.profiles[0] && <a href={TRUST.founder.profiles[0]} target="_blank" rel="noopener me" className={styles.authorLink} style={{ marginLeft: 20 }}>LinkedIn ↗</a>}
             </div>
           </aside>
           </div>
