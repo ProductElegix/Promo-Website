@@ -274,6 +274,9 @@ export const TRUST = {
     storyLink: { href: "/about#story", label: "Read my story" },
     name: "Edward Korytskyi",
     role: "Founder",
+    /** Edward's personal profiles (LinkedIn first). They go into the Person schema as sameAs. */
+    profiles: [] as string[],
+    knowsAbout: ["Work-life balance", "Burnout", "Wheel of Life", "Goal setting", "Habit building", "Life planning"],
     media: { src: "/images/founder.jpg", alt: "Edward Korytskyi, founder of Elegix, smiling in a white T-shirt in front of tropical greenery", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
   },
 };

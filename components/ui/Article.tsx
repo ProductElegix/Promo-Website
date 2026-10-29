@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { TRUST, type AreaKey, type MediaSlot } from "@/lib/content";
 import type { Block, Guide } from "@/lib/guides";
-import { OG_IMAGE, SITE_URL } from "@/lib/site";
+import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
 import { GuideTool } from "./GuideTool";
 import { Inline } from "./Inline";
@@ -36,7 +36,7 @@ export function articleMetadata(g: Omit<Guide, "related">, path: string): Metada
   };
 }
 
-function BlockView({ b }: { b: Block }) {
+export function BlockView({ b }: { b: Block }) {
   if ("list" in b) return <ul className={styles.list}>{b.list.map((t) => <li key={t}><Inline text={t} /></li>)}</ul>;
   if ("steps" in b) {
     return (
@@ -74,7 +74,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
         image: g.media.src ? [`${SITE_URL}${g.media.src}`] : [`${SITE_URL}${OG_IMAGE.url}`],
         datePublished: g.published,
         dateModified: g.updated,
-        author: { "@type": "Person", name: TRUST.founder.name, url: `${SITE_URL}/about#story` },
+        author: founderPerson(TRUST.founder),
         publisher: { "@id": `${SITE_URL}/#organization` },
         mainEntityOfPage: url,
         ...(g.area ? { about: { "@type": "Thing", name: g.label.replace(/^Life area · /, "") } } : {}),

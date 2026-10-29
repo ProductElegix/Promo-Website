@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { AreasList } from "@/components/sections/AreasList";
 import { BalanceCheck } from "@/components/sections/BalanceCheck";
 import { Trust } from "@/components/sections/Trust";
+import { PopularGuides } from "@/components/sections/PopularGuides";
 import { Join } from "@/components/sections/Join";
 import { Faq } from "@/components/sections/Faq";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -31,6 +32,7 @@ export default function Home() {
       <AreasList />
       <BalanceCheck />
       <Trust />
+      <PopularGuides />
       <Faq />
       <Join />
     </main>

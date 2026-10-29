@@ -11,8 +11,8 @@ import { AhrefsAnalytics } from "@/components/ui/AhrefsAnalytics";
 import { GoogleAnalytics } from "@/components/ui/GoogleAnalytics";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
-import { BRAND, META, SOCIALS } from "@/lib/content";
-import { INDEXABLE, SITE_URL } from "@/lib/site";
+import { BRAND, META, SOCIALS, TRUST } from "@/lib/content";
+import { FOUNDER_ID, INDEXABLE, SITE_URL, founderPerson } from "@/lib/site";
 import "./globals.css";
 
 const sans = Inter_Tight({ subsets: ["latin", "latin-ext"], weight: ["300", "400", "500"], variable: "--font-inter", display: "swap" });
@@ -50,7 +50,9 @@ const ORGANIZATION = {
       slogan: BRAND.slogan,
       disambiguatingDescription: BRAND.nameMeaning,
       sameAs: SOCIALS.map((s) => s.href),
+      founder: { "@id": FOUNDER_ID },
     },
+    founderPerson(TRUST.founder),
     {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
