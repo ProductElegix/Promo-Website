@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { TRUST, type AreaKey, type MediaSlot } from "@/lib/content";
 import type { Block, Guide } from "@/lib/guides";
+import { TAKEAWAYS } from "@/lib/guide-takeaways";
 import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
 import { GuideTool } from "./GuideTool";
@@ -114,6 +115,12 @@ export function Article({ guide: g, path, parent, related }: Props) {
             </ol>
           </nav>
           <div className={styles.body}>
+          {TAKEAWAYS[g.slug] && (
+            <section className={styles.takeaways} aria-labelledby="takeaways-title">
+              <h2 id="takeaways-title">Key takeaways</h2>
+              <ul className={styles.list}>{TAKEAWAYS[g.slug].map((t) => <li key={t}>{t}</li>)}</ul>
+            </section>
+          )}
           {g.sections.map((s) => (
             <section key={s.h2} id={anchor(s.h2)}>
               <h2>{s.h2}</h2>
@@ -140,7 +147,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
             <div>
               <p className={styles.authorName}>{TRUST.founder.name}</p>
               <p className={styles.authorRole}>Founder of Elegix</p>
-              <p className={styles.authorBio}>{TRUST.founder.quote}</p>
+              <p className={styles.authorBio}>{TRUST.founder.experience}</p>
               <Link href={TRUST.founder.storyLink.href} className={styles.authorLink}>{TRUST.founder.storyLink.label} →</Link>
               {TRUST.founder.profiles[0] && <a href={TRUST.founder.profiles[0]} target="_blank" rel="noopener me" className={styles.authorLink} style={{ marginLeft: 20 }}>LinkedIn ↗</a>}
             </div>

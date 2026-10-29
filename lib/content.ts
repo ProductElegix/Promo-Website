@@ -276,6 +276,8 @@ export const TRUST = {
     role: "Founder",
     /** Edward's personal profiles (LinkedIn first). They go into the Person schema as sameAs. */
     profiles: ["https://www.linkedin.com/in/korytsky"] as string[],
+    /** One line of experience under the author's name in every guide. */
+    experience: "Spent years trying every planner and habit tracker until keeping up with his own goals became a source of overwhelm. Writes about burnout and balance so others can spot a slipping area of life early.",
     knowsAbout: ["Work-life balance", "Burnout", "Wheel of Life", "Goal setting", "Habit building", "Life planning"],
     media: { src: "/images/founder.jpg", alt: "Edward Korytskyi, founder of Elegix, smiling in a white T-shirt in front of tropical greenery", brief: "Founder portrait · natural light · 4:5", ratio: "4 / 5" } as MediaSlot,
   },
