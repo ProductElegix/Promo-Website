@@ -5,6 +5,7 @@ import { TRUST, type AreaKey, type MediaSlot } from "@/lib/content";
 import type { Block, Guide } from "@/lib/guides";
 import { OG_IMAGE, SITE_URL } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
+import { GuideTool } from "./GuideTool";
 import { Inline } from "./Inline";
 import { Media } from "./Media";
 import { Pill } from "./Pill";
@@ -50,6 +51,7 @@ function BlockView({ b }: { b: Block }) {
     );
   }
   if ("tip" in b) return <p className={styles.tip}><Inline text={b.tip} /></p>;
+  if ("tool" in b) return <GuideTool name={b.tool} />;
   return <p><Inline text={b.p} /></p>;
 }
 

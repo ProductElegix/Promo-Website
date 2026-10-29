@@ -8,12 +8,27 @@
  *   **words**       bold
  */
 import { AREAS, AREAS_SECTION, type AreaKey, type MediaSlot } from "@/lib/content";
+import { EXTRAS } from "@/lib/guide-extras";
 
 export type Block =
   | { p: string }
   | { list: string[] }
   | { steps: { title: string; text: string }[] }
-  | { tip: string };
+  | { tip: string }
+  /** an interactive tool or download, rendered by components/ui/GuideTool.tsx */
+  | { tool: GuideToolName };
+
+export type GuideToolName = "wheel-calculator" | "wheel-template" | "burnout-check" | "hours-calculator";
+
+/** Extra depth for a guide or life area page, kept in lib/guide-extras/<slug>.ts so each page's long-form
+ *  text lives in its own file. Sections go in before a closing section that mentions Elegix. */
+export type GuideExtra = {
+  /** `before` puts a section in front of the existing section with that h2 */
+  sections: { h2: string; blocks: Block[]; before?: string }[];
+  faq?: { q: string; a: string }[];
+  /** date of the last real update to the page, shown as "Updated" */
+  updated?: string;
+};
 
 export type Guide = {
   slug: string;
@@ -45,7 +60,7 @@ const CTA = {
 
 const PHOTO = (src: string, alt: string): MediaSlot => ({ src, alt, brief: alt, ratio: "16 / 9" });
 
-export const GUIDES: Guide[] = [
+const BASE_GUIDES: Guide[] = [
   {
     slug: "wheel-of-life",
     title: "The Wheel of Life: how to fill it in and what to do with your score",
@@ -805,7 +820,7 @@ const NEXT_STEP = (name: string): Block => ({
   tip: `Not sure where ${name} stands? Rate all 6 areas in the free [Life Balance Check](/#check), or read [how to fill in the Wheel of Life](/guides/wheel-of-life).`,
 });
 
-export const AREA_GUIDES: AreaGuide[] = [
+const BASE_AREA_GUIDES: AreaGuide[] = [
   area("health", {
     title: "Health and work-life balance: how to stop trading your body for your career",
     metaTitle: "Health and work-life balance: sleep and energy",
@@ -969,6 +984,34 @@ export const AREA_GUIDES: AreaGuide[] = [
     ],
   }),
 ];
+
+/** Words in a page's body, for the "min read" label. */
+const wordCount = (g: Pick<Guide, "lede" | "sections" | "faq">) => {
+  const text = [g.lede, ...g.sections.flatMap((s) => [s.h2, ...s.blocks.map((b) => JSON.stringify(b))]), ...(g.faq ?? []).flatMap((f) => [f.q, f.a])].join(" ");
+  return text.split(/\s+/).filter(Boolean).length;
+};
+
+/** Merges a page's extra sections and questions in, before the closing section about Elegix. */
+function withExtras<T extends Guide | AreaGuide>(g: T): T {
+  const extra = EXTRAS[g.slug];
+  if (!extra) return g;
+  const last = g.sections.length - 1;
+  const closes = last >= 0 && /elegix/i.test(JSON.stringify(g.sections[last]));
+  const at = closes ? last : g.sections.length;
+  const placed = extra.sections.filter((x) => x.before);
+  const rest = extra.sections.filter((x) => !x.before).map(({ h2, blocks }) => ({ h2, blocks }));
+  const sections = [...g.sections.slice(0, at), ...rest, ...g.sections.slice(at)];
+  for (const { before, h2, blocks } of placed) {
+    const i = sections.findIndex((s) => s.h2 === before);
+    sections.splice(i < 0 ? at : i, 0, { h2, blocks });
+  }
+  const faq = [...(g.faq ?? []), ...(extra.faq ?? [])];
+  const minutes = Math.max(g.minutes, Math.round(wordCount({ lede: g.lede, sections, faq }) / 230));
+  return { ...g, sections, faq, minutes, updated: extra.updated ?? g.updated };
+}
+
+export const GUIDES: Guide[] = BASE_GUIDES.map(withExtras);
+export const AREA_GUIDES: AreaGuide[] = BASE_AREA_GUIDES.map(withExtras);
 
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);
 export const areaGuideBySlug = (slug: string) => AREA_GUIDES.find((g) => g.slug === slug);
