@@ -29,6 +29,9 @@
 .steps p { font-size: 1rem; }
 .n { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--lime); color: var(--black); font-size: 0.85rem; font-weight: 500; }
 
+.takeaways.takeaways { background: var(--paper); border-radius: var(--radius-m); padding: clamp(20px, 3vw, 28px); gap: 12px; }
+.takeaways h2 { font-size: 1.25rem; }
+
 .tip { background: var(--mint); border-radius: var(--radius-m); padding: 18px 20px; }
 
 .faq { display: grid; gap: 8px; }
