@@ -29,13 +29,13 @@ function WheelCalculator() {
   return (
     <figure className={styles.tool} aria-labelledby="wheel-calc-title">
       <p id="wheel-calc-title" className={styles.title}>Wheel of Life calculator</p>
-      <p className={styles.hint}>Rate each area from 0 to 10 for how satisfied you are with it right now. Your wheel updates as you go.</p>
+      <p className={styles.hint}>Rate each area from 1 to 10 for how satisfied you are with it right now. Your wheel updates as you go.</p>
       <div className={styles.split}>
         <div className={styles.sliders}>
           {AREA_ORDER.map((a) => (
             <label key={a} className={styles.slider}>
               <span>{AREAS[a].name}<b>{scores[a]}</b></span>
-              <input type="range" min={0} max={10} value={scores[a]} style={{ accentColor: `var(--${a}-s)` }}
+              <input type="range" min={1} max={10} value={scores[a]} style={{ accentColor: `var(--${a}-s)` }}
                 onChange={(e) => setScores({ ...scores, [a]: Number(e.target.value) })} />
             </label>
           ))}
@@ -128,7 +128,7 @@ function WheelTemplate() {
     <figure className={styles.tool}>
       <p className={styles.title}>Free printable Wheel of Life template</p>
       <p className={styles.hint}>A one-page PDF with the 6 areas of life, rings from 1 to 10 and a question for each area. Print it, colour in your scores and keep it to compare next month.</p>
-      <a className="btn" href="/downloads/wheel-of-life-template.pdf" download>Download the PDF (A4)</a>
+      <a className={`btn ${styles.download}`} href="/downloads/wheel-of-life-template.pdf" download>Download the PDF (A4)</a>
     </figure>
   );
 }

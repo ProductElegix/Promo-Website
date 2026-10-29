@@ -21,8 +21,14 @@ export type Block =
 export type GuideToolName = "wheel-calculator" | "wheel-template" | "burnout-check" | "hours-calculator";
 
 /** Extra depth for a guide or life area page, kept in lib/guide-extras/<slug>.ts so each page's long-form
- *  text lives in its own file. Sections go in before the closing "Elegix" section. */
-export type GuideExtra = { sections: { h2: string; blocks: Block[] }[]; faq?: { q: string; a: string }[] };
+ *  text lives in its own file. Sections go in before a closing section that mentions Elegix. */
+export type GuideExtra = {
+  /** `before` puts a section in front of the existing section with that h2 */
+  sections: { h2: string; blocks: Block[]; before?: string }[];
+  faq?: { q: string; a: string }[];
+  /** date of the last real update to the page, shown as "Updated" */
+  updated?: string;
+};
 
 export type Guide = {
   slug: string;
@@ -990,11 +996,18 @@ function withExtras<T extends Guide | AreaGuide>(g: T): T {
   const extra = EXTRAS[g.slug];
   if (!extra) return g;
   const last = g.sections.length - 1;
-  const at = last >= 0 && /elegix/i.test(g.sections[last].h2) ? last : g.sections.length;
-  const sections = [...g.sections.slice(0, at), ...extra.sections, ...g.sections.slice(at)];
+  const closes = last >= 0 && /elegix/i.test(JSON.stringify(g.sections[last]));
+  const at = closes ? last : g.sections.length;
+  const placed = extra.sections.filter((x) => x.before);
+  const rest = extra.sections.filter((x) => !x.before).map(({ h2, blocks }) => ({ h2, blocks }));
+  const sections = [...g.sections.slice(0, at), ...rest, ...g.sections.slice(at)];
+  for (const { before, h2, blocks } of placed) {
+    const i = sections.findIndex((s) => s.h2 === before);
+    sections.splice(i < 0 ? at : i, 0, { h2, blocks });
+  }
   const faq = [...(g.faq ?? []), ...(extra.faq ?? [])];
   const minutes = Math.max(g.minutes, Math.round(wordCount({ lede: g.lede, sections, faq }) / 230));
-  return { ...g, sections, faq, minutes };
+  return { ...g, sections, faq, minutes, updated: extra.updated ?? g.updated };
 }
 
 export const GUIDES: Guide[] = BASE_GUIDES.map(withExtras);

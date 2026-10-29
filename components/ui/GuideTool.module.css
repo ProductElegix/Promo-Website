@@ -18,3 +18,4 @@
 .input { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.9rem; }
 .input input { width: 90px; padding: 8px 10px; border: 1px solid var(--line, #d9dcd6); border-radius: 10px; font: inherit; color: var(--ink); background: #fff; }
 @media (max-width: 640px) { .split, .fields { grid-template-columns: 1fr; } .result { justify-items: start; text-align: left; } }
+.download.download { color: var(--paper); text-decoration: none; }
