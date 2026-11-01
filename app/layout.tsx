@@ -15,7 +15,7 @@ import { BRAND, META, SOCIALS, TRUST } from "@/lib/content";
 import { FOUNDER_ID, INDEXABLE, SITE_URL, founderPerson } from "@/lib/site";
 import "./globals.css";
 
-const sans = Inter_Tight({ subsets: ["latin", "latin-ext"], weight: ["300", "400", "500"], variable: "--font-inter", display: "swap" });
+const sans = Inter_Tight({ subsets: ["latin"], weight: ["300", "400", "500"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

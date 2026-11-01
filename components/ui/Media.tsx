@@ -27,7 +27,7 @@ export function Media({ media, tone = "light", fill = false, compact = false, si
   if (media.src) {
     return (
       <div className={box} style={style}>
-        <Image src={media.src} alt={media.alt} fill sizes={sizes} priority={priority} className={styles.img} />
+        <Image src={media.src} alt={media.alt} fill sizes={sizes} priority={priority} fetchPriority={priority ? "high" : undefined} className={styles.img} />
       </div>
     );
   }

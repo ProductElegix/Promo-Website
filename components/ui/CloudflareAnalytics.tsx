@@ -8,5 +8,5 @@ const TOKEN = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN || "b9346fb3b2ea4b628fde41
 
 export function CloudflareAnalytics() {
   if (!process.env.VERCEL_ENV) return null;
-  return <Script id="cf-web-analytics" src="https://static.cloudflareinsights.com/beacon.min.js" strategy="afterInteractive" data-cf-beacon={JSON.stringify({ token: TOKEN })} />;
+  return <Script id="cf-web-analytics" src="https://static.cloudflareinsights.com/beacon.min.js" strategy="lazyOnload" data-cf-beacon={JSON.stringify({ token: TOKEN })} />;
 }

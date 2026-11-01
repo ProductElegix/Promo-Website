@@ -2,13 +2,15 @@
 
 /* four small uppercase columns, like a colophon */
 .top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px; }
-.head { margin-bottom: 10px; font: inherit; color: rgba(255, 255, 255, .45); }
+.head { margin-bottom: 10px; font: inherit; color: rgba(255, 255, 255, .58); }
 .about { display: grid; gap: 10px; align-content: start; max-width: 22rem; }
 .about p { margin: 0; }
-.name { color: rgba(255, 255, 255, .45); }
+.name { color: rgba(255, 255, 255, .58); }
 .email { justify-self: start; text-decoration: underline; text-underline-offset: 3px; }
-.top ul { display: grid; gap: 4px; }
+.top ul { display: grid; }
 .top a { text-decoration: none; transition: color .2s; }
+/* list links get a 24px-tall tap area (WCAG target size) while the rows keep the same rhythm */
+.top li a { display: inline-flex; align-items: center; min-height: 24px; }
 .top a:hover { color: var(--lime); }
 .legal { text-align: right; }
 
