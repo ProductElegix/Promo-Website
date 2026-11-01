@@ -156,9 +156,7 @@ button { font: inherit; }
   padding: 16px 22px 15px; background: var(--green-btn); color: #fff;
   transition: opacity .3s var(--ease), background-color .4s var(--ease), color .4s var(--ease), box-shadow .3s var(--ease);
 }
-.btn::after { content: "→"; font-size: 13px; letter-spacing: 0; transition: transform .3s var(--ease); }
 .btn:hover { opacity: .82; }
-.btn:hover::after { transform: translateX(4px); }
 .btn:disabled { opacity: .6; cursor: progress; }
 .btn.lime, .on-dark .btn:not(.ghost):not(.dark):not(.white) { background: var(--lime); color: var(--black); }
 .btn.white { background: var(--paper); color: var(--ink); }
