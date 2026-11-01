@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 /**
- * Site-wide motion with GSAP, loaded lazily after the page is interactive (not in the main bundle).
- * - [data-hero-item]: hero eyebrow, headline, text and actions stagger in on load
- * - [data-hero-phone]: the phone slides up and tilts into place
+ * Site-wide scroll motion with GSAP. GSAP is downloaded and set up only on the visitor's first scroll,
+ * touch, click or key press: every effect below starts below the first screen, so there is nothing to
+ * animate before that, and the page loads and becomes interactive without paying for it (mobile speed).
+ * The hero entrance ([data-hero-item], [data-hero-phone]) is pure CSS in globals.css, so it runs at once.
  * - [data-hero-photo]: gentle parallax while scrolling past the hero
  * - [data-parallax]: the same for section photos (Early access)
  * - [data-scale-in]: a full-bleed photo eases from slightly zoomed in to its natural size as it scrolls into view
@@ -26,7 +27,17 @@ export function Motion() {
     let ctx: { revert: () => void } | undefined;
     let cancelled = false;
 
-    (async () => {
+    const EVENTS = ["scroll", "wheel", "touchstart", "pointerdown", "keydown"] as const;
+    const stop = () => EVENTS.forEach((e) => window.removeEventListener(e, start));
+    function start() {
+      stop();
+      void init();
+    }
+    // a page opened already scrolled (back navigation, #anchor) needs the effects straight away
+    if (window.scrollY > 0) start();
+    else EVENTS.forEach((e) => window.addEventListener(e, start, { passive: true }));
+
+    async function init() {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       if (cancelled) return;
       gsap.registerPlugin(ScrollTrigger);
@@ -34,13 +45,6 @@ export function Motion() {
       ctx = gsap.context(() => {
         // close to the CSS --ease, cubic-bezier(0.22, 1, 0.36, 1): fast start, long soft landing
         const ease = "expo.out";
-
-        const heroItems = gsap.utils.toArray<HTMLElement>("[data-hero-item]");
-        if (heroItems.length) gsap.from(heroItems, { y: 28, opacity: 0, duration: 0.9, ease, stagger: 0.09, delay: 0.05 });
-
-        gsap.utils.toArray<HTMLElement>("[data-hero-phone]").forEach((el) =>
-          gsap.from(el, { y: 120, rotate: 4, opacity: 0, duration: 1.3, ease: "power4.out", delay: 0.35 }),
-        );
 
         gsap.utils.toArray<HTMLElement>("[data-hero-photo]").forEach((el) =>
           gsap.to(el, { yPercent: 12, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top top", end: "bottom top", scrub: true } }),
@@ -94,9 +98,9 @@ export function Motion() {
       });
 
       ScrollTrigger.refresh();
-    })();
+    }
 
-    return () => { cancelled = true; ctx?.revert(); };
+    return () => { cancelled = true; stop(); ctx?.revert(); };
   }, [pathname]);
 
   return null;

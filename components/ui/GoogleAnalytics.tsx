@@ -17,7 +17,7 @@ gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user
 try{if(localStorage.getItem('elegix_cookie_consent')==='yes'){gtag('consent','update',{analytics_storage:'granted'});}}catch(e){}
 gtag('js',new Date());gtag('config','${GA_ID}');`}
       </Script>
-      <Script id="ga-gtag" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+      <Script id="ga-gtag" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="lazyOnload" />
     </>
   );
 }

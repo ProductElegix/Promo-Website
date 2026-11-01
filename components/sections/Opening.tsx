@@ -64,7 +64,7 @@ export function Opening() {
       {/* first screen: the photo as a full background, a centred headline and the early access card at the bottom */}
       <div className={styles.stage}>
         <div className={styles.bg} data-hero-photo>
-          <Image src={HERO.media.src!} alt={HERO.media.alt} fill priority sizes="100vw" className={styles.bgImage} />
+          <Image src={HERO.media.src!} alt={HERO.media.alt} fill priority fetchPriority="high" sizes="100vw" className={styles.bgImage} />
         </div>
         <div className={`${styles.captions} caption`} data-hero-item>
           {OPENING.captions.map(([a, b]) => <p key={a}>{a}<br />{b}</p>)}
