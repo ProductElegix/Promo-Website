@@ -77,7 +77,7 @@ export function Header() {
           {NAV.map((n) => <NavLink key={n.href} href={n.href} className={styles.navLink} current={isCurrent(n.href)}>{n.label}</NavLink>)}
         </nav>
         <div className={styles.actions}>
-          <NavLink href="/#join" className={styles.cta}>{NAV_CTA} <span aria-hidden="true">→</span></NavLink>
+          <NavLink href="/#join" className={styles.cta}>{NAV_CTA}</NavLink>
           <button type="button" className={`${styles.burger} caption`} aria-expanded={open} aria-controls="site-menu"
             onClick={() => setOpen((o) => !o)}>
             {open ? "Close" : "Menu"}<span className={styles.burgerIcon} aria-hidden="true" />
