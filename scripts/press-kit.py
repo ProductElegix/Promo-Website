@@ -5,11 +5,12 @@ import pathlib, zipfile
 root = pathlib.Path(__file__).resolve().parent.parent
 pub = root / "public"
 out = pub / "press" / "elegix-press-kit.zip"
-files = {f"logo/{p.name}": p for p in sorted((pub / "press").glob("elegix-*.*")) if p.suffix in {".svg", ".png"}}
+files = {f"logo/{p.name}": p for p in sorted((pub / "press").glob("elegix-*.*")) if p.suffix in {".svg", ".png"} and "concept" not in p.name}
+files["logo/elegix-logo-concept.png"] = pub / "press" / "elegix-logo-concept.png"
 for name in ["founder", "alina-krupa", "maksym-zhuravskyi", "yevhenii-bohomol"]:
     files[f"team/{'edward-korytskyi' if name == 'founder' else name}.jpg"] = pub / "images" / f"{name}.jpg"
-for name in ["home", "life-area"]:
-    files[f"app/elegix-{name}-screen.jpg"] = pub / "images" / "app" / f"{name}.jpg"
+for name in ["home", "life-area", "plan"]:
+    files[f"app/elegix-{name}-screen.jpg"] = pub / "press" / f"elegix-app-{name}.jpg"
 with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
     for arc, path in files.items():
         z.write(path, f"elegix-press-kit/{arc}")

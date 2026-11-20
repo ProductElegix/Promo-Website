@@ -16,6 +16,7 @@ export const APP: C["APP"] = {
   screens: [
     { label: "Головна", media: { ...en.APP.screens[0].media, alt: "Головний екран Elegix: лічильники цілей і звичок, категорії, оцінка балансу сфер життя та Why Story" } },
     { label: "Сфери життя", media: { ...en.APP.screens[1].media, alt: "Екран сфер життя в Elegix: радарна діаграма сфер зі змінами за тиждень і оцінкою балансу з 10" } },
+    { label: "План", media: { ...en.APP.screens[2].media, alt: "Екран плану в Elegix: календар тижня з сьогоднішніми звичками, невиконаними й виконаними, кожна з міткою категорії" } },
   ],
 };
 
@@ -513,10 +514,17 @@ export const PRESS: C["PRESS"] = {
     items: en.PRESS.logos.items.map((it) => ({ ...it, name: it.name.replace("Logomark", "Знак").replace("Logo", "Логотип").replace("light green", "світло-зелений").replace("dark green", "темно-зелений").replace("green", "зелений").replace("dark", "темний").replace("white", "білий") })),
     colours: [{ name: "Зелений", hex: "#009A44" }, { name: "Темно-зелений", hex: "#1A251E" }, { name: "Темний", hex: "#121212" }, { name: "Світло-зелений", hex: "#D5F45E" }, { name: "Білий", hex: "#FFFFFF" }],
   },
+  concept: {
+    label: "Історія логотипа",
+    title: "Вітер + вода = *E*",
+    lede: "Знак поєднує дві стихії в одній літері. Вітер означає свободу, вода означає життя. Разом вони малюють літеру E з Elegix.",
+    parts: [{ word: "Вітер", meaning: "Свобода" }, { word: "Вода", meaning: "Життя" }, { word: "E", meaning: "Elegix" }],
+    download: { label: "Завантажити концепт логотипа (PNG)", href: "/press/elegix-logo-concept.png" },
+  },
   photos: {
-    label: "Фото",
-    title: "Команда і *застосунок*",
-    lede: "Портрети співзасновників і справжні екрани застосунку.",
+    label: "Команда",
+    title: "*Співзасновники*",
+    lede: "Портрети людей, які будують Elegix.",
     download: "Завантажити",
     team: [
       { name: "Едуард Корицький", role: "Засновник", src: "/images/founder.jpg" },
@@ -524,9 +532,15 @@ export const PRESS: C["PRESS"] = {
       { name: "Максим Журавський", role: "CTO та співзасновник", src: "/images/maksym-zhuravskyi.jpg" },
       { name: "Євгеній Богомол", role: "Співзасновник", src: "/images/yevhenii-bohomol.jpg" },
     ],
-    screens: [
-      { name: "Головний екран", src: "/images/app/home.jpg" },
-      { name: "Екран сфер життя", src: "/images/app/life-area.jpg" },
+  },
+  screens: {
+    label: "Застосунок",
+    title: "Справжні *екрани*",
+    lede: "Скриншоти з поточної версії застосунку в повній роздільності телефона.",
+    items: [
+      { name: "Головний екран", text: "Цілі, звички, категорії й оцінка сфер життя в одному місці.", src: "/press/elegix-app-home.jpg" },
+      { name: "Екран сфер життя", text: "6 сфер життя на радарній діаграмі: цей тиждень проти минулого й оцінка балансу.", src: "/press/elegix-app-life-area.jpg" },
+      { name: "Екран плану", text: "Звички й задачі тижня, які відмічаєш день за днем.", src: "/press/elegix-app-plan.jpg" },
     ],
   },
   quotes: {

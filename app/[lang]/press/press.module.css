@@ -34,15 +34,28 @@
 .colours li { display: flex; align-items: center; gap: 10px; }
 .swatch { width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); }
 
-/* photos: 4 portraits and 2 screens */
-.photos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 28px 16px; }
+/* logo story: wind + water = E, on the brand green */
+.concept { border-radius: var(--radius-l); background: var(--green); color: #fff; padding: clamp(40px, 7vw, 110px) clamp(20px, 4vw, 64px); }
+.conceptRow { display: grid; grid-template-columns: repeat(3, 1fr); list-style: none; margin: 0; padding: 0; }
+.conceptPart { position: relative; display: grid; justify-items: center; gap: clamp(16px, 2.4vw, 32px); text-align: center; }
+.conceptPart svg { width: clamp(88px, 16vw, 220px); height: auto; }
+.conceptOp { position: absolute; left: 0; top: calc(clamp(88px, 16vw, 220px) / 2); transform: translate(-50%, -50%); font-size: clamp(24px, 2.4vw, 36px); line-height: 1; }
+.conceptWord { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.02em; line-height: 1.35; }
+.conceptBtn { margin-top: 20px; }
+
+/* team: 4 portraits */
+.photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px 16px; }
 .photoInfo { display: grid; gap: 2px; font-size: var(--fs-body); }
 .photoInfo a { color: var(--green); text-decoration: none; font-weight: 500; margin-top: 6px; justify-self: start; }
 .photoInfo a:hover { text-decoration: underline; }
 .photo { display: grid; gap: 12px; align-content: start; min-width: 0; }
 .portrait { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-m); overflow: hidden; background: var(--paper); }
 .portrait img { object-fit: cover; }
-.screen img { object-fit: contain; padding: 8px; }
+/* app screens: three phones side by side on a soft card */
+.screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 16px; }
+.screenItem { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.screenShot { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-l); overflow: hidden; background: var(--paper); }
+.screenShot img { object-fit: contain; padding: clamp(16px, 2.4vw, 32px) 0; }
 
 /* quotes */
 .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -63,12 +76,12 @@
 @media (max-width: 1100px) {
   .logos { grid-template-columns: repeat(3, 1fr); }
   .facts { grid-template-columns: repeat(2, 1fr); }
-  .photos { grid-template-columns: repeat(4, 1fr); }
   .quotes { grid-template-columns: 1fr; }
 }
 @media (max-width: 860px) {
   .logos { grid-template-columns: repeat(2, 1fr); }
   .photos { grid-template-columns: repeat(2, 1fr); }
+  .screens { grid-template-columns: 1fr; max-width: 420px; }
 }
 @media (max-width: 560px) {
   .facts { grid-template-columns: 1fr; }

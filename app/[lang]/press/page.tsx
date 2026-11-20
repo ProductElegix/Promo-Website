@@ -7,6 +7,7 @@ import { langMeta, pageMeta, paramsLang } from "@/lib/meta";
 import { SITE_URL } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
 import { Rich } from "@/components/ui/Rich";
+import { MARK } from "@/components/ui/Logo";
 import { CopyText } from "./CopyText";
 import styles from "./press.module.css";
 
@@ -17,6 +18,16 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 }
 
 /** Press kit: one download for everything, key facts, descriptions in 3 lengths, logos, photos, quotes and a contact. */
+/** The logomark with only some of its 4 strokes lit: wind is the top two, water the bottom two. */
+const PARTS: number[][] = [[0, 3], [1, 2], [0, 1, 2, 3]];
+function ConceptMark({ lit }: { lit: number[] }) {
+  return (
+    <svg viewBox="0 0 512 512" aria-hidden="true">
+      {MARK.map((d, i) => <path key={i} d={d} fill="#d5f45e" fillOpacity={lit.includes(i) ? 1 : 0.25} />)}
+    </svg>
+  );
+}
+
 export default async function Press() {
   const { lang, c: { PRESS: P } } = await getContent();
   const path = langMeta(lang, "/press").url;
@@ -122,6 +133,28 @@ export default async function Press() {
         </div>
       </section>
 
+      <section className={`section ${styles.tight}`} aria-labelledby="press-concept">
+        <div className="container">
+          <div className="section-head" data-reveal>
+            <span className="label">{P.concept.label}</span>
+            <h2 id="press-concept" className="display h2"><Rich text={P.concept.title} /></h2>
+            <p className="lede">{P.concept.lede}</p>
+          </div>
+          <div className={`on-dark ${styles.concept}`} data-reveal>
+            <ol className={styles.conceptRow}>
+              {P.concept.parts.map((part, i) => (
+                <li key={part.word} className={styles.conceptPart}>
+                  {i > 0 && <span className={styles.conceptOp} aria-hidden="true">{i === 1 ? "+" : "="}</span>}
+                  <ConceptMark lit={PARTS[i]} />
+                  <span className={styles.conceptWord}>{part.word}<br />{part.meaning}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <a href={P.concept.download.href} download className={`btn ghost ${styles.conceptBtn}`}>{P.concept.download.label}</a>
+        </div>
+      </section>
+
       <section className={`section ${styles.tight}`} aria-labelledby="press-photos">
         <div className="container">
           <div className="section-head" data-reveal>
@@ -140,11 +173,24 @@ export default async function Press() {
                 </div>
               </li>
             ))}
-            {P.photos.screens.map((s) => (
-              <li key={s.src} className={styles.photo} data-reveal>
-                <div className={`${styles.portrait} ${styles.screen}`}><Image src={s.src} alt={s.name} fill sizes="(max-width: 860px) 50vw, 25vw" /></div>
+          </ul>
+        </div>
+      </section>
+
+      <section className={`section ${styles.tight}`} aria-labelledby="press-screens">
+        <div className="container">
+          <div className="section-head" data-reveal>
+            <span className="label">{P.screens.label}</span>
+            <h2 id="press-screens" className="display h2"><Rich text={P.screens.title} /></h2>
+            <p className="lede">{P.screens.lede}</p>
+          </div>
+          <ul className={styles.screens}>
+            {P.screens.items.map((s) => (
+              <li key={s.src} className={styles.screenItem} data-reveal>
+                <div className={styles.screenShot}><Image src={s.src} alt={s.name} fill sizes="(max-width: 860px) 60vw, 22vw" /></div>
                 <div className={styles.photoInfo}>
                   <b>{s.name}</b>
+                  <span className="muted">{s.text}</span>
                   <a href={s.src} download>{P.photos.download}</a>
                 </div>
               </li>

@@ -183,7 +183,7 @@ export const HOW = {
       key: "goals",
       title: "Act",
       text: "Goals linked to daily habits and tasks, each with your “why” next to it, and one next step for the area that needs you most.",
-      screen: "Home",
+      screen: "Plan",
       tint: ["hobby", "people"] as [AreaKey, AreaKey],
       scroll: 0,
     },
@@ -248,8 +248,9 @@ export const ORBIT = {
 /** Real app screenshots: the hero phone, the How it works cards, the About hero and Ready. */
 export const APP = {
   screens: [
-    { label: "Home", media: { src: "/images/app/home.jpg", alt: "Elegix app home screen: goals and habits counters, categories, the Life Area balance score and Why Story", brief: "App screenshot · Home", ratio: "9 / 19.5" } },
-    { label: "Life Area", media: { src: "/images/app/life-area.jpg", alt: "Elegix Life Area screen: a radar chart of life areas with weekly changes and a balance score out of 10", brief: "App screenshot · Life Area", ratio: "9 / 19.5" } },
+    { label: "Home", media: { src: "/images/app/home-v2.jpg", alt: "Elegix app home screen: goals and habits counters, categories, the Life Area balance score and Why Story", brief: "App screenshot · Home", ratio: "9 / 19.5" } },
+    { label: "Life Area", media: { src: "/images/app/life-area-v2.jpg", alt: "Elegix Life Area screen: a radar chart of life areas with weekly changes and a balance score out of 10", brief: "App screenshot · Life Area", ratio: "9 / 19.5" } },
+    { label: "Plan", media: { src: "/images/app/plan-v2.jpg", alt: "Elegix Plan screen: a week calendar with today's habits, unchecked and completed, each tagged with its category", brief: "App screenshot · Plan", ratio: "9 / 19.5" } },
   ] as { label: string; media: MediaSlot }[],
 };
 
@@ -651,10 +652,17 @@ export const PRESS = {
     ] as { name: string; file: string; ground: "light" | "dark" }[],
     colours: [{ name: "Green", hex: "#009A44" }, { name: "Dark green", hex: "#1A251E" }, { name: "Dark", hex: "#121212" }, { name: "Light green", hex: "#D5F45E" }, { name: "White", hex: "#FFFFFF" }],
   },
+  concept: {
+    label: "Logo story",
+    title: "Wind + water = *E*",
+    lede: "The logomark joins two elements in one letter. Wind stands for freedom, water for life. Together they draw the E of Elegix.",
+    parts: [{ word: "Wind", meaning: "Freedom" }, { word: "Water", meaning: "Life" }, { word: "E", meaning: "Elegix" }],
+    download: { label: "Download the logo concept (PNG)", href: "/press/elegix-logo-concept.png" },
+  },
   photos: {
-    label: "Photos",
-    title: "Team and *app*",
-    lede: "Portraits of the co-founders and real screens from the app.",
+    label: "Team",
+    title: "The *co-founders*",
+    lede: "Portraits of the people building Elegix.",
     download: "Download",
     team: [
       { name: "Edward Korytskyi", role: "Founder", src: "/images/founder.jpg" },
@@ -662,9 +670,15 @@ export const PRESS = {
       { name: "Maksym Zhuravskyi", role: "CTO & Co-founder", src: "/images/maksym-zhuravskyi.jpg" },
       { name: "Yevhenii Bohomol", role: "Co-founder", src: "/images/yevhenii-bohomol.jpg" },
     ],
-    screens: [
-      { name: "Home screen", src: "/images/app/home.jpg" },
-      { name: "Life Area screen", src: "/images/app/life-area.jpg" },
+  },
+  screens: {
+    label: "App",
+    title: "Real *screens*",
+    lede: "Screenshots from the current build of the app, at full phone resolution.",
+    items: [
+      { name: "Home screen", text: "Goals, habits, categories and the Life Area score in one place.", src: "/press/elegix-app-home.jpg" },
+      { name: "Life Area screen", text: "The 6 life areas on a radar chart, with this week against last and the Balance score.", src: "/press/elegix-app-life-area.jpg" },
+      { name: "Plan screen", text: "The week's habits and tasks, checked off day by day.", src: "/press/elegix-app-plan.jpg" },
     ],
   },
   quotes: {
