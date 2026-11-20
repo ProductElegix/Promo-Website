@@ -11,7 +11,7 @@ export async function Compare() {
   return (
     <section className={`section on-dark ${styles.compare}`} aria-labelledby="compare-title">
       <div className="container">
-        <div className="section-head" data-reveal>
+        <div className="section-head centered" data-reveal>
           <span className="label">{COMPARE.eyebrow}</span>
           <h2 id="compare-title" className="display h2"><Rich text={COMPARE.title} /></h2>
           <p className="lede">{COMPARE.lede}</p>

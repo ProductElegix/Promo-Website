@@ -39,7 +39,7 @@ export async function Trust() {
   return (
     <section id="founder" className="section" aria-labelledby="trust-title">
       <div className="container">
-        <div className="section-head" data-reveal>
+        <div className="section-head centered" data-reveal>
           <span className="label">{TRUST.eyebrow}</span>
           <h2 id="trust-title" className="display h2"><Rich text={TRUST.title} /></h2>
         </div>

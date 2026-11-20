@@ -64,7 +64,7 @@ export function AreasList() {
   return (
     <section id="areas" className="section" aria-labelledby="areas-title">
       <div className="container">
-        <div className="section-head" data-reveal>
+        <div className="section-head centered" data-reveal>
           <span className="label">{AREAS_SECTION.label}</span>
           <h2 id="areas-title" className="display h2"><Rich text={AREAS_SECTION.title} /></h2>
         </div>
