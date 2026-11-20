@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { AREA_GUIDES, areaGuideBySlug, areaGuideHref } from "@/lib/guides";
+import { AREA_GUIDES, areaGuideBySlug, areaGuideHref, guidesForArea, midCtaTitle } from "@/lib/guides";
+import { AREAS } from "@/lib/content";
 import { Article, articleMetadata } from "@/components/ui/Article";
 
 export const dynamicParams = false;
@@ -9,14 +10,16 @@ type Props = { params: Promise<{ area: string }> };
 
 export async function generateMetadata({ params }: Props) {
   const g = areaGuideBySlug((await params).area);
-  return g ? articleMetadata(g, `/life-areas/${g.slug}`) : {};
+  return g ? articleMetadata(g, `/life-areas/${g.slug}`, true) : {};
 }
 
-/** One of the 6 life areas; "Keep reading" links to the other five. */
+/** One of the 6 life areas: the guides tagged with it, then "Keep reading" links to the other five. */
 export default async function AreaPage({ params }: Props) {
   const g = areaGuideBySlug((await params).area);
   if (!g) notFound();
   const related = AREA_GUIDES.filter((o) => o.slug !== g.slug)
     .map((o) => ({ href: areaGuideHref(o.area), label: o.label.replace("Life area · ", "Life area: "), title: o.title, media: o.media }));
-  return <Article guide={g} path={`/life-areas/${g.slug}`} parent={{ name: "Life areas", path: "/life-areas" }} related={related} />;
+  const guides = guidesForArea(g.area).map((o) => ({ href: `/guides/${o.slug}`, label: `${o.minutes} min read`, title: o.title, media: o.media }));
+  return <Article guide={g} path={`/life-areas/${g.slug}`} parent={{ name: "Life areas", path: "/life-areas" }} related={related} promote midTitle={midCtaTitle(g)}
+    lists={[{ id: "area-guides-title", title: `Guides about ${AREAS[g.area].short.toLowerCase()}`, items: guides }]} />;
 }
