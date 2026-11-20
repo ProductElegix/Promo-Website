@@ -1,4 +1,10 @@
-import { AREAS, AREA_ORDER, COMMUNITY, EMAIL, SOCIALS, type AreaKey } from "../content";
+import * as en from "../content";
+import { AREA_ORDER, SOCIALS, type AreaKey } from "../content";
+import { contentOf } from "../l10n";
+import type { Lang } from "../i18n";
+
+/** The words of the email being built, in its reader's language (set at the start of buildEmail; building is synchronous). */
+let EMAIL = en.EMAIL, AREAS = en.AREAS, COMMUNITY = en.COMMUNITY, LANG: Lang = "en";
 import { unsubscribeUrl } from "../unsubscribe";
 
 /**
@@ -135,7 +141,7 @@ function footer(email: string, unsub: string) {
 }
 
 function page(subject: string, rows: string) {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">` +
+  return `<!doctype html><html lang="${LANG}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">` +
     `<meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light"><title>${esc(subject)}</title></head>` +
     `<body style="margin:0;padding:0;background:${C.bg}">` +
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.bg}"><tr><td align="center" style="padding:16px">` +
@@ -149,9 +155,11 @@ function balance(scores: Record<string, number>) {
   return { average, lowest };
 }
 
-export function buildEmail(input: EmailInput): BuiltEmail {
+export function buildEmail(input: EmailInput, lang: Lang = "en"): BuiltEmail {
+  ({ EMAIL, AREAS, COMMUNITY } = contentOf(lang));
+  LANG = lang;
   // our own link when UNSUBSCRIBE_SECRET is set, otherwise Mailgun's tracking link
-  const unsub = unsubscribeUrl(input.email) ?? "%unsubscribe_url%";
+  const unsub = unsubscribeUrl(input.email, lang) ?? "%unsubscribe_url%";
   const foot = `${fill(EMAIL.footer.sent, { email: input.email })} ${EMAIL.footer.unsubscribe}: ${unsub}\n${EMAIL.footer.copyright}\n${SOCIALS.map((x) => `${x.label}: ${x.href}`).join("\n")}`;
   const waitText = (reply: string) => `${EMAIL.wait.title}\n${reply}\n— ${EMAIL.wait.name}\n${EMAIL.wait.note}`;
 

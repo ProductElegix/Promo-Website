@@ -20,7 +20,7 @@ export function verifyUnsubscribe(email: string, token: string): boolean {
 }
 
 /** Null when UNSUBSCRIBE_SECRET isn't set; the email then falls back to Mailgun's %unsubscribe_url%. */
-export function unsubscribeUrl(email: string): string | null {
+export function unsubscribeUrl(email: string, lang: "en" | "uk" = "en"): string | null {
   const t = unsubscribeToken(email);
-  return t ? `${BASE}/unsubscribe?${new URLSearchParams({ e: email.trim().toLowerCase(), t })}` : null;
+  return t ? `${BASE}${lang === "uk" ? "/uk" : ""}/unsubscribe?${new URLSearchParams({ e: email.trim().toLowerCase(), t })}` : null;
 }

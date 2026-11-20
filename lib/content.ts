@@ -51,7 +51,7 @@ export const NAV = [
   { href: "/guides", label: "Guides" },
   { href: "/careers", label: "Careers" },
 ];
-export const NAV_CTA = "Get early access";
+export const NAV_CTA: string = "Get early access";
 
 /** Official Elegix profiles: site footer and email footer. */
 export const SOCIALS = [

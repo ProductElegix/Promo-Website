@@ -19,7 +19,8 @@ import { Principles } from "@/components/sections/Trust";
 import { PhotoHero } from "@/components/sections/PhotoHero";
 import { Breadcrumbs } from "@/components/ui/JsonLd";
 import { OG_IMAGE } from "@/lib/site";
-import { storyByPerson, storyHref } from "@/lib/stories";
+import { storyHref } from "@/lib/stories";
+import { storiesOf } from "@/lib/stories-l10n";
 import styles from "./about.module.css";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -166,7 +167,7 @@ export default async function About() {
                 <Avatar name={m.name} photo={m.photo} size={420} className={styles.memberPhoto} />
                 <div><h3>{m.name}</h3><p>{m.role}</p>{m.bio && <p className={styles.memberBio}>{m.bio}</p>}</div>
                 {(() => {
-                  const story = storyByPerson(m.name);
+                  const story = storiesOf(lang).storyByPerson(m.name);
                   if (!story && !m.linkedin) return null;
                   return (
                     <div className={styles.memberLinks}>

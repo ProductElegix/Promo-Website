@@ -7,7 +7,8 @@ export async function POST(request: Request) {
   const form = await request.formData();
   const email = String(form.get("e") ?? "").trim().toLowerCase();
   const token = String(form.get("t") ?? "");
-  const back = (state: string) => NextResponse.redirect(new URL(`/unsubscribe?${new URLSearchParams({ state, e: email, t: token })}`, request.url), 303);
+  const prefix = form.get("l") === "uk" ? "/uk" : "";
+  const back = (state: string) => NextResponse.redirect(new URL(`${prefix}/unsubscribe?${new URLSearchParams({ state, e: email, t: token })}`, request.url), 303);
 
   if (!email || !verifyUnsubscribe(email, token)) return back("invalid");
   const cfg = mailgunConfig();
