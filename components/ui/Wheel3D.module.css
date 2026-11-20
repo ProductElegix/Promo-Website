@@ -12,11 +12,11 @@
   font-size: 13px; font-weight: 500; white-space: nowrap; pointer-events: none;
   box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .25);
   opacity: calc(var(--depth, 1) * .25); transition: opacity .5s var(--ease);
-  will-change: transform;
 }
 .tag svg { width: 13px; height: 13px; }
 .tag[data-on] { opacity: var(--depth, 1); }
 .ready .tag { display: inline-flex; }
+.box[data-idle] .tag, .box[data-idle] .score { visibility: hidden; }
 
 /* the score in the middle of the wheel */
 .score {

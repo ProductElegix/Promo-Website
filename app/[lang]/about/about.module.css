@@ -90,7 +90,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 /* how it works: wheel | steps | phone */
 .howSection { padding-top: 0; }
 .scrolly { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 5vw, 80px); }
-.stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; place-items: center; }
+.stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; place-items: center; contain: paint; }
 .chapters { display: grid; }
 .chapter { min-height: 80svh; display: grid; align-content: center; gap: 14px; opacity: .25; transition: opacity .5s var(--ease); }
 .chapter[data-active] { opacity: 1; }
