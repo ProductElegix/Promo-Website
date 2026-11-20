@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import { NavLink } from "@/components/ui/NavLink";
 import { useContent, usePlainPath, useUi } from "@/components/ui/Lang";
 import { LangSwitch } from "@/components/ui/LangSwitch";
@@ -67,7 +67,20 @@ export function Header() {
   useEffect(() => setOpen(false), [pathname]);
 
   const close = () => setOpen(false);
-  const isCurrent = (href: string) => (href.startsWith("/#") ? active === href : pathname === href || pathname.startsWith(`${href}/`));
+  /** pages that belong to a menu section without sitting under its path: free tools are part of Guides, stories of About */
+  const SECTION_OF: Record<string, string> = { "/tools": "/guides", "/stories": "/about", "/authors": "/about" };
+  const section = Object.entries(SECTION_OF).find(([p]) => pathname === p || pathname.startsWith(`${p}/`))?.[1];
+  const isCurrent = (href: string) => (href.startsWith("/#") ? active === href : section === href || pathname === href || pathname.startsWith(`${href}/`));
+  /** "Get early access": the signup form at the bottom of this page when there is one, the home page form otherwise */
+  const toJoin = (e: MouseEvent<HTMLAnchorElement>) => {
+    close();
+    if (pathname === "/" || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    const form = document.getElementById("join");
+    if (!form) return;
+    e.preventDefault();
+    // after the phone menu closes and the page can scroll again
+    setTimeout(() => form.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+  };
   const menuLinks = [{ href: "/", label: t.home }, ...NAV, { href: "/#join", label: NAV_CTA }];
   const className = [styles.header, onDark && styles.onDark, scrolled && styles.scrolled, open && styles.open].filter(Boolean).join(" ");
 
@@ -80,7 +93,7 @@ export function Header() {
         </nav>
         <div className={styles.actions}>
           <LangSwitch className={styles.lang} />
-          <NavLink href="/#join" className={styles.cta}>{NAV_CTA}</NavLink>
+          <NavLink href="/#join" className={styles.cta} onClick={toJoin}>{NAV_CTA}</NavLink>
           <button type="button" className={`${styles.burger} caption`} aria-expanded={open} aria-controls="site-menu"
             onClick={() => setOpen((o) => !o)}>
             {open ? t.close : t.menu}<span className={styles.burgerIcon} aria-hidden="true" />
@@ -92,7 +105,7 @@ export function Header() {
         <ul className={styles.menuList}>
           {menuLinks.map((n, i) => (
             <li key={n.href}>
-              <NavLink href={n.href} className={styles.menuLink} onNavigate={close} current={n.href !== "/#join" && isCurrent(n.href)}>
+              <NavLink href={n.href} className={styles.menuLink} onNavigate={close} onClick={n.href === "/#join" ? toJoin : undefined} current={n.href !== "/#join" && isCurrent(n.href)}>
                 <span style={{ transitionDelay: open ? `${80 + i * 50}ms` : "0ms" } as CSSProperties}>
                   <small>{String(i + 1).padStart(2, "0")}</small>{n.label}
                 </span>

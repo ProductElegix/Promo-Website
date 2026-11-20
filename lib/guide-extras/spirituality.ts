@@ -60,7 +60,7 @@ const extra: GuideExtra = {
           "**Service:** charity and helping your neighbour as part of faith; or volunteering for a cause you care about.",
           "**Awe:** pilgrimage, sacred music or places of worship; or nature, art, the night sky.",
         ] },
-        { p: "You don't need all of them. One daily practice and one weekly practice is plenty for a busy person. Many people find a practice that adds rest also lifts their [leisure](/life-areas/leisure) and [health](/life-areas/health) scores." },
+        { p: "You don't need all of them. One daily practice and one weekly practice is plenty for a busy person. Many people find a practice that adds rest also lifts their [leisure](/guides/leisure) and [health](/guides/health) scores." },
       ],
     },
     {

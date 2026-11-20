@@ -15,6 +15,11 @@ import { Rich } from "@/components/ui/Rich";
 import { PhotoHero } from "@/components/sections/PhotoHero";
 import { Join } from "@/components/sections/Join";
 import { SITE_URL } from "@/lib/site";
+import { Inline, plainText } from "@/components/ui/Inline";
+import { BlockView } from "@/components/ui/Article";
+import article from "@/components/ui/Article.module.css";
+import { LIFE_AREAS_HUB } from "@/lib/life-areas-hub";
+import { LIFE_AREAS_HUB_UK } from "@/lib/uk/life-areas-hub";
 import styles from "./hub.module.css";
 
 const T = {
@@ -26,7 +31,7 @@ const T = {
     lede: "Practical guides on the Wheel of Life, burnout, work-life balance and goals, plus a page for each of the 6 areas of life.",
     start: "Start reading", startHere: "Start here", readGuide: "Read the guide",
     allLabel: "Guides", allTitle: "Burnout, balance and *goals*",
-    areas: "The 6 life areas", tools: "Free tools", howWe: "How we write and check our guides",
+    areasLabel: "Life areas", areasTitle: "The 6 areas of a *balanced* life", questions: "Questions people ask", tools: "Free tools", howWe: "How we write and check our guides",
     checkLabel: "Free Life Balance Check", checkTitle: "Find your weakest area in *2 minutes*",
     checkText: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area.",
     checkBtn: "Take the free check",
@@ -39,7 +44,7 @@ const T = {
     lede: "Практичні гайди про колесо життя, вигорання, баланс роботи та життя й цілі, а також сторінка для кожної з 6 сфер життя.",
     start: "Почати читати", startHere: "Почни звідси", readGuide: "Читати гайд",
     allLabel: "Гайди", allTitle: "Вигорання, баланс і *цілі*",
-    areas: "6 сфер життя", tools: "Безкоштовні інструменти", howWe: "Як ми пишемо й перевіряємо гайди",
+    areasLabel: "Сфери життя", areasTitle: "6 сфер *збалансованого* життя", questions: "Питання, які ставлять люди", tools: "Безкоштовні інструменти", howWe: "Як ми пишемо й перевіряємо гайди",
     checkLabel: "Безкоштовна перевірка балансу", checkTitle: "Знайди свою найслабшу сферу за *2 хвилини*",
     checkText: "Оціни 6 сфер життя від 1 до 10. Ми надішлемо на пошту твою оцінку балансу життя й перший крок для найнижчої сфери.",
     checkBtn: "Пройти безкоштовну перевірку",
@@ -61,6 +66,7 @@ export default async function Guides() {
   const { GUIDES, AREA_GUIDES } = guidesOf(lang);
   const [first] = GUIDES;
   const areaCards: Card[] = AREA_GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g, lang), areas: areasOf(g) }));
+  const HUB = lang === "uk" ? LIFE_AREAS_HUB_UK : LIFE_AREAS_HUB;
   const all = [...GUIDES.map((g) => `/guides/${g.slug}`), ...AREA_GUIDES.map((g) => areaGuideHref(g.area))];
   return (
     <main>
@@ -73,6 +79,11 @@ export default async function Guides() {
         inLanguage: lang,
         url: `${SITE_URL}${langMeta(lang, "/guides").url}`,
         mainEntity: { "@type": "ItemList", itemListElement: all.map((href, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}${langMeta(lang, href).url}` })) },
+      }} />
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: HUB.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: plainText(f.a) } })),
       }} />
       <PhotoHero id="guides-title" media={HERO(lang)} eyebrow={t.eyebrow} titlePrefix={t.h1Prefix} title={t.h1} lede={t.lede}>
         <a href="#start" className="btn lime">{t.start}</a>
@@ -104,7 +115,38 @@ export default async function Guides() {
           <GuideFilter
             guides={GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g, lang), areas: areasOf(g) }))}
             areaPages={Object.fromEntries(AREA_GUIDES.map((g, i) => [g.area, areaCards[i]])) as Partial<Record<AreaKey, Card>>} />
-          <p className={styles.policy}><Link href="/life-areas">{t.areas}</Link> · <Link href="/tools">{t.tools}</Link> · <Link href="/guides/how-we-write-guides">{t.howWe}</Link> · <a href="/guides/feed.xml">RSS</a></p>
+          <p className={styles.policy}><Link href="/tools">{t.tools}</Link> · <Link href="/guides/how-we-write-guides">{t.howWe}</Link> · <a href="/guides/feed.xml">RSS</a></p>
+        </div>
+      </section>
+
+      {/* what the 6 areas are: the text that used to live on /life-areas, so every area page sits under Guides */}
+      <section id="areas" className="section" aria-labelledby="areas-title" style={{ paddingTop: 0, scrollMarginTop: "calc(var(--header-h) + 32px)" }}>
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{t.areasLabel}</span>
+            <h2 id="areas-title" className="display h2"><Rich text={t.areasTitle} /></h2>
+          </div>
+        </div>
+        <div className="container" style={{ maxWidth: 760 }}>
+          <div className={article.body}>
+            {HUB.sections.map((s) => (
+              <section key={s.h2}>
+                <h2>{s.h2}</h2>
+                {s.blocks.map((b, i) => <BlockView key={i} b={b} />)}
+              </section>
+            ))}
+            <section id="questions">
+              <h2>{t.questions}</h2>
+              <div className={article.faq}>
+                {HUB.faq.map((f) => (
+                  <details key={f.q}>
+                    <summary>{f.q}<span className={article.plus} aria-hidden="true" /></summary>
+                    <p><Inline text={f.a} /></p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
       </section>
 

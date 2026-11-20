@@ -12,12 +12,16 @@ import type { MouseEvent, ReactNode } from "react";
  * - the page you're already on (e.g. About on /about): smooth-scrolls to the top
  * - other paths: normal client-side navigation (no full reload), landing at the top (see ScrollToTop)
  */
-export function NavLink({ href, children, className, onNavigate, current }: {
+export function NavLink({ href, children, className, onNavigate, onClick: own, current }: {
   href: string; children: ReactNode; className?: string; onNavigate?: () => void; current?: boolean;
+  /** runs first; calling e.preventDefault() in it takes over the click */
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
 }) {
   const pathname = usePlainPath();
   const lang = useLang();
   const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    own?.(e);
+    if (e.defaultPrevented) return;
     onNavigate?.();
     if (e.metaKey || e.ctrlKey || e.shiftKey) return;
     if (href === pathname && pathname !== "/") {

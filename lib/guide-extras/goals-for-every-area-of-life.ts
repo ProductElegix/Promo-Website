@@ -8,7 +8,7 @@ const extra: GuideExtra = {
       blocks: [
         { p: "Good life goals are specific, finite and written in your own words, and the examples below give you several to choose from in each of the six areas." },
         { p: "Read them as a menu, not a checklist. Pick the one that makes you think “yes, that one”, then change the numbers to fit your life." },
-        { p: "**[Health](/life-areas/health)**" },
+        { p: "**[Health](/guides/health)**" },
         { list: [
           "Walk 8,000 steps on at least five days a week for the next two months.",
           "Be in bed by 23:00 on weeknights for 30 days.",
@@ -17,7 +17,7 @@ const extra: GuideExtra = {
           "Book the check-up and dental visit I've been putting off, this month.",
           "Cut down to one coffee after lunch, starting Monday.",
         ] },
-        { p: "**[Relationships](/life-areas/relationships)**" },
+        { p: "**[Relationships](/guides/relationships)**" },
         { list: [
           "Have a phone-free dinner with my partner every Thursday.",
           "Call my parents every Sunday.",
@@ -26,7 +26,7 @@ const extra: GuideExtra = {
           "Write a thank-you message to one person a month.",
           "Join one local group or club and go at least four times.",
         ] },
-        { p: "**[Spirituality](/life-areas/spirituality)**" },
+        { p: "**[Spirituality](/guides/spirituality)**" },
         { list: [
           "Meditate for ten minutes on five mornings a week for six weeks.",
           "Write down my five core values and check one big decision against them.",
@@ -35,7 +35,7 @@ const extra: GuideExtra = {
           "Volunteer for a cause I care about once a month.",
           "Take one full day off screens each month.",
         ] },
-        { p: "**[Leisure](/life-areas/leisure)**" },
+        { p: "**[Leisure](/guides/leisure)**" },
         { list: [
           "Learn to play three songs on the guitar by June.",
           "Read one novel a month just for fun.",
@@ -44,7 +44,7 @@ const extra: GuideExtra = {
           "Try one new restaurant, trail or museum every month.",
           "Finish the puzzle, painting or model I started.",
         ] },
-        { p: "**[Personal growth](/life-areas/personal-growth)**" },
+        { p: "**[Personal growth](/guides/personal-growth)**" },
         { list: [
           "Read twelve non-fiction books this year.",
           "Reach a conversational level in Spanish by December.",
@@ -53,7 +53,7 @@ const extra: GuideExtra = {
           "Ask three people for honest feedback and act on one point.",
           "Learn to touch type at 60 words per minute.",
         ] },
-        { p: "**[Finance & career](/life-areas/finance-and-career)**" },
+        { p: "**[Finance & career](/guides/finance-and-career)**" },
         { list: [
           "Save three months of expenses in an emergency fund.",
           "Pay off my credit card balance by September.",
