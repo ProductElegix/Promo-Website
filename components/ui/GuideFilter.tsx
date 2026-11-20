@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AREAS, AREA_ORDER, type AreaKey } from "@/lib/content";
 import { AreaIcon } from "./AreaIcon";
@@ -13,7 +14,7 @@ type Filter = "all" | "whole" | AreaKey;
 type Props = {
   /** every guide, in hub order; in hub order */
   guides: (Card & { areas: AreaKey[] })[];
-  /** the life area page for each area, shown first when that area is picked */
+  /** the life area page for each area: a banner over its guides when that area is picked */
   areaPages: Partial<Record<AreaKey, Card>>;
 };
 
@@ -48,15 +49,17 @@ export function GuideFilter({ guides, areaPages }: Props) {
   const [query, setQuery] = useState("");
   const tagged = (f: AreaKey) => guides.filter((g) => g.areas.includes(f)).length;
   /** pages a menu item shows; an area also shows that area's own page */
-  const count = (f: Filter) => (f === "all" ? guides.length : f === "whole" ? guides.filter((g) => !g.areas.length).length : tagged(f) + (areaPages[f] ? 1 : 0));
+  const count = (f: Filter) => (f === "all" ? guides.length : f === "whole" ? guides.filter((g) => !g.areas.length).length : tagged(f));
 
   const inFilter: Card[] =
     filter === "all" ? guides
     : filter === "whole" ? guides.filter((g) => !g.areas.length)
-    : [...(areaPages[filter] ? [areaPages[filter]] : []), ...guides.filter((g) => g.areas.includes(filter))];
+    : guides.filter((g) => g.areas.includes(filter));
   const q = query.trim().toLowerCase();
   const pool = q && filter === "all" ? [...guides, ...Object.values(areaPages)] : inFilter;
   const cards = q ? pool.filter((c) => `${c.title} ${c.text}`.toLowerCase().includes(q)) : inFilter;
+
+  const banner = filter !== "all" && filter !== "whole" && areaPages[filter] ? { area: filter, href: areaPages[filter]!.href } : null;
 
   const items: { f: Filter; label: string }[] = [
     { f: "all", label: "All guides" },
@@ -79,6 +82,14 @@ export function GuideFilter({ guides, areaPages }: Props) {
             );
           })}
         </div>
+        <nav className={styles.overviews} aria-label="Life area overviews">
+          <p>Area overviews</p>
+          <ul>
+            {AREA_ORDER.filter((a) => areaPages[a]).map((a) => (
+              <li key={a}><Link href={areaPages[a]!.href} style={areaVars(a)}><AreaIcon area={a} />{AREAS[a].short}</Link></li>
+            ))}
+          </ul>
+        </nav>
         <label className={styles.search}>
           <span className="sr-only">Search guides</span>
           <input type="search" placeholder="Search guides" value={query} onChange={(e) => setQuery(e.target.value)}
@@ -91,10 +102,16 @@ export function GuideFilter({ guides, areaPages }: Props) {
           {q ? `${cards.length} result${cards.length === 1 ? "" : "s"} for “${query.trim()}”`
             : filter === "all" ? `${guides.length} guides`
             : filter === "whole" ? "Guides that look at all 6 areas together"
-            : tagged(filter) ? `${AREAS[filter].short}: the area page and ${tagged(filter)} guide${tagged(filter) === 1 ? "" : "s"}`
-            : `${AREAS[filter].short}: the area page. More guides are on the way.`}
+            : `${tagged(filter)} guide${tagged(filter) === 1 ? "" : "s"} about ${AREAS[filter].short.toLowerCase()}`}
         </p>
-        {cards.length ? <GuideCards cards={cards} rows /> : <p className={styles.empty}>Nothing found. Try another word, or pick a life area on the left.</p>}
+        {!q && banner && (
+          <Link href={banner.href} className={styles.areaBanner} style={areaVars(banner.area)}>
+            <span className={styles.areaBannerIcon}><AreaIcon area={banner.area} /></span>
+            <span className={styles.areaBannerText}><strong>{AREAS[banner.area].short}: the area overview</strong><span>{AREAS[banner.area].description} Signs it&apos;s slipping and habits that bring it back.</span></span>
+            <span className={styles.areaBannerGo}>Open →</span>
+          </Link>
+        )}
+        {cards.length ? <GuideCards cards={cards} rows /> : <p className={styles.empty}>{!q && banner ? `Guides about ${AREAS[banner.area].short.toLowerCase()} are on the way. Start with the area overview above.` : "Nothing found. Try another word, or pick a life area on the left."}</p>}
       </div>
     </div>
   );

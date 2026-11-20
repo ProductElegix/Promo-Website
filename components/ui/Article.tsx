@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, type ReactNode } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -42,6 +42,8 @@ type Props = {
   midTitle?: string;
   /** more rows of cards above "Keep reading", e.g. the guides about a life area */
   lists?: { id: string; title: string; items: Props["related"] }[];
+  /** life area pages: the guides about this area, right under the header, so the page is the home of its area */
+  hub?: ReactNode;
 };
 
 /** How the guides are written and checked, linked from every guide's byline and author box. */
@@ -98,7 +100,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, "-").replac
 const date = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories, promote = false, midTitle = "Track all 6 areas, not just work", lists = [], areas }: Props) {
+export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories, promote = false, midTitle = "Track all 6 areas, not just work", lists = [], areas, hub }: Props) {
   const url = `${SITE_URL}${path}`;
   const isFounder = author.name === TRUST.founder.name;
   const storyLink = TRUST.founder.storyLink.href !== path ? TRUST.founder.storyLink : null;
@@ -169,6 +171,8 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
             </p>
           )}
         </header>
+
+        {hub}
 
         <div className={`container ${styles.photo}`}>
           <Media media={g.media} priority sizes="(max-width: 1100px) 100vw, 1100px" />

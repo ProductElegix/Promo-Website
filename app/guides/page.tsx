@@ -6,7 +6,7 @@ import { AreaTags } from "@/components/ui/AreaTags";
 import type { AreaKey } from "@/lib/content";
 import type { MediaSlot } from "@/lib/content";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
-import { GuideCards, type Card } from "@/components/ui/GuideCards";
+import type { Card } from "@/components/ui/GuideCards";
 import { GuideFilter } from "@/components/ui/GuideFilter";
 import { Rich } from "@/components/ui/Rich";
 import { PhotoHero } from "@/components/sections/PhotoHero";
@@ -73,18 +73,7 @@ export default function Guides() {
           <GuideFilter
             guides={GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g), areas: areasOf(g) }))}
             areaPages={Object.fromEntries(AREA_GUIDES.map((g, i) => [g.area, areaCards[i]])) as Partial<Record<AreaKey, Card>>} />
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="area-guides" style={{ paddingTop: 0 }}>
-        <div className="container">
-          <div className={`section-head ${styles.center}`} data-reveal>
-            <span className="label">Life areas</span>
-            <h2 id="area-guides" className="display h2"><Rich text="The 6 areas of *life*" /></h2>
-            <p className="lede">What each area covers, the signs it's slipping and small habits that bring it back.</p>
-          </div>
-          <GuideCards cards={areaCards} />
-          <p className={styles.policy}><Link href="/tools">Free tools</Link> · <Link href="/guides/how-we-write-guides">How we write and check our guides</Link> · <a href="/guides/feed.xml">RSS</a></p>
+          <p className={styles.policy}><Link href="/life-areas">The 6 life areas</Link> · <Link href="/tools">Free tools</Link> · <Link href="/guides/how-we-write-guides">How we write and check our guides</Link> · <a href="/guides/feed.xml">RSS</a></p>
         </div>
       </section>
 
