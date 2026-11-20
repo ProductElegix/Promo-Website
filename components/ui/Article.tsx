@@ -25,6 +25,8 @@ type Props = {
   author?: Author;
   /** heading of the table of contents */
   tocTitle?: string;
+  /** other people's stories, shown above "Keep reading" */
+  stories?: Props["related"];
   /** waitlist source tag, e.g. "story:why-i-built-elegix" (defaults to "guide:<slug>") */
   source?: string;
 };
@@ -78,7 +80,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, "-").replac
 const date = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source }: Props) {
+export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories }: Props) {
   const url = `${SITE_URL}${path}`;
   const isFounder = author.name === TRUST.founder.name;
   const storyLink = TRUST.founder.storyLink.href !== path ? TRUST.founder.storyLink : null;
@@ -185,23 +187,31 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
         </div>
       </section>
 
-      {related.length > 0 && (
-        <nav className={`section ${styles.relatedSection}`} aria-labelledby="related-title">
-          <div className="container">
-            <h2 id="related-title" className={styles.relatedTitle}>Keep reading</h2>
-            <ul className={styles.related}>
-              {related.map((r) => (
-                <li key={r.href}>
-                  <Link href={r.href}>
-                    {r.media?.src && <span className={styles.relatedPhoto}><Image src={r.media.src} alt="" fill sizes="(max-width: 860px) 100vw, 33vw" /></span>}
-                    <span className={styles.relatedText}><span className={styles.relatedLabel}>{r.label}</span><span>{r.title}</span></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-      )}
+      {stories && stories.length > 0 && <ReadingList id="stories-title" title={stories.length > 1 ? "Read other founders' stories" : "Read another founder's story"} items={stories} />}
+      {related.length > 0 && <ReadingList id="related-title" title="Keep reading" items={related} />}
     </main>
+  );
+}
+
+type ReadingItem = Props["related"][number];
+
+/** A row of cards linking other pages, at the end of an article. */
+function ReadingList({ id, title, items }: { id: string; title: string; items: ReadingItem[] }) {
+  return (
+    <nav className={`section ${styles.relatedSection}`} aria-labelledby={id}>
+      <div className="container">
+        <h2 id={id} className={styles.relatedTitle}>{title}</h2>
+        <ul className={styles.related}>
+          {items.map((r) => (
+            <li key={r.href}>
+              <Link href={r.href}>
+                {r.media?.src && <span className={styles.relatedPhoto}><Image src={r.media.src} alt="" fill sizes="(max-width: 860px) 100vw, 33vw" style={r.media.position ? { objectPosition: r.media.position } : undefined} /></span>}
+                <span className={styles.relatedText}><span className={styles.relatedLabel}>{r.label}</span><span>{r.title}</span></span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   );
 }

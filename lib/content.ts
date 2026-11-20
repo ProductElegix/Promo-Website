@@ -293,7 +293,7 @@ export const TEAM = {
     { name: "Edward Korytskyi", role: "Founder", photo: "/images/founder.jpg", linkedin: "https://www.linkedin.com/in/korytsky" },
     { name: "Alina Krupa", role: "CMO & Co-founder", photo: "/images/alina-krupa.jpg", linkedin: "https://www.linkedin.com/in/alinakrupa/" },
     { name: "Maksym Zhuravskyi", role: "CTO" },
-    { name: "Yevhenii Bohomol", role: "Product Analyst", photo: "/images/yevhenii-bohomol.jpg" }, // placeholder title, to confirm with Edward
+    { name: "Yevhenii Bohomol", role: "Product Analyst", photo: "/images/yevhenii-bohomol.jpg", linkedin: "https://www.linkedin.com/in/evgeniybogomol/" }, // placeholder title, to confirm with Edward
   ] as { name: string; role: string; photo?: string; linkedin?: string }[],
 };
 

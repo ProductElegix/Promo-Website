@@ -21,8 +21,10 @@ export default async function StoryPage({ params }: Props) {
   if (!s) notFound();
   const related = s.related.map(guideBySlug).filter((r) => r !== undefined)
     .map((r) => ({ href: `/guides/${r.slug}`, label: `${r.minutes} min read`, title: r.title, media: r.media }));
+  const others = STORIES.filter((o) => o.slug !== s.slug)
+    .map((o) => ({ href: storyHref(o), label: `${o.author.name} · ${o.author.role.replace(/ of Elegix$/, "")}`, title: o.title, media: o.media }));
   return (
     <Article guide={s} path={storyHref(s)} parent={{ name: "About", path: "/about#team" }} related={related}
-      author={s.author} tocTitle="In this story" source={`story:${s.slug}`} />
+      author={s.author} tocTitle="In this story" source={`story:${s.slug}`} stories={others} />
   );
 }
