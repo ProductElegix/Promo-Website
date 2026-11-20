@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AREA_GUIDES, areaGuideHref } from "@/lib/guides";
+import { AREA_GUIDES, areasOf, cardMeta, guideHref } from "@/lib/guides";
 import { LIFE_AREAS_HUB } from "@/lib/life-areas-hub";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
 import { BlockView } from "@/components/ui/Article";
@@ -40,7 +40,7 @@ export default function LifeAreas() {
       </section>
       <section className={`section ${styles.list}`} aria-label="All life areas">
         <div className="container">
-          <GuideCards cards={AREA_GUIDES.map((g) => ({ href: areaGuideHref(g.area), title: g.title, text: g.description, media: g.media, meta: `${g.minutes} min read`, area: g.area }))} />
+          <GuideCards cards={AREA_GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g), areas: areasOf(g) }))} />
         </div>
       </section>
       <section className="section" aria-label="About the areas of life" style={{ paddingTop: 0 }}>

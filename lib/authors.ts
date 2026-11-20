@@ -4,13 +4,14 @@
  * Each page lists everything that person wrote and carries ProfilePage structured data.
  */
 import { TRUST } from "@/lib/content";
-import { AREA_GUIDES, GUIDES, guideHref } from "@/lib/guides";
+import { AREA_GUIDES, GUIDES, areasOf, cardMeta, guideHref } from "@/lib/guides";
+import type { AreaKey } from "@/lib/content";
 import { STORIES, storyHref, type Author } from "@/lib/stories";
 import type { MediaSlot } from "@/lib/content";
 
 export type AuthorPage = Author & {
   slug: string;
-  writes: { href: string; title: string; text: string; label: string; media?: MediaSlot; date: string }[];
+  writes: { href: string; title: string; text: string; label: string; areas?: AreaKey[]; media?: MediaSlot; date: string }[];
 };
 
 export const authorSlug = (name: string) => name.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -27,7 +28,7 @@ function build(): AuthorPage[] {
     const stories = STORIES.filter((s) => s.author.name === a.name)
       .map((s) => ({ href: storyHref(s), title: s.title, text: s.description, label: "Story", media: s.media, date: s.updated }));
     const guides = a.name === founder.name
-      ? [...GUIDES, ...AREA_GUIDES].map((g) => ({ href: guideHref(g), title: g.title, text: g.description, label: "area" in g ? "Life area" : "Guide", media: g.media, date: g.updated }))
+      ? [...GUIDES, ...AREA_GUIDES].map((g) => ({ href: guideHref(g), title: g.title, text: g.description, label: cardMeta(g), areas: areasOf(g), media: g.media, date: g.updated }))
       : [];
     return { ...a, slug: authorSlug(a.name), writes: [...stories, ...guides].sort((x, y) => y.date.localeCompare(x.date)) };
   });

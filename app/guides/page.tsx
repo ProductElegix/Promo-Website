@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { AREA_GUIDES, GUIDES, areaGuideHref } from "@/lib/guides";
+import { AREA_GUIDES, GUIDES, areaGuideHref, areasOf, cardMeta, guideHref } from "@/lib/guides";
+import { AreaTags } from "@/components/ui/AreaTags";
 import type { AreaKey } from "@/lib/content";
 import type { MediaSlot } from "@/lib/content";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 /** Hub for every guide and life area page, so each one is two clicks from the home page. The first guide is the "start here". */
 export default function Guides() {
   const [first] = GUIDES;
-  const areaCards: Card[] = AREA_GUIDES.map((g) => ({ href: areaGuideHref(g.area), title: g.title, text: g.description, media: g.media, meta: `${g.minutes} min read`, area: g.area }));
+  const areaCards: Card[] = AREA_GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g), areas: areasOf(g) }));
   const all = [...GUIDES.map((g) => `/guides/${g.slug}`), ...AREA_GUIDES.map((g) => areaGuideHref(g.area))];
   return (
     <main>
@@ -53,9 +54,10 @@ export default function Guides() {
             <span className={styles.featuredPhoto}>{first.media.src && <Image src={first.media.src} alt={first.media.alt} fill sizes="(max-width: 860px) 100vw, 60vw" />}</span>
             <span className={styles.featuredText}>
               <span className="label">Start here</span>
+              <AreaTags areas={first.areas} />
               <h2 id="start-title" className={styles.featuredTitle}>{first.title}</h2>
               <p>{first.description}</p>
-              <span className={styles.meta}>{first.minutes} min read</span>
+              <span className={styles.meta}>{cardMeta(first)}</span>
               <span className="btn">Read the guide</span>
             </span>
           </Link>
@@ -69,8 +71,8 @@ export default function Guides() {
             <h2 id="all-guides" className="display h2"><Rich text="Burnout, balance and *goals*" /></h2>
           </div>
           <GuideFilter
-            guides={GUIDES.map((g) => ({ href: `/guides/${g.slug}`, title: g.title, text: g.description, media: g.media, meta: `${g.minutes} min read`, areas: g.areas }))}
-            areaPages={Object.fromEntries(areaCards.map((c) => [c.area, c])) as Partial<Record<AreaKey, Card>>} />
+            guides={GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g), areas: areasOf(g) }))}
+            areaPages={Object.fromEntries(AREA_GUIDES.map((g, i) => [g.area, areaCards[i]])) as Partial<Record<AreaKey, Card>>} />
         </div>
       </section>
 

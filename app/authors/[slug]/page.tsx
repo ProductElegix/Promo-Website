@@ -7,7 +7,6 @@ import { TRUST } from "@/lib/content";
 import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
 import { GuideCards } from "@/components/ui/GuideCards";
-import { EDITORIAL_PATH } from "@/components/ui/Article";
 import styles from "@/components/ui/Article.module.css";
 
 export const dynamicParams = false;
@@ -57,8 +56,7 @@ export default async function AuthorPage({ params }: Props) {
               <h1 id="author-title" className={styles.authorName} style={{ fontSize: 28 }}>{a.name}</h1>
               <p className={styles.authorRole}>{a.role}</p>
               <p className={styles.authorBio}>{a.bio}</p>
-              {a.linkedin && <a href={a.linkedin} target="_blank" rel="noopener me" className={styles.authorLink} style={{ marginRight: 20 }}>LinkedIn ↗</a>}
-              <Link href={EDITORIAL_PATH} className={styles.authorLink}>How we write guides</Link>
+              {a.linkedin && <a href={a.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn ↗</a>}
             </div>
           </div>
         </header>
@@ -66,7 +64,7 @@ export default async function AuthorPage({ params }: Props) {
       <section className="section" aria-labelledby="author-writes" style={{ paddingTop: 0 }}>
         <div className="container">
           <h2 id="author-writes" className={styles.relatedTitle}>{a.writes.length} {a.writes.length === 1 ? "piece" : "pieces"} by {a.name.split(" ")[0]}</h2>
-          <GuideCards cards={a.writes.map((w) => ({ href: w.href, title: w.title, text: w.text, media: w.media ?? OG_IMAGE_SLOT, meta: w.label }))} />
+          <GuideCards cards={a.writes.map((w) => ({ href: w.href, title: w.title, text: w.text, media: w.media ?? OG_IMAGE_SLOT, meta: w.label, areas: w.areas }))} />
         </div>
       </section>
     </main>

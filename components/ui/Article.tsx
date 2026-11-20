@@ -12,7 +12,7 @@ import { Breadcrumbs, JsonLd } from "./JsonLd";
 import { GuideTool } from "./GuideTool";
 import { Inline } from "./Inline";
 import { Media } from "./Media";
-import { Pill } from "./Pill";
+import { AreaTags } from "./AreaTags";
 import { Rich } from "./Rich";
 import { Toc } from "./Toc";
 import { ArticleActions } from "./ArticleActions";
@@ -25,7 +25,9 @@ type Props = {
   guide: Omit<Guide, "related" | "areas"> & { area?: AreaKey; intro?: Block[] };
   path: string;
   parent: Parent;
-  related: { href: string; label: string; title: string; media?: MediaSlot }[];
+  related: { href: string; label: string; title: string; media?: MediaSlot; areas?: AreaKey[] }[];
+  /** guides: the life areas it is about (empty: all 6), shown as tags over the title */
+  areas?: AreaKey[];
   /** who wrote it; defaults to the founder (guides). Personal stories pass their own person. */
   author?: Author;
   /** heading of the table of contents */
@@ -96,7 +98,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, "-").replac
 const date = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories, promote = false, midTitle = "Track all 6 areas, not just work", lists = [] }: Props) {
+export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories, promote = false, midTitle = "Track all 6 areas, not just work", lists = [], areas }: Props) {
   const url = `${SITE_URL}${path}`;
   const isFounder = author.name === TRUST.founder.name;
   const storyLink = TRUST.founder.storyLink.href !== path ? TRUST.founder.storyLink : null;
@@ -149,7 +151,10 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
           <nav aria-label="Breadcrumb" className={styles.crumbs}>
             <Link href="/">Elegix</Link><span aria-hidden="true">/</span><Link href={parent.path}>{parent.name}</Link>
           </nav>
-          {g.area ? <Pill area={g.area} strong /> : <span className="label">{g.label}</span>}
+          <div className={styles.kind}>
+            <span className="label">{g.area ? "Life area" : g.label}</span>
+            {(g.area || areas) && <AreaTags areas={g.area ? [g.area] : areas!} link />}
+          </div>
           <h1 id="article-title" className={`display ${styles.title}`}>{g.title}</h1>
           <p className={styles.lede}>{g.lede}</p>
           <p className={styles.meta}>
@@ -250,8 +255,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
               <p className={styles.authorBio}>{author.bio}</p>
               <Link href={authorHref(author.name)} className={styles.authorLink} style={{ marginRight: 20 }}>All by {author.name.split(" ")[0]} →</Link>
               {isFounder && storyLink && <Link href={storyLink.href} className={styles.authorLink} style={{ marginRight: 20 }}>{storyLink.label} →</Link>}
-              {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink} style={promote ? { marginRight: 20 } : undefined}>LinkedIn ↗</a>}
-              {promote && <Link href={EDITORIAL_PATH} className={styles.authorLink}>How we write guides</Link>}
+              {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn ↗</a>}
             </div>
           </aside>
           </div>
@@ -288,7 +292,7 @@ function ReadingList({ id, title, items }: { id: string; title: string; items: R
             <li key={r.href}>
               <Link href={r.href}>
                 {r.media?.src && <span className={styles.relatedPhoto}><Image src={r.media.src} alt="" fill sizes="(max-width: 860px) 100vw, 33vw" style={r.media.position ? { objectPosition: r.media.position } : undefined} /></span>}
-                <span className={styles.relatedText}><span className={styles.relatedLabel}>{r.label}</span><span>{r.title}</span></span>
+                <span className={styles.relatedText}>{r.areas && <AreaTags areas={r.areas} />}<span>{r.title}</span><span className={styles.relatedLabel}>{r.label}</span></span>
               </Link>
             </li>
           ))}
