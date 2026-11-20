@@ -27,7 +27,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 .public { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding: 22px 26px; border-radius: 16px; background: var(--paper); }
 .public p { color: var(--muted); font-size: 0.95rem; }
 .public ul { display: flex; flex-wrap: wrap; gap: 8px; }
-.public a { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--cream); text-decoration: none; font-size: 0.9rem; transition: background-color .15s; }
+.public a { display: inline-block; padding: 8px 14px; border-radius: var(--radius-s); background: var(--cream); text-decoration: none; font-size: 0.9rem; transition: background-color .15s; }
 .public a:hover { background: var(--mint); }
 
 .cta { grid-template-columns: minmax(0, 1fr); border-radius: 16px; padding: clamp(40px, 7vw, 88px) clamp(24px, 5vw, 64px); background: var(--atmo-green); color: #fff; display: grid; gap: 18px; justify-items: center; text-align: center; position: relative; overflow: hidden; }

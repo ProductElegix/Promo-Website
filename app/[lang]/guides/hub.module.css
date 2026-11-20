@@ -38,7 +38,7 @@
 
 /* life area filter over the guide grid */
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 16px; max-width: 60rem; }
-.chip { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 8px 12px 8px 14px; border: 0; border-radius: 999px; background: var(--paper); color: var(--ink); font: 500 var(--fs-small) var(--font-sans); letter-spacing: -0.01em; cursor: pointer; box-shadow: inset 0 0 0 1px var(--line); transition: background .2s, color .2s, box-shadow .2s; }
+.chip { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 8px 12px 8px 14px; border: 0; border-radius: var(--radius-s); background: var(--paper); color: var(--ink); font: 500 var(--fs-small) var(--font-sans); letter-spacing: -0.01em; cursor: pointer; box-shadow: inset 0 0 0 1px var(--line); transition: background .2s, color .2s, box-shadow .2s; }
 .chip svg { width: 14px; height: 14px; color: var(--s); }
 .chip:hover { box-shadow: inset 0 0 0 1px var(--ink); }
 .chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -93,7 +93,7 @@
   .menu { position: static; gap: 12px; }
   .menuList { display: flex; overflow-x: auto; gap: 8px; padding: 2px var(--gutter) 6px; margin-inline: calc(-1 * var(--gutter)); border-right: 0; scrollbar-width: none; }
   .menuList::-webkit-scrollbar { display: none; }
-  .menuItem { flex: none; width: auto; min-height: 40px; padding: 8px 14px; border-radius: 999px; background: var(--paper); font-size: var(--fs-small); box-shadow: inset 0 0 0 1px var(--line); }
+  .menuItem { flex: none; width: auto; min-height: 40px; padding: 8px 14px; border-radius: var(--radius-s); background: var(--paper); font-size: var(--fs-small); box-shadow: inset 0 0 0 1px var(--line); }
   .menuItem[aria-pressed="true"] { background: var(--ink); color: var(--paper); box-shadow: none; }
   .menuItem[aria-pressed="true"] svg, .menuItem[aria-pressed="true"] .menuCount { color: inherit; }
   .menuItem[aria-pressed="true"] .allDot { background: var(--paper); }
@@ -126,7 +126,7 @@
 .overviews { display: grid; gap: 8px; padding-right: clamp(16px, 2vw, 32px); }
 .overviews p { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-left: 12px; }
 .overviews ul { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0 0 0 8px; margin: 0; }
-.overviews a { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); font-size: 13px; text-decoration: none; transition: box-shadow .2s; }
+.overviews a { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 8px; border-radius: var(--radius-s); box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); font-size: 13px; text-decoration: none; transition: box-shadow .2s; }
 .overviews a:hover { box-shadow: inset 0 0 0 1px var(--ink); }
 .overviews svg { width: 12px; height: 12px; color: var(--s); }
 @media (max-width: 860px) { .overviews { display: none; } }
