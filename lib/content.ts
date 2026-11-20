@@ -273,12 +273,22 @@ export const CHECK = {
   eyebrow: "Free Life Balance Check",
   title: "Find your weakest area in *2 minutes*",
   text: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area. Free, and you'll get a spot on the waitlist.",
-  question: "How satisfied are you with each area right now?",
+  question: "How satisfied are you with this area right now?",
   button: "Take the free check",
   result: "Your Life Balance score",
   lowest: "Your weakest area",
   done: "We'll email your score and a first step to",
   sent: "We've emailed your score and a first step to",
+  /** the step-by-step check inside the modal */
+  low: "Not at all",
+  high: "Completely",
+  back: "Back",
+  next: "Next",
+  finish: "See my result",
+  emailTitle: "Where should we send your first step?",
+  emailNote: "You'll also get a printable Wheel of Life (PDF) to check again in a month.",
+  submit: "Send my first step",
+  restart: "Start over",
 };
 
 // 9
@@ -391,6 +401,12 @@ export const EMAIL = {
     stepTitle: "Your first step for {area}",
     button: { label: "See how Elegix works", href: "https://www.elegix.net/#how" },
     reply: "Want to talk through your result? Just hit reply, I read every answer.",
+    /** the lead magnet: the printable Wheel of Life from the guides */
+    pdf: {
+      title: "Your printable Wheel of Life",
+      text: "Print it, colour in your scores and check again in a month. Seeing the change on paper keeps the weak area in view.",
+      button: { label: "Download the PDF", href: "https://www.elegix.net/downloads/wheel-of-life-template.pdf" },
+    },
   },
   belief: { title: "At Elegix, we believe", text: "A good life isn't the most productive one. It's a balanced one." },
   wait: { title: "While you wait", name: "Edward Korytskyi, Founder", note: "Coming soon to iOS & Android" },

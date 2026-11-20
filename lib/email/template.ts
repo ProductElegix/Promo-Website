@@ -102,6 +102,14 @@ function belief(btn: { label: string; href: string }) {
   return card(h(EMAIL.belief.title, 24, 30, "#ffffff") + p(EMAIL.belief.text, "#ffffff", "center", "padding-top:16px") + button(btn.label, btn.href), C.brand);
 }
 
+/** The printable Wheel of Life (PDF), the balance check's lead magnet. */
+function pdf() {
+  const k = EMAIL.check.pdf;
+  const btn = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px"><tr><td align="center" bgcolor="${C.brand}" style="border-radius:9999px;background:${C.brand}">` +
+    `<a href="${esc(k.button.href)}" style="display:block;padding:14px 28px;font-family:${FONT};font-size:16px;line-height:24px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:9999px">${esc(k.button.label)}</a></td></tr></table>`;
+  return card(h(k.title, 20, 28, C.brand, "left") + p(k.text, C.text, "left", "padding-top:8px") + btn);
+}
+
 /** Invite link to the private Telegram group: a server-only env var, never shipped to the site. */
 export const communityUrl = () => process.env.TELEGRAM_COMMUNITY_URL?.trim() || "";
 
@@ -173,6 +181,7 @@ export function buildEmail(input: EmailInput, lang: Lang = "en"): BuiltEmail {
       hero(fill(c.title, vars), fill(c.subtitle, vars), false),
       areas(input.scores, lowest),
       firstStep(lowest),
+      pdf(),
       belief(c.button),
       community(),
       wait(c.reply),
@@ -183,6 +192,7 @@ export function buildEmail(input: EmailInput, lang: Lang = "en"): BuiltEmail {
       fill(c.subtitle, vars),
       `${c.areasTitle}:\n${AREA_ORDER.map((a) => `${AREAS[a].name}: ${input.scores![a]}/10`).join("\n")}`,
       `${fill(c.stepTitle, vars)}: ${EMAIL.firstSteps[lowest]}`,
+      `${c.pdf.title}\n${c.pdf.text}\n${c.pdf.button.label}: ${c.pdf.button.href}`,
       `${EMAIL.belief.title}: ${EMAIL.belief.text}`,
       `${c.button.label}: ${c.button.href}`,
       communityText(),
