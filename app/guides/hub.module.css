@@ -7,7 +7,8 @@
 .card { display: grid; grid-template-rows: auto 1fr; height: 100%; background: var(--paper); border-radius: var(--radius-l); overflow: hidden; padding: 10px; text-decoration: none; transition: transform .2s; }
 .card:hover { transform: translateY(-3px); }
 .card > :first-child { border-radius: var(--radius-m); overflow: hidden; }
-.cardText { display: grid; gap: 10px; align-content: start; justify-items: start; padding: 18px 12px 12px; }
+.cardText { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 18px 12px 12px; }
+.cardText > .meta { margin-top: auto; padding-top: 6px; }
 .cardText h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.2; }
 .cardText p { font-size: var(--fs-body); color: var(--muted); line-height: 1.55; }
 .meta { font-size: var(--fs-small); color: var(--muted); }
@@ -34,10 +35,6 @@
 .grid.two { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 640px) { .grid.two { grid-template-columns: 1fr; } }
 
-/* card tags: life area pills and the read time */
-.tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
-.tags .meta { margin-left: 2px; }
-.allAreas { display: inline-flex; align-items: center; padding: 5px 9px 4px; border-radius: var(--radius-s); background: var(--cream); color: var(--ink); font-size: var(--fs-xs); font-weight: 500; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; }
 
 /* life area filter over the guide grid */
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 16px; max-width: 60rem; }

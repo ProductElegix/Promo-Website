@@ -176,6 +176,19 @@ button { font: inherit; }
 .pill.strong { background: var(--s); color: var(--t); }
 .pill svg { width: 12px; height: 12px; flex: none; }
 
+/* area tags: the life areas a guide is about, the same on every card and in the article header */
+.area-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.area-tag {
+  display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px 0 8px;
+  border-radius: 999px; background: transparent; box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--ink); font-size: 13px; font-weight: 500; line-height: 1; letter-spacing: -0.005em; white-space: nowrap; text-decoration: none;
+}
+.area-tag svg { width: 12px; height: 12px; flex: none; color: var(--s); }
+a.area-tag { transition: box-shadow .2s; }
+a.area-tag:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+.area-wheel { width: 12px; height: 12px; flex: none; border-radius: 50%;
+  background: conic-gradient(var(--health-s) 0 60deg, var(--people-s) 0 120deg, var(--meaning-s) 0 180deg, var(--hobby-s) 0 240deg, var(--growth-s) 0 300deg, var(--career-s) 0); }
+
 /* glass: used sparingly over photos */
 .glass {
   background: rgba(0, 0, 0, 0.35);

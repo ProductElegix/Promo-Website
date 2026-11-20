@@ -1077,6 +1077,11 @@ export function relatedTo(g: Guide, count = 3): (Guide | AreaGuide)[] {
   return [...picked, ...auto].slice(0, count);
 }
 
+/** The life areas a guide or life area page is about (empty: all 6). */
+export const areasOf = (o: Guide | AreaGuide): AreaKey[] => ("area" in o ? [o.area] : o.areas);
+/** "Guide · 12 min read" or "Life area · 8 min read": the line under every card. */
+export const cardMeta = (o: Guide | AreaGuide) => `${"area" in o ? "Life area" : "Guide"} · ${o.minutes} min read`;
+
 /** Guides about one life area, for that area's page and the hub filter. */
 export const guidesForArea = (key: AreaKey) => GUIDES.filter((g) => g.areas.includes(key));
 

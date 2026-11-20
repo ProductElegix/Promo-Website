@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GUIDES } from "@/lib/guides";
+import { GUIDES, areasOf, cardMeta, guideHref } from "@/lib/guides";
 import { GuideCards } from "@/components/ui/GuideCards";
 import { Rich } from "@/components/ui/Rich";
 
@@ -15,7 +15,7 @@ export function PopularGuides() {
           <span className="label">Popular guides</span>
           <h2 id="guides-title" className="display h2"><Rich text="Start with the *basics*" /></h2>
         </div>
-        <GuideCards cards={guides.map((g) => ({ href: `/guides/${g.slug}`, title: g.title, text: g.description, media: g.media, meta: `${g.minutes} min read`, areas: g.areas }))} />
+        <GuideCards cards={guides.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g), areas: areasOf(g) }))} />
         <p style={{ marginTop: 32, textAlign: "center" }}><Link href="/guides" className="btn">All guides</Link></p>
       </div>
     </section>
