@@ -145,6 +145,7 @@ button { font: inherit; }
 .section-head.center { justify-items: start; text-align: left; }
 /* truly centred head (badge + title in the middle of the page) */
 .section-head.centered { justify-items: center; text-align: center; margin-inline: auto; }
+.section-head.centered .lede { margin-inline: auto; }
 
 /* inline highlight inside body text (Rich ==word==): the word set in ink, underlined with a hairline */
 .hl { background: none; color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; white-space: nowrap; }
