@@ -40,26 +40,30 @@ export default function About() {
         <StatementStrip label={A.hero.mission.label} text={A.hero.mission.text} photos={A.hero.strip} />
       </StatementSection>
 
-      {/* 3. The founder story: why it exists */}
+      {/* 3. The founder story: one centred quote, one signature, his photo with two facts, then the takeaway */}
       <section id={A.story.id} className="section" aria-labelledby="story-title" style={{ scrollMarginTop: "var(--header-h)" }}>
         <div className={`container ${styles.story}`}>
-          <div className={styles.storyAside} data-reveal>
-            <div className={`on-dark ${styles.stat}`}>
-              <b className={styles.statValue}><span data-count={A.storyStat.value}>{A.storyStat.value}</span>{A.storyStat.unit}</b>
-              <p>{A.storyStat.caption}</p>
+          <span className="label" data-reveal>{STORY.label}</span>
+          <h2 id="story-title" className="sr-only">{STORY.title}</h2>
+          <figure className={styles.storyQuote} data-reveal>
+            <span className={styles.quoteMark} aria-hidden="true">&ldquo;</span>
+            <blockquote><p><Rich text={STORY.quote} /></p></blockquote>
+            <figcaption className={styles.byline}><b>{TRUST.founder.name}</b><span aria-hidden="true" className={styles.bar} />{TRUST.founder.role}</figcaption>
+          </figure>
+          <div className={styles.storyVisual} data-reveal>
+            <div className={styles.storyPhoto}>
+              <Image src={TRUST.founder.media.src ?? "/images/founder.jpg"} alt={TRUST.founder.media.alt} fill sizes="(max-width: 640px) 70vw, 380px" />
             </div>
-            <p className={styles.founder}><b>{TRUST.founder.name}</b>, {TRUST.founder.role}</p>
+            {STORY.facts.map((f, i) => (
+              <p key={f.value} className={`${styles.storyFact} ${i ? styles.factB : styles.factA}`}>
+                <b>{f.value}</b><span>{f.text}</span>
+              </p>
+            ))}
           </div>
-          <div className={styles.storyBody}>
-            <span className="label">{A.story.label}</span>
-            <h2 id="story-title" className="display h2"><Rich text={STORY.title} /></h2>
-            {STORY.blocks.map((b, i) => {
-              if (b.type === "lines") return <p key={i} className={styles.lines} data-reveal>{b.lines.map((l) => <span key={l}>{l}</span>)}</p>;
-              if (b.type === "quote") return <blockquote key={i} className={styles.quote} data-reveal>{b.text}</blockquote>;
-              return <p key={i} className={b.type === "lead" ? styles.lead : undefined} data-reveal>{b.text}</p>;
-            })}
-            <p className={styles.sign}>{STORY.signature}</p>
-            <Link href={STORY.more.href} className={`btn ${styles.storyMore}`} data-reveal>{STORY.more.label}</Link>
+          <div className={styles.storyEnd} data-reveal>
+            <p className={`display ${styles.takeaway}`}><Rich text={STORY.takeaway} /></p>
+            <p className={styles.storyText}>{STORY.text}</p>
+            <Link href={STORY.more.href} className="btn">{STORY.more.label}</Link>
           </div>
         </div>
       </section>
