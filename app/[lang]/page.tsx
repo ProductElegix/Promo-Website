@@ -1,6 +1,7 @@
 import { Opening } from "@/components/sections/Opening";
 import { FactsTicker } from "@/components/sections/FactsTicker";
 import { Problem } from "@/components/sections/Problem";
+import { Spread } from "@/components/sections/Spread";
 import { Orbit } from "@/components/sections/Orbit";
 import { Compare } from "@/components/sections/Compare";
 import { HowItWorks } from "@/components/sections/HowItWorks";
@@ -26,6 +27,7 @@ export default async function Home() {
       <Opening />
       <FactsTicker />
       <Problem />
+      <Spread />
       <HowItWorks />
       <Orbit />
       <Compare />
