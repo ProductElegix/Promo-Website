@@ -123,7 +123,7 @@ export const OPENING = {
     title: "Not another planner. A *mirror* for your whole life.",
     text: "Most apps reward you for doing more. Elegix shows what doing more is costing you: a 1-minute weekly check-in, one Life Balance score and one small next step for the area that needs you most.",
   },
-  card: { title: "Ready to get started?", text: "Join the early access list. We'll email you once, when your spot opens." },
+  card: { title: "Ready to get started?", text: "Join the early access list." },
 };
 
 /** Facts ticker under the hero: a value and a short caption, scrolling on a dark strip. */
@@ -315,7 +315,7 @@ export const JOIN = {
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
   button: "Reserve my spot",
-  note: "No payment now. One email when your spot opens.",
+  note: "No payment now.",
 };
 
 // 11
@@ -501,7 +501,7 @@ export const ABOUT_PAGE = {
       { q: "Who is behind Elegix?", a: "Four people: Edward Korytskyi (founder), Alina Krupa (CMO and co-founder), Maksym Zhuravskyi (CTO and co-founder) and Yevhenii Bohomol (co-founder). Elegix is registered in Ukraine as an individual entrepreneur (FOP) business in Edward's name." },
       { q: "Where are you based?", a: "In Lutsk, Ukraine. We work as a small remote team, four days a week." },
       { q: "What stage is Elegix at?", a: "We're building the first version of the iOS and Android app. Waitlist members get in first, in the order they joined." },
-      { q: "How do I get early access?", a: "Join the waitlist with your email. We'll write once, when your spot opens. Early members also get a founding member price, locked for life." },
+      { q: "How do I get early access?", a: "Join the waitlist with your email. Early members also get a founding member price, locked for life." },
       { q: "What do you do with my data?", a: "Only what's needed to run the app for you. It's never sold, analytics run only if you agree, and you can have your data deleted any time. The details are in our Privacy Policy." },
       { q: "How can I contact you?", a: "Email hello@elegix.net. Edward reads every message, and we usually reply within a couple of days." },
     ],
