@@ -143,6 +143,8 @@ button { font: inherit; }
 .section-head.split > :not(.btn) { grid-column: 1; }
 .section-head.split > .btn { grid-column: 2; grid-row: 1 / span 3; align-self: end; }
 .section-head.center { justify-items: start; text-align: left; }
+/* truly centred head (badge + title in the middle of the page) */
+.section-head.centered { justify-items: center; text-align: center; margin-inline: auto; }
 
 /* inline highlight inside body text (Rich ==word==): the word set in ink, underlined with a hairline */
 .hl { background: none; color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; white-space: nowrap; }

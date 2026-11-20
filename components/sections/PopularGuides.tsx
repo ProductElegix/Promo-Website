@@ -16,7 +16,7 @@ export async function PopularGuides() {
   return (
     <section id="guides" className="section" aria-labelledby="guides-title">
       <div className="container">
-        <div className="section-head" data-reveal>
+        <div className="section-head centered" data-reveal>
           <span className="label">{t.popularGuides}</span>
           <h2 id="guides-title" className="display h2"><Rich text={t.startWithBasics} /></h2>
         </div>
