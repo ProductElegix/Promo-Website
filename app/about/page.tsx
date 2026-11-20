@@ -9,6 +9,7 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Faq } from "@/components/sections/Faq";
 import { Avatar } from "@/components/ui/Avatar";
 import { Rich } from "@/components/ui/Rich";
+import { Media } from "@/components/ui/Media";
 import { Join } from "@/components/sections/Join";
 import { StatementSection, StatementStrip } from "@/components/sections/Opening";
 import { Principles } from "@/components/sections/Trust";
@@ -124,17 +125,20 @@ export default function About() {
 
 
       {/* 7. Pricing and the name: two short facts, side by side */}
-      <section className={`section ${styles.pricingSection}`} aria-label="Pricing and the name">
-        <div className={`container ${styles.facts}`}>
-          <div className={styles.fact} data-reveal>
-            <span className="label">{A.pricing.label}</span>
-            <h2 id="pricing-title" className={styles.factTitle}><Rich text={A.pricing.title} /></h2>
-            <p className={styles.factText}>{A.pricing.text}</p>
-          </div>
-          <div className={styles.fact} data-reveal>
-            <span className="label">{A.name.label}</span>
-            <h2 id="name-title" className={styles.factTitle}>{A.name.title}</h2>
-            <p className={styles.factText}>{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
+      <section className={`on-dark ${styles.pf}`} data-theme="dark" aria-label="Pricing and the name">
+        <div className={styles.pfStage}>
+          <div className={styles.pfPhoto} data-parallax data-scale-in><Media media={A.photo} fill sizes="100vw" /></div>
+          <div className={`container ${styles.pfGrid}`}>
+            <div className={styles.pfItem} data-reveal>
+              <span className="label">{A.pricing.label}</span>
+              <h2 id="pricing-title" className={styles.pfTitle}><Rich text={A.pricing.title} /></h2>
+              <p className={styles.pfText}>{A.pricing.text}</p>
+            </div>
+            <div className={styles.pfItem} data-reveal>
+              <span className="label">{A.name.label}</span>
+              <h2 id="name-title" className={styles.pfTitle}>{A.name.title}</h2>
+              <p className={styles.pfText}>{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
+            </div>
           </div>
         </div>
       </section>
