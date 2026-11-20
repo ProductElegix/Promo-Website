@@ -1,5 +1,5 @@
 import Link from "@/components/ui/Lang";
-import { AREA_ORDER } from "@/lib/content";
+import { AREA_ORDER, APP as APP_EN } from "@/lib/content";
 import type { Content } from "@/lib/l10n";
 import { getContent } from "@/lib/lang";
 import { ui } from "@/lib/ui";
@@ -66,7 +66,8 @@ export async function HowItWorks({ learnMore = true, chips = true }: { learnMore
         </div>
         <ol className={styles.cards}>
           {HOW.steps.map((step, i) => {
-            const screen = (APP.screens.find((s) => s.label === step.screen) ?? APP.screens[0]).media;
+            // steps name their screen by the English label; the translated list keeps the same order
+            const screen = (APP.screens[APP_EN.screens.findIndex((s) => s.label === step.screen)] ?? APP.screens[0]).media;
             const [a, b] = step.tint;
             return (
               <li key={step.key} className={styles.card} data-reveal

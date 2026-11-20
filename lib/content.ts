@@ -183,7 +183,7 @@ export const HOW = {
       key: "goals",
       title: "Act",
       text: "Goals linked to daily habits and tasks, each with your “why” next to it, and one next step for the area that needs you most.",
-      screen: "Home",
+      screen: "Plan",
       tint: ["hobby", "people"] as [AreaKey, AreaKey],
       scroll: 0,
     },
@@ -248,8 +248,9 @@ export const ORBIT = {
 /** Real app screenshots: the hero phone, the How it works cards, the About hero and Ready. */
 export const APP = {
   screens: [
-    { label: "Home", media: { src: "/images/app/home.jpg", alt: "Elegix app home screen: goals and habits counters, categories, the Life Area balance score and Why Story", brief: "App screenshot · Home", ratio: "9 / 19.5" } },
-    { label: "Life Area", media: { src: "/images/app/life-area.jpg", alt: "Elegix Life Area screen: a radar chart of life areas with weekly changes and a balance score out of 10", brief: "App screenshot · Life Area", ratio: "9 / 19.5" } },
+    { label: "Home", media: { src: "/images/app/home-v2.jpg", alt: "Elegix app home screen: goals and habits counters, categories, the Life Area balance score and Why Story", brief: "App screenshot · Home", ratio: "9 / 19.5" } },
+    { label: "Life Area", media: { src: "/images/app/life-area-v2.jpg", alt: "Elegix Life Area screen: a radar chart of life areas with weekly changes and a balance score out of 10", brief: "App screenshot · Life Area", ratio: "9 / 19.5" } },
+    { label: "Plan", media: { src: "/images/app/plan-v2.jpg", alt: "Elegix Plan screen: a week calendar with today's habits, unchecked and completed, each tagged with its category", brief: "App screenshot · Plan", ratio: "9 / 19.5" } },
   ] as { label: string; media: MediaSlot }[],
 };
 
@@ -342,7 +343,7 @@ export const FOOTER = {
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   name: "Elegix: Valencian for “choose”.",
   email: "hello@elegix.net",
-  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Get early access" }],
+  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/press", label: "Press" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Get early access" }],
   legal: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms" }],
   socials: SOCIALS,
   wordmark: "Elegix",
@@ -594,3 +595,109 @@ export const CAREERS = {
   },
 };
 
+
+/**
+ * /press: the press kit for journalists. Facts, descriptions and quotes here must stay true:
+ * no invented numbers (see brand-words/elegix-media-hooks "Чего не делать").
+ * Files live in public/press/ and public/images/; the ZIP is rebuilt by scripts/press-kit.mjs.
+ */
+export const PRESS = {
+  meta: { title: "Press kit · Elegix", description: "Elegix logos, team photos, app screenshots, key facts and ready-to-use descriptions for journalists. Free to use in stories about Elegix." },
+  label: "Press",
+  title: "Elegix *press kit*",
+  lede: "Logos, photos, facts and ready-made descriptions of Elegix. Use anything on this page in a story about us. Need an interview, a comment or something that isn't here? Write to us.",
+  download: { label: "Download press kit (ZIP)", href: "/press/elegix-press-kit.zip" },
+  contact: { label: "Contact the press team", email: "hello@elegix.net", subject: "Press enquiry" },
+  facts: {
+    label: "Key facts",
+    title: "Elegix in *one minute*",
+    items: [
+      { k: "What it is", v: "A life balance tracker app" },
+      { k: "What it does", v: "Shows which of 6 life areas is slipping, before it turns into burnout" },
+      { k: "Stage", v: "In development, waitlist open" },
+      { k: "Platforms", v: "iOS and Android" },
+      { k: "Pricing", v: "Free, with an optional Premium plan" },
+      { k: "Founder", v: "Edward Korytskyi" },
+      { k: "Team", v: "Lutsk, Ukraine" },
+      { k: "The name", v: "Valencian for “choose”" },
+    ],
+  },
+  about: {
+    label: "Descriptions",
+    title: "Describe us in *your length*",
+    lede: "Copy whichever fits your piece. They all say the same thing, just at different lengths.",
+    copy: "Copy",
+    copied: "Copied",
+    items: [
+      { label: "One line", text: "Elegix is a life balance tracker app that shows which of your 6 life areas is slipping, before it turns into burnout." },
+      { label: "About 50 words", text: "Elegix is a life balance tracker for ambitious people who want to grow at work without losing the rest of their life. It brings goals, habits and tasks together across 6 life areas and shows which one needs attention next. The name is Valencian for “choose”. Elegix is coming to iOS and Android." },
+      { label: "About 150 words", text: "Elegix is a life balance tracker for people who want to grow at work without losing the rest of their life. Most planners fix one piece: a to-do list, a habit streak, a goal. Elegix looks at the whole picture. It brings goals, habits and tasks together across 6 life areas: health, relationships, spirituality, leisure, personal growth, and finance and career. A one-minute weekly check-in and a 10-minute monthly review show what grew, what dropped and which area to focus on next, before a slipping area turns into burnout.\n\nThe name comes from Valencian and Western Catalan, where elegix means “choose”: a balanced life isn't something you find, it's something you choose, one week at a time. Elegix was founded by Edward Korytskyi and is built by a small team from Lutsk, Ukraine. The app is in development for iOS and Android, free to use with an optional Premium plan, and the waitlist is open at elegix.net." },
+    ],
+  },
+  logos: {
+    label: "Logo",
+    title: "Logo and *logomark*",
+    lede: "Green, dark green or dark on light backgrounds; light green or white on dark ones. Please don't recolour, stretch or add effects to the logo.",
+    items: [
+      { name: "Logo, green", file: "elegix-logo-green", ground: "light" },
+      { name: "Logo, dark green", file: "elegix-logo-dark-green", ground: "light" },
+      { name: "Logo, dark", file: "elegix-logo-dark", ground: "light" },
+      { name: "Logo, light green", file: "elegix-logo-light-green", ground: "dark" },
+      { name: "Logo, white", file: "elegix-logo-white", ground: "dark" },
+      { name: "Logomark, green", file: "elegix-mark-green", ground: "light" },
+      { name: "Logomark, dark green", file: "elegix-mark-dark-green", ground: "light" },
+      { name: "Logomark, dark", file: "elegix-mark-dark", ground: "light" },
+      { name: "Logomark, light green", file: "elegix-mark-light-green", ground: "dark" },
+      { name: "Logomark, white", file: "elegix-mark-white", ground: "dark" },
+    ] as { name: string; file: string; ground: "light" | "dark" }[],
+    colours: [{ name: "Green", hex: "#009A44" }, { name: "Dark green", hex: "#1A251E" }, { name: "Dark", hex: "#121212" }, { name: "Light green", hex: "#D5F45E" }, { name: "White", hex: "#FFFFFF" }],
+  },
+  concept: {
+    label: "Logo story",
+    title: "Wind + water = *E*",
+    lede: "The logomark joins two elements in one letter. Wind stands for freedom, water for life. Together they draw the E of Elegix.",
+    parts: [{ word: "Wind", meaning: "Freedom" }, { word: "Water", meaning: "Life" }, { word: "E", meaning: "Elegix" }],
+    download: { label: "Download the logo concept (PNG)", href: "/press/elegix-logo-concept.png" },
+  },
+  photos: {
+    label: "Team",
+    title: "The *co-founders*",
+    lede: "Portraits of the people building Elegix.",
+    download: "Download",
+    team: [
+      { name: "Edward Korytskyi", role: "Founder", src: "/images/founder.jpg" },
+      { name: "Alina Krupa", role: "CMO & Co-founder", src: "/images/alina-krupa.jpg" },
+      { name: "Maksym Zhuravskyi", role: "CTO & Co-founder", src: "/images/maksym-zhuravskyi.jpg" },
+      { name: "Yevhenii Bohomol", role: "Co-founder", src: "/images/yevhenii-bohomol.jpg" },
+    ],
+  },
+  screens: {
+    label: "App",
+    title: "Real *screens*",
+    lede: "Screenshots from the current build of the app, at full phone resolution.",
+    items: [
+      { name: "Home screen", text: "Goals, habits, categories and the Life Area score in one place.", src: "/press/elegix-app-home.jpg" },
+      { name: "Life Area screen", text: "The 6 life areas on a radar chart, with this week against last and the Balance score.", src: "/press/elegix-app-life-area.jpg" },
+      { name: "Plan screen", text: "The week's habits and tasks, checked off day by day.", src: "/press/elegix-app-plan.jpg" },
+    ],
+  },
+  quotes: {
+    label: "Quotes",
+    title: "In *their words*",
+    items: [
+      { text: "At 20 I worked 20 hours a day and nearly lost my health. Elegix is the app I badly needed back then.", name: "Edward Korytskyi", role: "Founder of Elegix" },
+      { text: "A balanced life isn't something you find. It's something you choose, one week at a time. That's why the app is called Elegix: it means “choose”.", name: "Edward Korytskyi", role: "Founder of Elegix" },
+      { text: "Years at C-level taught me to measure everything. Everything except my own life.", name: "Alina Krupa", role: "CMO and Co-founder of Elegix" },
+    ],
+  },
+  stories: {
+    label: "Background",
+    title: "The *stories* behind it",
+    links: [
+      { href: "/stories/why-i-built-elegix", label: "Edward's story: why he built Elegix" },
+      { href: "/stories/alina-krupa", label: "Alina's story: why she co-founded Elegix" },
+      { href: "/about", label: "About Elegix and the team" },
+    ],
+  },
+  cta: { title: "Writing about *balance or burnout*?", text: "We're happy to give a comment, share what we see in our free Life Balance Check, or set up an interview with the founders." },
+};
