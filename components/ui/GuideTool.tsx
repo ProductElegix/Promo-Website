@@ -102,8 +102,8 @@ const TEXT = {
 const useText = () => TEXT[useLang()];
 
 const AREA_PAGE: Record<AreaKey, string> = {
-  health: "/life-areas/health", people: "/life-areas/relationships", meaning: "/life-areas/spirituality",
-  hobby: "/life-areas/leisure", growth: "/life-areas/personal-growth", career: "/life-areas/finance-and-career",
+  health: "/guides/health", people: "/guides/relationships", meaning: "/guides/spirituality",
+  hobby: "/guides/leisure", growth: "/guides/personal-growth", career: "/guides/finance-and-career",
 };
 
 function WheelCalculator() {

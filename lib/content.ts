@@ -25,7 +25,7 @@ export type MediaSlot = {
 /** The 6 life areas, named and ordered exactly as in the app's Life Area radar. */
 export const AREAS: Record<AreaKey, { name: string; short: string; description: string; neglect: string }> = {
   health: { name: "Health", short: "Health", description: "Sleep, movement, food and energy.", neglect: "Sleep, food and movement are the first to go when work gets loud." },
-  people: { name: "Relationship", short: "Relationship", description: "Family, friends, partner and community.", neglect: "The people who matter get whatever energy is left." },
+  people: { name: "Relationships", short: "Relationships", description: "Family, friends, partner and community.", neglect: "The people who matter get whatever energy is left." },
   meaning: { name: "Spirituality", short: "Spirituality", description: "Values, reflection, mindfulness and inner calm.", neglect: "Busy days leave no time to stop and ask why." },
   hobby: { name: "Leisure", short: "Leisure", description: "Rest, play, creativity and things you do for fun.", neglect: "When did you last do something just for fun?" },
   growth: { name: "Personal Growth", short: "Personal Growth", description: "Learning, skills, reading and new challenges.", neglect: "Learning stopped when the busy season started." },
@@ -314,7 +314,7 @@ export const JOIN = {
   perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "Behind-the-scenes updates as it's built"],
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
-  button: "Reserve my spot",
+  button: "Get early access",
   note: "No payment now.",
 };
 
@@ -342,7 +342,7 @@ export const FOOTER = {
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   name: "Elegix: Valencian for “choose”.",
   email: "hello@elegix.net",
-  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Early access" }],
+  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Get early access" }],
   legal: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms" }],
   socials: SOCIALS,
   wordmark: "Elegix",
@@ -565,7 +565,7 @@ export const CAREERS = {
   product: {
     label: "What you'd work on",
     title: "A life balance tracker for *iOS and Android*",
-    text: "Elegix links goals, habits and tasks to 6 life areas: Health, Relationship, Spirituality, Leisure, Personal Growth and Finance & Career. One Life Balance score shows which part of life needs attention next.",
+    text: "Elegix links goals, habits and tasks to 6 life areas: Health, Relationships, Spirituality, Leisure, Personal Growth and Finance & Career. One Life Balance score shows which part of life needs attention next.",
     points: [
       "One Life Balance score and 6 area scores",
       "Goals, habits and tasks linked to an area and a “why”",

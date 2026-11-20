@@ -1,5 +1,5 @@
 /**
- * Guides (/guides/…) and life area pages (/life-areas/…): long-form pages written for the searches people
+ * Guides (/guides/…) and the 6 life area pages (also /guides/…, e.g. /guides/health): long-form pages written for the searches people
  * actually make ("wheel of life", "signs of burnout", "how to improve work life balance"). Each one ends in
  * the waitlist, so search traffic turns into signups.
  *
@@ -12,6 +12,7 @@ import { EXTRAS } from "@/lib/guide-extras";
 import { UK_GUIDES } from "@/lib/uk/guides";
 import { UK_EXTRAS } from "@/lib/uk/guide-extras";
 import type { Lang } from "@/lib/i18n";
+import { AREA_SLUGS, areaHref } from "@/lib/area-slugs";
 
 export type Block =
   | { p: string }
@@ -45,7 +46,7 @@ export type Guide = {
   metaTitle: string;
   description: string;
   label: string;
-  /** life areas the page is about, main one first; empty means it covers all 6 (the hub's "Whole life" filter) */
+  /** life areas the page is about, main one first; empty means it covers all 6 (the hub's "All 6 areas" filter) */
   areas: AreaKey[];
   /** an expert who checked the page; shown as "Reviewed by" and only set for a real, named reviewer */
   reviewer?: Reviewer;
@@ -109,12 +110,12 @@ const BASE_GUIDES: Guide[] = [
         blocks: [
           { p: "Versions of the wheel use anywhere from 6 to 12 areas. More slices give more detail but make the picture harder to read and the habit harder to keep. Elegix uses six, because six is enough to cover a whole life and few enough to rate in under a minute:" },
           { list: [
-            "**[Health](/life-areas/health):** sleep, movement, food and energy.",
-            "**[Relationships](/life-areas/relationships):** family, friends, partner and community.",
-            "**[Spirituality](/life-areas/spirituality):** values, reflection, mindfulness and inner calm.",
-            "**[Leisure](/life-areas/leisure):** rest, play, creativity and things you do for fun.",
-            "**[Personal growth](/life-areas/personal-growth):** learning, skills, reading and new challenges.",
-            "**[Finance & career](/life-areas/finance-and-career):** work, income, savings and business.",
+            "**[Health](/guides/health):** sleep, movement, food and energy.",
+            "**[Relationships](/guides/relationships):** family, friends, partner and community.",
+            "**[Spirituality](/guides/spirituality):** values, reflection, mindfulness and inner calm.",
+            "**[Leisure](/guides/leisure):** rest, play, creativity and things you do for fun.",
+            "**[Personal growth](/guides/personal-growth):** learning, skills, reading and new challenges.",
+            "**[Finance & career](/guides/finance-and-career):** work, income, savings and business.",
           ] },
           { p: "If one area matters a lot to you and doesn't fit, such as home or parenting, add it. A wheel you believe in beats a perfect template." },
         ],
@@ -139,7 +140,7 @@ const BASE_GUIDES: Guide[] = [
           { list: [
             "**One deep dent.** Most areas are fine and one is far behind. This is the easiest wheel to fix: you know exactly where to start.",
             "**A lopsided wheel.** One or two areas are at 8 to 10 and the rest are low. This is the classic shape of people who are crushing it at work and losing the rest. The high area is often feeding on the time and energy of the others.",
-            "**A small, even wheel.** Everything sits around 4 or 5. Nothing is on fire, and nothing feels good. This often points at tiredness or burnout rather than at one area. Start with [health](/life-areas/health) and rest.",
+            "**A small, even wheel.** Everything sits around 4 or 5. Nothing is on fire, and nothing feels good. This often points at tiredness or burnout rather than at one area. Start with [health](/guides/health) and rest.",
           ] },
           { p: "Your average across all areas is your balance score. It's useful to track, but the gaps matter more than the average: a 7 made of 9s and 3s feels very different from a 7 made of 7s." },
         ],
@@ -259,7 +260,7 @@ const BASE_GUIDES: Guide[] = [
         h2: "Balance isn't equal hours",
         blocks: [
           { p: "Work-life balance doesn't mean eight hours of work, eight hours of life and eight of sleep. Some seasons are heavy: a launch, exams, a new role. Balance means no area of your life is neglected for so long that it breaks. It's measured over months, not days." },
-          { p: "That's also why “life” is too vague. Life is your [health](/life-areas/health), your [relationships](/life-areas/relationships), your [rest and fun](/life-areas/leisure), your [growth](/life-areas/personal-growth) and your [sense of meaning](/life-areas/spirituality). Each one can slip on its own." },
+          { p: "That's also why “life” is too vague. Life is your [health](/guides/health), your [relationships](/guides/relationships), your [rest and fun](/guides/leisure), your [growth](/guides/personal-growth) and your [sense of meaning](/guides/spirituality). Each one can slip on its own." },
         ],
       },
       {
@@ -269,7 +270,7 @@ const BASE_GUIDES: Guide[] = [
             { title: "Measure the whole picture", text: "Rate your 6 life areas from 1 to 10 with the [Wheel of Life](/guides/wheel-of-life). You'll usually find one or two areas carrying the cost of your career." },
             { title: "Set one hard stop", text: "Pick an end time for work on most days and tell someone about it. One boundary that holds beats five you ignore." },
             { title: "Plan the week, not just the day", text: "On Sunday, put two or three non-work things in your calendar first: a workout, dinner with a friend, an evening off. Work fills the rest." },
-            { title: "Tie goals to areas", text: "Next to every goal, write which area of life it serves. If all your goals sit under [finance & career](/life-areas/finance-and-career), that's your answer. See [how to set goals for every area of life](/guides/goals-for-every-area-of-life)." },
+            { title: "Tie goals to areas", text: "Next to every goal, write which area of life it serves. If all your goals sit under [finance & career](/guides/finance-and-career), that's your answer. See [how to set goals for every area of life](/guides/goals-for-every-area-of-life)." },
             { title: "Protect your first and last hour", text: "No email in the first hour after waking and the last hour before sleep. These hours shape your mood more than any other two." },
             { title: "Make rest active", text: "Swap some scrolling for things that actually refill you: a walk outside, a hobby with your hands, time with people you like." },
             { title: "Review every week", text: "Spend ten minutes on Sunday with a [weekly review](/guides/weekly-review): what went well, which area slipped, one step for next week." },
@@ -324,12 +325,12 @@ const BASE_GUIDES: Guide[] = [
         h2: "Examples of goals for each area of life",
         blocks: [
           { list: [
-            "**[Health](/life-areas/health):** sleep 7 hours on weeknights for a month. Habit: screens off at 22:30.",
-            "**[Relationships](/life-areas/relationships):** reconnect with three old friends this quarter. Habit: one call every Sunday.",
-            "**[Spirituality](/life-areas/spirituality):** write down my top five values. Habit: ten minutes of journaling on Friday evening.",
-            "**[Leisure](/life-areas/leisure):** learn three songs on the guitar. Habit: two 20-minute practice sessions a week.",
-            "**[Personal growth](/life-areas/personal-growth):** read six books this half-year. Habit: 20 pages before bed.",
-            "**[Finance & career](/life-areas/finance-and-career):** build a three-month emergency fund. Habit: move a fixed amount to savings every payday.",
+            "**[Health](/guides/health):** sleep 7 hours on weeknights for a month. Habit: screens off at 22:30.",
+            "**[Relationships](/guides/relationships):** reconnect with three old friends this quarter. Habit: one call every Sunday.",
+            "**[Spirituality](/guides/spirituality):** write down my top five values. Habit: ten minutes of journaling on Friday evening.",
+            "**[Leisure](/guides/leisure):** learn three songs on the guitar. Habit: two 20-minute practice sessions a week.",
+            "**[Personal growth](/guides/personal-growth):** read six books this half-year. Habit: 20 pages before bed.",
+            "**[Finance & career](/guides/finance-and-career):** build a three-month emergency fund. Habit: move a fixed amount to savings every payday.",
           ] },
         ],
       },
@@ -367,7 +368,7 @@ const BASE_GUIDES: Guide[] = [
         h2: "The 10-minute template",
         blocks: [
           { steps: [
-            { title: "Re-score your 6 areas (1 minute)", text: "Rate [health](/life-areas/health), [relationships](/life-areas/relationships), [spirituality](/life-areas/spirituality), [leisure](/life-areas/leisure), [personal growth](/life-areas/personal-growth) and [finance & career](/life-areas/finance-and-career) from 1 to 10. Don't think long; compare with last week." },
+            { title: "Re-score your 6 areas (1 minute)", text: "Rate [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career) from 1 to 10. Don't think long; compare with last week." },
             { title: "One win (2 minutes)", text: "What went well? Which goal or habit moved? Write it down. Noticing progress is what keeps you doing this." },
             { title: "One slip (2 minutes)", text: "Which area dropped or stayed low? Finish the sentence “It slipped because…”. Be curious, not harsh." },
             { title: "One step for next week (3 minutes)", text: "Choose one small action for the area that needs you most and put it in your calendar now, with a day and a time." },
@@ -411,7 +412,7 @@ const BASE_GUIDES: Guide[] = [
         h2: "The 5-minute method",
         blocks: [
           { steps: [
-            { title: "Score your areas (1 minute)", text: "Rate [health](/life-areas/health), [relationships](/life-areas/relationships), [spirituality](/life-areas/spirituality), [leisure](/life-areas/leisure), [personal growth](/life-areas/personal-growth) and [finance & career](/life-areas/finance-and-career) from 1 to 10. Go with your first answer." },
+            { title: "Score your areas (1 minute)", text: "Rate [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career) from 1 to 10. Go with your first answer." },
             { title: "Choose one area (1 minute)", text: "Pick the lowest score, or the area that would lift others if it moved. Tired and short-tempered? Health usually comes first, because sleep improves everything else." },
             { title: "Choose one action (2 minutes)", text: "Make it small and specific: “two 30-minute walks, Tuesday and Thursday at 7pm”, not “exercise more”. If you can't fail at it, it's the right size." },
             { title: "Put it in the calendar (1 minute)", text: "Give the action a day and a time, like a meeting. An action without a slot is a wish." },
@@ -471,12 +472,12 @@ const BASE_GUIDES: Guide[] = [
         blocks: [
           { p: "Before choosing, look at all of your life, not just the part that shouts. Score each of the 6 areas from 1 to 10 for how satisfied you are right now:" },
           { list: [
-            "**[Health](/life-areas/health):** sleep, movement, food and energy.",
-            "**[Relationships](/life-areas/relationships):** family, friends, partner and community.",
-            "**[Spirituality](/life-areas/spirituality):** values, reflection, mindfulness and inner calm.",
-            "**[Leisure](/life-areas/leisure):** rest, play, creativity and fun.",
-            "**[Personal growth](/life-areas/personal-growth):** learning, skills and new challenges.",
-            "**[Finance & career](/life-areas/finance-and-career):** work, income, savings and business.",
+            "**[Health](/guides/health):** sleep, movement, food and energy.",
+            "**[Relationships](/guides/relationships):** family, friends, partner and community.",
+            "**[Spirituality](/guides/spirituality):** values, reflection, mindfulness and inner calm.",
+            "**[Leisure](/guides/leisure):** rest, play, creativity and fun.",
+            "**[Personal growth](/guides/personal-growth):** learning, skills and new challenges.",
+            "**[Finance & career](/guides/finance-and-career):** work, income, savings and business.",
           ] },
           { tip: "This is the [Wheel of Life](/guides/wheel-of-life). You can also take the free [Life Balance Check](/#check) and get your scores by email." },
         ],
@@ -565,7 +566,7 @@ const BASE_GUIDES: Guide[] = [
           { list: [
             "**A hard stop.** End work at a set time on most days and keep your phone away for the first hour at home.",
             "**One fixed family ritual.** A weekly dinner, a Saturday walk, bedtime stories. Fixed rituals survive busy seasons.",
-            "**A weekly check.** Score [relationships](/life-areas/relationships) and [finance & career](/life-areas/finance-and-career) every Sunday. When one drops two weeks in a row, it's time to rebalance.",
+            "**A weekly check.** Score [relationships](/guides/relationships) and [finance & career](/guides/finance-and-career) every Sunday. When one drops two weeks in a row, it's time to rebalance.",
             "**Watch your health.** When you feel torn for months, [burnout](/guides/signs-of-burnout) is often close. Sleep is usually the first thing to protect.",
           ] },
           { p: "[Elegix](/about) shows your career and relationships side by side with the other areas of your life, so you see the trade-off while you can still choose differently." },
@@ -669,7 +670,7 @@ const BASE_GUIDES: Guide[] = [
             "**Expectations reset.** When a report takes one hour instead of three, people start expecting three reports.",
             "**Nobody decided.** Time you don't assign on purpose gets assigned by default, and the default is work.",
           ] },
-          { p: "The result is a quiet trade. You become more productive at work while the rest of your life, your [health](/life-areas/health), [relationships](/life-areas/relationships) and [leisure](/life-areas/leisure), gets nothing from the gain." },
+          { p: "The result is a quiet trade. You become more productive at work while the rest of your life, your [health](/guides/health), [relationships](/guides/relationships) and [leisure](/guides/leisure), gets nothing from the gain." },
         ],
       },
       {
@@ -724,7 +725,7 @@ const BASE_GUIDES: Guide[] = [
         blocks: [
           { p: "Resolutions are big, vague and all start on the same day: “get fit”, “read more”, “be present”. They compete with work for the same hours, and work has deadlines. A plan by area of life is different in three ways." },
           { list: [
-            "**It covers your whole life.** You look at [health](/life-areas/health), [relationships](/life-areas/relationships), [spirituality](/life-areas/spirituality), [leisure](/life-areas/leisure), [personal growth](/life-areas/personal-growth) and [finance & career](/life-areas/finance-and-career), so nothing is forgotten by default.",
+            "**It covers your whole life.** You look at [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career), so nothing is forgotten by default.",
             "**It makes you choose.** You pick two focus areas for the year instead of promising to fix everything.",
             "**It runs on small steps.** Each goal is tied to a micro-habit you can keep on a busy week.",
           ] },
@@ -805,7 +806,7 @@ const BASE_GUIDES: Guide[] = [
         h2: "Choose what your fifth day is for",
         blocks: [
           { steps: [
-            { title: "Score your 6 areas of life (5 minutes)", text: "Rate [health](/life-areas/health), [relationships](/life-areas/relationships), [spirituality](/life-areas/spirituality), [leisure](/life-areas/leisure), [personal growth](/life-areas/personal-growth) and [finance & career](/life-areas/finance-and-career) from 1 to 10. The [Wheel of Life](/guides/wheel-of-life) makes it visual." },
+            { title: "Score your 6 areas of life (5 minutes)", text: "Rate [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career) from 1 to 10. The [Wheel of Life](/guides/wheel-of-life) makes it visual." },
             { title: "Give the day one main area (2 minutes)", text: "Pick the lowest area, or the one you miss most. That's what the day is for this month: a long run and cooking, time with a parent, a class, a project you keep postponing." },
             { title: "Cap life admin at two hours", text: "Errands are a fair use of the morning. Put them in one block and stop at lunch, so the afternoon goes to the area you chose." },
             { title: "Close work for the day", text: "No email, no “quick check”. A fifth day spent half-working gives you neither the rest nor the work." },
@@ -832,14 +833,6 @@ const BASE_GUIDES: Guide[] = [
   },
 ];
 
-const AREA_SLUGS: Record<AreaKey, string> = {
-  health: "health",
-  people: "relationships",
-  meaning: "spirituality",
-  hobby: "leisure",
-  growth: "personal-growth",
-  career: "finance-and-career",
-};
 
 const area = (key: AreaKey, g: Omit<AreaGuide, "area" | "areas" | "slug" | "media" | "published" | "updated" | "cta">): AreaGuide => ({
   area: key,
@@ -1065,7 +1058,7 @@ export const hasUk = (slug: string) => slug in UK_GUIDES;
 
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);
 export const areaGuideBySlug = (slug: string) => AREA_GUIDES.find((g) => g.slug === slug);
-export const areaGuideHref = (key: AreaKey) => `/life-areas/${AREA_SLUGS[key]}`;
+export const areaGuideHref = areaHref;
 
 export const guideHref = (g: Guide | AreaGuide) => ("area" in g ? areaGuideHref(g.area) : `/guides/${g.slug}`);
 

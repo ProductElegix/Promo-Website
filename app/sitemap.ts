@@ -20,8 +20,7 @@ function entries(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/tools`, lastModified: guidesUpdated, changeFrequency: "monthly" as const, priority: 0.6 },
     ...AUTHORS.map((a) => ({ url: `${SITE_URL}/authors/${a.slug}`, lastModified: newest(a.writes.map((w) => w.date)), changeFrequency: "monthly" as const, priority: 0.4 })),
     ...GUIDES.map((g) => ({ url: `${SITE_URL}/guides/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
-    { url: `${SITE_URL}/life-areas`, lastModified: newest(AREA_GUIDES.map((g) => g.updated)), changeFrequency: "monthly", priority: 0.7 },
-    ...AREA_GUIDES.map((g) => ({ url: `${SITE_URL}/life-areas/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.6 })),
+    ...AREA_GUIDES.map((g) => ({ url: `${SITE_URL}/guides/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.6 })),
     { url: `${SITE_URL}/careers`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${SITE_URL}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
@@ -30,7 +29,7 @@ function entries(): MetadataRoute.Sitemap {
 
 /** Guide and life area pages exist in Ukrainian only once translated; every other page always does. */
 function ukReady(path: string) {
-  const m = path.match(/^\/(?:guides|life-areas)\/([^/]+)$/);
+  const m = path.match(/^\/guides\/([^/]+)$/);
   return !m || m[1] === "how-we-write-guides" || hasUk(m[1]);
 }
 

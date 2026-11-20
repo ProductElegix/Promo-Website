@@ -51,7 +51,7 @@ const extra: GuideExtra = {
           { title: "Stage 3: Detachment", text: "Cynicism sets in. You do the work, but you've stopped caring about it. You cancel plans because you have nothing left. This is where most of the 12 signs above start to cluster." },
           { title: "Stage 4: Exhaustion", text: "You feel empty most of the time. Getting started on anything takes huge effort, mistakes increase and your body may protest with headaches, illness or poor sleep. At this stage, small changes are rarely enough on their own. Professional support and a real change at work usually are." },
         ] },
-        { p: "The good news is in stages 1 and 2. That's where a [weekly review](/guides/weekly-review) and a few protected hours for [health](/life-areas/health) and rest can stop the slide before it becomes stage 3." },
+        { p: "The good news is in stages 1 and 2. That's where a [weekly review](/guides/weekly-review) and a few protected hours for [health](/guides/health) and rest can stop the slide before it becomes stage 3." },
       ],
     },
     {
@@ -123,7 +123,7 @@ const extra: GuideExtra = {
           "**Fixing it with more productivity.** A new to-do app doesn't solve too much work. It just organises it.",
           "**Cutting the things that help first.** Exercise, sleep and friends are the first to go and the last to come back, though they are what recovery runs on.",
           "**Going quiet.** Hiding it from your partner, friends or manager makes it last longer.",
-          "**Changing everything at once.** A full life overhaul is another big project. Pick one or two changes, like a fixed stop time and one evening for [relationships](/life-areas/relationships), and hold them.",
+          "**Changing everything at once.** A full life overhaul is another big project. Pick one or two changes, like a fixed stop time and one evening for [relationships](/guides/relationships), and hold them.",
         ] },
         { p: "For a wider view of where your time goes and how to rebalance it, read [how to improve work-life balance when you love your work](/guides/work-life-balance)." },
       ],

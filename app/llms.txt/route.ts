@@ -28,7 +28,7 @@ export function GET() {
     ...GUIDES.map((g) => line(`/guides/${g.slug}`, g.title, g.description)),
     "",
     "## Life areas",
-    ...AREA_GUIDES.map((g) => line(`/life-areas/${g.slug}`, g.title, g.description)),
+    ...AREA_GUIDES.map((g) => line(`/guides/${g.slug}`, g.title, g.description)),
     "",
   ].join("\n");
   return new Response(body, { headers: { "Content-Type": "text/plain; charset=utf-8" } });

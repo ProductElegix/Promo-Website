@@ -59,7 +59,7 @@ const extra: GuideExtra = {
           "**Agree on a check-in:** “Can we review this in a month?”",
         ] },
         { p: "If you're a manager, have this conversation with your team before they have to bring it up. Decide together which work AI should speed up, and whether faster delivery means more output, better quality or shorter days. Each is a valid choice. The mistake is not choosing." },
-        { tip: "Proposing to spend saved time on learning or deep work is often the easiest first ask, because it benefits both you and the team. It's a natural link to your [personal growth](/life-areas/personal-growth) and [career](/life-areas/finance-and-career) goals." },
+        { tip: "Proposing to spend saved time on learning or deep work is often the easiest first ask, because it benefits both you and the team. It's a natural link to your [personal growth](/guides/personal-growth) and [career](/guides/finance-and-career) goals." },
       ],
     },
     {

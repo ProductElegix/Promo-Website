@@ -210,7 +210,7 @@ export const JOIN: C["JOIN"] = {
   perks: ["Перший доступ, у порядку приєднання", "Ціна для засновників, закріплена назавжди", "Голос у тому, що ми будуємо далі", "Новини з-за лаштунків, поки ми будуємо"],
   media: { ...en.JOIN.media, alt: "Ранкове сонце кидає тіні листя на теплу потерту стіну з рослиною в кутку" },
   signature: { name: "Едуард Корицький", role: "Засновник Elegix" },
-  button: "Забронювати місце",
+  button: "Отримати ранній доступ",
   note: "Жодної оплати зараз.",
 };
 
@@ -237,7 +237,7 @@ export const FOOTER: C["FOOTER"] = {
   about: "Трекер балансу життя для тих, хто хоче рости в роботі, не втрачаючи решту життя.",
   name: "Elegix: «обирай» валенсійською.",
   email: "hello@elegix.net",
-  nav: [{ href: "/about", label: "Про нас" }, { href: "/guides", label: "Гайди" }, { href: "/careers", label: "Кар’єра" }, { href: "/#faq", label: "Питання" }, { href: "/#join", label: "Ранній доступ" }],
+  nav: [{ href: "/about", label: "Про нас" }, { href: "/guides", label: "Гайди" }, { href: "/careers", label: "Кар’єра" }, { href: "/#faq", label: "Питання" }, { href: "/#join", label: "Отримати ранній доступ" }],
   legal: [{ href: "/privacy", label: "Політика конфіденційності" }, { href: "/terms", label: "Умови використання" }],
   socials: SOCIALS,
   wordmark: "Elegix",

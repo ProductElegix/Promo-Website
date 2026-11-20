@@ -112,7 +112,7 @@ const extra: GuideExtra = {
           "**Too many goals at once.** Three new skills in one quarter usually means none.",
           "**Only growing for work.** Career skills matter, but growth that's only about your job leaves you dependent on it for meaning.",
           "**No way to see progress.** Without a finished result or a weekly score, you can't tell if it's working, and motivation fades.",
-          "**Growing at the cost of sleep.** Learning at midnight trades one area for another. Protect your [health](/life-areas/health) first.",
+          "**Growing at the cost of sleep.** Learning at midnight trades one area for another. Protect your [health](/guides/health) first.",
         ] },
       ],
     },
@@ -120,7 +120,7 @@ const extra: GuideExtra = {
       h2: "Personal growth for parents, managers, freelancers and students",
       blocks: [
         { list: [
-          "**Parents:** learn alongside your kids, like a language, an instrument or chess. It counts for growth and for [relationships](/life-areas/relationships).",
+          "**Parents:** learn alongside your kids, like a language, an instrument or chess. It counts for growth and for [relationships](/guides/relationships).",
           "**Managers:** mentoring someone is one of the fastest ways to learn. Teaching forces you to understand.",
           "**Freelancers:** budget learning time like a client project, with a fixed weekly slot and a small yearly budget.",
           "**Students:** your studies already take most of your learning energy. Pick a growth goal far from your subject, like a sport or a craft, for balance.",

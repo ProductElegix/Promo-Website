@@ -15,12 +15,12 @@ export const LIFE_AREAS_HUB: { sections: { h2: string; blocks: Block[] }[]; faq:
       h2: "The 6 areas of life in Elegix",
       blocks: [
         { list: [
-          "**[Health](/life-areas/health):** sleep, movement, food, energy and mental health. The base the other five stand on.",
-          "**[Relationships](/life-areas/relationships):** partner, family, friends and community. Time and attention for the people who matter.",
-          "**[Spirituality](/life-areas/spirituality):** meaning, values, faith or reflection. Knowing why you do what you do, religious or not.",
-          "**[Leisure](/life-areas/leisure):** rest, fun, hobbies and play. Time that is not meant to be useful.",
-          "**[Personal growth](/life-areas/personal-growth):** learning, skills, reading and new challenges you choose for yourself.",
-          "**[Finance & career](/life-areas/finance-and-career):** work, income, savings and the direction of your career.",
+          "**[Health](/guides/health):** sleep, movement, food, energy and mental health. The base the other five stand on.",
+          "**[Relationships](/guides/relationships):** partner, family, friends and community. Time and attention for the people who matter.",
+          "**[Spirituality](/guides/spirituality):** meaning, values, faith or reflection. Knowing why you do what you do, religious or not.",
+          "**[Leisure](/guides/leisure):** rest, fun, hobbies and play. Time that is not meant to be useful.",
+          "**[Personal growth](/guides/personal-growth):** learning, skills, reading and new challenges you choose for yourself.",
+          "**[Finance & career](/guides/finance-and-career):** work, income, savings and the direction of your career.",
         ] },
         { p: "Each area page above explains what the area covers, the signs it's slipping, and small weekly habits that bring it back." },
       ],

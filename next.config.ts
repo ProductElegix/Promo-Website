@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
       { source: "/story", destination: "/about#story", statusCode: 301 },
       // the check lives on the home page; keep old links working
       { source: "/life-balance-check", destination: "/#check", permanent: true },
+      // life area pages live inside Guides now (/guides/health), and the areas overview is part of /guides
+      { source: "/life-areas", destination: "/guides#areas", permanent: true },
+      { source: "/life-areas/:area", destination: "/guides/:area", permanent: true },
+      { source: "/uk/life-areas", destination: "/uk/guides#areas", permanent: true },
+      { source: "/uk/life-areas/:area", destination: "/uk/guides/:area", permanent: true },
     ];
   },
 };

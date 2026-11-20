@@ -175,7 +175,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
           </nav>
           <div className={styles.kind}>
             <span className="label">{g.area ? t.lifeArea : g.label}</span>
-            {(g.area || areas) && <AreaTags areas={g.area ? [g.area] : areas!} link />}
+            {(g.area || areas) && <AreaTags areas={g.area ? [g.area] : areas!} link={!g.area} />}
           </div>
           <h1 id="article-title" className={`display ${styles.title}`}>{g.title}</h1>
           <p className={styles.lede}>{g.lede}</p>
