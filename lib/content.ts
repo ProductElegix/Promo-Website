@@ -450,7 +450,7 @@ export const ABOUT_PAGE = {
     label: "How it works",
     title: "Built on the *Wheel of Life*. Used every week.",
     lede: "The Wheel of Life is a classic coaching exercise: rate each area of your life and the gaps become obvious. People do it once and forget it. Elegix turns it into a habit, linked to your real goals, habits and tasks.",
-    areasLabel: "The 6 life areas",
+    wheel: { label: "A wheel of life with 6 areas", balance: "Life Balance", last: "Last week", now: "This week", scores: [7, 6, 5, 6, 7, 8], prev: [6, 6, 3, 7, 6, 8] },
     steps: [
       { title: "See", text: "One Life Balance score and 6 area scores show which part of your life needs you." },
       { title: "Act", text: "Every goal, habit and task belongs to an area, with your “why” next to it and one next step." },

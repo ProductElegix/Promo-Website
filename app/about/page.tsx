@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
-import { AreaIcon } from "@/components/ui/AreaIcon";
+import { ABOUT_PAGE as A, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST, type AreaKey } from "@/lib/content";
 import { WordCycle } from "./WordCycle";
-import { areaVars } from "@/components/ui/Pill";
-import { Wheel } from "@/components/ui/Wheel";
-import { Phone } from "@/components/ui/Phone";
+import { Wheel3D } from "@/components/ui/Wheel3D";
 import { Faq } from "@/components/sections/Faq";
 import { Avatar } from "@/components/ui/Avatar";
 import { Rich } from "@/components/ui/Rich";
@@ -17,7 +14,6 @@ import { Principles } from "@/components/sections/Trust";
 import { PhotoHero } from "@/components/sections/PhotoHero";
 import { Breadcrumbs } from "@/components/ui/JsonLd";
 import { OG_IMAGE } from "@/lib/site";
-import { areaGuideHref } from "@/lib/guides";
 import { storyByPerson, storyHref } from "@/lib/stories";
 import styles from "./about.module.css";
 
@@ -68,7 +64,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 4. How it works: the wheel and its 6 areas, three steps, the weekly and monthly rhythm, the app */}
+      {/* 4. How it works: a scroll story, the 3D wheel stays on screen while See, Act and Reflect change it */}
       <section id="how" className={`section ${styles.howSection}`} aria-labelledby="how-title">
         <div className="container">
           <div className={`section-head ${styles.center}`} data-reveal>
@@ -76,33 +72,24 @@ export default function About() {
             <h2 id="how-title" className="display h2"><Rich text={A.how.title} /></h2>
             <p className="lede">{A.how.lede}</p>
           </div>
-          <div className={styles.how}>
-            <div className={styles.howWheel} data-reveal>
-              <div className={styles.wheel}><Wheel scores={[7, 6, 5, 6, 7, 8]} size={260} label="A wheel of life with 6 areas" /></div>
-              <p className={styles.howAreasLabel}>{A.how.areasLabel}</p>
-              <ul className={styles.howAreas}>
-                {AREA_ORDER.map((a) => (
-                  <li key={a}><Link href={areaGuideHref(a)} style={areaVars(a)}><AreaIcon area={a} />{AREAS[a].short}</Link></li>
-                ))}
-              </ul>
+          <div className={styles.scrolly}>
+            <div className={styles.stage}>
+              <Wheel3D scores={A.how.wheel.scores} prev={A.how.wheel.prev} text={A.how.wheel}
+                names={Object.fromEntries(AREA_ORDER.map((a) => [a, AREAS[a].short])) as Record<AreaKey, string>} />
             </div>
-            <ol className={styles.steps}>
+            <ol className={styles.chapters}>
               {A.how.steps.map((st, i) => (
-                <li key={st.title} className={styles.step} data-reveal>
+                <li key={st.title} className={styles.chapter} data-wheel-step={i}>
                   <span className={`num ${styles.stepN}`}>{String(i + 1).padStart(2, "0")}</span>
-                  <div><h3>{st.title}</h3><p>{st.text}</p></div>
+                  <h3>{st.title}</h3>
+                  <p>{st.text}</p>
                 </li>
               ))}
-              <li className={styles.rhythm} data-reveal>
-                {A.how.rhythm.map((r) => (
-                  <div key={r.title} className={styles.rhythmItem}>
-                    <b>{r.time}</b><span>{r.title}</span><small>{r.text}</small>
-                  </div>
-                ))}
-              </li>
             </ol>
-            <div className={styles.howPhone} data-reveal><Phone screen={APP.screens[1].media} /></div>
           </div>
+          <p className={styles.rhythmLine} data-reveal>
+            {A.how.rhythm.map((r) => <span key={r.title}><b>{r.time}</b> {r.title.toLowerCase()}</span>)}
+          </p>
         </div>
       </section>
 

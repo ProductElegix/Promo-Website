@@ -19,7 +19,6 @@
 .n { justify-self: start; background: var(--lime); color: var(--black); }
 
 .tick { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--mint); color: var(--green); font-size: 0.75rem; font-weight: 500; }
-.wheel { padding: 18px; border-radius: 50%; background: var(--cream); display: grid; }
 .story { display: grid; grid-template-columns: minmax(0, 0.8fr) 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
 .storyAside { position: sticky; top: calc(var(--header-h) + 32px); display: grid; gap: 14px; }
 .photo { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-l); overflow: hidden; }
@@ -108,32 +107,27 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 
 /* how it works: wheel | steps | phone */
 .howSection { padding-top: 0; }
-.how { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 0.7fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
-.howWheel { display: grid; justify-items: center; gap: 16px; }
-.howAreasLabel { font-size: var(--fs-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.howAreas { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 360px; }
-.howAreas a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px 6px; border-radius: 999px; background: var(--t); color: var(--s); font-size: var(--fs-small); text-decoration: none; transition: transform .3s var(--ease); }
-.howAreas a:hover { transform: translateY(-2px); }
-.howAreas svg { width: 14px; height: 14px; }
-.steps { display: grid; gap: 10px; }
-.step { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; padding: 20px 22px; border-radius: var(--radius-m); background: var(--paper); }
-.step h3 { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 6px; }
-.step p { color: var(--ink-2); }
-.stepN { background: var(--lime); color: var(--black); }
-.rhythm { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.rhythmItem { display: grid; gap: 4px; padding: 18px 20px; border-radius: var(--radius-m); background: var(--atmo-green, var(--green)); color: #fff; }
-.rhythmItem b { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1; color: var(--lime); }
-.rhythmItem span { font-weight: 500; }
-.rhythmItem small { color: rgba(255, 255, 255, .75); font-size: var(--fs-small); }
-.howPhone { max-width: 260px; justify-self: center; width: 100%; }
-@media (max-width: 1100px) {
-  .how { grid-template-columns: 1fr 1fr; }
-  .howPhone { display: none; }
+.scrolly { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 5vw, 80px); }
+.stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; place-items: center; }
+.chapters { display: grid; }
+.chapter { min-height: 80svh; display: grid; align-content: center; gap: 14px; opacity: .25; transition: opacity .5s var(--ease); }
+.chapter[data-active] { opacity: 1; }
+.chapter:first-child { min-height: 60svh; }
+.chapter h3 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 400; letter-spacing: -0.045em; line-height: 1; }
+.chapter p { font-size: var(--fs-lead); line-height: 1.5; color: var(--ink-2); max-width: 26rem; }
+.stepN { justify-self: start; background: var(--lime); color: var(--black); }
+.rhythmLine { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(24px, 4vw, 48px); }
+.rhythmLine span { padding: 10px 18px 9px; border-radius: 999px; background: var(--paper); color: var(--ink-2); }
+.rhythmLine b { color: var(--ink); font-weight: 500; }
+@media (max-width: 860px) {
+  .scrolly { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .stage { top: var(--header-h); height: 50svh; z-index: 2; background: var(--cream); }
+  .chapters { position: relative; z-index: 1; }
+  .chapter { min-height: 60svh; align-content: end; padding-bottom: 8svh; }
+  .chapter:first-child { min-height: 50svh; }
+  .chapter { opacity: 0; }
 }
-@media (max-width: 760px) {
-  .how { grid-template-columns: 1fr; }
-  .rhythm { grid-template-columns: 1fr 1fr; }
-}
+@media (prefers-reduced-motion: reduce) { .chapter { opacity: 1; } }
 
 /* who it's for: photo cards with the reader's own words on the photo */
 .audience { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
