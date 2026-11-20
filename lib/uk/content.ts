@@ -509,9 +509,9 @@ export const PRESS: C["PRESS"] = {
     ...en.PRESS.logos,
     label: "Логотип",
     title: "Логотип і *знак*",
-    lede: "Зелений на світлому фоні, білий на темному. Будь ласка, не перефарбовуй, не розтягуй і не додавай ефектів.",
-    items: en.PRESS.logos.items.map((it) => ({ ...it, name: it.name.replace("Logo", "Логотип").replace("Mark", "Знак").replace("green", "зелений").replace("black", "чорний").replace("white", "білий") })),
-    colours: [{ name: "Зелений Elegix", hex: "#009A44" }, { name: "Лайм", hex: "#D5F45E" }, { name: "Чорнило", hex: "#111111" }, { name: "Папір", hex: "#F2F2F0" }],
+    lede: "Зелений, темно-зелений або темний на світлому фоні; світло-зелений або білий на темному. Будь ласка, не перефарбовуй, не розтягуй і не додавай ефектів.",
+    items: en.PRESS.logos.items.map((it) => ({ ...it, name: it.name.replace("Logomark", "Знак").replace("Logo", "Логотип").replace("light green", "світло-зелений").replace("dark green", "темно-зелений").replace("green", "зелений").replace("dark", "темний").replace("white", "білий") })),
+    colours: [{ name: "Зелений", hex: "#009A44" }, { name: "Темно-зелений", hex: "#1A251E" }, { name: "Темний", hex: "#121212" }, { name: "Світло-зелений", hex: "#D5F45E" }, { name: "Білий", hex: "#FFFFFF" }],
   },
   photos: {
     label: "Фото",
