@@ -54,9 +54,9 @@ export const STORIES: Story[] = [
     ],
     sections: [
       {
-        h2: "School from 7 to 7",
+        h2: "School from 7am to 7pm",
         blocks: [
-          { p: "For 11 years I went to a boarding school in Ukraine where we stayed from 7 in the morning until 7 at night. I got home at 8, and on days with sports after class, at 10. My whole life happened in the few hours left before sleep: games, Discord, YouTube, anime, and alongside all that, design, code, video editing and streaming, which I taught myself." },
+          { p: "For 11 years I went to a boarding school in Ukraine where we stayed from 7am to 7pm. I got home at 8pm, and on days with sports after class, at 10pm. My whole life happened in the few hours left before sleep: games, Discord, YouTube, anime, and alongside all that, design, code, video editing and streaming, which I taught myself." },
           { p: "At 13 that turned into my first income. I took freelance orders and made about 250 hryvnias a month, roughly $10. My parents didn't really believe in that money, and I can't blame them: it sat in an e-wallet that you could barely withdraw from in Ukraine. Around the same time I was making Minecraft videos that I'm still embarrassed about, though without them I wouldn't know half of what I know now." },
         ],
       },
@@ -95,7 +95,7 @@ export const STORIES: Story[] = [
       {
         h2: "What I have now",
         blocks: [
-          { p: "I wake up at 10, learn English from movies and anime, and build my own things. The first, Elegix, is an app that shows which of the 6 areas of your life is slipping, before you get to your own 106 pounds. I badly needed something like that myself. The second, Builders Node, is an offline community of people who also want to build something of their own." },
+          { p: "I wake up at 10am, learn English from movies and anime, and build my own things. The first, Elegix, is an app that shows which of the 6 areas of your life is slipping, before you get to your own 106 pounds. I badly needed something like that myself. The second, Builders Node, is an offline community of people who also want to build something of their own." },
           { p: "I still don't know what happens if it doesn't work out. But the most important thing I've managed in 23 years isn't the studio or the island. It's realizing that you don't have to make it to everything, only to what's yours." },
           { p: "If this resonates, join the waitlist below. Elegix isn't launched yet, but you can already get early access, and I'll keep writing about building my own things without breaking myself a second time." },
         ],
