@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { PROBLEM } from "@/lib/content";
+import { getContent } from "@/lib/lang";
 import { AreaIcon } from "@/components/ui/AreaIcon";
-import { areaVars } from "@/components/ui/Pill";
+import { areaVars } from "@/components/ui/areaVars";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Problem.module.css";
 
 /** The problem: title and text, then four photo cards for what slips first and the closing line in a wide card. */
-export function Problem() {
+export async function Problem() {
+  const { c: { PROBLEM } } = await getContent();
   return (
     <section className="section" aria-labelledby="problem-title">
       <div className="container">

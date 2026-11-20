@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from "@/components/ui/Lang";
 import type { AreaKey, MediaSlot } from "@/lib/content";
 import { AreaTags } from "./AreaTags";
 import { Media } from "./Media";
-import styles from "@/app/guides/hub.module.css";
+import styles from "@/app/[lang]/guides/hub.module.css";
 
 export type Card = {
   href: string; title: string; text: string; media: MediaSlot;

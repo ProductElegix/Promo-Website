@@ -9,7 +9,7 @@ const STARTS = new Set(["template", "own", "unsure"]);
 // The 6 life areas, as in the app (lib/content.ts AREA_ORDER). Older signups stored 7 scores; those stay as they are.
 const AREA_KEYS = ["health", "people", "meaning", "hobby", "growth", "career"] as const;
 
-type Body = { email?: unknown; source?: unknown; start?: unknown; company?: unknown; scores?: unknown; consent?: unknown; page?: unknown; attribution?: unknown };
+type Body = { email?: unknown; lang?: unknown; source?: unknown; start?: unknown; company?: unknown; scores?: unknown; consent?: unknown; page?: unknown; attribution?: unknown };
 
 const str = (v: unknown, max: number) => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : undefined);
 
@@ -72,6 +72,7 @@ export async function POST(request: Request) {
     // every form shows the consent line, so a signup is consent to the current policy version
     consent: body.consent === true ? { at: now, page: str(body.page, 200) ?? "/", policyVersion: POLICY_VERSION } : undefined,
     attribution: parseAttribution(body.attribution),
+    ...(body.lang === "uk" ? { lang: "uk" as const } : {}),
   };
 
   const mailgun = mailgunConfig();

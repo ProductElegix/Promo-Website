@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { track } from "@/lib/track";
+import { useUi } from "./Lang";
 import styles from "./Article.module.css";
 
 /** End of a guide: "Was this helpful?" (a GA4 event, no form) and share buttons, with the phone's own share sheet where there is one. */
 export function ArticleActions({ slug, title, url }: { slug: string; title: string; url: string }) {
+  const tr = useUi();
   const [vote, setVote] = useState<"yes" | "no" | null>(null);
   const [copied, setCopied] = useState(false);
   const [native, setNative] = useState(false);
@@ -34,28 +36,28 @@ export function ArticleActions({ slug, title, url }: { slug: string; title: stri
     <div className={styles.actions}>
       <div className={styles.helpful} aria-live="polite">
         {vote ? (
-          <p>{vote === "yes" ? "Thanks! Glad it helped." : "Thanks. Tell us what was missing at hello@elegix.net and we'll improve it."}</p>
+          <p>{vote === "yes" ? tr.thanksHelped : tr.thanksMissing}</p>
         ) : (
           <>
-            <p>Was this guide helpful?</p>
+            <p>{tr.wasHelpful}</p>
             <div className={styles.actionRow}>
-              <button type="button" className={styles.actionBtn} onClick={() => answer("yes")}>Yes</button>
-              <button type="button" className={styles.actionBtn} onClick={() => answer("no")}>Not really</button>
+              <button type="button" className={styles.actionBtn} onClick={() => answer("yes")}>{tr.yes}</button>
+              <button type="button" className={styles.actionBtn} onClick={() => answer("no")}>{tr.notReally}</button>
             </div>
           </>
         )}
       </div>
       <div className={styles.share}>
-        <p>Share</p>
+        <p>{tr.share}</p>
         <div className={styles.actionRow}>
-          {native && <button type="button" className={`${styles.iconBtn} ${styles.nativeShare}`} onClick={share} aria-label="Share" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" /></svg></button>}
-          <button type="button" className={styles.iconBtn} onClick={copy} aria-label={copied ? "Link copied" : "Copy link"} title={copied ? "Link copied" : "Copy link"}>
+          {native && <button type="button" className={`${styles.iconBtn} ${styles.nativeShare}`} onClick={share} aria-label={tr.share} title={tr.share}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" /></svg></button>}
+          <button type="button" className={styles.iconBtn} onClick={copy} aria-label={copied ? tr.linkCopied : tr.copyLink} title={copied ? tr.linkCopied : tr.copyLink}>
             {copied
               ? <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 5 5L20 7" /></svg>
               : <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" /><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" /></svg>}
           </button>
           {links.map((l) => (
-            <a key={l.name} href={l.href} target="_blank" rel="noopener" className={styles.iconBtn} aria-label={`Share on ${l.name}`} title={l.name} onClick={() => shared(l.name.toLowerCase())}>
+            <a key={l.name} href={l.href} target="_blank" rel="noopener" className={styles.iconBtn} aria-label={tr.shareOn(l.name)} title={l.name} onClick={() => shared(l.name.toLowerCase())}>
               <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">{l.icon}</svg>
             </a>
           ))}

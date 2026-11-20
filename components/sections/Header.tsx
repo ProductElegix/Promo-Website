@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { usePathname } from "next/navigation";
 import { NavLink } from "@/components/ui/NavLink";
-import { NAV, NAV_CTA, SOCIALS } from "@/lib/content";
+import { useContent, usePlainPath, useUi } from "@/components/ui/Lang";
+import { LangSwitch } from "@/components/ui/LangSwitch";
 import { Logo } from "@/components/ui/Logo";
 import styles from "./Header.module.css";
 
@@ -20,7 +20,9 @@ function isOverDark(header: HTMLElement | null) {
  * full-screen menu with big numbered links on phones and tablets.
  */
 export function Header() {
-  const pathname = usePathname();
+  const pathname = usePlainPath();
+  const { NAV, NAV_CTA, SOCIALS } = useContent();
+  const t = useUi();
   const ref = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [onDark, setOnDark] = useState(false);
@@ -49,7 +51,7 @@ export function Header() {
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
     return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
-  }, [pathname]);
+  }, [pathname, NAV]);
 
   // while the menu is open: Escape closes it and the page behind doesn't scroll
   useEffect(() => {
@@ -66,21 +68,22 @@ export function Header() {
 
   const close = () => setOpen(false);
   const isCurrent = (href: string) => (href.startsWith("/#") ? active === href : pathname === href || pathname.startsWith(`${href}/`));
-  const menuLinks = [{ href: "/", label: "Home" }, ...NAV, { href: "/#join", label: NAV_CTA }];
+  const menuLinks = [{ href: "/", label: t.home }, ...NAV, { href: "/#join", label: NAV_CTA }];
   const className = [styles.header, onDark && styles.onDark, scrolled && styles.scrolled, open && styles.open].filter(Boolean).join(" ");
 
   return (
     <header ref={ref} className={className}>
       <div className={`${styles.row} caption`}>
-        <NavLink href="/" className={styles.logo} onNavigate={close}><span className="visually-hidden">Elegix home</span><Logo /></NavLink>
-        <nav aria-label="Main" className={styles.nav}>
+        <NavLink href="/" className={styles.logo} onNavigate={close}><span className="visually-hidden">{t.elegixHome}</span><Logo /></NavLink>
+        <nav aria-label={t.mainNav} className={styles.nav}>
           {NAV.map((n) => <NavLink key={n.href} href={n.href} className={styles.navLink} current={isCurrent(n.href)}>{n.label}</NavLink>)}
         </nav>
         <div className={styles.actions}>
+          <LangSwitch className={styles.lang} />
           <NavLink href="/#join" className={styles.cta}>{NAV_CTA}</NavLink>
           <button type="button" className={`${styles.burger} caption`} aria-expanded={open} aria-controls="site-menu"
             onClick={() => setOpen((o) => !o)}>
-            {open ? "Close" : "Menu"}<span className={styles.burgerIcon} aria-hidden="true" />
+            {open ? t.close : t.menu}<span className={styles.burgerIcon} aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -99,6 +102,7 @@ export function Header() {
         </ul>
         <div className={`${styles.menuFoot} caption`}>
           <a href="mailto:hello@elegix.net">hello@elegix.net</a>
+          <LangSwitch />
           <span className={styles.socials}>
             {SOCIALS.slice(0, 3).map((s) => <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>)}
           </span>

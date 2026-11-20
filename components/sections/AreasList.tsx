@@ -1,16 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { AREAS, AREA_ORDER, AREAS_SECTION } from "@/lib/content";
+import Link, { useContent, useUi } from "@/components/ui/Lang";
+import { AREA_ORDER } from "@/lib/content";
 import { areaGuideHref } from "@/lib/guides";
 import { AreaIcon } from "@/components/ui/AreaIcon";
 import { Media } from "@/components/ui/Media";
-import { Pill, areaVars } from "@/components/ui/Pill";
+import { Pill } from "@/components/ui/Pill";
+import { areaVars } from "@/components/ui/areaVars";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./AreasList.module.css";
 
 export function AreasList() {
+  const { AREAS, AREAS_SECTION } = useContent();
+  const t = useUi();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -31,7 +34,7 @@ export function AreasList() {
         </div>
         <div className={styles.grid} data-reveal onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
           onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
-          <ul className={styles.list} role="tablist" aria-label="Life areas" aria-orientation="vertical">
+          <ul className={styles.list} role="tablist" aria-label={t.lifeAreas} aria-orientation="vertical">
             {AREA_ORDER.map((a, i) => (
               <li key={a} role="presentation">
                 <button type="button" role="tab" id={`area-tab-${a}`} aria-selected={i === index} aria-controls="area-panel"
@@ -59,7 +62,7 @@ export function AreasList() {
             <div className={`glass ${styles.note}`}>
               <Pill area={active} strong />
               <p>{AREAS[active].neglect}</p>
-              <Link href={areaGuideHref(active)} className={styles.more}>How to balance {AREAS[active].name.toLowerCase()}</Link>
+              <Link href={areaGuideHref(active)} className={styles.more}>{t.howToBalance(AREAS[active].name)}</Link>
             </div>
           </div>
         </div>

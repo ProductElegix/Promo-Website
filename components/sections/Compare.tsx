@@ -1,9 +1,12 @@
-import { COMPARE } from "@/lib/content";
+import { getContent } from "@/lib/lang";
+import { ui } from "@/lib/ui";
 import { LogoMark } from "@/components/ui/Logo";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Compare.module.css";
 
-export function Compare() {
+export async function Compare() {
+  const { lang, c: { COMPARE } } = await getContent();
+  const t = ui(lang);
   const [them, us] = COMPARE.columns;
   return (
     <section className={`section on-dark ${styles.compare}`} aria-labelledby="compare-title">
@@ -13,9 +16,9 @@ export function Compare() {
           <h2 id="compare-title" className="display h2"><Rich text={COMPARE.title} /></h2>
           <p className="lede">{COMPARE.lede}</p>
         </div>
-        <div className={styles.table} role="table" aria-label={`${them} compared with ${us}`} data-reveal>
+        <div className={styles.table} role="table" aria-label={t.comparedWith(them, us)} data-reveal>
           <div role="row" className={`${styles.row} ${styles.headRow}`}>
-            <span role="columnheader" className={styles.rowLabel}><span className="visually-hidden">Compared</span></span>
+            <span role="columnheader" className={styles.rowLabel}><span className="visually-hidden">{t.compared}</span></span>
             <span role="columnheader" className={styles.them}>{them}</span>
             <span role="columnheader" className={styles.us}><LogoMark className={styles.mark} />{us}</span>
           </div>

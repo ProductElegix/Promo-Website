@@ -1,0 +1,6 @@
+import { notFound } from "next/navigation";
+
+/** Any path that matches no page renders the language's 404 page inside the site layout. */
+export default function Missing() {
+  notFound();
+}

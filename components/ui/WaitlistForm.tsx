@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Link from "next/link";
-import { CONSENT } from "@/lib/content";
+import Link, { useContent, useLang, useUi } from "@/components/ui/Lang";
 import { CommunityNote } from "./CommunityNote";
 import { readAttribution } from "@/lib/attribution";
 import styles from "./WaitlistForm.module.css";
@@ -19,7 +18,12 @@ type Props = {
 
 type Status = { kind: "idle" | "ok" | "err"; text: string };
 
-export function WaitlistForm({ source, variant = "underline", start, placeholder = "Your email for early access", buttonLabel = "Join" }: Props) {
+export function WaitlistForm({ source, variant = "underline", start, placeholder: ownPlaceholder, buttonLabel: ownLabel }: Props) {
+  const { CONSENT } = useContent();
+  const t = useUi();
+  const lang = useLang();
+  const placeholder = ownPlaceholder ?? t.emailForAccess;
+  const buttonLabel = ownLabel ?? t.join;
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
@@ -29,7 +33,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
     e.preventDefault();
     const value = email.trim().toLowerCase();
     if (!EMAIL_RE.test(value)) {
-      setStatus({ kind: "err", text: "Enter a valid email, like name@example.com." });
+      setStatus({ kind: "err", text: t.invalidEmail });
       return;
     }
     const company = (new FormData(e.currentTarget).get("company") as string) || "";
@@ -39,16 +43,16 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source, start, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
+        body: JSON.stringify({ email: value, source, start, lang, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean; invited?: boolean };
-      if (!res.ok) throw new Error(data.error || "We couldn't save your email. Please try again.");
+      if (!res.ok) throw new Error(data.error || t.saveFailed);
       window.gtag?.("event", "generate_lead", { form: source });
-      setStatus({ kind: "ok", text: data.emailed ? `You're on the list. We've sent a confirmation to ${value}.` : `You're on the list. We'll email ${value} when your spot opens.` });
+      setStatus({ kind: "ok", text: data.emailed ? t.onListSent(value) : t.onListLater(value) });
       setInvited(!!data.invited);
       setEmail("");
     } catch (err) {
-      setStatus({ kind: "err", text: err instanceof Error ? err.message : "We couldn't save your email. Please try again." });
+      setStatus({ kind: "err", text: err instanceof Error ? err.message : t.saveFailed });
     } finally {
       setBusy(false);
     }
@@ -58,13 +62,13 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
   return (
     <div className={styles.wrap} data-clarity-mask="true">
       <form className={`${styles.form} ${styles[variant]}`} onSubmit={onSubmit} noValidate>
-        <label htmlFor={id} className="visually-hidden">Email</label>
+        <label htmlFor={id} className="visually-hidden">{t.yourEmail}</label>
         <input id={id} type="email" inputMode="email" autoComplete="email" placeholder={placeholder}
           value={email} onChange={(e) => setEmail(e.target.value)} required aria-describedby={`${id}-status`} />
         {/* honeypot for bots */}
         <input type="text" name="company" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
         <button type="submit" className={variant === "underline" ? "btn" : styles.barBtn} disabled={busy}>
-          {busy ? "Joining…" : buttonLabel}
+          {busy ? t.joining : buttonLabel}
         </button>
       </form>
       <p className={styles.consent}>{CONSENT.before} <Link href="/privacy">{CONSENT.link}</Link>{CONSENT.after}</p>

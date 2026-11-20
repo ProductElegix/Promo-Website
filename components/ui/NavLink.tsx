@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link, { useLang, usePlainPath } from "@/components/ui/Lang";
+import { localePath } from "@/lib/i18n";
 import type { MouseEvent, ReactNode } from "react";
 
 /**
@@ -15,7 +15,8 @@ import type { MouseEvent, ReactNode } from "react";
 export function NavLink({ href, children, className, onNavigate, current }: {
   href: string; children: ReactNode; className?: string; onNavigate?: () => void; current?: boolean;
 }) {
-  const pathname = usePathname();
+  const pathname = usePlainPath();
+  const lang = useLang();
   const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
     onNavigate?.();
     if (e.metaKey || e.ctrlKey || e.shiftKey) return;
@@ -28,7 +29,7 @@ export function NavLink({ href, children, className, onNavigate, current }: {
     if (href === "/") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
-      history.replaceState(null, "", "/");
+      history.replaceState(null, "", localePath(lang, "/"));
       return;
     }
     const id = href.startsWith("/#") ? href.slice(2) : null;
@@ -36,7 +37,7 @@ export function NavLink({ href, children, className, onNavigate, current }: {
     if (el) {
       e.preventDefault();
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      history.replaceState(null, "", `/#${id}`);
+      history.replaceState(null, "", localePath(lang, `/#${id}`));
     }
   };
   return <Link href={href} className={className} onClick={onClick} aria-current={current ? "page" : undefined}>{children}</Link>;

@@ -1,13 +1,17 @@
-import Link from "next/link";
-import { APP, AREAS, AREA_ORDER, HERO, HOW } from "@/lib/content";
+import Link from "@/components/ui/Lang";
+import { AREA_ORDER } from "@/lib/content";
+import type { Content } from "@/lib/l10n";
+import { getContent } from "@/lib/lang";
+import { ui } from "@/lib/ui";
 import { Phone } from "@/components/ui/Phone";
-import { Pill, areaVars } from "@/components/ui/Pill";
+import { Pill } from "@/components/ui/Pill";
+import { areaVars } from "@/components/ui/areaVars";
 import { Rich } from "@/components/ui/Rich";
 import { Wheel } from "@/components/ui/Wheel";
 import styles from "./HowItWorks.module.css";
 
 /** Small floating UI chip over the phone's edge; demo values are labelled as examples. */
-function Chip({ kind }: { kind: (typeof HOW.steps)[number]["key"] }) {
+function Chip({ kind, c: { HERO, HOW, AREAS } }: { kind: Content["HOW"]["steps"][number]["key"]; c: Content }) {
   if (kind === "balance") {
     const c = HERO.card;
     return (
@@ -44,7 +48,9 @@ function Chip({ kind }: { kind: (typeof HOW.steps)[number]["key"] }) {
 
 /** How it works: the 6 areas as chips, then See / Act / Reflect as tall cards with the app peeking up.
  *  On the home page it ends with one "Learn more" link to /about; /about renders it without. */
-export function HowItWorks({ learnMore = true, chips = true }: { learnMore?: boolean; chips?: boolean }) {
+export async function HowItWorks({ learnMore = true, chips = true }: { learnMore?: boolean; chips?: boolean }) {
+  const { lang, c } = await getContent();
+  const { APP, HOW } = c;
   return (
     <section id="how" className="section" aria-labelledby="how-title">
       <div className="container">
@@ -53,26 +59,26 @@ export function HowItWorks({ learnMore = true, chips = true }: { learnMore?: boo
           <h2 id="how-title" className="display h2"><Rich text={HOW.title} /></h2>
           <p className="lede">{HOW.lede}</p>
           {chips && (
-            <ul className={styles.areas} aria-label="The 6 life areas">
+            <ul className={styles.areas} aria-label={ui(lang).sixAreas}>
               {AREA_ORDER.map((a) => <li key={a}><Pill area={a} /></li>)}
             </ul>
           )}
         </div>
         <ol className={styles.cards}>
-          {HOW.steps.map((c, i) => {
-            const screen = (APP.screens.find((s) => s.label === c.screen) ?? APP.screens[0]).media;
-            const [a, b] = c.tint;
+          {HOW.steps.map((step, i) => {
+            const screen = (APP.screens.find((s) => s.label === step.screen) ?? APP.screens[0]).media;
+            const [a, b] = step.tint;
             return (
-              <li key={c.key} className={styles.card} data-reveal
+              <li key={step.key} className={styles.card} data-reveal
                 style={{ ["--a" as string]: `var(--${a}-t)`, ["--b" as string]: `var(--${b}-t)` }}>
                 <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
-                <h3 className={styles.title}>{c.title}</h3>
-                <p className={styles.text}>{c.text}</p>
+                <h3 className={styles.title}>{step.title}</h3>
+                <p className={styles.text}>{step.text}</p>
                 <div className={styles.device}>
-                  <div className={`${styles.phoneWrap} ${c.scroll ? styles.scrolled : ""}`} style={{ ["--scroll" as string]: `-${c.scroll}%` }}>
+                  <div className={`${styles.phoneWrap} ${step.scroll ? styles.scrolled : ""}`} style={{ ["--scroll" as string]: `-${step.scroll}%` }}>
                     <Phone screen={screen} className={styles.phone} />
                   </div>
-                  <div className={styles.chipWrap} aria-hidden="true"><Chip kind={c.key} /></div>
+                  <div className={styles.chipWrap} aria-hidden="true"><Chip kind={step.key} c={c} /></div>
                 </div>
               </li>
             );

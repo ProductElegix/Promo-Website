@@ -1,16 +1,22 @@
 import { Fragment, type ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/Lang";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { TRUST, type AreaKey, type MediaSlot } from "@/lib/content";
-import { sourcesOf, type Block, type Guide } from "@/lib/guides";
+import type { AreaKey, MediaSlot } from "@/lib/content";
+import { hasUk, sourcesOf, type Block, type Guide } from "@/lib/guides";
 import type { Author } from "@/lib/stories";
 import { TAKEAWAYS } from "@/lib/guide-takeaways";
+import { UK_TAKEAWAYS } from "@/lib/uk/guide-takeaways";
+import { contentOf } from "@/lib/l10n";
+import { getLang } from "@/lib/lang";
+import { langMeta } from "@/lib/meta";
+import { ui } from "@/lib/ui";
+import type { Lang } from "@/lib/i18n";
 import { authorHref } from "@/lib/authors";
 import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
 import { GuideTool } from "./GuideTool";
-import { Inline } from "./Inline";
+import { Inline, plainText } from "./Inline";
 import { Media } from "./Media";
 import { AreaTags } from "./AreaTags";
 import { Rich } from "./Rich";
@@ -50,25 +56,30 @@ type Props = {
 export const EDITORIAL_PATH = "/guides/how-we-write-guides";
 
 /** The founder as an article author, used by every guide. */
-const FOUNDER_AUTHOR: Author = {
-  name: TRUST.founder.name,
-  role: "Founder of Elegix",
-  photo: TRUST.founder.media.src,
-  bio: TRUST.founder.experience,
-  linkedin: TRUST.founder.profiles[0],
-};
+export function founderAuthor(lang: Lang): Author {
+  const { TRUST } = contentOf(lang);
+  return {
+    name: TRUST.founder.name,
+    role: ui(lang).founderOfElegix,
+    photo: TRUST.founder.media.src,
+    bio: TRUST.founder.experience,
+    linkedin: TRUST.founder.profiles[0],
+  };
+}
 
 /** Metadata for a guide or life area page: its own title, canonical URL and article share card. */
 /** `ownImage`: the route has its own opengraph-image (guides, life areas), so the share card comes from there. */
-export function articleMetadata(g: Omit<Guide, "related" | "areas">, path: string, ownImage = false): Metadata {
+export function articleMetadata(g: Omit<Guide, "related" | "areas">, path: string, ownImage = false, lang: Lang = "en"): Metadata {
+  const lm = langMeta(lang, path);
   const photo = g.media.src ? [{ url: g.media.src, alt: g.media.alt }, OG_IMAGE] : [OG_IMAGE];
   return {
     title: g.metaTitle,
     description: g.description,
-    alternates: { canonical: path, types: { "application/rss+xml": [{ url: "/guides/feed.xml", title: "Elegix guides" }] } },
+    ...(lm.robots ? { robots: lm.robots } : {}),
+    alternates: { ...lm.alternates, types: { "application/rss+xml": [{ url: "/guides/feed.xml", title: "Elegix guides" }] } },
     openGraph: {
-      title: g.metaTitle, description: g.description, url: path, siteName: "Elegix", type: "article", locale: "en_US",
-      publishedTime: g.published, modifiedTime: g.updated, authors: [TRUST.founder.name],
+      title: g.metaTitle, description: g.description, url: lm.url, siteName: "Elegix", type: "article", locale: lm.locale,
+      publishedTime: g.published, modifiedTime: g.updated, authors: [contentOf(lang).TRUST.founder.name],
       ...(ownImage ? {} : { images: photo }),
     },
     twitter: { card: "summary_large_image", title: g.metaTitle, description: g.description, ...(ownImage ? {} : { images: g.media.src ? [g.media.src] : [OG_IMAGE] }) },
@@ -95,26 +106,35 @@ export function BlockView({ b }: { b: Block }) {
 }
 
 /** Anchor id for a section heading, e.g. "How to read your wheel" → "how-to-read-your-wheel". */
-const anchor = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const anchor = (h: string) => h.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "");
 
-const date = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+const dateIn = (lang: Lang) => (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString(lang === "uk" ? "uk-UA" : "en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories, promote = false, midTitle = "Track all 6 areas, not just work", lists = [], areas, hub }: Props) {
+export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub }: Props) {
+  const lang = await getLang();
+  const t = ui(lang);
+  const date = dateIn(lang);
+  const { TRUST } = contentOf(lang);
+  const author = ownAuthor ?? founderAuthor(lang);
+  const tocTitle = ownToc ?? t.inThisGuide;
+  const midTitle = ownMid ?? t.trackAllSix;
+  const path = langMeta(lang, plainPath).url;
   const url = `${SITE_URL}${path}`;
   const isFounder = author.name === TRUST.founder.name;
-  const storyLink = TRUST.founder.storyLink.href !== path ? TRUST.founder.storyLink : null;
+  const takeaways = lang === "uk" ? (hasUk(g.slug) ? UK_TAKEAWAYS[g.slug] : TAKEAWAYS[g.slug]) : TAKEAWAYS[g.slug];
+  const storyLink = TRUST.founder.storyLink.href !== plainPath ? TRUST.founder.storyLink : null;
   const sources = sourcesOf(g);
   const toc = [
     ...g.sections.map((s) => ({ id: anchor(s.h2), label: s.h2 })),
-    ...(g.faq ? [{ id: "questions", label: "Questions people ask" }] : []),
-    ...(sources.length ? [{ id: "sources", label: "Sources" }] : []),
+    ...(g.faq ? [{ id: "questions", label: t.questionsPeopleAsk }] : []),
+    ...(sources.length ? [{ id: "sources", label: t.sources }] : []),
   ];
   const midAfter = promote && g.sections.length >= 4 ? 1 : -1;
   const waitlistSource = (source ?? `guide:${g.slug}`).slice(0, 32);
   return (
     <main>
-      <Breadcrumbs name={g.title} path={path} parents={[parent]} />
+      <Breadcrumbs name={g.title} path={path} parents={[{ ...parent, path: langMeta(lang, parent.path).url }]} />
       <JsonLd data={{
         "@context": "https://schema.org",
         "@type": "Article",
@@ -123,12 +143,12 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
         image: g.media.src ? [`${SITE_URL}${g.media.src}`] : [`${SITE_URL}${OG_IMAGE.url}`],
         datePublished: g.published,
         dateModified: g.updated,
-        author: isFounder ? founderPerson(TRUST.founder) : { "@type": "Person", name: author.name, jobTitle: author.role, ...(author.linkedin ? { sameAs: [author.linkedin] } : {}) },
+        author: isFounder ? founderPerson(contentOf("en").TRUST.founder) : { "@type": "Person", name: author.name, jobTitle: author.role, ...(author.linkedin ? { sameAs: [author.linkedin] } : {}) },
         publisher: { "@id": `${SITE_URL}/#organization` },
         mainEntityOfPage: url,
-        inLanguage: "en",
+        inLanguage: lang,
         ...(sources.length ? { citation: sources.map((s) => s.url) } : {}),
-        ...(g.area ? { about: { "@type": "Thing", name: g.label.replace(/^Life area · /, "") } } : {}),
+        ...(g.area ? { about: { "@type": "Thing", name: g.label.replace(/^(Life area|Сфера життя) · /, "") } } : {}),
       }} />
       {g.reviewer && (
         <JsonLd data={{
@@ -143,31 +163,31 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
         <JsonLd data={{
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: g.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          mainEntity: g.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: plainText(f.a) } })),
         }} />
       )}
 
       {promote && <GuideAnalytics slug={g.slug} bodyId="article-body" />}
       <article className={`section ${styles.article}`} aria-labelledby="article-title">
         <header className={`container ${styles.head}`}>
-          <nav aria-label="Breadcrumb" className={styles.crumbs}>
+          <nav aria-label={t.breadcrumb} className={styles.crumbs}>
             <Link href="/">Elegix</Link><span aria-hidden="true">/</span><Link href={parent.path}>{parent.name}</Link>
           </nav>
           <div className={styles.kind}>
-            <span className="label">{g.area ? "Life area" : g.label}</span>
+            <span className="label">{g.area ? t.lifeArea : g.label}</span>
             {(g.area || areas) && <AreaTags areas={g.area ? [g.area] : areas!} link />}
           </div>
           <h1 id="article-title" className={`display ${styles.title}`}>{g.title}</h1>
           <p className={styles.lede}>{g.lede}</p>
           <p className={styles.meta}>
             {author.photo && <Image src={author.photo} alt="" width={32} height={32} className={styles.metaPhoto} />}
-            <span>By <Link href={authorHref(author.name)} rel="author">{author.name}</Link>, {author.role} · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
+            <span>{t.by} <Link href={authorHref(author.name)} rel="author">{author.name}</Link>, {author.role} · {t.updated} <time dateTime={g.updated}>{date(g.updated)}</time> · {t.minRead(g.minutes)}</span>
           </p>
           {(g.reviewer || (promote && sources.length > 0)) && (
             <p className={styles.trust}>
-              {g.reviewer && <span>Reviewed by {g.reviewer.url ? <a href={g.reviewer.url} target="_blank" rel="noopener">{g.reviewer.name}</a> : g.reviewer.name}, {g.reviewer.credentials}</span>}
-              {promote && sources.length > 0 && <a href="#sources">{sources.length} source{sources.length === 1 ? "" : "s"}</a>}
-              {promote && <Link href={EDITORIAL_PATH}>How we write guides</Link>}
+              {g.reviewer && <span>{t.reviewedBy} {g.reviewer.url ? <a href={g.reviewer.url} target="_blank" rel="noopener">{g.reviewer.name}</a> : g.reviewer.name}, {g.reviewer.credentials}</span>}
+              {promote && sources.length > 0 && <a href="#sources">{t.nSources(sources.length)}</a>}
+              {promote && <Link href={EDITORIAL_PATH}>{t.howWeWrite}</Link>}
             </p>
           )}
         </header>
@@ -183,33 +203,33 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
             <Toc title={tocTitle} items={toc} bodyId="article-body" />
             {promote && (
               <div className={styles.sideCta}>
-                <p className={styles.sideCtaTitle}>See which area of your life is slipping</p>
-                <p>Elegix scores your 6 life areas every week. Free for iOS and Android.</p>
-                <a href="#join" className="btn lime" data-cta="side">Get early access</a>
+                <p className={styles.sideCtaTitle}>{t.sideCtaTitle}</p>
+                <p>{t.sideCtaText}</p>
+                <a href="#join" className="btn lime" data-cta="side">{t.getEarlyAccess}</a>
               </div>
             )}
           </aside>
           <div id="article-body" className={styles.body}>
-          {TAKEAWAYS[g.slug] && (
+          {takeaways && (
             <section className={styles.takeaways} aria-labelledby="takeaways-title">
-              <h2 id="takeaways-title">Key takeaways</h2>
-              <ul className={styles.list}>{TAKEAWAYS[g.slug].map((t) => <li key={t}>{t}</li>)}</ul>
+              <h2 id="takeaways-title">{t.keyTakeaways}</h2>
+              <ul className={styles.list}>{takeaways.map((t) => <li key={t}>{t}</li>)}</ul>
             </section>
           )}
           {g.intro?.map((b, i) => <BlockView key={`intro-${i}`} b={b} />)}
           {g.sections.map((s, si) => (
             <Fragment key={s.h2}>
               <section id={anchor(s.h2)}>
-                <h2>{s.h2}<a href={`#${anchor(s.h2)}`} className={styles.anchor} aria-label={`Link to “${s.h2}”`}>#</a></h2>
+                <h2>{s.h2}<a href={`#${anchor(s.h2)}`} className={styles.anchor} aria-label={t.linkTo(s.h2)}>#</a></h2>
                 {s.blocks.map((b, i) => <BlockView key={i} b={b} />)}
               </section>
               {si === midAfter && (
                 <aside className={`on-dark ${styles.midCta}`} aria-labelledby="mid-cta-title">
                   <div>
                     <p id="mid-cta-title" className={styles.midCtaTitle}>{midTitle}</p>
-                    <p className={styles.midCtaText}>Elegix shows which area of your life is slipping before it turns into burnout. Join the waitlist for early access.</p>
+                    <p className={styles.midCtaText}>{t.midCtaText}</p>
                   </div>
-                  <div className={styles.midForm}><WaitlistForm source={`mid:${g.slug}`.slice(0, 32)} variant="glass" placeholder="Your email" buttonLabel="Join" /></div>
+                  <div className={styles.midForm}><WaitlistForm source={`mid:${g.slug}`.slice(0, 32)} variant="glass" placeholder={t.yourEmail} buttonLabel={t.join} /></div>
                 </aside>
               )}
             </Fragment>
@@ -217,12 +237,12 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
 
           {g.faq && (
             <section id="questions">
-              <h2>Questions people ask</h2>
+              <h2>{t.questionsPeopleAsk}</h2>
               <div className={styles.faq}>
                 {g.faq.map((f) => (
                   <details key={f.q}>
                     <summary>{f.q}<span className={styles.plus} aria-hidden="true" /></summary>
-                    <p>{f.a}</p>
+                    <p><Inline text={f.a} /></p>
                   </details>
                 ))}
               </div>
@@ -231,7 +251,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
 
           {sources.length > 0 && (
             <section id="sources" className={styles.sources}>
-              <h2>Sources</h2>
+              <h2>{t.sources}</h2>
               <ol>
                 {sources.map((src) => (
                   <li key={src.url}><a href={src.url} target="_blank" rel="noopener">{src.label}</a> <span className={styles.domain}>{new URL(src.url).hostname.replace(/^www\./, "")}</span></li>
@@ -239,20 +259,20 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
               </ol>
               {g.changes && g.changes.length > 0 && (
                 <>
-                  <h3 className={styles.changesTitle}>What changed</h3>
+                  <h3 className={styles.changesTitle}>{t.whatChanged}</h3>
                   <ul className={styles.changes}>
                     {g.changes.map((c) => <li key={c.date + c.text}><time dateTime={c.date}>{date(c.date)}</time>: {c.text}</li>)}
                   </ul>
                 </>
               )}
-              {promote && <p className={styles.disclaimer}>This guide is general information, not medical or financial advice. If you feel exhausted most days, low for more than two weeks, or unsafe, talk to a doctor or a licensed therapist. Read <Link href={EDITORIAL_PATH}>how we write and check our guides</Link>.</p>}
+              {promote && <p className={styles.disclaimer}>{t.disclaimer} {t.read} <Link href={EDITORIAL_PATH}>{t.howWeWriteAndCheck}</Link>.</p>}
             </section>
           )}
 
           {promote && <ArticleActions slug={g.slug} title={g.title} url={url} />}
 
           <div className={styles.authorBlock}>
-          <aside className={styles.author} aria-label="About the author">
+          <aside className={styles.author} aria-label={t.aboutAuthor}>
             {author.photo && <div className={styles.authorPhoto}><Image src={author.photo} alt={author.name} fill sizes="96px" /></div>}
             <div>
               <p className={styles.authorName}>{author.name}</p>
@@ -262,7 +282,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
               {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </aside>
-          <Link href={authorHref(author.name)} className={`btn ghost ${styles.authorAll}`}>Read all articles by {author.name.split(" ")[0]}</Link>
+          <Link href={authorHref(author.name)} className={`btn ghost ${styles.authorAll}`}>{t.readAllBy(author.name.split(" ")[0])}</Link>
           </div>
           </div>
         </div>
@@ -273,14 +293,14 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
           <div className={`on-dark grain ${styles.cta}`}>
             <h2 id="cta-title" className="display h2"><Rich text={g.cta.title} /></h2>
             <p className="lede">{g.cta.text}</p>
-            <div className={styles.ctaForm}><WaitlistForm source={waitlistSource} variant="glass" placeholder="Your email" buttonLabel="Get early access" /></div>
+            <div className={styles.ctaForm}><WaitlistForm source={waitlistSource} variant="glass" placeholder={t.yourEmail} buttonLabel={t.getEarlyAccess} /></div>
           </div>
         </div>
       </section>
 
-      {stories && stories.length > 0 && <ReadingList id="stories-title" title={stories.length > 1 ? "Read other founders' stories" : "Read another founder's story"} items={stories} />}
+      {stories && stories.length > 0 && <ReadingList id="stories-title" title={stories.length > 1 ? t.otherStories : t.anotherStory} items={stories} />}
       {lists.filter((l) => l.items.length > 0).map((l) => <ReadingList key={l.id} id={l.id} title={l.title} items={l.items} />)}
-      {related.length > 0 && <ReadingList id="related-title" title="Keep reading" items={related} />}
+      {related.length > 0 && <ReadingList id="related-title" title={t.keepReading} items={related} />}
     </main>
   );
 }
