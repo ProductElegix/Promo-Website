@@ -292,8 +292,8 @@ export const TEAM = {
   members: [
     { name: "Edward Korytskyi", role: "Founder", photo: "/images/founder.jpg", linkedin: "https://www.linkedin.com/in/korytsky" },
     { name: "Alina Krupa", role: "CMO & Co-founder", photo: "/images/alina-krupa.jpg", linkedin: "https://www.linkedin.com/in/alinakrupa/" },
-    { name: "Maksym Zhuravskyi", role: "CTO" },
-    { name: "Yevhenii Bohomol", role: "Product Analyst", photo: "/images/yevhenii-bohomol.jpg", linkedin: "https://www.linkedin.com/in/evgeniybogomol/" }, // placeholder title, to confirm with Edward
+    { name: "Maksym Zhuravskyi", role: "CTO & Co-founder", photo: "/images/maksym-zhuravskyi.jpg", linkedin: "https://www.linkedin.com/in/mesiriak/" },
+    { name: "Yevhenii Bohomol", role: "Co-founder", photo: "/images/yevhenii-bohomol.jpg", linkedin: "https://www.linkedin.com/in/evgeniybogomol/" },
   ] as { name: string; role: string; photo?: string; linkedin?: string }[],
 };
 
@@ -547,7 +547,7 @@ export const CAREERS = {
       { q: "How can I get in touch about a job?", a: "Email hello@elegix.net with the subject “Careers”. Tell us what you do, what you'd like to work on and why this problem matters to you. A link to your work helps." },
       { q: "What does the Elegix team work on?", a: "A life balance tracker for iOS and Android. It links goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next." },
       { q: "What is the work week like?", a: "We work four days a week, with Wednesday off, so nobody goes more than two days without a break. We try to keep clear priorities and one next step, the same way the app does." },
-      { q: "Who is on the team?", a: "Edward Korytskyi (founder), Alina Krupa (CMO and co-founder), Maksym Zhuravskyi (CTO) and Yevhenii Bohomol. You can meet the team on the About page." },
+      { q: "Who is on the team?", a: "Edward Korytskyi (founder), Alina Krupa (CMO and co-founder), Maksym Zhuravskyi (CTO and co-founder) and Yevhenii Bohomol (co-founder). You can meet the team on the About page." },
     ],
   },
   open: {
