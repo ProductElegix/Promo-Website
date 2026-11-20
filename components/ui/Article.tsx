@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { TRUST, type AreaKey, type MediaSlot } from "@/lib/content";
 import type { Block, Guide } from "@/lib/guides";
+import type { Author } from "@/lib/stories";
 import { TAKEAWAYS } from "@/lib/guide-takeaways";
 import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
@@ -16,10 +17,25 @@ import styles from "./Article.module.css";
 
 type Parent = { name: string; path: string };
 type Props = {
-  guide: Omit<Guide, "related"> & { area?: AreaKey };
+  guide: Omit<Guide, "related"> & { area?: AreaKey; intro?: Block[] };
   path: string;
   parent: Parent;
   related: { href: string; label: string; title: string; media?: MediaSlot }[];
+  /** who wrote it; defaults to the founder (guides). Personal stories pass their own person. */
+  author?: Author;
+  /** heading of the table of contents */
+  tocTitle?: string;
+  /** waitlist source tag, e.g. "story:why-i-built-elegix" (defaults to "guide:<slug>") */
+  source?: string;
+};
+
+/** The founder as an article author, used by every guide. */
+const FOUNDER_AUTHOR: Author = {
+  name: TRUST.founder.name,
+  role: "Founder of Elegix",
+  photo: TRUST.founder.media.src,
+  bio: TRUST.founder.experience,
+  linkedin: TRUST.founder.profiles[0],
 };
 
 /** Metadata for a guide or life area page: its own title, canonical URL and article share card. */
@@ -62,8 +78,10 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, "-").replac
 const date = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export function Article({ guide: g, path, parent, related }: Props) {
+export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source }: Props) {
   const url = `${SITE_URL}${path}`;
+  const isFounder = author.name === TRUST.founder.name;
+  const storyLink = TRUST.founder.storyLink.href !== path ? TRUST.founder.storyLink : null;
   return (
     <main>
       <Breadcrumbs name={g.title} path={path} parents={[parent]} />
@@ -75,7 +93,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
         image: g.media.src ? [`${SITE_URL}${g.media.src}`] : [`${SITE_URL}${OG_IMAGE.url}`],
         datePublished: g.published,
         dateModified: g.updated,
-        author: founderPerson(TRUST.founder),
+        author: isFounder ? founderPerson(TRUST.founder) : { "@type": "Person", name: author.name, jobTitle: author.role, ...(author.linkedin ? { sameAs: [author.linkedin] } : {}) },
         publisher: { "@id": `${SITE_URL}/#organization` },
         mainEntityOfPage: url,
         ...(g.area ? { about: { "@type": "Thing", name: g.label.replace(/^Life area · /, "") } } : {}),
@@ -97,8 +115,8 @@ export function Article({ guide: g, path, parent, related }: Props) {
           <h1 id="article-title" className={`display ${styles.title}`}>{g.title}</h1>
           <p className={styles.lede}>{g.lede}</p>
           <p className={styles.meta}>
-            {TRUST.founder.media.src && <Image src={TRUST.founder.media.src} alt="" width={32} height={32} className={styles.metaPhoto} />}
-            <span>By <Link href="/about#story">{TRUST.founder.name}</Link>, founder of Elegix · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
+            {author.photo && <Image src={author.photo} alt="" width={32} height={32} className={styles.metaPhoto} />}
+            <span>By <Link href={isFounder ? "/about#story" : "/about#team"}>{author.name}</Link>, {author.role.charAt(0).toLowerCase() + author.role.slice(1)} · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
           </p>
         </header>
 
@@ -108,7 +126,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
 
         <div className={`container ${styles.layout}`}>
           <nav className={styles.toc} aria-labelledby="toc-title">
-            <p id="toc-title" className={styles.tocTitle}>In this guide</p>
+            <p id="toc-title" className={styles.tocTitle}>{tocTitle}</p>
             <ol>
               {g.sections.map((s) => <li key={s.h2}><a href={`#${anchor(s.h2)}`}>{s.h2}</a></li>)}
               {g.faq && <li><a href="#questions">Questions people ask</a></li>}
@@ -121,6 +139,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
               <ul className={styles.list}>{TAKEAWAYS[g.slug].map((t) => <li key={t}>{t}</li>)}</ul>
             </section>
           )}
+          {g.intro?.map((b, i) => <BlockView key={`intro-${i}`} b={b} />)}
           {g.sections.map((s) => (
             <section key={s.h2} id={anchor(s.h2)}>
               <h2>{s.h2}</h2>
@@ -143,13 +162,13 @@ export function Article({ guide: g, path, parent, related }: Props) {
           )}
 
           <aside className={styles.author} aria-label="About the author">
-            {TRUST.founder.media.src && <div className={styles.authorPhoto}><Image src={TRUST.founder.media.src} alt={TRUST.founder.media.alt} fill sizes="96px" /></div>}
+            {author.photo && <div className={styles.authorPhoto}><Image src={author.photo} alt={author.name} fill sizes="96px" /></div>}
             <div>
-              <p className={styles.authorName}>{TRUST.founder.name}</p>
-              <p className={styles.authorRole}>Founder of Elegix</p>
-              <p className={styles.authorBio}>{TRUST.founder.experience}</p>
-              <Link href={TRUST.founder.storyLink.href} className={styles.authorLink}>{TRUST.founder.storyLink.label} →</Link>
-              {TRUST.founder.profiles[0] && <a href={TRUST.founder.profiles[0]} target="_blank" rel="noopener me" className={styles.authorLink} style={{ marginLeft: 20 }}>LinkedIn ↗</a>}
+              <p className={styles.authorName}>{author.name}</p>
+              <p className={styles.authorRole}>{author.role}</p>
+              <p className={styles.authorBio}>{author.bio}</p>
+              {isFounder && storyLink && <Link href={storyLink.href} className={styles.authorLink} style={{ marginRight: 20 }}>{storyLink.label} →</Link>}
+              {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn ↗</a>}
             </div>
           </aside>
           </div>
@@ -161,7 +180,7 @@ export function Article({ guide: g, path, parent, related }: Props) {
           <div className={`on-dark grain ${styles.cta}`}>
             <h2 id="cta-title" className="display h2"><Rich text={g.cta.title} /></h2>
             <p className="lede">{g.cta.text}</p>
-            <div className={styles.ctaForm}><WaitlistForm source={`guide:${g.slug}`.slice(0, 32)} variant="glass" placeholder="Your email" buttonLabel="Get early access" /></div>
+            <div className={styles.ctaForm}><WaitlistForm source={(source ?? `guide:${g.slug}`).slice(0, 32)} variant="glass" placeholder="Your email" buttonLabel="Get early access" /></div>
           </div>
         </div>
       </section>
