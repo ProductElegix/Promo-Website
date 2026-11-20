@@ -12,8 +12,30 @@ export type Card = {
   areas?: AreaKey[];
 };
 
-/** A grid of photo cards linking to guides or life area pages: area tags, title, summary, then kind and read time. */
-export function GuideCards({ cards, two = false }: { cards: Card[]; two?: boolean }) {
+/** A grid of photo cards linking to guides or life area pages: area tags, title, summary, then kind and read time.
+ *  `rows`: the guide library layout, two columns of wide cards with the text left and a round photo right. */
+export function GuideCards({ cards, two = false, rows = false }: { cards: Card[]; two?: boolean; rows?: boolean }) {
+  if (rows) return (
+    <ul className={styles.rows}>
+      {cards.map((c) => (
+        <li key={c.href}>
+          <Link href={c.href} className={styles.row}>
+            <span className={styles.rowText}>
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+              <span className={styles.rowFoot}>
+                {c.areas && <AreaTags areas={c.areas} />}
+                <span className={styles.meta}>{c.meta}</span>
+              </span>
+            </span>
+            <span className={styles.rowPhoto}>
+              <Media media={{ ...c.media, ratio: "1 / 1" }} compact sizes="180px" />
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
   return (
     <ul className={`${styles.grid} ${two ? styles.two : ""}`}>
       {cards.map((c) => (
