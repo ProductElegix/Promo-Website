@@ -251,17 +251,19 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
 
           {promote && <ArticleActions slug={g.slug} title={g.title} url={url} />}
 
+          <div className={styles.authorBlock}>
           <aside className={styles.author} aria-label="About the author">
             {author.photo && <div className={styles.authorPhoto}><Image src={author.photo} alt={author.name} fill sizes="96px" /></div>}
             <div>
               <p className={styles.authorName}>{author.name}</p>
               <p className={styles.authorRole}>{author.role}</p>
               <p className={styles.authorBio}>{author.bio}</p>
-              <Link href={authorHref(author.name)} className={styles.authorLink} style={{ marginRight: 20 }}>All by {author.name.split(" ")[0]}</Link>
               {isFounder && storyLink && <Link href={storyLink.href} className={styles.authorLink} style={{ marginRight: 20 }}>{storyLink.label}</Link>}
               {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </aside>
+          <Link href={authorHref(author.name)} className={`btn ghost ${styles.authorAll}`}>Read all articles by {author.name.split(" ")[0]}</Link>
+          </div>
           </div>
         </div>
       </article>
