@@ -17,7 +17,7 @@ export type Author = {
   linkedin?: string;
 };
 
-export type Story = Omit<Guide, "related"> & {
+export type Story = Omit<Guide, "related" | "areas"> & {
   /** must match the name in TEAM.members */
   person: string;
   author: Author;

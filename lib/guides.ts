@@ -38,6 +38,10 @@ export type Guide = {
   metaTitle: string;
   description: string;
   label: string;
+  /** life areas the page is about, main one first; empty means it covers all 6 (the hub's "Whole life" filter) */
+  areas: AreaKey[];
+  /** an expert who checked the page; shown as "Reviewed by" and only set for a real, named reviewer */
+  reviewer?: Reviewer;
   /** opening paragraph under the h1 */
   lede: string;
   published: string;
@@ -51,6 +55,8 @@ export type Guide = {
   cta: { title: string; text: string };
 };
 
+export type Reviewer = { name: string; credentials: string; url?: string };
+
 export type AreaGuide = Omit<Guide, "related"> & { area: AreaKey };
 
 const CTA = {
@@ -63,6 +69,7 @@ const PHOTO = (src: string, alt: string): MediaSlot => ({ src, alt, brief: alt, 
 const BASE_GUIDES: Guide[] = [
   {
     slug: "wheel-of-life",
+    areas: [],
     title: "The Wheel of Life: how to fill it in and what to do with your score",
     metaTitle: "Wheel of Life: free template and how to use it",
     description: "What the Wheel of Life is, how to score your 6 life areas in 10 minutes, read the shape of your wheel and turn your lowest score into a weekly step.",
@@ -145,6 +152,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "signs-of-burnout",
+    areas: ["health", "career"],
     title: "12 signs of burnout in high achievers, and what to do first",
     metaTitle: "Signs of burnout in high achievers: 12 warnings",
     description: "Burnout in ambitious people rarely looks like collapse. 12 early signs in your body, your work and your relationships, and the first small steps that help.",
@@ -219,6 +227,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "work-life-balance",
+    areas: ["career", "health"],
     title: "How to improve work-life balance when you love your work",
     metaTitle: "How to improve work-life balance if you love work",
     description: "Practical work-life balance tips for ambitious people: measure all 6 areas of life, set boundaries that hold and plan your week around more than work.",
@@ -266,6 +275,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "goals-for-every-area-of-life",
+    areas: [],
     title: "How to set goals for every area of your life",
     metaTitle: "How to set goals for every area of life: examples",
     description: "Set goals for health, relationships, spirituality, leisure, growth and career: one goal per area, a reason why and a weekly habit. With examples.",
@@ -319,6 +329,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "weekly-review",
+    areas: [],
     title: "The 10-minute weekly review that keeps your life in balance",
     metaTitle: "Weekly review template: 10 minutes for life balance",
     description: "A 10-minute weekly review: re-score your 6 life areas, note one win and one slip, and choose one step for next week. A template for every Sunday.",
@@ -361,6 +372,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "how-to-choose-what-to-focus-on",
+    areas: [],
     title: "How to choose what to focus on this week",
     metaTitle: "How to choose what to focus on: a 5-minute method",
     description: "Too many goals and not enough week? A 5-minute Sunday method to choose one focus area of your life, one small action for it, and what to let go of.",
@@ -419,6 +431,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "how-to-choose-priorities-in-life",
+    areas: [],
     title: "How to choose your priorities in life: a simple method across 6 areas",
     metaTitle: "How to choose priorities in life: a 6-area method",
     description: "How to decide what matters when everything feels important: score 6 areas of life, find your values and choose 2 priorities for the season.",
@@ -488,6 +501,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "choosing-between-career-and-family",
+    areas: ["career", "people"],
     title: "Choosing between career and family: a calmer way to decide",
     metaTitle: "Choosing between career and family: how to decide",
     description: "Feel torn between your career and your family? Why it's rarely a one-time choice, how to decide season by season, and small steps that protect both.",
@@ -550,6 +564,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "decision-fatigue",
+    areas: ["health", "meaning"],
     title: "Decision fatigue: why choosing less makes you feel better",
     metaTitle: "Decision fatigue: signs, causes and what helps",
     description: "What decision fatigue is, what the research says, signs to watch for, and simple ways to make fewer decisions so you choose well where it matters.",
@@ -609,6 +624,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "ai-time-savings-work-life-balance",
+    areas: ["career", "hobby"],
     title: "AI saved you hours this week. Where did they go?",
     metaTitle: "AI saves you time at work. Keep it for your life",
     description: "AI saves workers about 3 hours a week, yet most say their workload went up. Why saved time goes back to work, and 4 steps to choose where it goes.",
@@ -675,6 +691,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "plan-next-year-by-area-of-life",
+    areas: [],
     title: "How to plan 2027 by area of life, not just by work goals",
     metaTitle: "How to plan 2027 by area of life: a yearly plan",
     description: "Plan 2027 across 6 areas of life, not a list of resolutions: review 2026, pick 2 focus areas, set a goal and a micro-habit per area, check in weekly.",
@@ -742,6 +759,7 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "four-day-work-week-extra-day",
+    areas: ["hobby", "career"],
     title: "Four days for work. What is your fifth day for?",
     metaTitle: "4-day work week: how to use your extra day off well",
     description: "In the largest four-day week trial, 71% of workers reported less burnout. How to choose what your extra day is for, across 6 areas of life.",
@@ -806,8 +824,9 @@ const AREA_SLUGS: Record<AreaKey, string> = {
   career: "finance-and-career",
 };
 
-const area = (key: AreaKey, g: Omit<AreaGuide, "area" | "slug" | "media" | "published" | "updated" | "cta">): AreaGuide => ({
+const area = (key: AreaKey, g: Omit<AreaGuide, "area" | "areas" | "slug" | "media" | "published" | "updated" | "cta">): AreaGuide => ({
   area: key,
+  areas: [key],
   slug: AREA_SLUGS[key],
   media: { ...AREAS_SECTION.media[key], ratio: "16 / 9" },
   published: "2026-10-22",
@@ -1016,3 +1035,41 @@ export const AREA_GUIDES: AreaGuide[] = BASE_AREA_GUIDES.map(withExtras);
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);
 export const areaGuideBySlug = (slug: string) => AREA_GUIDES.find((g) => g.slug === slug);
 export const areaGuideHref = (key: AreaKey) => `/life-areas/${AREA_SLUGS[key]}`;
+
+export const guideHref = (g: Guide | AreaGuide) => ("area" in g ? areaGuideHref(g.area) : `/guides/${g.slug}`);
+
+/** Every outside source a page links to, in reading order, once each: the page's "Sources" list. */
+export function sourcesOf(g: Pick<Guide, "sections" | "faq">): { label: string; url: string }[] {
+  const text = [...g.sections.flatMap((s) => s.blocks.map((b) => JSON.stringify(b))), ...(g.faq ?? []).map((f) => f.a)].join(" ");
+  const seen = new Set<string>();
+  const out: { label: string; url: string }[] = [];
+  for (const m of text.matchAll(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g)) {
+    const key = m[2].replace(/\/$/, "");
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ label: m[1], url: m[2] });
+  }
+  return out;
+}
+
+/** "Keep reading" for a guide: up to two hand-picked links, then the closest pages by shared life areas
+ *  (other guides and the page of its main area), so every guide also links one page it has no manual link to
+ *  and new guides join in without editing older ones. */
+export function relatedTo(g: Guide, count = 3): (Guide | AreaGuide)[] {
+  const picked = g.related.map(guideBySlug).filter((r): r is Guide => r !== undefined).slice(0, count - 1);
+  const score = (o: Guide | AreaGuide) => {
+    if (!g.areas.length) return "area" in o ? 0 : o.areas.length ? 1 : 2;
+    const shared = o.areas.filter((a) => g.areas.includes(a)).length;
+    return shared * 2 + ("area" in o && o.area === g.areas[0] ? 3 : 0);
+  };
+  const auto = [...GUIDES, ...AREA_GUIDES]
+    .filter((o) => o.slug !== g.slug && !picked.includes(o as Guide))
+    .map((o, i) => ({ o, s: score(o), i }))
+    .filter((x) => x.s > 0)
+    .sort((a, b) => b.s - a.s || a.i - b.i)
+    .map((x) => x.o);
+  return [...picked, ...auto].slice(0, count);
+}
+
+/** Guides about one life area, for that area's page and the hub filter. */
+export const guidesForArea = (key: AreaKey) => GUIDES.filter((g) => g.areas.includes(key));

@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     ...STORIES.map((s) => ({ url: `${SITE_URL}${storyHref(s)}`, lastModified: new Date(s.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${SITE_URL}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/guides/how-we-write-guides`, lastModified: new Date("2026-11-20"), changeFrequency: "yearly" as const, priority: 0.4 },
     ...GUIDES.map((g) => ({ url: `${SITE_URL}/guides/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${SITE_URL}/life-areas`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     ...AREA_GUIDES.map((g) => ({ url: `${SITE_URL}/life-areas/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.6 })),
