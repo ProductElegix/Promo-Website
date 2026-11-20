@@ -121,7 +121,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 .rhythmLine b { color: var(--ink); font-weight: 500; }
 @media (max-width: 860px) {
   .scrolly { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .stage { top: var(--header-h); height: 52svh; z-index: 0; }
+  .stage { top: var(--header-h); height: 50svh; z-index: 2; background: var(--cream); }
   .chapters { position: relative; z-index: 1; }
   .chapter { min-height: 60svh; align-content: end; padding-bottom: 8svh; }
   .chapter:first-child { min-height: 50svh; }
