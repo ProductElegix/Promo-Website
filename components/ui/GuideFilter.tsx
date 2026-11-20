@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AREAS, AREA_ORDER, type AreaKey } from "@/lib/content";
 import { AreaIcon } from "./AreaIcon";
+import { track } from "@/lib/track";
 import { areaVars } from "./Pill";
 import { GuideCards, type Card } from "./GuideCards";
 import styles from "@/app/guides/hub.module.css";
@@ -38,6 +39,7 @@ export function GuideFilter({ guides, areaPages }: Props) {
 
   function pick(f: Filter) {
     setFilter(f);
+    track("guide_filter", { area: f });
     const url = new URL(window.location.href);
     if (f === "all") url.searchParams.delete("area"); else url.searchParams.set("area", f);
     window.history.replaceState(null, "", url);

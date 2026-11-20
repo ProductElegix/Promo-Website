@@ -20,7 +20,7 @@ const HERO: MediaSlot = { src: "/images/how-next.jpg", alt: "A notebook, pen and
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: "/guides" },
+  alternates: { canonical: "/guides", types: { "application/rss+xml": [{ url: "/guides/feed.xml", title: "Elegix guides" }] } },
   openGraph: { title: `${TITLE} · Elegix`, description: DESCRIPTION, url: "/guides", siteName: "Elegix", type: "website", locale: "en_US", images: [OG_IMAGE] },
   twitter: { card: "summary_large_image", title: `${TITLE} · Elegix`, description: DESCRIPTION, images: [OG_IMAGE] },
 };
@@ -82,7 +82,7 @@ export default function Guides() {
             <p className="lede">What each area covers, the signs it's slipping and small habits that bring it back.</p>
           </div>
           <GuideCards cards={areaCards} />
-          <p className={styles.policy}>Every guide links its sources. <Link href="/guides/how-we-write-guides">How we write and check our guides</Link></p>
+          <p className={styles.policy}><Link href="/tools">Free tools</Link> · <Link href="/guides/how-we-write-guides">How we write and check our guides</Link> · <a href="/guides/feed.xml">RSS</a></p>
         </div>
       </section>
 

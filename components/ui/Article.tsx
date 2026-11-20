@@ -6,6 +6,7 @@ import { TRUST, type AreaKey, type MediaSlot } from "@/lib/content";
 import { sourcesOf, type Block, type Guide } from "@/lib/guides";
 import type { Author } from "@/lib/stories";
 import { TAKEAWAYS } from "@/lib/guide-takeaways";
+import { authorHref } from "@/lib/authors";
 import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
 import { GuideTool } from "./GuideTool";
@@ -14,6 +15,8 @@ import { Media } from "./Media";
 import { Pill } from "./Pill";
 import { Rich } from "./Rich";
 import { Toc } from "./Toc";
+import { ArticleActions } from "./ArticleActions";
+import { GuideAnalytics } from "./GuideAnalytics";
 import { WaitlistForm } from "./WaitlistForm";
 import styles from "./Article.module.css";
 
@@ -33,6 +36,8 @@ type Props = {
   source?: string;
   /** guides and life area pages: a waitlist form after the second section and an app card under the contents */
   promote?: boolean;
+  /** headline of the waitlist box after the second section */
+  midTitle?: string;
   /** more rows of cards above "Keep reading", e.g. the guides about a life area */
   lists?: { id: string; title: string; items: Props["related"] }[];
 };
@@ -50,17 +55,19 @@ const FOUNDER_AUTHOR: Author = {
 };
 
 /** Metadata for a guide or life area page: its own title, canonical URL and article share card. */
-export function articleMetadata(g: Omit<Guide, "related" | "areas">, path: string): Metadata {
+/** `ownImage`: the route has its own opengraph-image (guides, life areas), so the share card comes from there. */
+export function articleMetadata(g: Omit<Guide, "related" | "areas">, path: string, ownImage = false): Metadata {
+  const photo = g.media.src ? [{ url: g.media.src, alt: g.media.alt }, OG_IMAGE] : [OG_IMAGE];
   return {
     title: g.metaTitle,
     description: g.description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, types: { "application/rss+xml": [{ url: "/guides/feed.xml", title: "Elegix guides" }] } },
     openGraph: {
       title: g.metaTitle, description: g.description, url: path, siteName: "Elegix", type: "article", locale: "en_US",
       publishedTime: g.published, modifiedTime: g.updated, authors: [TRUST.founder.name],
-      images: g.media.src ? [{ url: g.media.src, alt: g.media.alt }, OG_IMAGE] : [OG_IMAGE],
+      ...(ownImage ? {} : { images: photo }),
     },
-    twitter: { card: "summary_large_image", title: g.metaTitle, description: g.description, images: g.media.src ? [g.media.src] : [OG_IMAGE] },
+    twitter: { card: "summary_large_image", title: g.metaTitle, description: g.description, ...(ownImage ? {} : { images: g.media.src ? [g.media.src] : [OG_IMAGE] }) },
   };
 }
 
@@ -79,7 +86,7 @@ export function BlockView({ b }: { b: Block }) {
     );
   }
   if ("tip" in b) return <p className={styles.tip}><Inline text={b.tip} /></p>;
-  if ("tool" in b) return <GuideTool name={b.tool} />;
+  if ("tool" in b) return <div data-tool={b.tool}><GuideTool name={b.tool} /></div>;
   return <p><Inline text={b.p} /></p>;
 }
 
@@ -89,7 +96,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, "-").replac
 const date = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories, promote = false, lists = [] }: Props) {
+export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTHOR, tocTitle = "In this guide", source, stories, promote = false, midTitle = "Track all 6 areas, not just work", lists = [] }: Props) {
   const url = `${SITE_URL}${path}`;
   const isFounder = author.name === TRUST.founder.name;
   const storyLink = TRUST.founder.storyLink.href !== path ? TRUST.founder.storyLink : null;
@@ -136,6 +143,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
         }} />
       )}
 
+      {promote && <GuideAnalytics slug={g.slug} bodyId="article-body" />}
       <article className={`section ${styles.article}`} aria-labelledby="article-title">
         <header className={`container ${styles.head}`}>
           <nav aria-label="Breadcrumb" className={styles.crumbs}>
@@ -146,7 +154,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
           <p className={styles.lede}>{g.lede}</p>
           <p className={styles.meta}>
             {author.photo && <Image src={author.photo} alt="" width={32} height={32} className={styles.metaPhoto} />}
-            <span>By <Link href={isFounder ? "/about#story" : "/about#team"}>{author.name}</Link>, {author.role} · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
+            <span>By <Link href={authorHref(author.name)} rel="author">{author.name}</Link>, {author.role} · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
           </p>
           {(g.reviewer || (promote && sources.length > 0)) && (
             <p className={styles.trust}>
@@ -168,7 +176,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
               <div className={styles.sideCta}>
                 <p className={styles.sideCtaTitle}>See which area of your life is slipping</p>
                 <p>Elegix scores your 6 life areas every week. Free for iOS and Android.</p>
-                <a href="#join" className="btn lime">Get early access</a>
+                <a href="#join" className="btn lime" data-cta="side">Get early access</a>
               </div>
             )}
           </aside>
@@ -183,13 +191,13 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
           {g.sections.map((s, si) => (
             <Fragment key={s.h2}>
               <section id={anchor(s.h2)}>
-                <h2>{s.h2}</h2>
+                <h2>{s.h2}<a href={`#${anchor(s.h2)}`} className={styles.anchor} aria-label={`Link to “${s.h2}”`}>#</a></h2>
                 {s.blocks.map((b, i) => <BlockView key={i} b={b} />)}
               </section>
               {si === midAfter && (
                 <aside className={`on-dark ${styles.midCta}`} aria-labelledby="mid-cta-title">
                   <div>
-                    <p id="mid-cta-title" className={styles.midCtaTitle}>Track all 6 areas, not just work</p>
+                    <p id="mid-cta-title" className={styles.midCtaTitle}>{midTitle}</p>
                     <p className={styles.midCtaText}>Elegix shows which area of your life is slipping before it turns into burnout. Join the waitlist for early access.</p>
                   </div>
                   <div className={styles.midForm}><WaitlistForm source={`mid:${g.slug}`.slice(0, 32)} variant="glass" placeholder="Your email" buttonLabel="Join" /></div>
@@ -220,9 +228,19 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
                   <li key={src.url}><a href={src.url} target="_blank" rel="noopener">{src.label}</a> <span className={styles.domain}>{new URL(src.url).hostname.replace(/^www\./, "")}</span></li>
                 ))}
               </ol>
+              {g.changes && g.changes.length > 0 && (
+                <>
+                  <h3 className={styles.changesTitle}>What changed</h3>
+                  <ul className={styles.changes}>
+                    {g.changes.map((c) => <li key={c.date + c.text}><time dateTime={c.date}>{date(c.date)}</time>: {c.text}</li>)}
+                  </ul>
+                </>
+              )}
               {promote && <p className={styles.disclaimer}>This guide is general information, not medical or financial advice. If you feel exhausted most days, low for more than two weeks, or unsafe, talk to a doctor or a licensed therapist. Read <Link href={EDITORIAL_PATH}>how we write and check our guides</Link>.</p>}
             </section>
           )}
+
+          {promote && <ArticleActions slug={g.slug} title={g.title} url={url} />}
 
           <aside className={styles.author} aria-label="About the author">
             {author.photo && <div className={styles.authorPhoto}><Image src={author.photo} alt={author.name} fill sizes="96px" /></div>}
@@ -230,6 +248,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
               <p className={styles.authorName}>{author.name}</p>
               <p className={styles.authorRole}>{author.role}</p>
               <p className={styles.authorBio}>{author.bio}</p>
+              <Link href={authorHref(author.name)} className={styles.authorLink} style={{ marginRight: 20 }}>All by {author.name.split(" ")[0]} →</Link>
               {isFounder && storyLink && <Link href={storyLink.href} className={styles.authorLink} style={{ marginRight: 20 }}>{storyLink.label} →</Link>}
               {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink} style={promote ? { marginRight: 20 } : undefined}>LinkedIn ↗</a>}
               {promote && <Link href={EDITORIAL_PATH} className={styles.authorLink}>How we write guides</Link>}

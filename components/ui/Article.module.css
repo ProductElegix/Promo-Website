@@ -18,6 +18,7 @@
 .body h2 { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; }
 .body p, .body li { font-size: 1.06rem; line-height: 1.7; color: var(--ink-2); }
 .body a { color: var(--green); text-underline-offset: 3px; }
+.body a:hover { text-decoration-thickness: 2px; }
 .body strong { color: var(--ink); font-weight: 500; }
 
 .list { display: grid; gap: 10px; padding-left: 22px; list-style: disc; }
@@ -130,3 +131,23 @@
 @media (max-width: 560px) { .author { grid-template-columns: 1fr; } }
 .midForm p { font-size: var(--fs-xs) !important; line-height: 1.45 !important; text-align: left !important; }
 .midForm a { color: inherit !important; }
+
+/* link icon beside each section heading, shown on hover or focus */
+.body h2 { position: relative; }
+.anchor { margin-left: 10px; font-weight: 400; color: var(--muted) !important; text-decoration: none; opacity: 0; transition: opacity .2s; }
+.body h2:hover .anchor, .anchor:focus-visible { opacity: 1; }
+@media (hover: none) { .anchor { display: none; } }
+
+/* "Was this helpful?" and share buttons at the end of a guide */
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.helpful, .share { display: grid; gap: 12px; align-content: start; background: var(--paper); border-radius: var(--radius-l); padding: clamp(18px, 2.4vw, 24px); }
+.helpful > p, .share > p { font-size: var(--fs-body) !important; font-weight: 500; color: var(--ink) !important; }
+.actionRow { display: flex; flex-wrap: wrap; gap: 8px; }
+.actionBtn { display: inline-flex; align-items: center; min-height: 38px; padding: 8px 14px; border: 0; border-radius: 999px; background: var(--cream); color: var(--ink) !important; font: 500 var(--fs-small) var(--font-sans); text-decoration: none !important; cursor: pointer; transition: background .2s; }
+.actionBtn:hover { background: var(--cream-2); }
+.actionBtn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (max-width: 720px) { .actions { grid-template-columns: 1fr; } }
+.changesTitle { font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-top: 8px; }
+.changes { display: grid; gap: 6px; padding-left: 20px; list-style: disc; }
+.changes li { font-size: 0.95rem !important; }
+.changes time { color: var(--ink); font-weight: 500; }

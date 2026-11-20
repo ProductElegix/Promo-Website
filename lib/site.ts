@@ -20,7 +20,7 @@ export function founderPerson(f: { name: string; role: string; profiles: string[
     "@type": "Person",
     "@id": FOUNDER_ID,
     name: f.name,
-    url: `${SITE_URL}/about#story`,
+    url: `${SITE_URL}/authors/${f.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
     ...(f.media.src ? { image: `${SITE_URL}${f.media.src}` } : {}),
     jobTitle: f.role,
     worksFor: { "@id": `${SITE_URL}/#organization` },

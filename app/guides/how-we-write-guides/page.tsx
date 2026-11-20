@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FOOTER, TRUST } from "@/lib/content";
 import { OG_IMAGE } from "@/lib/site";
+import { authorHref } from "@/lib/authors";
 import { Breadcrumbs } from "@/components/ui/JsonLd";
 import styles from "@/components/ui/Article.module.css";
 
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 const SECTIONS: { h2: string; body: React.ReactNode }[] = [
   {
     h2: "Who writes the guides",
-    body: <p>Every guide is written by <Link href="/about#story">{TRUST.founder.name}</Link>, founder of Elegix. {TRUST.founder.experience} The byline on each guide says who wrote it and when it was last updated.</p>,
+    body: <p>Every guide is written by <Link href={authorHref(TRUST.founder.name)}>{TRUST.founder.name}</Link>, founder of Elegix. {TRUST.founder.experience} The byline on each guide says who wrote it and when it was last updated.</p>,
   },
   {
     h2: "What we write about",
@@ -69,8 +70,8 @@ export default function HowWeWriteGuides() {
           <h1 id="article-title" className={`display ${styles.title}`}>{TITLE}</h1>
           <p className={styles.lede}>The guides on this site are meant to be useful, honest and easy to check. Here is how we write them.</p>
         </header>
-        <div className={`container ${styles.layout}`} style={{ marginTop: "clamp(32px, 5vw, 56px)" }}>
-          <div className={styles.body} style={{ gridColumn: "1 / -1" }}>
+        <div className={`container ${styles.head}`} style={{ marginTop: "clamp(32px, 5vw, 56px)", display: "block" }}>
+          <div className={styles.body}>
             {SECTIONS.map((s) => (
               <section key={s.h2}>
                 <h2>{s.h2}</h2>

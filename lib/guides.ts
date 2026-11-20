@@ -28,7 +28,11 @@ export type GuideExtra = {
   faq?: { q: string; a: string }[];
   /** date of the last real update to the page, shown as "Updated" */
   updated?: string;
+  /** what changed in each real update, newest first; shown as "What changed" at the end of the page */
+  changes?: Change[];
 };
+
+export type Change = { date: string; text: string };
 
 export type Guide = {
   slug: string;
@@ -52,6 +56,8 @@ export type Guide = {
   faq?: { q: string; a: string }[];
   /** slugs of guides to link at the end */
   related: string[];
+  /** what changed in each real update (from lib/guide-extras), newest first */
+  changes?: Change[];
   cta: { title: string; text: string };
 };
 
@@ -1026,7 +1032,7 @@ function withExtras<T extends Guide | AreaGuide>(g: T): T {
   }
   const faq = [...(g.faq ?? []), ...(extra.faq ?? [])];
   const minutes = Math.max(g.minutes, Math.round(wordCount({ lede: g.lede, sections, faq }) / 230));
-  return { ...g, sections, faq, minutes, updated: extra.updated ?? g.updated };
+  return { ...g, sections, faq, minutes, updated: extra.updated ?? g.updated, ...(extra.changes ? { changes: extra.changes } : {}) };
 }
 
 export const GUIDES: Guide[] = BASE_GUIDES.map(withExtras);
@@ -1073,3 +1079,15 @@ export function relatedTo(g: Guide, count = 3): (Guide | AreaGuide)[] {
 
 /** Guides about one life area, for that area's page and the hub filter. */
 export const guidesForArea = (key: AreaKey) => GUIDES.filter((g) => g.areas.includes(key));
+
+/** Headline of the waitlist box in the middle of a guide, matched to its main life area. */
+const MID_CTA: Record<AreaKey | "all", string> = {
+  all: "See all 6 areas of your life in one place",
+  health: "Notice when sleep and energy start to slip",
+  people: "Keep the people who matter on your radar",
+  career: "Keep work from eating the other 5 areas",
+  hobby: "Make room for rest, and see if you take it",
+  meaning: "Check in with what matters, every week",
+  growth: "Track the growth you keep postponing",
+};
+export const midCtaTitle = (g: { areas: AreaKey[] }) => MID_CTA[g.areas[0] ?? "all"];
