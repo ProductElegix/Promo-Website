@@ -59,7 +59,7 @@ export function AreasList() {
             <div className={`glass ${styles.note}`}>
               <Pill area={active} strong />
               <p>{AREAS[active].neglect}</p>
-              <Link href={areaGuideHref(active)} className={styles.more}>How to balance {AREAS[active].name.toLowerCase()} →</Link>
+              <Link href={areaGuideHref(active)} className={styles.more}>How to balance {AREAS[active].name.toLowerCase()}</Link>
             </div>
           </div>
         </div>

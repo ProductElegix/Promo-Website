@@ -57,7 +57,7 @@ export default function About() {
                 </div>
                 <h3>{AREAS[a].name}</h3>
                 <p>{AREAS[a].description}</p>
-                <Link href={areaGuideHref(a)} className={styles.areaLink}>Read the guide<span className="visually-hidden"> to {AREAS[a].name}</span> →</Link>
+                <Link href={areaGuideHref(a)} className={styles.areaLink}>Read the guide<span className="visually-hidden"> to {AREAS[a].name}</span></Link>
               </li>
             ))}
           </ul>
@@ -183,8 +183,8 @@ export default function About() {
                   if (!story && !m.linkedin) return null;
                   return (
                     <div className={styles.memberLinks}>
-                      {story && <Link href={storyHref(story)} className={styles.memberLink}>Read story<span className="visually-hidden"> by {m.name}</span> →</Link>}
-                      {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener" className={styles.memberLink}>LinkedIn ↗</a>}
+                      {story && <Link href={storyHref(story)} className={styles.memberLink}>Read story<span className="visually-hidden"> by {m.name}</span></Link>}
+                      {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener" className={styles.memberLink}>LinkedIn</a>}
                     </div>
                   );
                 })()}

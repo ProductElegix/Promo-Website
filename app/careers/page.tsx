@@ -87,7 +87,7 @@ export default function Careers() {
             <p className="lede">{C.open.text}</p>
             <div className={styles.actions}>
               <a href={mail} className="btn lime">{C.open.button}</a>
-              <Link href={C.open.team.href} className={styles.team}>{C.open.team.label} →</Link>
+              <Link href={C.open.team.href} className={styles.team}>{C.open.team.label}</Link>
             </div>
           </div>
         </div>

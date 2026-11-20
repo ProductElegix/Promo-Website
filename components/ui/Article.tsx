@@ -257,9 +257,9 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
               <p className={styles.authorName}>{author.name}</p>
               <p className={styles.authorRole}>{author.role}</p>
               <p className={styles.authorBio}>{author.bio}</p>
-              <Link href={authorHref(author.name)} className={styles.authorLink} style={{ marginRight: 20 }}>All by {author.name.split(" ")[0]} →</Link>
-              {isFounder && storyLink && <Link href={storyLink.href} className={styles.authorLink} style={{ marginRight: 20 }}>{storyLink.label} →</Link>}
-              {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn ↗</a>}
+              <Link href={authorHref(author.name)} className={styles.authorLink} style={{ marginRight: 20 }}>All by {author.name.split(" ")[0]}</Link>
+              {isFounder && storyLink && <Link href={storyLink.href} className={styles.authorLink} style={{ marginRight: 20 }}>{storyLink.label}</Link>}
+              {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </aside>
           </div>

@@ -108,7 +108,7 @@ export function GuideFilter({ guides, areaPages }: Props) {
           <Link href={banner.href} className={styles.areaBanner} style={areaVars(banner.area)}>
             <span className={styles.areaBannerIcon}><AreaIcon area={banner.area} /></span>
             <span className={styles.areaBannerText}><strong>{AREAS[banner.area].short}: the area overview</strong><span>{AREAS[banner.area].description} Signs it&apos;s slipping and habits that bring it back.</span></span>
-            <span className={styles.areaBannerGo}>Open →</span>
+            <span className={styles.areaBannerGo}>Open</span>
           </Link>
         )}
         {cards.length ? <GuideCards cards={cards} rows /> : <p className={styles.empty}>{!q && banner ? `Guides about ${AREAS[banner.area].short.toLowerCase()} are on the way. Start with the area overview above.` : "Nothing found. Try another word, or pick a life area on the left."}</p>}

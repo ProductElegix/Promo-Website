@@ -30,12 +30,12 @@ export default async function AreaPage({ params }: Props) {
     <section className={`container ${styles.areaHub}`} aria-labelledby="area-guides-title">
       <div className={styles.areaHubHead}>
         <h2 id="area-guides-title" className={styles.areaHubTitle}>Guides about {name.toLowerCase()} <span>{guides.length}</span></h2>
-        <a href="#article-body" className={styles.areaHubSkip}>Read the {name.toLowerCase()} overview ↓</a>
+        <a href="#article-body" className={styles.areaHubSkip}>Read the {name.toLowerCase()} overview</a>
       </div>
       {guides.length
         ? <GuideCards rows cards={guides.map((o) => ({ href: guideHref(o), title: o.title, text: o.description, media: o.media, meta: cardMeta(o), areas: areasOf(o) }))} />
         : <p className={styles.empty}>Guides about {name.toLowerCase()} are on the way. Until then, the overview below covers the basics.</p>}
-      {whole > 0 && <p className={styles.areaHubMore}><Link href="/guides?area=whole">{whole} more guides look at all 6 areas together →</Link></p>}
+      {whole > 0 && <p className={styles.areaHubMore}><Link href="/guides?area=whole">{whole} more guides look at all 6 areas together</Link></p>}
     </section>
   );
   return <Article guide={g} path={`/life-areas/${g.slug}`} parent={{ name: "Life areas", path: "/life-areas" }} related={related} promote midTitle={midCtaTitle(g)} hub={hub} />;

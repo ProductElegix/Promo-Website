@@ -78,7 +78,7 @@ export function HowItWorks({ learnMore = true, chips = true }: { learnMore?: boo
             );
           })}
         </ol>
-        {learnMore && <p className={styles.more} data-reveal><Link href={HOW.more.href}>{HOW.more.label} →</Link></p>}
+        {learnMore && <p className={styles.more} data-reveal><Link href={HOW.more.href}>{HOW.more.label}</Link></p>}
       </div>
     </section>
   );

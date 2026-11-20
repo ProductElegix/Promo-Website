@@ -56,7 +56,7 @@ export default async function AuthorPage({ params }: Props) {
               <h1 id="author-title" className={styles.authorName} style={{ fontSize: 28 }}>{a.name}</h1>
               <p className={styles.authorRole}>{a.role}</p>
               <p className={styles.authorBio}>{a.bio}</p>
-              {a.linkedin && <a href={a.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn ↗</a>}
+              {a.linkedin && <a href={a.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </div>
         </header>
