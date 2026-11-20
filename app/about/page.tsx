@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ABOUT_PAGE as A, AREAS, AREAS_SECTION, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
+import { ABOUT_PAGE as A, APP, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST } from "@/lib/content";
 import { AreaIcon } from "@/components/ui/AreaIcon";
-import { Pill, areaVars } from "@/components/ui/Pill";
+import { WordCycle } from "./WordCycle";
+import { areaVars } from "@/components/ui/Pill";
 import { Wheel } from "@/components/ui/Wheel";
-import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Phone } from "@/components/ui/Phone";
 import { Faq } from "@/components/sections/Faq";
 import { Avatar } from "@/components/ui/Avatar";
 import { Rich } from "@/components/ui/Rich";
+import { Media } from "@/components/ui/Media";
 import { Join } from "@/components/sections/Join";
 import { StatementSection, StatementStrip } from "@/components/sections/Opening";
 import { Principles } from "@/components/sections/Trust";
@@ -28,128 +30,28 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
-  const photo = TRUST.founder.media;
   return (
     <main>
       <Breadcrumbs name="About" path="/about" />
-      {/* 1. Hero: what Elegix is and the mission */}
+      {/* 1. Hero: what Elegix is and who is behind it */}
       <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede}>
         <a href="#join" className="btn lime">{A.hero.cta}</a>
+        <p className={styles.who}>{A.hero.who}</p>
       </PhotoHero>
-      {/* 1b. Mission, revealed word by word, with the photo strip (same as the home page) */}
+
+      {/* 2. Mission, revealed word by word, with the photo strip */}
       <StatementSection>
         <StatementStrip label={A.hero.mission.label} text={A.hero.mission.text} photos={A.hero.strip} />
       </StatementSection>
-      {/* 2. The 6 areas */}
-      <section className="section" aria-labelledby="areas-title">
-        <div className="container">
-          <div className={`section-head ${styles.center}`} data-reveal>
-            <span className="label">{A.areas.label}</span>
-            <h2 id="areas-title" className="display h2"><Rich text={A.areas.title} /></h2>
-            <p className="lede">{A.areas.lede}</p>
-          </div>
-          <ul className={styles.areas}>
-            {AREA_ORDER.map((a) => (
-              <li key={a} className={styles.area} style={areaVars(a)} data-reveal>
-                <div className={styles.areaPhoto}>
-                  <Image src={AREAS_SECTION.media[a].src!} alt={AREAS_SECTION.media[a].alt} fill sizes="(max-width: 860px) 100vw, 33vw" />
-                  <span className={styles.areaIcon} aria-hidden="true"><AreaIcon area={a} /></span>
-                </div>
-                <h3>{AREAS[a].name}</h3>
-                <p>{AREAS[a].description}</p>
-                <Link href={areaGuideHref(a)} className={styles.areaLink}>Read the guide<span className="visually-hidden"> to {AREAS[a].name}</span></Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
 
-      {/* 3. How it works (same cards as the home page) */}
-      <HowItWorks learnMore={false} chips={false} />
-
-      {/* 4. Who it's for */}
-      <section className={`section on-dark ${styles.dark}`} aria-labelledby="audience-title">
-        <div className="container">
-          <div className={`section-head ${styles.center}`} data-reveal>
-            <span className="label">{A.audience.label}</span>
-            <h2 id="audience-title" className="display h2"><Rich text={A.audience.title} /></h2>
-            <p className="lede">{A.audience.lede}</p>
-          </div>
-          <ul className={styles.audience}>
-            {A.audience.items.map((a, i) => (
-              <li key={a.title} className={styles.audienceCard} data-reveal>
-                <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
-                <h3>{a.title}</h3>
-                <p>{a.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* 5. The rhythm */}
-      <section className="section" aria-labelledby="modes-title">
-        <div className="container">
-          <div className={`section-head ${styles.center}`} data-reveal>
-            <span className="label">{A.modes.label}</span>
-            <h2 id="modes-title" className="display h2"><Rich text={A.modes.title} /></h2>
-            <p className="lede">{A.modes.lede}</p>
-          </div>
-          <div className={styles.modes}>
-            {A.modes.items.map((m, i) => (
-              <div key={m.title} className={`${styles.mode} ${i === 0 ? styles.modeDark : ""}`} data-reveal>
-                <div className={styles.modeHead}><h3>{m.title}</h3><span className={styles.time}>{m.time}</span></div>
-                <ul>{m.points.map((p) => <li key={p}><span className={styles.tick} aria-hidden="true">✓</span>{p}</li>)}</ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. The idea behind it */}
-      <section className={`section ${styles.ideaSection}`} aria-labelledby="idea-title">
-        <div className={`container ${styles.idea}`}>
-          <div className={styles.ideaVisual} data-reveal>
-            <div className={styles.wheel}><Wheel scores={[7, 6, 5, 6, 7, 8]} size={280} label="A wheel of life with 6 areas" /></div>
-            <ul className={styles.chips}>{AREA_ORDER.map((a) => <li key={a}><Pill area={a} strong /></li>)}</ul>
-          </div>
-          <div className={styles.ideaText} data-reveal>
-            <span className="label">{A.idea.label}</span>
-            <h2 id="idea-title" className="display h2"><Rich text={A.idea.title} /></h2>
-            <p className={styles.ideaP}>{A.idea.text}</p>
-            <ul className={styles.points}>{A.idea.points.map((p) => <li key={p}><span className={styles.tick} aria-hidden="true">✓</span>{p}</li>)}</ul>
-          </div>
-        </div>
-      </section>
-
-
-      {/* 7. Pricing */}
-      <section className={`section ${styles.pricingSection}`} aria-labelledby="pricing-title">
-        <div className="container">
-          <div className={styles.pricing} data-reveal>
-            <span className="label">{A.pricing.label}</span>
-            <h2 id="pricing-title" className="display h2"><Rich text={A.pricing.title} /></h2>
-            <p className="lede">{A.pricing.text}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* 7b. Why the name */}
-      <section className={`section ${styles.pricingSection}`} aria-labelledby="name-title">
-        <div className="container">
-          <div className={styles.pricing} data-reveal>
-            <span className="label">{A.name.label}</span>
-            <h2 id="name-title" className="display h2">{A.name.title}</h2>
-            <p className="lede">{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. Our story */}
+      {/* 3. The founder story: why it exists */}
       <section id={A.story.id} className="section" aria-labelledby="story-title" style={{ scrollMarginTop: "var(--header-h)" }}>
         <div className={`container ${styles.story}`}>
           <div className={styles.storyAside} data-reveal>
-            {photo.src && <div className={styles.photo}><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 860px) 100vw, 420px" /></div>}
+            <div className={`on-dark ${styles.stat}`}>
+              <b className={styles.statValue}><span data-count={A.storyStat.value}>{A.storyStat.value}</span>{A.storyStat.unit}</b>
+              <p>{A.storyStat.caption}</p>
+            </div>
             <p className={styles.founder}><b>{TRUST.founder.name}</b>, {TRUST.founder.role}</p>
           </div>
           <div className={styles.storyBody}>
@@ -160,24 +62,108 @@ export default function About() {
               if (b.type === "quote") return <blockquote key={i} className={styles.quote} data-reveal>{b.text}</blockquote>;
               return <p key={i} className={b.type === "lead" ? styles.lead : undefined} data-reveal>{b.text}</p>;
             })}
-            <p className={styles.sign}>— {STORY.signature}</p>
+            <p className={styles.sign}>{STORY.signature}</p>
             <Link href={STORY.more.href} className={`btn ${styles.storyMore}`} data-reveal>{STORY.more.label}</Link>
           </div>
         </div>
       </section>
 
-      {/* 9. Team */}
-      <section id="team" className={`section ${styles.teamSection}`} aria-labelledby="team-title" style={{ scrollMarginTop: "var(--header-h)" }}>
+      {/* 4. How it works: the wheel and its 6 areas, three steps, the weekly and monthly rhythm, the app */}
+      <section id="how" className={`section ${styles.howSection}`} aria-labelledby="how-title">
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{A.how.label}</span>
+            <h2 id="how-title" className="display h2"><Rich text={A.how.title} /></h2>
+            <p className="lede">{A.how.lede}</p>
+          </div>
+          <div className={styles.how}>
+            <div className={styles.howWheel} data-reveal>
+              <div className={styles.wheel}><Wheel scores={[7, 6, 5, 6, 7, 8]} size={260} label="A wheel of life with 6 areas" /></div>
+              <p className={styles.howAreasLabel}>{A.how.areasLabel}</p>
+              <ul className={styles.howAreas}>
+                {AREA_ORDER.map((a) => (
+                  <li key={a}><Link href={areaGuideHref(a)} style={areaVars(a)}><AreaIcon area={a} />{AREAS[a].short}</Link></li>
+                ))}
+              </ul>
+            </div>
+            <ol className={styles.steps}>
+              {A.how.steps.map((st, i) => (
+                <li key={st.title} className={styles.step} data-reveal>
+                  <span className={`num ${styles.stepN}`}>{String(i + 1).padStart(2, "0")}</span>
+                  <div><h3>{st.title}</h3><p>{st.text}</p></div>
+                </li>
+              ))}
+              <li className={styles.rhythm} data-reveal>
+                {A.how.rhythm.map((r) => (
+                  <div key={r.title} className={styles.rhythmItem}>
+                    <b>{r.time}</b><span>{r.title}</span><small>{r.text}</small>
+                  </div>
+                ))}
+              </li>
+            </ol>
+            <div className={styles.howPhone} data-reveal><Phone screen={APP.screens[1].media} /></div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Who it's for */}
+      <section className="section" aria-labelledby="audience-title" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{A.audience.label}</span>
+            <h2 id="audience-title" className="display h2"><Rich text={A.audience.title} /></h2>
+            <p className="lede">{A.audience.lede}</p>
+          </div>
+          <ul className={styles.audience}>
+            {A.audience.items.map((a) => (
+              <li key={a.title} className={styles.audienceCard} data-reveal>
+                <div className={`zoom ${styles.audiencePhoto}`}>
+                  <Image src={a.src} alt={a.alt} fill sizes="(max-width: 860px) 100vw, 33vw" />
+                  <blockquote className={styles.audienceQuote}>{a.quote}</blockquote>
+                </div>
+                <h3>{a.title}</h3>
+                <p>{a.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 6. Where we are: the road to launch */}
+      <section className={`section on-dark ${styles.dark}`} aria-labelledby="stage-title">
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{A.stage.label}</span>
+            <h2 id="stage-title" className="display h2"><Rich text={A.stage.title} /></h2>
+            <p className="lede">{A.stage.lede}</p>
+          </div>
+          <ol className={styles.timeline} data-timeline>
+            <span className={styles.timelineTrack} aria-hidden="true"><span className={styles.timelineFill} data-timeline-fill style={{ ["--done" as string]: `${(A.stage.steps.findIndex((x) => x.current) + 0.5) / A.stage.steps.length}` }} /></span>
+            {A.stage.steps.map((st) => (
+              <li key={st.title} className={`${styles.milestone} ${st.current ? styles.current : ""}`} data-milestone aria-current={st.current ? "step" : undefined}>
+                <span className={styles.dot} aria-hidden="true" />
+                {st.current && <span className={styles.now}>{A.stage.now}</span>}
+                <h3>{st.title}</h3>
+                <p>{st.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 7. Team */}
+      <section id="team" className="section" aria-labelledby="team-title" style={{ scrollMarginTop: "var(--header-h)" }}>
         <div className="container">
           <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{TEAM.label}</span>
             <h2 id="team-title" className="display h2"><Rich text={TEAM.title} /></h2>
+            <ul className={styles.teamFacts}>{A.teamFacts.map((f) => <li key={f}>{f}</li>)}</ul>
           </div>
           <ul className={styles.team}>
             {TEAM.members.map((m) => (
               <li key={m.name} className={styles.member} data-reveal>
                 <Avatar name={m.name} photo={m.photo} size={420} className={styles.memberPhoto} />
-                <div><h3>{m.name}</h3><p>{m.role}</p></div>
+                <div><h3>{m.name}</h3><p>{m.role}</p>{m.bio && <p className={styles.memberBio}>{m.bio}</p>}</div>
                 {(() => {
                   const story = storyByPerson(m.name);
                   if (!story && !m.linkedin) return null;
@@ -194,7 +180,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 10. What we believe */}
+      {/* 8. What we believe */}
       <section className={`section ${styles.beliefsSection}`} aria-labelledby="beliefs-title">
         <div className="container">
           <div className={`section-head ${styles.center}`} data-reveal>
@@ -209,8 +195,34 @@ export default function About() {
         </div>
       </section>
 
-      {/* 11. FAQ */}
-      <Faq only={A.faq} />
+      {/* 9. Pricing over a full-bleed photo */}
+      <section className={`on-dark ${styles.pf}`} data-theme="dark" aria-labelledby="pricing-title">
+        <div className={styles.pfStage}>
+          <div className={styles.pfPhoto} data-parallax data-scale-in><Media media={A.photo} fill sizes="100vw" /></div>
+          <div className={`container ${styles.pfInner}`} data-reveal>
+            <span className="label">{A.pricing.label}</span>
+            <h2 id="pricing-title" className={`display h2 ${styles.pfTitle}`}><Rich text={A.pricing.title} /></h2>
+            <p className={styles.pfText}>{A.pricing.text}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Why the name: "choose" in other languages, landing on elegix */}
+      <section className={`section ${styles.nameSection}`} aria-labelledby="name-title">
+        <div className={`container ${styles.name}`}>
+          <span className="label" data-reveal>{A.name.label}</span>
+          <h2 id="name-title" className="visually-hidden">{A.name.title}</h2>
+          <p className={styles.nameLine} data-reveal>
+            <WordCycle words={A.name.words} />
+            <span className={styles.nameEq} aria-hidden="true">=</span>
+            <span className={styles.nameMeaning} aria-hidden="true">{A.name.meaning}</span>
+          </p>
+          <p className={styles.nameText} data-reveal>{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
+        </div>
+      </section>
+
+      {/* 11. Questions about the company */}
+      <Faq items={A.faq.items} title={A.faq.title} />
 
       {/* 12. Early access (same block as the home page) */}
       <Join />

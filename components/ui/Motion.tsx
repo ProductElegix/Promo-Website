@@ -16,6 +16,8 @@ import { usePathname } from "next/navigation";
  * - svg[data-wheel] path: wheel-of-life segments draw in from the centre
  * - [data-split-words]: words light up one after another as the paragraph scrolls through the screen
  * - [data-strip]: the photo strip opens up from behind the middle photo while scrolling
+ * - [data-count]: a number counts up from 0 when it scrolls into view
+ * - [data-timeline-fill]: the road to launch fills up to the current stage while scrolling; [data-milestone] steps fade in one by one
  * Content is fully visible without JavaScript and with prefers-reduced-motion; only transforms
  * and opacity are animated, so nothing shifts the layout.
  */
@@ -85,6 +87,20 @@ export function Motion() {
               { xPercent: (mid - i) * 55, scale: i === mid ? 0.9 : 0.8, opacity: i === mid ? 1 : 0.4 },
               { xPercent: 0, scale: 1, opacity: 1, ease: "none", scrollTrigger: { trigger: strip, start: "top 95%", end: "top 30%", scrub: 0.8 } }),
           );
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-count]").forEach((el) => {
+          const to = Number(el.dataset.count) || 0;
+          const n = { v: 0 };
+          gsap.to(n, { v: to, duration: 1.6, ease: "power2.out", onUpdate: () => { el.textContent = String(Math.round(n.v)); },
+            scrollTrigger: { trigger: el, start: "top 85%", once: true } });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-timeline-fill]").forEach((el) => {
+          const vertical = el.parentElement!.offsetHeight > el.parentElement!.offsetWidth;
+          const list = el.closest("[data-timeline]") ?? el;
+          gsap.from(el, { [vertical ? "scaleY" : "scaleX"]: 0, ease: "none", scrollTrigger: { trigger: list, start: "top 80%", end: "bottom 55%", scrub: 0.6 } });
+          gsap.from(list.querySelectorAll("[data-milestone]"), { y: 24, opacity: 0, duration: 0.9, ease, stagger: 0.12, scrollTrigger: { trigger: list, start: "top 85%", once: true } });
         });
 
         gsap.utils.toArray<SVGSVGElement>("svg[data-wheel]").forEach((svg) => {
