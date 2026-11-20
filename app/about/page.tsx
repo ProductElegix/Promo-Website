@@ -16,6 +16,7 @@ import { PhotoHero } from "@/components/sections/PhotoHero";
 import { Breadcrumbs } from "@/components/ui/JsonLd";
 import { OG_IMAGE } from "@/lib/site";
 import { areaGuideHref } from "@/lib/guides";
+import { storyByPerson, storyHref } from "@/lib/stories";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
@@ -160,6 +161,7 @@ export default function About() {
               return <p key={i} className={b.type === "lead" ? styles.lead : undefined} data-reveal>{b.text}</p>;
             })}
             <p className={styles.sign}>— {STORY.signature}</p>
+            <Link href={STORY.more.href} className={`btn ${styles.storyMore}`} data-reveal>{STORY.more.label}</Link>
           </div>
         </div>
       </section>
@@ -176,7 +178,16 @@ export default function About() {
               <li key={m.name} className={styles.member} data-reveal>
                 <Avatar name={m.name} photo={m.photo} size={420} className={styles.memberPhoto} />
                 <div><h3>{m.name}</h3><p>{m.role}</p></div>
-                {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener" className={styles.memberLink}>LinkedIn ↗</a>}
+                {(() => {
+                  const story = storyByPerson(m.name);
+                  if (!story && !m.linkedin) return null;
+                  return (
+                    <div className={styles.memberLinks}>
+                      {story && <Link href={storyHref(story)} className={styles.memberLink}>Read story<span className="visually-hidden"> by {m.name}</span> →</Link>}
+                      {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener" className={styles.memberLink}>LinkedIn ↗</a>}
+                    </div>
+                  );
+                })()}
               </li>
             ))}
           </ul>
