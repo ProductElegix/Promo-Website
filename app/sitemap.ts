@@ -1,12 +1,14 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { AREA_GUIDES, GUIDES } from "@/lib/guides";
+import { STORIES, storyHref } from "@/lib/stories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    ...STORIES.map((s) => ({ url: `${SITE_URL}${storyHref(s)}`, lastModified: new Date(s.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${SITE_URL}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     ...GUIDES.map((g) => ({ url: `${SITE_URL}/guides/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${SITE_URL}/life-areas`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },

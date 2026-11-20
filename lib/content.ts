@@ -271,7 +271,7 @@ export const TRUST = {
   founder: {
     quote: "I tried every planner and habit tracker. Each fixed one piece, and none answered the bigger question: how do you build a balanced life without the process itself becoming overwhelming? Elegix is my answer.",
     fallback: "Questions, ideas or your own story with burnout? Write to me directly at hello@elegix.net. I read every message.",
-    storyLink: { href: "/about#story", label: "Read my story" },
+    storyLink: { href: "/stories/why-i-built-elegix", label: "Read my story" },
     name: "Edward Korytskyi",
     role: "Founder",
     /** Edward's personal profiles (LinkedIn first). They go into the Person schema as sameAs. */
@@ -397,21 +397,14 @@ export const STORY = {
   label: "Our story",
   title: "Why I created *Elegix*",
   blocks: [
-    { type: "lead", text: "Elegix began with a simple realization:" },
-    { type: "p", text: "Most people don't struggle because they lack ambition or motivation. They struggle because modern life has become increasingly complex and overwhelming." },
-    { type: "p", text: "I've experienced this firsthand." },
-    { type: "lines", lines: ["Too many goals.", "Too many responsibilities.", "An endless stream of notifications.", "Dozens of productivity tools.", "Constant pressure to do more, achieve more, improve faster, and somehow keep everything under control."] },
-    { type: "p", text: "I tried planners, habit trackers, calendars, note-taking apps, and countless productivity systems. Each one solved a specific problem, but none helped me solve the bigger one:" },
-    { type: "quote", text: "How do you build a balanced, intentional life without feeling overwhelmed by the very process of trying to improve it?" },
-    { type: "p", text: "Over time, I realized that people don't need another productivity app. They need a system that helps them stay connected to what truly matters." },
-    { type: "lines", lines: ["A system that makes their goals visible.", "That turns progress into something tangible.", "That helps build lasting habits.", "And supports personal growth without making life feel like an endless list of tasks."] },
-    { type: "p", text: "That realization became the foundation of Elegix." },
-    { type: "p", text: "I created Elegix to help people organize more than their schedules: the parts of life that truly matter. Health, relationships, inner calm, rest, personal growth and career, through daily habits and long-term goals." },
-    { type: "quote", text: "Our mission is simple: to help people build a life they're proud of, one small step at a time." },
-    { type: "lines", lines: ["I believe productivity should create freedom — not burnout.", "Planning should bring clarity — not stress.", "Personal growth should feel achievable — not overwhelming."] },
-    { type: "p", text: "Elegix isn't just another productivity app. It's a system that brings clarity, structure and balance into everyday life, and helps people become the person they want to become." },
+    { type: "lead", text: "At 20 I weighed 48 kilograms, about 106 pounds." },
+    { type: "p", text: "I was so afraid of not having at 20 what other people have at 60 that I worked 20 hours a day, once went 5 days without sleep, and nearly got their health instead." },
+    { type: "p", text: "What pulled me back was the opposite of doing more: I dropped the projects I didn't need, made myself the main project and deleted social media." },
+    { type: "quote", text: "You don't have to make it to everything, only to what's yours." },
+    { type: "p", text: "Elegix is the app I badly needed back then. It shows which of the 6 areas of your life is slipping, before it costs you what it cost me." },
   ] as ({ type: "lead" | "p" | "quote"; text: string } | { type: "lines"; lines: string[] })[],
   signature: "Edward Korytskyi, Founder",
+  more: { href: "/stories/why-i-built-elegix", label: "Read the full story" },
   cta: "Get early access",
 };
 

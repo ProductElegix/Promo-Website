@@ -1,4 +1,5 @@
 import { AREA_GUIDES, GUIDES } from "@/lib/guides";
+import { STORIES, storyHref } from "@/lib/stories";
 import { BRAND, META } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
@@ -19,6 +20,9 @@ export function GET() {
     "## Pages",
     line("/", "Home", "what Elegix does, the free Life Balance Check and the waitlist"),
     line("/about", "About", "the product, who it's for, pricing, the founder's story and the team"),
+    "",
+    "## Stories",
+    ...STORIES.map((s) => line(storyHref(s), s.title, s.description)),
     "",
     "## Guides",
     ...GUIDES.map((g) => line(`/guides/${g.slug}`, g.title, g.description)),
