@@ -68,7 +68,7 @@ export function Header() {
 
   const close = () => setOpen(false);
   /** pages that belong to a menu section without sitting under its path: free tools are part of Guides, stories of About */
-  const SECTION_OF: Record<string, string> = { "/tools": "/guides", "/stories": "/about", "/authors": "/about" };
+  const SECTION_OF: Record<string, string> = { "/tools": "/guides", "/authors": "/about" };
   const section = Object.entries(SECTION_OF).find(([p]) => pathname === p || pathname.startsWith(`${p}/`))?.[1];
   const isCurrent = (href: string) => (href.startsWith("/#") ? active === href : section === href || pathname === href || pathname.startsWith(`${href}/`));
   /** "Get early access": the signup form at the bottom of this page when there is one, the home page form otherwise */

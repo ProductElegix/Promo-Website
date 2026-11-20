@@ -44,7 +44,7 @@ export default async function AuthorPage({ params }: Props) {
     : { "@type": "Person", name: a.name, jobTitle: a.role, description: a.bio, url: `${SITE_URL}${path}`, ...(a.photo ? { image: `${SITE_URL}${a.photo}` } : {}), ...(a.linkedin ? { sameAs: [a.linkedin] } : {}) };
   return (
     <main>
-      <Breadcrumbs name={a.name} path={path} parents={[{ name: t.guides, path: langMeta(lang, "/guides").url }]} />
+      <Breadcrumbs name={a.name} path={path} parents={[{ name: t.about, path: langMeta(lang, "/about").url }]} />
       <JsonLd data={{
         "@context": "https://schema.org",
         "@type": "ProfilePage",
@@ -56,7 +56,7 @@ export default async function AuthorPage({ params }: Props) {
       <section className={`section ${styles.article}`} aria-labelledby="author-title">
         <header className={`container ${styles.head}`}>
           <nav aria-label={t.breadcrumb} className={styles.crumbs}>
-            <Link href="/">Elegix</Link><span aria-hidden="true">/</span><Link href="/guides">{t.guides}</Link>
+            <Link href="/">Elegix</Link><span aria-hidden="true">/</span><Link href="/about#team">{t.about}</Link>
           </nav>
           <div className={styles.author} style={{ width: "100%" }}>
             {a.photo && <div className={styles.authorPhoto}><Image src={a.photo} alt={a.name} fill sizes="96px" priority /></div>}
@@ -64,6 +64,7 @@ export default async function AuthorPage({ params }: Props) {
               <h1 id="author-title" className={styles.authorName} style={{ fontSize: 28 }}>{a.name}</h1>
               <p className={styles.authorRole}>{a.role}</p>
               <p className={styles.authorBio}>{a.bio}</p>
+              {a.story && <Link href={a.story} className="btn" style={{ marginTop: 16, marginRight: 16 }}>{t.readStory}</Link>}
               {a.linkedin && <a href={a.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </div>

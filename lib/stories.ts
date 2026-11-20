@@ -1,5 +1,5 @@
 /**
- * Personal stories (/stories/…): one long-form page per person on the team, in their own words.
+ * Personal stories (/about/stories/…): one long-form page per person on the team, in their own words.
  * Each one renders with the same Article layout as the guides and ends in the waitlist.
  *
  * To add someone's story: add an entry below with `person` matching their name in TEAM (lib/content.ts).
@@ -152,7 +152,7 @@ export const STORIES: Story[] = [
       {
         h2: "How I came to Elegix",
         blocks: [
-          { p: "Around then I met [Edward Korytskyi](/stories/why-i-built-elegix), the founder of Elegix. We talked a lot about his idea: about goals, priorities, and how easy it is to lose what matters among everyday tasks. I kept recognizing myself in those conversations." },
+          { p: "Around then I met [Edward Korytskyi](/about/stories/why-i-built-elegix), the founder of Elegix. We talked a lot about his idea: about goals, priorities, and how easy it is to lose what matters among everyday tasks. I kept recognizing myself in those conversations." },
           { p: "I realized I didn't just want to support the idea. I wanted to build this product together, the one I had needed so much myself." },
           { p: "That's how I joined Elegix as CMO and co-founder." },
           { p: "Elegix brings the 6 key areas of life into one system. It helps you see what you give your attention to, what you keep putting off, and where you're losing balance." },
@@ -179,4 +179,4 @@ export const STORIES: Story[] = [
 
 export const storyBySlug = (slug: string) => STORIES.find((s) => s.slug === slug);
 export const storyByPerson = (name: string) => STORIES.find((s) => s.person === name);
-export const storyHref = (s: Pick<Story, "slug">) => `/stories/${s.slug}`;
+export const storyHref = (s: Pick<Story, "slug">) => `/about/stories/${s.slug}`;
