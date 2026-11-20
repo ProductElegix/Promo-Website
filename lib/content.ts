@@ -342,7 +342,7 @@ export const FOOTER = {
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   name: "Elegix: Valencian for “choose”.",
   email: "hello@elegix.net",
-  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Get early access" }],
+  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/press", label: "Press" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Get early access" }],
   legal: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms" }],
   socials: SOCIALS,
   wordmark: "Elegix",
@@ -594,3 +594,92 @@ export const CAREERS = {
   },
 };
 
+
+/**
+ * /press: the press kit for journalists. Facts, descriptions and quotes here must stay true:
+ * no invented numbers (see brand-words/elegix-media-hooks "Чего не делать").
+ * Files live in public/press/ and public/images/; the ZIP is rebuilt by scripts/press-kit.mjs.
+ */
+export const PRESS = {
+  meta: { title: "Press kit · Elegix", description: "Elegix logos, team photos, app screenshots, key facts and ready-to-use descriptions for journalists. Free to use in stories about Elegix." },
+  label: "Press",
+  title: "Elegix *press kit*",
+  lede: "Logos, photos, facts and ready-made descriptions of Elegix. Use anything on this page in a story about us. Need an interview, a comment or something that isn't here? Write to us.",
+  download: { label: "Download press kit (ZIP)", href: "/press/elegix-press-kit.zip" },
+  contact: { label: "Contact the press team", email: "hello@elegix.net", subject: "Press enquiry" },
+  facts: {
+    label: "Key facts",
+    title: "Elegix in *one minute*",
+    items: [
+      { k: "What it is", v: "A life balance tracker app" },
+      { k: "What it does", v: "Shows which of 6 life areas is slipping, before it turns into burnout" },
+      { k: "Stage", v: "In development, waitlist open" },
+      { k: "Platforms", v: "iOS and Android" },
+      { k: "Pricing", v: "Free, with an optional Premium plan" },
+      { k: "Founder", v: "Edward Korytskyi" },
+      { k: "Team", v: "Lutsk, Ukraine" },
+      { k: "The name", v: "Valencian for “choose”" },
+    ],
+  },
+  about: {
+    label: "Descriptions",
+    title: "Describe us in *your length*",
+    lede: "Copy whichever fits your piece. They all say the same thing, just at different lengths.",
+    copy: "Copy",
+    copied: "Copied",
+    items: [
+      { label: "One line", text: "Elegix is a life balance tracker app that shows which of your 6 life areas is slipping, before it turns into burnout." },
+      { label: "About 50 words", text: "Elegix is a life balance tracker for ambitious people who want to grow at work without losing the rest of their life. It brings goals, habits and tasks together across 6 life areas and shows which one needs attention next. The name is Valencian for “choose”. Elegix is coming to iOS and Android." },
+      { label: "About 150 words", text: "Elegix is a life balance tracker for people who want to grow at work without losing the rest of their life. Most planners fix one piece: a to-do list, a habit streak, a goal. Elegix looks at the whole picture. It brings goals, habits and tasks together across 6 life areas: health, relationships, spirituality, leisure, personal growth, and finance and career. A one-minute weekly check-in and a 10-minute monthly review show what grew, what dropped and which area to focus on next, before a slipping area turns into burnout.\n\nThe name comes from Valencian and Western Catalan, where elegix means “choose”: a balanced life isn't something you find, it's something you choose, one week at a time. Elegix was founded by Edward Korytskyi and is built by a small team from Lutsk, Ukraine. The app is in development for iOS and Android, free to use with an optional Premium plan, and the waitlist is open at elegix.net." },
+    ],
+  },
+  logos: {
+    label: "Logo",
+    title: "Logo and *mark*",
+    lede: "Green on light backgrounds, white on dark ones. Please don't recolour, stretch or add effects to the logo.",
+    items: [
+      { name: "Logo, green", file: "elegix-logo-green", ground: "light" },
+      { name: "Logo, black", file: "elegix-logo-black", ground: "light" },
+      { name: "Logo, white", file: "elegix-logo-white", ground: "dark" },
+      { name: "Mark, green", file: "elegix-mark-green", ground: "light" },
+      { name: "Mark, black", file: "elegix-mark-black", ground: "light" },
+      { name: "Mark, white", file: "elegix-mark-white", ground: "dark" },
+    ] as { name: string; file: string; ground: "light" | "dark" }[],
+    colours: [{ name: "Elegix green", hex: "#009A44" }, { name: "Lime", hex: "#D5F45E" }, { name: "Ink", hex: "#111111" }, { name: "Paper", hex: "#F2F2F0" }],
+  },
+  photos: {
+    label: "Photos",
+    title: "Team and *app*",
+    lede: "Portraits of the co-founders and real screens from the app.",
+    download: "Download",
+    team: [
+      { name: "Edward Korytskyi", role: "Founder", src: "/images/founder.jpg" },
+      { name: "Alina Krupa", role: "CMO & Co-founder", src: "/images/alina-krupa.jpg" },
+      { name: "Maksym Zhuravskyi", role: "CTO & Co-founder", src: "/images/maksym-zhuravskyi.jpg" },
+      { name: "Yevhenii Bohomol", role: "Co-founder", src: "/images/yevhenii-bohomol.jpg" },
+    ],
+    screens: [
+      { name: "Home screen", src: "/images/app/home.jpg" },
+      { name: "Life Area screen", src: "/images/app/life-area.jpg" },
+    ],
+  },
+  quotes: {
+    label: "Quotes",
+    title: "In *their words*",
+    items: [
+      { text: "At 20 I worked 20 hours a day and nearly lost my health. Elegix is the app I badly needed back then.", name: "Edward Korytskyi", role: "Founder of Elegix" },
+      { text: "A balanced life isn't something you find. It's something you choose, one week at a time. That's why the app is called Elegix: it means “choose”.", name: "Edward Korytskyi", role: "Founder of Elegix" },
+      { text: "Years at C-level taught me to measure everything. Everything except my own life.", name: "Alina Krupa", role: "CMO and Co-founder of Elegix" },
+    ],
+  },
+  stories: {
+    label: "Background",
+    title: "The *stories* behind it",
+    links: [
+      { href: "/stories/why-i-built-elegix", label: "Edward's story: why he built Elegix" },
+      { href: "/stories/alina-krupa", label: "Alina's story: why she co-founded Elegix" },
+      { href: "/about", label: "About Elegix and the team" },
+    ],
+  },
+  cta: { title: "Writing about *balance or burnout*?", text: "We're happy to give a comment, share what we see in our free Life Balance Check, or set up an interview with the founders." },
+};
