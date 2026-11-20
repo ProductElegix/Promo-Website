@@ -9,10 +9,10 @@ export const DEFAULT_LANG: Lang = "en";
 export const isLang = (v: unknown): v is Lang => LANGS.includes(v as Lang);
 
 /**
- * The Ukrainian version is public (indexed, in the sitemap, offered in the language switch) only when
- * this is on. While the translation is in progress /uk pages exist but ask search engines to stay away.
+ * The Ukrainian version is public: indexed, in the sitemap, offered in the language switch.
+ * Set NEXT_PUBLIC_UK_PUBLIC=no to hide it again (the /uk pages stay, but ask search engines to stay away).
  */
-export const UK_PUBLIC = process.env.NEXT_PUBLIC_UK_PUBLIC === "yes";
+export const UK_PUBLIC = process.env.NEXT_PUBLIC_UK_PUBLIC !== "no";
 
 /** Paths that are files or API calls and never get a language prefix. */
 const isFileLike = (path: string) => path.startsWith("/api/") || /\.[a-z0-9]+$/i.test(path.split(/[?#]/)[0]);
