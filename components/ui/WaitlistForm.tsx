@@ -62,7 +62,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
   return (
     <div className={styles.wrap} data-clarity-mask="true">
       <form className={`${styles.form} ${styles[variant]}`} onSubmit={onSubmit} noValidate>
-        <label htmlFor={id} className="visually-hidden">Email</label>
+        <label htmlFor={id} className="visually-hidden">{t.yourEmail}</label>
         <input id={id} type="email" inputMode="email" autoComplete="email" placeholder={placeholder}
           value={email} onChange={(e) => setEmail(e.target.value)} required aria-describedby={`${id}-status`} />
         {/* honeypot for bots */}

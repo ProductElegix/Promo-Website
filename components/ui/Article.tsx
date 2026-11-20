@@ -16,7 +16,7 @@ import { authorHref } from "@/lib/authors";
 import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
 import { GuideTool } from "./GuideTool";
-import { Inline } from "./Inline";
+import { Inline, plainText } from "./Inline";
 import { Media } from "./Media";
 import { AreaTags } from "./AreaTags";
 import { Rich } from "./Rich";
@@ -163,7 +163,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
         <JsonLd data={{
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: g.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          mainEntity: g.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: plainText(f.a) } })),
         }} />
       )}
 
@@ -242,7 +242,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
                 {g.faq.map((f) => (
                   <details key={f.q}>
                     <summary>{f.q}<span className={styles.plus} aria-hidden="true" /></summary>
-                    <p>{f.a}</p>
+                    <p><Inline text={f.a} /></p>
                   </details>
                 ))}
               </div>

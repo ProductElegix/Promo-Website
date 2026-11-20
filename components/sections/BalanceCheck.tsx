@@ -96,7 +96,7 @@ export function BalanceCheck() {
                 ))}
               </fieldset>
               <div className={styles.submit}>
-                <label htmlFor="email-check" className="visually-hidden">Email</label>
+                <label htmlFor="email-check" className="visually-hidden">{t.yourEmail}</label>
                 <input id="email-check" type="email" inputMode="email" autoComplete="email" placeholder={t.yourEmail} value={email}
                   onChange={(e) => setEmail(e.target.value)} required aria-describedby="check-status" />
                 <input type="text" name="company" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />

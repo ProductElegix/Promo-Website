@@ -1,3 +1,4 @@
+import { Inline, plainText } from "@/components/ui/Inline";
 import type { Metadata } from "next";
 import { areasOf, cardMeta, guideHref, guidesOf } from "@/lib/guides";
 import { LIFE_AREAS_HUB } from "@/lib/life-areas-hub";
@@ -41,7 +42,7 @@ export default async function LifeAreas() {
       <JsonLd data={{
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        mainEntity: HUB.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        mainEntity: HUB.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: plainText(f.a) } })),
       }} />
       <section className={`section ${styles.hero}`} aria-labelledby="areas-title">
         <div className="container">
@@ -72,7 +73,7 @@ export default async function LifeAreas() {
                 {HUB.faq.map((f) => (
                   <details key={f.q}>
                     <summary>{f.q}<span className={article.plus} aria-hidden="true" /></summary>
-                    <p>{f.a}</p>
+                    <p><Inline text={f.a} /></p>
                   </details>
                 ))}
               </div>
