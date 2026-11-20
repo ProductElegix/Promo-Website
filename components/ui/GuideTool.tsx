@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { AREAS, AREA_ORDER, type AreaKey } from "@/lib/content";
+import { AREA_ORDER, type AreaKey } from "@/lib/content";
+import { localePath, type Lang } from "@/lib/i18n";
+import { ui } from "@/lib/ui";
+import { useContent, useLang } from "./Lang";
 import type { GuideToolName } from "@/lib/guides";
 import { Wheel } from "./Wheel";
 import styles from "./GuideTool.module.css";
@@ -14,12 +17,99 @@ export function GuideTool({ name }: { name: GuideToolName }) {
   return <WheelTemplate />;
 }
 
+const TEXT = {
+  en: {
+    wheelTitle: "Wheel of Life calculator",
+    wheelHint: "Rate each area from 1 to 10 for how satisfied you are with it right now. Your wheel updates as you go.",
+    wheelLabel: (avg: string) => `Your Wheel of Life: average ${avg} out of 10`,
+    average: "Average:", lowest: "Lowest area:", gap: "Biggest gap:",
+    points: (n: number) => `${n} points`, bumpy: ", a bumpy wheel", fairly: ", fairly even", even: ", perfectly even",
+    wheelNote: "Start with your lowest area: choose one small step for it this week. Your scores stay in your browser.",
+    signs: [
+      "I'm tired even after a full night's sleep",
+      "Sleep is the first thing I cut when I'm busy",
+      "I tend to get sick at the start of holidays",
+      "Exercise has quietly disappeared from my weeks",
+      "Everything feels urgent and nothing feels important",
+      "Small tasks feel heavy and sit for days",
+      "I feel cynical about work I used to care about",
+      "I can't switch off from work in the evening",
+      "Friends have stopped asking me to things",
+      "Hobbies have become “someday”",
+      "I'm short with the people closest to me",
+      "I numb out (scrolling, snacks, TV) instead of resting",
+    ],
+    few: "Few warning signs. Keep an eye on them with a short weekly check-in.",
+    several: "Several warning signs. Start with steps 1 and 2 below this week: make it visible and protect your sleep.",
+    many: "Many warning signs. Take this seriously: follow the steps below and talk to a doctor or a mental health professional.",
+    burnoutTitle: "Burnout self-check: 12 signs",
+    burnoutHint: "Tick each statement that has been true for you most weeks over the last month.",
+    of12: (n: number) => `${n} of 12.`,
+    burnoutNote: "This is a reflection tool, not a diagnosis. Your answers stay in your browser.",
+    hoursTitle: "Where do your 168 hours go?",
+    hoursHint: "Every week has 168 hours. Fill in your usual numbers to see what's really left for the rest of your life.",
+    work: "Work, including email after hours", commute: "Commute", sleep: "Sleep", admin: "Chores, errands and life admin",
+    hWeek: "h / week", hWorkday: "h / workday", hNight: "h / night",
+    free: (f: string) => `${f} free hours a week`,
+    perDay: (d: string) => `, about ${d} a day, for health, people, rest, growth and meaning.`,
+    split: (e: string) => ` Split evenly across those 5 areas, that's ${e} hours each.`,
+    hoursNote: "The question isn't whether you have time. It's which area of your life gets it. Your numbers stay in your browser.",
+    templateTitle: "Free printable Wheel of Life template",
+    templateHint: "A one-page PDF with the 6 areas of life, rings from 1 to 10 and a question for each area. Print it, colour in your scores and keep it to compare next month.",
+    download: "Download the PDF (A4)",
+  },
+  uk: {
+    wheelTitle: "Калькулятор колеса життя",
+    wheelHint: "Оціни кожну сферу від 1 до 10: наскільки ти задоволений нею зараз. Колесо оновлюється одразу.",
+    wheelLabel: (avg: string) => `Твоє колесо життя: у середньому ${avg} з 10`,
+    average: "Середнє:", lowest: "Найнижча сфера:", gap: "Найбільший розрив:",
+    points: (n: number) => `${n} ${ui("uk").pointsWord(n)}`, bumpy: ", колесо нерівне", fairly: ", досить рівно", even: ", ідеально рівно",
+    wheelNote: "Почни з найнижчої сфери: обери для неї один маленький крок на цей тиждень. Твої оцінки залишаються в браузері.",
+    signs: [
+      "Я втомлений навіть після повноцінного сну",
+      "Коли я зайнятий, першим скорочую сон",
+      "Я часто хворію на початку відпустки",
+      "Спорт непомітно зник із моїх тижнів",
+      "Усе здається терміновим і нічого важливим",
+      "Дрібні задачі здаються важкими й лежать днями",
+      "Я цинічно ставлюся до роботи, яка колись була мені важлива",
+      "Увечері я не можу відключитися від роботи",
+      "Друзі перестали кликати мене кудись",
+      "Хобі перетворилися на «колись»",
+      "Я різкий із найближчими людьми",
+      "Замість відпочинку я «вимикаюся» (стрічка, перекуси, серіали)",
+    ],
+    few: "Мало тривожних ознак. Стеж за ними за допомогою короткої щотижневої перевірки.",
+    several: "Кілька тривожних ознак. Почни цього тижня з кроків 1 і 2 нижче: зроби це видимим і захисти свій сон.",
+    many: "Багато тривожних ознак. Постався до цього серйозно: виконай кроки нижче й поговори з лікарем або фахівцем із ментального здоров’я.",
+    burnoutTitle: "Самоперевірка на вигорання: 12 ознак",
+    burnoutHint: "Познач кожне твердження, яке було правдою для тебе більшість тижнів за останній місяць.",
+    of12: (n: number) => `${n} з 12.`,
+    burnoutNote: "Це інструмент для рефлексії, а не діагноз. Твої відповіді залишаються в браузері.",
+    hoursTitle: "Куди йдуть твої 168 годин?",
+    hoursHint: "У кожному тижні 168 годин. Введи свої звичні цифри й подивись, скільки насправді лишається на решту життя.",
+    work: "Робота, разом із поштою після роботи", commute: "Дорога", sleep: "Сон", admin: "Побут, справи й дрібниці",
+    hWeek: "год / тиждень", hWorkday: "год / робочий день", hNight: "год / ніч",
+    free: (f: string) => `${f} вільних годин на тиждень`,
+    perDay: (d: string) => `, приблизно ${d} на день, на здоров’я, людей, відпочинок, розвиток і сенс.`,
+    split: (e: string) => ` Якщо розділити порівну між цими 5 сферами, це ${e} год на кожну.`,
+    hoursNote: "Питання не в тому, чи є в тебе час. А в тому, якій сфері життя він дістається. Твої цифри залишаються в браузері.",
+    templateTitle: "Безкоштовний шаблон колеса життя для друку",
+    templateHint: "PDF на одну сторінку з 6 сферами життя, кільцями від 1 до 10 і питанням для кожної сфери. Роздрукуй, зафарбуй свої оцінки й збережи, щоб порівняти наступного місяця.",
+    download: "Завантажити PDF (A4)",
+  },
+};
+const useText = () => TEXT[useLang()];
+
 const AREA_PAGE: Record<AreaKey, string> = {
   health: "/life-areas/health", people: "/life-areas/relationships", meaning: "/life-areas/spirituality",
   hobby: "/life-areas/leisure", growth: "/life-areas/personal-growth", career: "/life-areas/finance-and-career",
 };
 
 function WheelCalculator() {
+  const t = useText();
+  const lang = useLang();
+  const { AREAS } = useContent();
   const [scores, setScores] = useState<Record<AreaKey, number>>(() => Object.fromEntries(AREA_ORDER.map((a) => [a, 5])) as Record<AreaKey, number>);
   const values = AREA_ORDER.map((a) => scores[a]);
   const average = values.reduce((s, n) => s + n, 0) / values.length;
@@ -28,8 +118,8 @@ function WheelCalculator() {
   const gap = scores[highest] - scores[lowest];
   return (
     <figure className={styles.tool} aria-labelledby="wheel-calc-title">
-      <p id="wheel-calc-title" className={styles.title}>Wheel of Life calculator</p>
-      <p className={styles.hint}>Rate each area from 1 to 10 for how satisfied you are with it right now. Your wheel updates as you go.</p>
+      <p id="wheel-calc-title" className={styles.title}>{t.wheelTitle}</p>
+      <p className={styles.hint}>{t.wheelHint}</p>
       <div className={styles.split}>
         <div className={styles.sliders}>
           {AREA_ORDER.map((a) => (
@@ -41,44 +131,32 @@ function WheelCalculator() {
           ))}
         </div>
         <div className={styles.result}>
-          <Wheel scores={values} size={200} label={`Your Wheel of Life: average ${average.toFixed(1)} out of 10`} />
-          <p><b>Average:</b> {average.toFixed(1)} / 10</p>
-          <p><b>Lowest area:</b> <a href={AREA_PAGE[lowest]}>{AREAS[lowest].name}</a> ({scores[lowest]})</p>
-          <p><b>Biggest gap:</b> {gap} points{gap >= 4 ? ", a bumpy wheel" : gap > 0 ? ", fairly even" : ", perfectly even"}</p>
+          <Wheel scores={values} size={200} label={t.wheelLabel(average.toFixed(1))} />
+          <p><b>{t.average}</b> {average.toFixed(1)} / 10</p>
+          <p><b>{t.lowest}</b> <a href={localePath(lang as Lang, AREA_PAGE[lowest])}>{AREAS[lowest].name}</a> ({scores[lowest]})</p>
+          <p><b>{t.gap}</b> {t.points(gap)}{gap >= 4 ? t.bumpy : gap > 0 ? t.fairly : t.even}</p>
         </div>
       </div>
-      <figcaption className={styles.note}>Start with your lowest area: choose one small step for it this week. Your scores stay in your browser.</figcaption>
+      <figcaption className={styles.note}>{t.wheelNote}</figcaption>
     </figure>
   );
 }
 
-const BURNOUT_SIGNS = [
-  "I'm tired even after a full night's sleep",
-  "Sleep is the first thing I cut when I'm busy",
-  "I tend to get sick at the start of holidays",
-  "Exercise has quietly disappeared from my weeks",
-  "Everything feels urgent and nothing feels important",
-  "Small tasks feel heavy and sit for days",
-  "I feel cynical about work I used to care about",
-  "I can't switch off from work in the evening",
-  "Friends have stopped asking me to things",
-  "Hobbies have become “someday”",
-  "I'm short with the people closest to me",
-  "I numb out (scrolling, snacks, TV) instead of resting",
-];
 
 function BurnoutCheck() {
+  const t = useText();
+  const BURNOUT_SIGNS = t.signs;
   const [checked, setChecked] = useState<boolean[]>(() => BURNOUT_SIGNS.map(() => false));
   const count = checked.filter(Boolean).length;
   const band = count <= 3
-    ? "Few warning signs. Keep an eye on them with a short weekly check-in."
+    ? t.few
     : count <= 7
-      ? "Several warning signs. Start with steps 1 and 2 below this week: make it visible and protect your sleep."
-      : "Many warning signs. Take this seriously: follow the steps below and talk to a doctor or a mental health professional.";
+      ? t.several
+      : t.many;
   return (
     <figure className={styles.tool} aria-labelledby="burnout-check-title">
-      <p id="burnout-check-title" className={styles.title}>Burnout self-check: 12 signs</p>
-      <p className={styles.hint}>Tick each statement that has been true for you most weeks over the last month.</p>
+      <p id="burnout-check-title" className={styles.title}>{t.burnoutTitle}</p>
+      <p className={styles.hint}>{t.burnoutHint}</p>
       <ul className={styles.checks}>
         {BURNOUT_SIGNS.map((s, i) => (
           <li key={s}>
@@ -89,13 +167,14 @@ function BurnoutCheck() {
           </li>
         ))}
       </ul>
-      <p className={styles.score} role="status" aria-live="polite"><b>{count} of 12.</b> {band}</p>
-      <figcaption className={styles.note}>This is a reflection tool, not a diagnosis. Your answers stay in your browser.</figcaption>
+      <p className={styles.score} role="status" aria-live="polite"><b>{t.of12(count)}</b> {band}</p>
+      <figcaption className={styles.note}>{t.burnoutNote}</figcaption>
     </figure>
   );
 }
 
 function HoursCalculator() {
+  const t = useText();
   const [h, setH] = useState({ work: 45, commute: 1, sleep: 7.5, admin: 12 });
   const free = Math.max(0, 168 - h.work - h.commute * 5 - h.sleep * 7 - h.admin);
   const field = (key: keyof typeof h, label: string, unit: string, step = 1) => (
@@ -106,29 +185,30 @@ function HoursCalculator() {
   );
   return (
     <figure className={styles.tool} aria-labelledby="hours-calc-title">
-      <p id="hours-calc-title" className={styles.title}>Where do your 168 hours go?</p>
-      <p className={styles.hint}>Every week has 168 hours. Fill in your usual numbers to see what's really left for the rest of your life.</p>
+      <p id="hours-calc-title" className={styles.title}>{t.hoursTitle}</p>
+      <p className={styles.hint}>{t.hoursHint}</p>
       <div className={styles.fields}>
-        {field("work", "Work, including email after hours", "h / week")}
-        {field("commute", "Commute", "h / workday", 0.25)}
-        {field("sleep", "Sleep", "h / night", 0.5)}
-        {field("admin", "Chores, errands and life admin", "h / week")}
+        {field("work", t.work, t.hWeek)}
+        {field("commute", t.commute, t.hWorkday, 0.25)}
+        {field("sleep", t.sleep, t.hNight, 0.5)}
+        {field("admin", t.admin, t.hWeek)}
       </div>
       <p className={styles.score} role="status" aria-live="polite">
-        <b>{free.toFixed(1)} free hours a week</b>, about {(free / 7).toFixed(1)} a day, for health, people, rest, growth and meaning.
-        {free > 0 && <> Split evenly across those 5 areas, that's {(free / 5).toFixed(1)} hours each.</>}
+        <b>{t.free(free.toFixed(1))}</b>{t.perDay((free / 7).toFixed(1))}
+        {free > 0 && <>{t.split((free / 5).toFixed(1))}</>}
       </p>
-      <figcaption className={styles.note}>The question isn't whether you have time. It's which area of your life gets it. Your numbers stay in your browser.</figcaption>
+      <figcaption className={styles.note}>{t.hoursNote}</figcaption>
     </figure>
   );
 }
 
 function WheelTemplate() {
+  const t = useText();
   return (
     <figure className={styles.tool}>
-      <p className={styles.title}>Free printable Wheel of Life template</p>
-      <p className={styles.hint}>A one-page PDF with the 6 areas of life, rings from 1 to 10 and a question for each area. Print it, colour in your scores and keep it to compare next month.</p>
-      <a className={`btn ${styles.download}`} href="/downloads/wheel-of-life-template.pdf" download>Download the PDF (A4)</a>
+      <p className={styles.title}>{t.templateTitle}</p>
+      <p className={styles.hint}>{t.templateHint}</p>
+      <a className={`btn ${styles.download}`} href="/downloads/wheel-of-life-template.pdf" download>{t.download}</a>
     </figure>
   );
 }

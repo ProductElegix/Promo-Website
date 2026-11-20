@@ -9,6 +9,9 @@
  */
 import { AREAS, AREAS_SECTION, type AreaKey, type MediaSlot } from "@/lib/content";
 import { EXTRAS } from "@/lib/guide-extras";
+import { UK_GUIDES } from "@/lib/uk/guides";
+import { UK_EXTRAS } from "@/lib/uk/guide-extras";
+import type { Lang } from "@/lib/i18n";
 
 export type Block =
   | { p: string }
@@ -59,6 +62,14 @@ export type Guide = {
   /** what changed in each real update (from lib/guide-extras), newest first */
   changes?: Change[];
   cta: { title: string; text: string };
+};
+
+/** The words of a guide or life area page, the part that changes between languages. */
+export type GuideText = Pick<Guide, "title" | "metaTitle" | "description" | "label" | "lede" | "sections" | "faq" | "cta"> & {
+  /** alt text of the page photo */
+  alt: string;
+  /** what changed in each update, in this language */
+  changes?: Change[];
 };
 
 export type Reviewer = { name: string; credentials: string; url?: string };
@@ -1017,8 +1028,8 @@ const wordCount = (g: Pick<Guide, "lede" | "sections" | "faq">) => {
 };
 
 /** Merges a page's extra sections and questions in, before the closing section about Elegix. */
-function withExtras<T extends Guide | AreaGuide>(g: T): T {
-  const extra = EXTRAS[g.slug];
+function withExtras<T extends Guide | AreaGuide>(g: T, extras: Record<string, GuideExtra> = EXTRAS): T {
+  const extra = extras[g.slug];
   if (!extra) return g;
   const last = g.sections.length - 1;
   const closes = last >= 0 && /elegix/i.test(JSON.stringify(g.sections[last]));
@@ -1035,8 +1046,22 @@ function withExtras<T extends Guide | AreaGuide>(g: T): T {
   return { ...g, sections, faq, minutes, updated: extra.updated ?? g.updated, ...(extra.changes ? { changes: extra.changes } : {}) };
 }
 
-export const GUIDES: Guide[] = BASE_GUIDES.map(withExtras);
-export const AREA_GUIDES: AreaGuide[] = BASE_AREA_GUIDES.map(withExtras);
+export const GUIDES: Guide[] = BASE_GUIDES.map((g) => withExtras(g));
+export const AREA_GUIDES: AreaGuide[] = BASE_AREA_GUIDES.map((g) => withExtras(g));
+
+/** A page in Ukrainian when its translation exists (with the Ukrainian extra sections), otherwise the English page. */
+function toUk<T extends Guide | AreaGuide>(g: T): T {
+  const t = UK_GUIDES[g.slug];
+  if (!t) return withExtras(g);
+  const { alt, changes, ...text } = t;
+  const base = { ...g, ...text, media: { ...g.media, alt }, ...(changes ? { changes } : {}) } as T;
+  return withExtras(base, UK_EXTRAS);
+}
+
+const UK_SET = { GUIDES: BASE_GUIDES.map(toUk), AREA_GUIDES: BASE_AREA_GUIDES.map(toUk) };
+
+/** True when the page has a Ukrainian translation. */
+export const hasUk = (slug: string) => slug in UK_GUIDES;
 
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);
 export const areaGuideBySlug = (slug: string) => AREA_GUIDES.find((g) => g.slug === slug);
@@ -1080,7 +1105,9 @@ export function relatedTo(g: Guide, count = 3): (Guide | AreaGuide)[] {
 /** The life areas a guide or life area page is about (empty: all 6). */
 export const areasOf = (o: Guide | AreaGuide): AreaKey[] => ("area" in o ? [o.area] : o.areas);
 /** "Guide · 12 min read" or "Life area · 8 min read": the line under every card. */
-export const cardMeta = (o: Guide | AreaGuide) => `${"area" in o ? "Life area" : "Guide"} · ${o.minutes} min read`;
+export const cardMeta = (o: Guide | AreaGuide, lang: Lang = "en") => lang === "uk"
+  ? `${"area" in o ? "Сфера життя" : "Гайд"} · ${o.minutes} хв читання`
+  : `${"area" in o ? "Life area" : "Guide"} · ${o.minutes} min read`;
 
 /** Guides about one life area, for that area's page and the hub filter. */
 export const guidesForArea = (key: AreaKey) => GUIDES.filter((g) => g.areas.includes(key));
@@ -1096,3 +1123,29 @@ const MID_CTA: Record<AreaKey | "all", string> = {
   growth: "Track the growth you keep postponing",
 };
 export const midCtaTitle = (g: { areas: AreaKey[] }) => MID_CTA[g.areas[0] ?? "all"];
+
+/** The guides and life area pages in one language, with the helpers that depend on them. */
+export function guidesOf(lang: Lang) {
+  const set = lang === "uk" ? UK_SET : { GUIDES, AREA_GUIDES };
+  const bySlug = (slug: string) => set.GUIDES.find((g) => g.slug === slug);
+  return {
+    ...set,
+    guideBySlug: bySlug,
+    areaGuideBySlug: (slug: string) => set.AREA_GUIDES.find((g) => g.slug === slug),
+    guidesForArea: (key: AreaKey) => set.GUIDES.filter((g) => g.areas.includes(key)),
+    /** relatedTo() in this language: the same picks, the localized pages */
+    relatedTo: (g: Guide, count = 3) => relatedTo(GUIDES.find((e) => e.slug === g.slug) ?? g, count)
+      .map((r) => ("area" in r ? set.AREA_GUIDES.find((x) => x.slug === r.slug) : bySlug(r.slug)) ?? r),
+    midCtaTitle: (g: { areas: AreaKey[] }) => (lang === "uk" ? MID_CTA_UK : MID_CTA)[g.areas[0] ?? "all"],
+  };
+}
+
+const MID_CTA_UK: Record<AreaKey | "all", string> = {
+  all: "Усі 6 сфер життя в одному місці",
+  health: "Помічай, коли сон і енергія починають просідати",
+  people: "Тримай найважливіших людей у полі зору",
+  career: "Не дай роботі з’їсти решту 5 сфер",
+  hobby: "Залиш місце для відпочинку й перевір, чи ти ним користуєшся",
+  meaning: "Звіряйся з тим, що важливо, щотижня",
+  growth: "Відстежуй розвиток, який постійно відкладаєш",
+};

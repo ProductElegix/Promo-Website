@@ -226,3 +226,10 @@ a.area-tag:hover { box-shadow: inset 0 0 0 1px var(--ink); }
 }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* EN / UA language switch (header, menu): the current language solid, the other one faded */
+.lang-switch { display: inline-flex; align-items: center; gap: 0; }
+.lang-switch > * { padding: 8px 6px 7px; line-height: 1; text-decoration: none; color: inherit; }
+.lang-switch > * + *::before { content: ""; display: inline-block; width: 1px; height: .9em; margin: 0 8px 0 -6px; vertical-align: -.1em; background: currentColor; opacity: .35; }
+.lang-switch > a { opacity: .5; transition: opacity .3s; }
+.lang-switch > a:hover { opacity: 1; }

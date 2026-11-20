@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Lang";
 
 /**
  * Body text from lib/guides.ts:

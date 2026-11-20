@@ -1,0 +1,232 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "@/components/ui/Lang";
+import { AREA_ORDER } from "@/lib/content";
+import { contentOf } from "@/lib/l10n";
+import { getContent } from "@/lib/lang";
+import { langMeta } from "@/lib/meta";
+import { isLang } from "@/lib/i18n";
+import { ui } from "@/lib/ui";
+import { AreaIcon } from "@/components/ui/AreaIcon";
+import { Pill } from "@/components/ui/Pill";
+import { areaVars } from "@/components/ui/areaVars";
+import { Wheel } from "@/components/ui/Wheel";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Faq } from "@/components/sections/Faq";
+import { Avatar } from "@/components/ui/Avatar";
+import { Rich } from "@/components/ui/Rich";
+import { Media } from "@/components/ui/Media";
+import { Join } from "@/components/sections/Join";
+import { StatementSection, StatementStrip } from "@/components/sections/Opening";
+import { Principles } from "@/components/sections/Trust";
+import { PhotoHero } from "@/components/sections/PhotoHero";
+import { Breadcrumbs } from "@/components/ui/JsonLd";
+import { OG_IMAGE } from "@/lib/site";
+import { areaGuideHref } from "@/lib/guides";
+import { storyByPerson, storyHref } from "@/lib/stories";
+import styles from "./about.module.css";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang: l } = await params;
+  const lang = isLang(l) ? l : "en";
+  const A = contentOf(lang).ABOUT_PAGE;
+  const lm = langMeta(lang, "/about");
+  return {
+    title: { absolute: A.meta.title },
+    description: A.meta.description,
+    alternates: lm.alternates,
+    ...(lm.robots ? { robots: lm.robots } : {}),
+    openGraph: { title: A.meta.title, description: A.meta.description, url: lm.url, siteName: "Elegix", type: "website", locale: lm.locale, images: [OG_IMAGE] },
+    twitter: { card: "summary_large_image", title: A.meta.title, description: A.meta.description, images: [OG_IMAGE] },
+  };
+}
+
+export default async function About() {
+  const { lang, c: { ABOUT_PAGE: A, AREAS, AREAS_SECTION, SOCIALS, STORY, TEAM, TRUST } } = await getContent();
+  const t = ui(lang);
+  const photo = TRUST.founder.media;
+  return (
+    <main>
+      <Breadcrumbs name={t.about} path={langMeta(lang, "/about").url} />
+      {/* 1. Hero: what Elegix is and the mission */}
+      <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede}>
+        <a href="#join" className="btn lime">{A.hero.cta}</a>
+      </PhotoHero>
+      {/* 1b. Mission, revealed word by word, with the photo strip (same as the home page) */}
+      <StatementSection>
+        <StatementStrip label={A.hero.mission.label} text={A.hero.mission.text} photos={A.hero.strip} />
+      </StatementSection>
+      {/* 2. The 6 areas */}
+      <section className="section" aria-labelledby="areas-title">
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{A.areas.label}</span>
+            <h2 id="areas-title" className="display h2"><Rich text={A.areas.title} /></h2>
+            <p className="lede">{A.areas.lede}</p>
+          </div>
+          <ul className={styles.areas}>
+            {AREA_ORDER.map((a) => (
+              <li key={a} className={styles.area} style={areaVars(a)} data-reveal>
+                <div className={styles.areaPhoto}>
+                  <Image src={AREAS_SECTION.media[a].src!} alt={AREAS_SECTION.media[a].alt} fill sizes="(max-width: 860px) 100vw, 33vw" />
+                  <span className={styles.areaIcon} aria-hidden="true"><AreaIcon area={a} /></span>
+                </div>
+                <h3>{AREAS[a].name}</h3>
+                <p>{AREAS[a].description}</p>
+                <Link href={areaGuideHref(a)} className={styles.areaLink}>{t.readTheGuide}<span className="visually-hidden"> {t.toArea(AREAS[a].name)}</span></Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 3. How it works (same cards as the home page) */}
+      <HowItWorks learnMore={false} chips={false} />
+
+      {/* 4. Who it's for */}
+      <section className={`section on-dark ${styles.dark}`} aria-labelledby="audience-title">
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{A.audience.label}</span>
+            <h2 id="audience-title" className="display h2"><Rich text={A.audience.title} /></h2>
+            <p className="lede">{A.audience.lede}</p>
+          </div>
+          <ul className={styles.audience}>
+            {A.audience.items.map((a, i) => (
+              <li key={a.title} className={styles.audienceCard} data-reveal>
+                <span className={`num ${styles.n}`}>{String(i + 1).padStart(2, "0")}</span>
+                <h3>{a.title}</h3>
+                <p>{a.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 5. The rhythm */}
+      <section className="section" aria-labelledby="modes-title">
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{A.modes.label}</span>
+            <h2 id="modes-title" className="display h2"><Rich text={A.modes.title} /></h2>
+            <p className="lede">{A.modes.lede}</p>
+          </div>
+          <div className={styles.modes}>
+            {A.modes.items.map((m, i) => (
+              <div key={m.title} className={`${styles.mode} ${i === 0 ? styles.modeDark : ""}`} data-reveal>
+                <div className={styles.modeHead}><h3>{m.title}</h3><span className={styles.time}>{m.time}</span></div>
+                <ul>{m.points.map((p) => <li key={p}><span className={styles.tick} aria-hidden="true">✓</span>{p}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. The idea behind it */}
+      <section className={`section ${styles.ideaSection}`} aria-labelledby="idea-title">
+        <div className={`container ${styles.idea}`}>
+          <div className={styles.ideaVisual} data-reveal>
+            <div className={styles.wheel}><Wheel scores={[7, 6, 5, 6, 7, 8]} size={280} label={t.wheelSix} /></div>
+            <ul className={styles.chips}>{AREA_ORDER.map((a) => <li key={a}><Pill area={a} strong /></li>)}</ul>
+          </div>
+          <div className={styles.ideaText} data-reveal>
+            <span className="label">{A.idea.label}</span>
+            <h2 id="idea-title" className="display h2"><Rich text={A.idea.title} /></h2>
+            <p className={styles.ideaP}>{A.idea.text}</p>
+            <ul className={styles.points}>{A.idea.points.map((p) => <li key={p}><span className={styles.tick} aria-hidden="true">✓</span>{p}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+
+
+      {/* 7. Pricing and the name: two short facts, side by side */}
+      <section className={`on-dark ${styles.pf}`} data-theme="dark" aria-label={t.pricingAndName}>
+        <div className={styles.pfStage}>
+          <div className={styles.pfPhoto} data-parallax data-scale-in><Media media={A.photo} fill sizes="100vw" /></div>
+          <div className={`container ${styles.pfGrid}`}>
+            <div className={styles.pfItem} data-reveal>
+              <span className="label">{A.pricing.label}</span>
+              <h2 id="pricing-title" className={styles.pfTitle}><Rich text={A.pricing.title} /></h2>
+              <p className={styles.pfText}>{A.pricing.text}</p>
+            </div>
+            <div className={styles.pfItem} data-reveal>
+              <span className="label">{A.name.label}</span>
+              <h2 id="name-title" className={styles.pfTitle}>{A.name.title}</h2>
+              <p className={styles.pfText}>{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Our story */}
+      <section id={A.story.id} className="section" aria-labelledby="story-title" style={{ scrollMarginTop: "var(--header-h)" }}>
+        <div className={`container ${styles.story}`}>
+          <div className={styles.storyAside} data-reveal>
+            {photo.src && <div className={styles.photo}><Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 860px) 100vw, 420px" /></div>}
+            <p className={styles.founder}><b>{TRUST.founder.name}</b>, {TRUST.founder.role}</p>
+          </div>
+          <div className={styles.storyBody}>
+            <span className="label">{A.story.label}</span>
+            <h2 id="story-title" className="display h2"><Rich text={STORY.title} /></h2>
+            {STORY.blocks.map((b, i) => {
+              if (b.type === "lines") return <p key={i} className={styles.lines} data-reveal>{b.lines.map((l) => <span key={l}>{l}</span>)}</p>;
+              if (b.type === "quote") return <blockquote key={i} className={styles.quote} data-reveal>{b.text}</blockquote>;
+              return <p key={i} className={b.type === "lead" ? styles.lead : undefined} data-reveal>{b.text}</p>;
+            })}
+            <p className={styles.sign}>— {STORY.signature}</p>
+            <Link href={STORY.more.href} className={`btn ${styles.storyMore}`} data-reveal>{STORY.more.label}</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Team */}
+      <section id="team" className={`section ${styles.teamSection}`} aria-labelledby="team-title" style={{ scrollMarginTop: "var(--header-h)" }}>
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{TEAM.label}</span>
+            <h2 id="team-title" className="display h2"><Rich text={TEAM.title} /></h2>
+          </div>
+          <ul className={styles.team}>
+            {TEAM.members.map((m) => (
+              <li key={m.name} className={styles.member} data-reveal>
+                <Avatar name={m.name} photo={m.photo} size={420} className={styles.memberPhoto} />
+                <div><h3>{m.name}</h3><p>{m.role}</p></div>
+                {(() => {
+                  const story = storyByPerson(m.name);
+                  if (!story && !m.linkedin) return null;
+                  return (
+                    <div className={styles.memberLinks}>
+                      {story && <Link href={storyHref(story)} className={styles.memberLink}>{t.readStory}<span className="visually-hidden"> {t.byName(m.name)}</span></Link>}
+                      {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener" className={styles.memberLink}>LinkedIn</a>}
+                    </div>
+                  );
+                })()}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 10. What we believe */}
+      <section className={`section ${styles.beliefsSection}`} aria-labelledby="beliefs-title">
+        <div className="container">
+          <div className={`section-head ${styles.center}`} data-reveal>
+            <span className="label">{A.beliefs.label}</span>
+            <h2 id="beliefs-title" className="display h2"><Rich text={A.beliefs.title} /></h2>
+          </div>
+          <Principles className={styles.principles} />
+          <div className={styles.public} data-reveal>
+            <div><b>{A.publicBuild.title}</b><p>{A.publicBuild.text}</p></div>
+            <ul>{SOCIALS.map((s) => <li key={s.label}><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. FAQ */}
+      <Faq only={A.faq} />
+
+      {/* 12. Early access (same block as the home page) */}
+      <Join />
+    </main>
+  );
+}

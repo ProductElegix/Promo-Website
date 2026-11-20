@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useUi } from "./Lang";
 import styles from "./Article.module.css";
 
 type Item = { id: string; label: string };
@@ -15,6 +16,7 @@ export function Toc({ title, items, bodyId }: { title: string; items: Item[]; bo
   const [active, setActive] = useState(-1);
   const [progress, setProgress] = useState(0);
   const ref = useRef<HTMLDetailsElement>(null);
+  const t = useUi();
 
   useEffect(() => {
     const wide = window.matchMedia("(min-width: 1100px)");
@@ -58,10 +60,10 @@ export function Toc({ title, items, bodyId }: { title: string; items: Item[]; bo
       <details ref={ref} className={styles.toc} open>
         <summary className={styles.tocSummary}>
           <span className={styles.tocTitle}>{title}</span>
-          <span className={styles.tocNow}>{active >= 0 ? `${String(active + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}` : `${items.length} sections`}</span>
+          <span className={styles.tocNow}>{active >= 0 ? `${String(active + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}` : t.sections(items.length)}</span>
           <span className={styles.tocChevron} aria-hidden="true" />
         </summary>
-        <div className={styles.tocBar} role="progressbar" aria-label="Reading progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct}>
+        <div className={styles.tocBar} role="progressbar" aria-label={t.readingProgress} aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct}>
           <span style={{ transform: `scaleX(${progress})` }} />
         </div>
         <ol>

@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { PRINCIPLES, TRUST } from "@/lib/content";
+import Link from "@/components/ui/Lang";
+import { getContent } from "@/lib/lang";
 import { Media } from "@/components/ui/Media";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Trust.module.css";
@@ -17,7 +17,8 @@ function Lock() {
 }
 
 /** The 4 principles, shared with /about. The privacy one is the dark card with the lock. */
-export function Principles({ className = "" }: { className?: string }) {
+export async function Principles({ className = "" }: { className?: string }) {
+  const { c: { PRINCIPLES } } = await getContent();
   return (
     <ul className={`${styles.principles} ${className}`}>
       {PRINCIPLES.map((p, i) => (
@@ -32,7 +33,8 @@ export function Principles({ className = "" }: { className?: string }) {
   );
 }
 
-export function Trust() {
+export async function Trust() {
+  const { c: { TRUST } } = await getContent();
   const f = TRUST.founder;
   return (
     <section id="founder" className="section" aria-labelledby="trust-title">

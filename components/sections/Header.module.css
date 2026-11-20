@@ -78,3 +78,7 @@
   .logo svg { height: 20px; }
 }
 @media (min-width: 961px) { .menu { display: none; } }
+
+/* EN / UA switch */
+.lang { margin-right: 4px; }
+@media (max-width: 960px) { .lang { display: none; } }

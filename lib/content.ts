@@ -461,6 +461,8 @@ export const ABOUT_PAGE = {
     text: "The Wheel of Life is a classic coaching exercise: rate each area of your life, look at the shape, and the gaps become obvious. It works, but people do it once and forget it. Elegix turns it into something you use every day, linked to your real goals, habits and tasks.",
     points: ["Rate each area honestly, from 1 to 10", "Connect every goal and habit to an area", "Watch your balance change week by week", "Change one thing at a time, without guilt"],
   },
+  /** full-bleed photo behind the pricing and name block */
+  photo: { src: "/images/how-score.jpg", alt: "A person walking along a waterfront path at sunset", brief: "Calm walk at sunset · full-bleed", ratio: "3 / 2" } as MediaSlot,
   pricing: {
     label: "Pricing",
     title: "Free to use. *Premium* if you want more.",

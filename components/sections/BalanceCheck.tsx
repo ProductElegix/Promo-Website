@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Link from "next/link";
-import { AREAS, AREA_ORDER, CHECK, CONSENT, type AreaKey } from "@/lib/content";
+import Link, { useContent, useLang, useUi } from "@/components/ui/Lang";
+import { AREA_ORDER, type AreaKey } from "@/lib/content";
 import { readAttribution } from "@/lib/attribution";
 import { AreaIcon } from "@/components/ui/AreaIcon";
-import { areaVars } from "@/components/ui/Pill";
+import { areaVars } from "@/components/ui/areaVars";
 import { Rich } from "@/components/ui/Rich";
 import { CommunityNote } from "@/components/ui/CommunityNote";
 import { Wheel } from "@/components/ui/Wheel";
@@ -16,6 +16,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 type Result = { average: number; lowest: AreaKey; email: string; emailed: boolean; invited: boolean };
 
 export function BalanceCheck() {
+  const { AREAS, CHECK, CONSENT } = useContent();
+  const t = useUi();
+  const lang = useLang();
   const [scores, setScores] = useState<Record<AreaKey, number>>(
     () => Object.fromEntries(AREA_ORDER.map((a) => [a, 5])) as Record<AreaKey, number>,
   );
@@ -27,7 +30,7 @@ export function BalanceCheck() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const value = email.trim().toLowerCase();
-    if (!EMAIL_RE.test(value)) { setError("Enter a valid email, like name@example.com."); return; }
+    if (!EMAIL_RE.test(value)) { setError(t.invalidEmail); return; }
     const company = (new FormData(e.currentTarget).get("company") as string) || "";
     setBusy(true);
     setError("");
@@ -35,17 +38,17 @@ export function BalanceCheck() {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source: "balance-check", scores, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
+        body: JSON.stringify({ email: value, source: "balance-check", scores, lang, company, consent: true, page: window.location.pathname, attribution: readAttribution() }),
       });
       const data = (await res.json().catch(() => ({}))) as { error?: string; emailed?: boolean; invited?: boolean };
-      if (!res.ok) throw new Error(data.error || "We couldn't save your check. Please try again.");
+      if (!res.ok) throw new Error(data.error || t.checkFailed);
       const values = AREA_ORDER.map((a) => scores[a]);
       const average = values.reduce((sum, n) => sum + n, 0) / values.length;
       const lowest = AREA_ORDER.reduce((low, a) => (scores[a] < scores[low] ? a : low), AREA_ORDER[0]);
       window.gtag?.("event", "generate_lead", { form: "balance-check" });
       setResult({ average, lowest, email: value, emailed: !!data.emailed, invited: !!data.invited });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "We couldn't save your check. Please try again.");
+      setError(err instanceof Error ? err.message : t.checkFailed);
     } finally {
       setBusy(false);
     }
@@ -64,7 +67,7 @@ export function BalanceCheck() {
           </div>
           {/* live preview: the wheel redraws as the sliders move */}
           <div className={styles.wheelPanel}>
-            <div className={styles.wheel}><Wheel scores={AREA_ORDER.map((a) => scores[a])} size={300} label="Your ratings as a wheel of life" /></div>
+            <div className={styles.wheel}><Wheel scores={AREA_ORDER.map((a) => scores[a])} size={300} label={t.ratingsWheel} /></div>
           </div>
 
           {result ? (
@@ -87,17 +90,17 @@ export function BalanceCheck() {
                     <span className={styles.name}><span className={styles.icon} aria-hidden="true"><AreaIcon area={a} /></span>{AREAS[a].short}</span>
                     <input type="range" min={1} max={10} step={1} value={scores[a]}
                       onChange={(e) => setScores((s) => ({ ...s, [a]: Number(e.target.value) }))}
-                      aria-valuetext={`${scores[a]} out of 10`} style={{ ["--p" as string]: `${((scores[a] - 1) / 9) * 100}%` }} />
+                      aria-valuetext={t.outOf10(scores[a])} style={{ ["--p" as string]: `${((scores[a] - 1) / 9) * 100}%` }} />
                     <output className={styles.value}>{scores[a]}</output>
                   </label>
                 ))}
               </fieldset>
               <div className={styles.submit}>
                 <label htmlFor="email-check" className="visually-hidden">Email</label>
-                <input id="email-check" type="email" inputMode="email" autoComplete="email" placeholder="Your email" value={email}
+                <input id="email-check" type="email" inputMode="email" autoComplete="email" placeholder={t.yourEmail} value={email}
                   onChange={(e) => setEmail(e.target.value)} required aria-describedby="check-status" />
                 <input type="text" name="company" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
-                <button type="submit" className="btn" disabled={busy}>{busy ? "Sending…" : CHECK.button}</button>
+                <button type="submit" className="btn" disabled={busy}>{busy ? t.sending : CHECK.button}</button>
               </div>
               <p className={styles.consent}>{CONSENT.before} <Link href="/privacy">{CONSENT.link}</Link>{CONSENT.after}</p>
               <p id="check-status" className={styles.error} role="status" aria-live="polite">{error}</p>

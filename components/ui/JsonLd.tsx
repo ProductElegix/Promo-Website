@@ -9,7 +9,8 @@ type Crumb = { name: string; path: string };
 
 /** BreadcrumbList for an inner page: Elegix › (parents ›) name. Google shows it instead of the bare URL. */
 export function Breadcrumbs({ name, path, parents = [] }: Crumb & { parents?: Crumb[] }) {
-  const trail = [{ name: "Elegix", path: "/" }, ...parents, { name, path }];
+  const root = path === "/uk" || path.startsWith("/uk/") ? "/uk" : "/";
+  const trail = [{ name: "Elegix", path: root }, ...parents, { name, path }];
   return (
     <JsonLd data={{
       "@context": "https://schema.org",
