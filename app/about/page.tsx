@@ -123,24 +123,18 @@ export default function About() {
       </section>
 
 
-      {/* 7. Pricing */}
-      <section className={`section ${styles.pricingSection}`} aria-labelledby="pricing-title">
-        <div className="container">
-          <div className={styles.pricing} data-reveal>
+      {/* 7. Pricing and the name: two short facts, side by side */}
+      <section className={`section ${styles.pricingSection}`} aria-label="Pricing and the name">
+        <div className={`container ${styles.facts}`}>
+          <div className={styles.fact} data-reveal>
             <span className="label">{A.pricing.label}</span>
-            <h2 id="pricing-title" className="display h2"><Rich text={A.pricing.title} /></h2>
-            <p className="lede">{A.pricing.text}</p>
+            <h2 id="pricing-title" className={styles.factTitle}><Rich text={A.pricing.title} /></h2>
+            <p className={styles.factText}>{A.pricing.text}</p>
           </div>
-        </div>
-      </section>
-
-      {/* 7b. Why the name */}
-      <section className={`section ${styles.pricingSection}`} aria-labelledby="name-title">
-        <div className="container">
-          <div className={styles.pricing} data-reveal>
+          <div className={styles.fact} data-reveal>
             <span className="label">{A.name.label}</span>
-            <h2 id="name-title" className="display h2">{A.name.title}</h2>
-            <p className="lede">{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
+            <h2 id="name-title" className={styles.factTitle}>{A.name.title}</h2>
+            <p className={styles.factText}>{A.name.text[0]}<i lang="ca-valencia">{A.name.text[1]}</i>{A.name.text[2]}</p>
           </div>
         </div>
       </section>

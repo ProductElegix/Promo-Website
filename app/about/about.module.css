@@ -124,3 +124,11 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 .center.center { justify-items: center; text-align: center; max-width: 60rem; margin-inline: auto; }
 /* the tag above the story keeps its own width inside the grid */
 .storyBody > :global(.label) { justify-self: start; }
+
+/* pricing and the name: two equal cards in one row */
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.fact { display: grid; gap: 16px; align-content: start; justify-items: start; background: var(--paper); border-radius: var(--radius-l); padding: clamp(28px, 3.5vw, 48px); }
+.factTitle { font-size: var(--fs-h3-l); font-weight: 500; letter-spacing: -0.035em; line-height: 1.05; }
+.factText { font-size: var(--fs-lead); color: var(--muted); line-height: 1.5; max-width: 34rem; }
+@media (max-width: 860px) { .facts { grid-template-columns: 1fr; } }
+.factTitle em { font-style: normal; color: var(--green); }
