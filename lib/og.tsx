@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { AREAS, type AreaKey } from "@/lib/content";
+import type { AreaKey } from "@/lib/content";
+import { contentOf } from "@/lib/l10n";
+import type { Lang } from "@/lib/i18n";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
@@ -20,7 +22,8 @@ async function photo(src?: string) {
 }
 
 /** The share card for a guide or life area page: its photo, darkened, with the title and area tag on top. */
-export async function articleOgImage(g: { title: string; minutes: number; media: { src?: string }; areas?: AreaKey[]; kind: string }) {
+export async function articleOgImage(g: { title: string; minutes: number; media: { src?: string }; areas?: AreaKey[]; kind: string }, lang: Lang = "en") {
+  const AREAS = contentOf(lang).AREAS;
   const [bg, inter] = await Promise.all([photo(g.media.src), font()]);
   const area = g.areas?.[0];
   return new ImageResponse(
@@ -37,7 +40,7 @@ export async function articleOgImage(g: { title: string; minutes: number; media:
             )}
           </div>
           <div style={{ display: "flex", fontSize: g.title.length > 70 ? 56 : 66, lineHeight: 1.05, letterSpacing: "-0.035em", color: "#fff", maxWidth: 900 }}>{g.title}</div>
-          <div style={{ display: "flex", fontSize: 24, color: "rgba(255,255,255,.75)" }}>{`www.elegix.net · ${g.minutes} min read`}</div>
+          <div style={{ display: "flex", fontSize: 24, color: "rgba(255,255,255,.75)" }}>{`www.elegix.net · ${g.minutes} ${lang === "uk" ? "хв читання" : "min read"}`}</div>
         </div>
       </div>
     ),

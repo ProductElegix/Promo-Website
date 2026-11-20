@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Lang";
 
 /**
  * Body text from lib/guides.ts:
@@ -17,3 +17,6 @@ export function Inline({ text }: { text: string }) {
     </>
   );
 }
+
+/** The same text without markup, for structured data: links keep their words, bold loses its stars. */
+export const plainText = (text: string) => text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*([^*]+)\*\*/g, "$1");

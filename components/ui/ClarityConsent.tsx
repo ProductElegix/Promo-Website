@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link, { useUi } from "@/components/ui/Lang";
 import styles from "./ClarityConsent.module.css";
 
 const KEY = "elegix_cookie_consent"; // "yes" | "no"
@@ -37,6 +37,7 @@ function grantGoogle() {
 /** Small cookie banner: Clarity and GA cookies run only after "Accept". The choice is remembered in this browser. */
 export function ClarityConsent({ id }: { id: string }) {
   const [open, setOpen] = useState(false);
+  const t = useUi();
 
   useEffect(() => {
     const v = read();
@@ -46,11 +47,11 @@ export function ClarityConsent({ id }: { id: string }) {
 
   if (!open) return null;
   return (
-    <div className={styles.banner} role="region" aria-label="Cookie preferences">
-      <p>We use cookies to see how people use this site and improve it. <Link href="/privacy">Privacy Policy</Link></p>
+    <div className={styles.banner} role="region" aria-label={t.cookiePrefs}>
+      <p>{t.cookieText} <Link href="/privacy">{t.privacyPolicy}</Link></p>
       <div className={styles.actions}>
-        <button type="button" className={styles.decline} onClick={() => { save("no"); setOpen(false); }}>Decline</button>
-        <button type="button" className={styles.accept} onClick={() => { save("yes"); setOpen(false); loadClarity(id); grantGoogle(); }}>Accept</button>
+        <button type="button" className={styles.decline} onClick={() => { save("no"); setOpen(false); }}>{t.decline}</button>
+        <button type="button" className={styles.accept} onClick={() => { save("yes"); setOpen(false); loadClarity(id); grantGoogle(); }}>{t.accept}</button>
       </div>
     </div>
   );

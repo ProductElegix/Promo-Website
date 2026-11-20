@@ -1,11 +1,13 @@
-import { JOIN } from "@/lib/content";
+import { getContent } from "@/lib/lang";
+import { ui } from "@/lib/ui";
 import { Media } from "@/components/ui/Media";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Join.module.css";
 
 /** Early access: a full-bleed photo with one title, one line and the form. */
-export function Join() {
+export async function Join() {
+  const { lang, c: { JOIN } } = await getContent();
   return (
     <section id="join" className={`on-dark ${styles.join}`} data-theme="dark" aria-labelledby="join-title">
       <div className={styles.stage}>
@@ -14,7 +16,7 @@ export function Join() {
           <h2 id="join-title" className={`display h2 ${styles.title}`}><Rich text={JOIN.title} /></h2>
           <p className={styles.sub}>{JOIN.sub}</p>
           <div id="join-form" className={styles.form}>
-            <WaitlistForm source="join" variant="underline" placeholder="Your email" buttonLabel={JOIN.button} />
+            <WaitlistForm source="join" variant="underline" placeholder={ui(lang).yourEmail} buttonLabel={JOIN.button} />
           </div>
         </div>
       </div>

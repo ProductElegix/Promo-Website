@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { APP, AREAS, READY } from "@/lib/content";
+import { getContent } from "@/lib/lang";
 import { Phone } from "@/components/ui/Phone";
 import { Pill } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Ready.module.css";
 
 /** Closing block: headline + CTA, then the app surrounded by everyday objects, one per life area. */
-export function Ready() {
+export async function Ready() {
+  const { c: { APP, AREAS, READY } } = await getContent();
   return (
     <section className={`section ${styles.ready}`} aria-labelledby="ready-title">
       <div className="container">

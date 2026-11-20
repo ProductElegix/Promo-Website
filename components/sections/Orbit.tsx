@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { AREAS, ORBIT } from "@/lib/content";
+import { getContent } from "@/lib/lang";
 import { LogoMark } from "@/components/ui/Logo";
-import { areaVars } from "@/components/ui/Pill";
+import { areaVars } from "@/components/ui/areaVars";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Orbit.module.css";
 
 /** "One picture": a statement title, a big ring with the logo mark and round area photos scattered around it. */
-export function Orbit() {
+export async function Orbit() {
+  const { c: { AREAS, ORBIT } } = await getContent();
   return (
     <section className={`section ${styles.orbit}`} aria-labelledby="orbit-title">
       <div className="container">

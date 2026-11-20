@@ -17,6 +17,8 @@ export type Signup = {
   /** what the person agreed to: the consent line under the form links to this policy version */
   consent?: { at: string; page: string; policyVersion: string };
   attribution?: { utm_source?: string; utm_medium?: string; utm_campaign?: string; referrer?: string; landing?: string };
+  /** the site language the person signed up on; their emails are in it */
+  lang?: "en" | "uk";
 };
 
 /** What we keep per person in the list member's vars. Never overwritten wholesale: see mergeVars. */
@@ -36,6 +38,8 @@ type MemberVars = {
   utm_campaign?: string;
   referrer?: string;
   landing?: string;
+  /** the language of the latest signup, for later emails */
+  lang?: "en" | "uk";
   joinedAt?: string; // older records
 };
 
@@ -96,6 +100,7 @@ export function mergeVars(old: MemberVars, s: Signup): MemberVars {
     utm_campaign: old.utm_campaign ?? a.utm_campaign,
     referrer: old.referrer ?? a.referrer,
     landing: old.landing ?? a.landing,
+    lang: s.lang ?? old.lang ?? "en",
   };
 }
 
@@ -130,7 +135,7 @@ export async function unsubscribeFromWaitlist(cfg: Config, email: string): Promi
  * Returns true when Mailgun accepted the message.
  */
 export async function sendConfirmation(cfg: Config, s: Signup, testMode = false): Promise<boolean> {
-  const mail = buildEmail(s);
+  const mail = buildEmail(s, s.lang ?? "en");
   const form = new FormData();
   form.append("from", cfg.from);
   form.append("to", s.email);
@@ -168,6 +173,7 @@ export async function notifyTeam(cfg: Config, s: Signup, isNew: boolean, testMod
     `${isNew ? "New signup" : "Repeat signup (already on the list)"}: ${s.email}`,
     "",
     `Form: ${s.source}`,
+    s.lang && s.lang !== "en" ? `Language: ${s.lang}` : "",
     s.start ? `Wants to start with: ${s.start}` : "",
     s.scores ? `Balance check: ${Object.entries(s.scores).map(([k, v]) => `${k} ${v}`).join(", ")}` : "",
     s.consent ? `Page: ${s.consent.page}` : "",

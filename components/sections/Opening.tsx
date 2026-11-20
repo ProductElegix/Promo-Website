@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { HERO, OPENING } from "@/lib/content";
+import { getContent } from "@/lib/lang";
+import { ui } from "@/lib/ui";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import styles from "./Opening.module.css";
@@ -58,7 +59,8 @@ export function StatementSection({ id, children }: { id?: string; children: Reac
  * Black opening of the home page (Duna style): a full-screen photo behind the headline (the page's h1) and caption row,
  * the statement and the early-access form.
  */
-export function Opening() {
+export async function Opening() {
+  const { lang, c: { HERO, OPENING } } = await getContent();
   return (
     <section className={`on-dark ${styles.opening}`} data-theme="dark" aria-labelledby="hero-title">
       {/* first screen: the photo as a full background, a centred headline and the early access card at the bottom */}
@@ -78,7 +80,7 @@ export function Opening() {
             <p className={styles.cardTitle}>{OPENING.card.title}</p>
             <p className={styles.cardText}>{OPENING.card.text}</p>
           </div>
-          <WaitlistForm source="hero" variant="bar" placeholder="Your email" buttonLabel={HERO.cta} />
+          <WaitlistForm source="hero" variant="bar" placeholder={ui(lang).yourEmail} buttonLabel={HERO.cta} />
           <ul className={`${styles.trust} caption`}>{HERO.trust.map((t) => <li key={t}>{t}</li>)}</ul>
         </div>
       </div>

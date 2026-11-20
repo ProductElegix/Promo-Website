@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import Link, { useContent, useUi } from "@/components/ui/Lang";
 import { useEffect, useRef, useState } from "react";
-import { AREAS, AREA_ORDER, type AreaKey } from "@/lib/content";
+import { AREA_ORDER, type AreaKey } from "@/lib/content";
 import { AreaIcon } from "./AreaIcon";
 import { track } from "@/lib/track";
-import { areaVars } from "./Pill";
+import { areaVars } from "./areaVars";
 import { GuideCards, type Card } from "./GuideCards";
-import styles from "@/app/guides/hub.module.css";
+import styles from "@/app/[lang]/guides/hub.module.css";
 
 type Filter = "all" | "whole" | AreaKey;
 
@@ -23,6 +23,8 @@ const isFilter = (v: string | null): v is Filter => v === "all" || v === "whole"
 /** Chips over the guide grid: all guides, guides about the whole wheel, or one of the 6 life areas.
  *  The pick lives in ?area= so a filtered view can be shared; without JS every guide shows. */
 export function GuideFilter({ guides, areaPages }: Props) {
+  const { AREAS } = useContent();
+  const t = useUi();
   const [filter, setFilter] = useState<Filter>("all");
   const chipsRef = useRef<HTMLDivElement>(null);
 
@@ -62,15 +64,15 @@ export function GuideFilter({ guides, areaPages }: Props) {
   const banner = filter !== "all" && filter !== "whole" && areaPages[filter] ? { area: filter, href: areaPages[filter]!.href } : null;
 
   const items: { f: Filter; label: string }[] = [
-    { f: "all", label: "All guides" },
-    { f: "whole", label: "Whole life" },
+    { f: "all", label: t.allGuides },
+    { f: "whole", label: t.wholeLife },
     ...AREA_ORDER.map((a) => ({ f: a as Filter, label: AREAS[a].short })),
   ];
 
   return (
     <div className={styles.library}>
-      <aside className={styles.menu} aria-label="Guide topics">
-        <div ref={chipsRef} className={styles.menuList} role="group" aria-label="Filter guides by life area">
+      <aside className={styles.menu} aria-label={t.guideTopics}>
+        <div ref={chipsRef} className={styles.menuList} role="group" aria-label={t.filterByArea}>
           {items.map(({ f, label }) => {
             const area = f !== "all" && f !== "whole" ? f : null;
             return (
@@ -82,8 +84,8 @@ export function GuideFilter({ guides, areaPages }: Props) {
             );
           })}
         </div>
-        <nav className={styles.overviews} aria-label="Life area overviews">
-          <p>Area overviews</p>
+        <nav className={styles.overviews} aria-label={t.areaOverviews}>
+          <p>{t.areaOverviewsShort}</p>
           <ul>
             {AREA_ORDER.filter((a) => areaPages[a]).map((a) => (
               <li key={a}><Link href={areaPages[a]!.href} style={areaVars(a)}><AreaIcon area={a} />{AREAS[a].short}</Link></li>
@@ -91,27 +93,27 @@ export function GuideFilter({ guides, areaPages }: Props) {
           </ul>
         </nav>
         <label className={styles.search}>
-          <span className="sr-only">Search guides</span>
-          <input type="search" placeholder="Search guides" value={query} onChange={(e) => setQuery(e.target.value)}
+          <span className="sr-only">{t.searchGuides}</span>
+          <input type="search" placeholder={t.searchGuides} value={query} onChange={(e) => setQuery(e.target.value)}
             onBlur={() => q && track("search", { search_term: q })} />
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
         </label>
       </aside>
       <div className={styles.libraryMain}>
         <p className={`${styles.result}`} aria-live="polite">
-          {q ? `${cards.length} result${cards.length === 1 ? "" : "s"} for “${query.trim()}”`
-            : filter === "all" ? `${guides.length} guides`
-            : filter === "whole" ? "Guides that look at all 6 areas together"
-            : `${tagged(filter)} guide${tagged(filter) === 1 ? "" : "s"} about ${AREAS[filter].short.toLowerCase()}`}
+          {q ? t.nResultsFor(cards.length, query.trim())
+            : filter === "all" ? t.nGuides(guides.length)
+            : filter === "whole" ? t.wholeLifeGuides
+            : t.nGuidesAbout(tagged(filter), AREAS[filter].short)}
         </p>
         {!q && banner && (
           <Link href={banner.href} className={styles.areaBanner} style={areaVars(banner.area)}>
             <span className={styles.areaBannerIcon}><AreaIcon area={banner.area} /></span>
-            <span className={styles.areaBannerText}><strong>{AREAS[banner.area].short}: the area overview</strong><span>{AREAS[banner.area].description} Signs it&apos;s slipping and habits that bring it back.</span></span>
-            <span className={styles.areaBannerGo}>Open</span>
+            <span className={styles.areaBannerText}><strong>{t.areaOverviewTitle(AREAS[banner.area].short)}</strong><span>{AREAS[banner.area].description} {t.areaOverviewText}</span></span>
+            <span className={styles.areaBannerGo}>{t.open}</span>
           </Link>
         )}
-        {cards.length ? <GuideCards cards={cards} rows /> : <p className={styles.empty}>{!q && banner ? `Guides about ${AREAS[banner.area].short.toLowerCase()} are on the way. Start with the area overview above.` : "Nothing found. Try another word, or pick a life area on the left."}</p>}
+        {cards.length ? <GuideCards cards={cards} rows /> : <p className={styles.empty}>{!q && banner ? t.guidesOnTheWay(AREAS[banner.area].short) : t.nothingFound}</p>}
       </div>
     </div>
   );
