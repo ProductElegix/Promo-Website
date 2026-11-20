@@ -694,8 +694,8 @@ export const PRESS = {
     label: "Background",
     title: "The *stories* behind it",
     links: [
-      { href: "/stories/why-i-built-elegix", label: "Edward's story: why he built Elegix" },
-      { href: "/stories/alina-krupa", label: "Alina's story: why she co-founded Elegix" },
+      { href: "/about/stories/why-i-built-elegix", label: "Edward's story: why he built Elegix" },
+      { href: "/about/stories/alina-krupa", label: "Alina's story: why she co-founded Elegix" },
       { href: "/about", label: "About Elegix and the team" },
     ],
   },

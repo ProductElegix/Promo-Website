@@ -556,8 +556,8 @@ export const PRESS: C["PRESS"] = {
     label: "Передісторія",
     title: "*Історії* за продуктом",
     links: [
-      { href: "/stories/why-i-built-elegix", label: "Історія Едуарда: чому він створив Elegix" },
-      { href: "/stories/alina-krupa", label: "Історія Аліни: чому вона стала співзасновницею" },
+      { href: "/about/stories/why-i-built-elegix", label: "Історія Едуарда: чому він створив Elegix" },
+      { href: "/about/stories/alina-krupa", label: "Історія Аліни: чому вона стала співзасновницею" },
       { href: "/about", label: "Про Elegix і команду" },
     ],
   },
