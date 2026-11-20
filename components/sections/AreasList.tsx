@@ -68,7 +68,8 @@ export function AreasList() {
           <span className="label">{AREAS_SECTION.label}</span>
           <h2 id="areas-title" className="display h2"><Rich text={AREAS_SECTION.title} /></h2>
         </div>
-        <div ref={track} className={styles.track}>
+      </div>
+      <div ref={track} className={styles.track}>
           <div ref={card} className={styles.card}>
             <div className={styles.photo} aria-hidden="true">
               {AREA_ORDER.map((a) => (
@@ -108,7 +109,6 @@ export function AreasList() {
               </div>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );

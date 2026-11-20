@@ -1,10 +1,11 @@
-/* the track is taller than the card; the card sticks while the page scrolls through the six areas */
-.track { --card-top: calc(var(--header-h) + 24px); --step: 36svh; position: relative; height: calc(100svh - var(--card-top) - 16px + 5 * var(--step)); }
+/* full-bleed: the track spans the whole page width and is taller than the screen;
+   the card sticks edge to edge while the page scrolls through the six areas */
+.track { --step: 36svh; position: relative; height: calc(100svh + 5 * var(--step)); }
 .card {
-  position: sticky; top: var(--card-top);
-  height: calc(100svh - var(--card-top) - 16px); min-height: 520px; max-height: 1000px;
+  position: sticky; top: 0;
+  height: 100svh; min-height: 560px;
   display: grid; grid-template-columns: 1fr 1fr;
-  border-radius: var(--radius-l); overflow: hidden; background: var(--black-2); color: var(--paper);
+  overflow: hidden; background: var(--black-2); color: var(--paper);
 }
 
 /* photo half */
@@ -13,10 +14,10 @@
 .layer > div { border-radius: 0; }
 .layer.on { opacity: 1; transform: none; }
 .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0, 0, 0, .28), transparent 30%); }
-.tag { position: absolute; top: 20px; left: 20px; }
+.tag { position: absolute; top: calc(var(--header-h) + 28px); left: var(--gutter); }
 
 /* dark half with the list */
-.panel { display: grid; grid-template-rows: auto 1fr auto; gap: 24px; padding: clamp(24px, 3.4vw, 56px); min-height: 0; }
+.panel { display: grid; grid-template-rows: auto 1fr auto; gap: 24px; padding: calc(var(--header-h) + 32px) var(--gutter) clamp(32px, 4vw, 64px) clamp(32px, 5vw, 96px); min-height: 0; }
 .count { font-size: var(--fs-xs); font-weight: 500; letter-spacing: .08em; color: rgba(242, 242, 240, .5); font-variant-numeric: tabular-nums; }
 .list { align-self: center; display: grid; }
 .item {
@@ -42,10 +43,10 @@
 @keyframes in { from { opacity: 0; transform: translateY(6px); } }
 
 @media (max-width: 860px) {
-  .track { --card-top: calc(var(--header-h) + 8px); --step: 30svh; }
-  .card { grid-template-columns: 1fr; grid-template-rows: 38% 1fr; min-height: 560px; height: calc(100svh - var(--card-top) - 12px); }
-  .tag { top: 14px; left: 14px; }
-  .panel { gap: 14px; padding: 20px; }
+  .track { --step: 30svh; }
+  .card { grid-template-columns: 1fr; grid-template-rows: 42% 1fr; }
+  .tag { top: auto; bottom: 14px; left: var(--gutter); }
+  .panel { gap: 14px; padding: 20px var(--gutter) 24px; }
   .item { font-size: clamp(24px, min(7.4vw, 4.4svh), 34px); }
   .line { font-size: 16px; }
 }
