@@ -19,19 +19,8 @@
 .n { justify-self: start; background: var(--lime); color: var(--black); }
 
 .tick { width: 24px; height: 24px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--mint); color: var(--green); font-size: 0.75rem; font-weight: 500; }
-.story { display: grid; grid-template-columns: minmax(0, 0.8fr) 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
-.storyAside { position: sticky; top: calc(var(--header-h) + 32px); display: grid; gap: 14px; }
 .photo { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-l); overflow: hidden; }
 .photo img { object-fit: cover; object-position: 50% 30%; }
-.founder { color: var(--muted); }
-.founder b { color: var(--ink); font-weight: 500; }
-.storyBody { display: grid; gap: 20px; font-size: clamp(1.05rem, 1.4vw, 1.18rem); line-height: 1.65; color: var(--ink-2); }
-.storyBody :global(.h2) { color: var(--ink); margin-bottom: 8px; }
-.lead { font-size: 1.3em; line-height: 1.35; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
-.lines { display: grid; gap: 4px; padding-left: 18px; border-left: 2px solid var(--green); color: var(--ink); }
-.quote { margin: 8px 0; font-size: 1.3em; line-height: 1.35; font-weight: 500; letter-spacing: -0.02em; color: var(--green); }
-.sign { color: var(--muted); }
-.storyMore { justify-self: start; margin-top: 8px; }
 
 .beliefsSection { padding-top: 0; }
 ul.principles { grid-template-columns: repeat(4, 1fr); }
@@ -51,8 +40,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
   ul.principles { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
-  .story, .features { grid-template-columns: 1fr; }
-  .storyAside { position: static; }
+  .features { grid-template-columns: 1fr; }
   .photo { aspect-ratio: 4 / 3; }
   .dark { margin-inline: 6px; border-radius: 16px; }
 }
@@ -81,8 +69,6 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 
 /* centred section heads, like the home page */
 .center.center { justify-items: center; text-align: center; max-width: 60rem; margin-inline: auto; }
-/* the tag above the story keeps its own width inside the grid */
-.storyBody > :global(.label) { justify-self: start; }
 
 /* pricing: white text over a full-bleed photo (like the home Join block) */
 .pf { position: relative; }
@@ -100,15 +86,11 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 /* hero: who is behind it */
 .who { width: 100%; margin-top: 4px; font-size: var(--fs-small); color: rgba(255, 255, 255, .7); }
 
-/* founder story: a dark number card instead of a second founder photo */
-.stat { display: grid; gap: 14px; padding: clamp(28px, 3.5vw, 44px); border-radius: var(--radius-l); background: var(--atmo-dark, #111); color: #f1f1ec; min-height: clamp(320px, 34vw, 460px); align-content: end; }
-.statValue { font-size: clamp(6rem, 13vw, 11rem); line-height: .85; font-weight: 500; letter-spacing: -0.06em; color: var(--lime); }
-.stat p { font-size: var(--fs-lead); line-height: 1.4; color: rgba(255, 255, 255, .78); max-width: 18rem; }
 
 /* how it works: wheel | steps | phone */
 .howSection { padding-top: 0; }
 .scrolly { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 5vw, 80px); }
-.stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; place-items: center; }
+.stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; place-items: center; contain: paint; }
 .chapters { display: grid; }
 .chapter { min-height: 80svh; display: grid; align-content: center; gap: 14px; opacity: .25; transition: opacity .5s var(--ease); }
 .chapter[data-active] { opacity: 1; }
@@ -178,3 +160,31 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 .nameEq { color: var(--muted); font-weight: 300; }
 .nameMeaning { color: var(--ink); }
 .nameText { max-width: 40rem; font-size: var(--fs-lead); line-height: 1.55; color: var(--ink-2); }
+
+/* founder story: centred quote with one signature, his photo with two facts floating beside it, then the takeaway */
+.story { display: grid; justify-items: center; text-align: center; }
+.storyQuote { margin: clamp(20px, 3vw, 36px) 0 0; display: grid; justify-items: center; gap: clamp(18px, 2vw, 28px); max-width: 30ch; font-size: clamp(26px, 3.3vw, 52px); }
+.quoteMark { font-size: 2.4em; line-height: .6; height: .42em; font-weight: 500; color: var(--cream-2); font-family: Georgia, "Times New Roman", serif; }
+.storyQuote blockquote { margin: 0; }
+.storyQuote blockquote p { font-size: 1em; line-height: 1.12; font-weight: 500; letter-spacing: -0.035em; color: var(--ink); text-wrap: balance; }
+.storyQuote blockquote em { font-style: normal; color: var(--green); }
+.byline { display: flex; align-items: center; gap: 12px; font-size: var(--fs-small); color: var(--muted); }
+.byline b { color: var(--ink); font-weight: 500; }
+.bar { width: 1px; height: 14px; background: var(--ink); opacity: .5; }
+.storyVisual { position: relative; width: min(380px, 66vw); margin: clamp(48px, 7vw, 96px) 0 clamp(40px, 6vw, 80px); }
+.storyPhoto { position: relative; aspect-ratio: 4 / 5; border-radius: 999px 999px var(--radius-l) var(--radius-l); overflow: hidden; background: var(--cream-2); }
+.storyPhoto img { object-fit: cover; }
+.storyFact { position: absolute; display: grid; gap: 4px; text-align: left; padding: 16px 20px; border-radius: var(--radius-m); background: rgba(242, 242, 240, .82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); width: max-content; max-width: 220px; }
+.storyFact b { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: var(--ink); }
+.storyFact span { font-size: var(--fs-small); line-height: 1.35; color: var(--muted); }
+.factA { top: 22%; right: 0; transform: translateX(62%); }
+.factB { bottom: 14%; left: 0; transform: translateX(-62%); }
+.storyEnd { display: grid; justify-items: center; gap: 16px; max-width: 40rem; }
+.takeaway { font-size: var(--fs-h3-l); line-height: 1.1; letter-spacing: -0.035em; font-weight: 500; text-wrap: balance; }
+.storyText { font-size: var(--fs-lead); line-height: 1.5; color: var(--ink-2); max-width: 34rem; margin-bottom: 8px; }
+@media (max-width: 640px) {
+  .storyQuote { max-width: 100%; }
+  .storyFact { padding: 12px 14px; max-width: 150px; }
+  .factA { transform: translateX(28%); top: 10%; }
+  .factB { transform: translateX(-28%); bottom: 8%; }
+}

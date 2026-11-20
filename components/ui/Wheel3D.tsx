@@ -331,7 +331,9 @@ function build(
     raf = requestAnimationFrame(tick);
   };
   const start = () => { if (!document.hidden && visible && !raf) { clock.getDelta(); raf = requestAnimationFrame(tick); } };
-  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; start(); });
+  // off screen the labels and the score are hidden, not just frozen: Safari can leave stale
+  // copies of them painted over the sections above once the sticky stage scrolls away
+  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; el.toggleAttribute("data-idle", !visible); start(); });
   io.observe(el);
   document.addEventListener("visibilitychange", start);
   raf = requestAnimationFrame(tick);

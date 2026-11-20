@@ -394,18 +394,18 @@ export const EMAIL = {
   } as Record<AreaKey, string>,
 };
 
-/** The founder story (shown on /about#story), in Edward's words. */
+/** The founder story (shown on /about#story), in Edward's words: one quote, one signature, two facts beside his photo, then the takeaway. */
 export const STORY = {
   label: "Our story",
-  title: "Why I created *Elegix*",
-  blocks: [
-    { type: "lead", text: "At 20 I weighed 48 kilograms, about 106 pounds." },
-    { type: "p", text: "I was so afraid of not having at 20 what other people have at 60 that I worked 20 hours a day, once went 5 days without sleep, and nearly got their health instead." },
-    { type: "p", text: "What pulled me back was the opposite of doing more: I dropped the projects I didn't need, made myself the main project and deleted social media." },
-    { type: "quote", text: "You don't have to make it to everything, only to what's yours." },
-    { type: "p", text: "Elegix is the app I badly needed back then. It shows which of the 6 areas of your life is slipping, before it costs you what it cost me." },
-  ] as ({ type: "lead" | "p" | "quote"; text: string } | { type: "lines"; lines: string[] })[],
-  signature: "Edward Korytskyi, Founder",
+  title: "Why I created Elegix",
+  quote: "At 20 I worked 20 hours a day and nearly lost my health. *Elegix* is the app I badly needed back then.",
+  /** two facts from the story, floating beside the founder photo */
+  facts: [
+    { value: "48 kg", text: "my weight at 20 (106 lb)" },
+    { value: "5 days", text: "without sleep, once" },
+  ],
+  takeaway: "You don't have to make it to everything, only to *what's yours*.",
+  text: "I got my life back by doing less, not more. Elegix shows which of the 6 areas of your life is slipping, before it costs you what it cost me.",
   more: { href: "/stories/why-i-built-elegix", label: "Read the full story" },
   cta: "Get early access",
 };
@@ -443,8 +443,6 @@ export const ABOUT_PAGE = {
       { title: "For anyone who wants to feel in control again", quote: "“Too many goals, too many apps. I don't know where to start.”", text: "Elegix brings them into one calm place and shows you the next small step.", src: "/images/area-meaning.jpg", alt: "A woman standing at a tall window at dusk" },
     ],
   },
-  /** the founder story's side card: one number from it, counted up as it scrolls into view */
-  storyStat: { value: 20, unit: "h", caption: "a day at work, at 20. That's what Elegix is built to prevent." },
   /** How Elegix works: the wheel, three steps and the rhythm in one block (replaces the 6 area photos, the rhythm and the idea blocks) */
   how: {
     label: "How it works",
