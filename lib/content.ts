@@ -294,7 +294,7 @@ export const TEAM = {
     { name: "Alina Krupa", role: "CMO & Co-founder", photo: "/images/alina-krupa.jpg", linkedin: "https://www.linkedin.com/in/alinakrupa/" },
     { name: "Maksym Zhuravskyi", role: "CTO & Co-founder", photo: "/images/maksym-zhuravskyi.jpg", linkedin: "https://www.linkedin.com/in/mesiriak/" },
     { name: "Yevhenii Bohomol", role: "Co-founder", photo: "/images/yevhenii-bohomol.jpg", linkedin: "https://www.linkedin.com/in/evgeniybogomol/" },
-  ] as { name: string; role: string; photo?: string; linkedin?: string }[],
+  ] as { name: string; role: string; photo?: string; linkedin?: string; bio?: string }[],
 };
 
 /** Shared by the founder block on the home page and "Our principles" on /about. The last one (dark, with the lock) carries the privacy promise. */
@@ -421,46 +421,62 @@ export const ABOUT_PAGE = {
     title: "Built for a *balanced* life, not a busier one",
     media: { src: "/images/about-hero.jpg", alt: "A man sitting on a cliff edge, looking out over misty mountains at dawn", brief: "About hero · calm person outdoors · 2400×1600", ratio: "3 / 2" } as MediaSlot,
     lede: "Elegix is a life balance tracker. It links your goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next.",
+    /** one line under the lede: who is behind it */
+    who: "A team of 4 from Lutsk, Ukraine, building it in public.",
     mission: { label: "Our mission", text: "To help people build a life they're *proud of*, one *small step* at a time. Not by doing more, but by seeing *all six areas* at once." },
     strip: [
       { src: "/images/area-people.jpg", alt: "Friends clinking glasses of red wine over dinner" },
       { src: "/images/area-meaning.jpg", alt: "A woman standing at a tall window at dusk" },
-      { src: "/images/about-hero.jpg", alt: "A man looking out over misty mountains at dawn" },
+      { src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen" },
       { src: "/images/area-home.jpg", alt: "A bright, tidy living room with plants and an orange armchair" },
       { src: "/images/area-career.jpg", alt: "A woman working on a laptop at a wooden table" },
     ],
     cta: "Get early access",
-  },
-  areas: {
-    label: "The 6 life areas",
-    title: "Everything you do belongs to an *area*",
-    lede: "Every goal, habit and task sits in one of these areas. Together they make your Life Balance score.",
   },
   audience: {
     label: "Who it's for",
     title: "Who is *Elegix* for?",
     lede: "For anyone who's good at getting things done and tired of everything else quietly slipping.",
     items: [
-      { title: "For people crushing it at work", text: "Your career is moving, but sleep, friends and hobbies keep getting pushed to “later”. Elegix shows the trade-off before it turns into burnout." },
-      { title: "For those who've tried every planner", text: "Notion setups, to-do apps, habit trackers. Each solved one problem. Elegix gives you one framework for all of it, ready from day one." },
-      { title: "For anyone who wants to feel in control again", text: "Too many goals, notifications and tools. Elegix brings them into one calm place and shows you the next small step." },
+      { title: "For people crushing it at work", quote: "“My career is growing. My gym bag hasn't moved in three weeks.”", text: "Sleep, friends and hobbies keep getting pushed to “later”. Elegix shows the trade-off before it turns into burnout.", src: "/images/area-career.jpg", alt: "A woman working on a laptop at a wooden table" },
+      { title: "For those who've tried every planner", quote: "“I've built five Notion systems. None of them lasted a month.”", text: "Each app solved one problem. Elegix gives you one framework for all of it, ready from day one.", src: "/images/how-next.jpg", alt: "A notebook, pen and laptop on a wooden desk" },
+      { title: "For anyone who wants to feel in control again", quote: "“Too many goals, too many apps. I don't know where to start.”", text: "Elegix brings them into one calm place and shows you the next small step.", src: "/images/area-meaning.jpg", alt: "A woman standing at a tall window at dusk" },
     ],
   },
-  modes: {
-    label: "The rhythm",
-    title: "A weekly check-in and a *monthly review*",
-    lede: "A 1-minute weekly check-in, plus a 10-minute monthly review. That's the whole routine.",
-    items: [
-      { title: "Weekly check-in", time: "1 minute", points: ["Rate each of the 6 areas from 1 to 10", "See your Life Balance score update", "Notice which area needs you next"] },
-      { title: "Monthly review", time: "10 minutes", points: ["See which areas grew and which dropped", "Read back your “why” for each goal", "Choose one area to focus on next month"] },
+  /** the founder story's side card: one number from it, counted up as it scrolls into view */
+  storyStat: { value: 20, unit: "h", caption: "a day at work, at 20. That's what Elegix is built to prevent." },
+  /** How Elegix works: the wheel, three steps and the rhythm in one block (replaces the 6 area photos, the rhythm and the idea blocks) */
+  how: {
+    label: "How it works",
+    title: "Built on the *Wheel of Life*. Used every week.",
+    lede: "The Wheel of Life is a classic coaching exercise: rate each area of your life and the gaps become obvious. People do it once and forget it. Elegix turns it into a habit, linked to your real goals, habits and tasks.",
+    wheel: { label: "A wheel of life with 6 areas", balance: "Life Balance", last: "Last week", now: "This week", scores: [7, 6, 5, 6, 7, 8], prev: [6, 6, 3, 7, 6, 8] },
+    steps: [
+      { title: "See", text: "One Life Balance score and 6 area scores show which part of your life needs you." },
+      { title: "Act", text: "Every goal, habit and task belongs to an area, with your “why” next to it and one next step." },
+      { title: "Reflect", text: "See what grew and what dropped, and choose the one area to focus on next." },
+    ],
+    rhythm: [
+      { time: "1 min", title: "Weekly check-in", text: "Rate each area from 1 to 10." },
+      { time: "10 min", title: "Monthly review", text: "What grew, what dropped, what to change." },
     ],
   },
-  idea: {
-    label: "The idea behind it",
-    title: "Built on the *Wheel of Life*",
-    text: "The Wheel of Life is a classic coaching exercise: rate each area of your life, look at the shape, and the gaps become obvious. It works, but people do it once and forget it. Elegix turns it into something you use every day, linked to your real goals, habits and tasks.",
-    points: ["Rate each area honestly, from 1 to 10", "Connect every goal and habit to an area", "Watch your balance change week by week", "Change one thing at a time, without guilt"],
+  /** Where we are: the road to launch, with the current stage marked */
+  stage: {
+    label: "Where we are",
+    title: "Building the *first version*",
+    lede: "Elegix is in development. Waitlist members get in first, in the order they joined.",
+    now: "We're here",
+    steps: [
+      { title: "The idea", text: "Years of planners that fixed one piece and missed the whole picture." },
+      { title: "Design and prototype", text: "The 6 areas, the Life Balance score and the weekly check-in, tested on ourselves." },
+      { title: "First version", text: "Building the iOS and Android app and sharing every step in public.", current: true },
+      { title: "Early access", text: "Waitlist members get in first, with a founding member price." },
+      { title: "Public launch", text: "Elegix on the App Store and Google Play." },
+    ] as { title: string; text: string; current?: boolean }[],
   },
+  /** small facts next to the team */
+  teamFacts: ["Lutsk, Ukraine", "4-day work week", "Building in public"],
   /** full-bleed photo behind the pricing and name block */
   photo: { src: "/images/how-score.jpg", alt: "A person walking along a waterfront path at sunset", brief: "Calm walk at sunset · full-bleed", ratio: "3 / 2" } as MediaSlot,
   pricing: {
@@ -472,8 +488,26 @@ export const ABOUT_PAGE = {
     label: "Why the name",
     title: "Why “Elegix”?",
     text: ["In Valencian and Western Catalan, ", "elegix", " means “choose”, and also “she chooses”. That’s the whole idea behind the app: a balanced life isn’t something you find. It’s something you choose, one week at a time."],
+    /** the word "choose" in other languages, cycling before it lands on elegix */
+    words: [
+      { word: "обирай", lang: "uk" }, { word: "elige", lang: "es" },
+      { word: "choisis", lang: "fr" }, { word: "wähle", lang: "de" }, { word: "scegli", lang: "it" }, { word: "elegix", lang: "ca-valencia" },
+    ],
+    /** shown after the cycling word: elegix = “choose” */
+    meaning: "“choose”",
   },
-  faq: ["How is Elegix different from Todoist or Notion?", "Is the Life Balance score real or just a number?", "I've given up on every planner. Why would this one stick?", "Is it free?", "Which platforms?", "What happens to my data?", "What does Elegix mean?"],
+  /** questions about the company (the product questions are on the home page) */
+  faq: {
+    title: "Questions about *us*",
+    items: [
+      { q: "Who is behind Elegix?", a: "Four people: Edward Korytskyi (founder), Alina Krupa (CMO and co-founder), Maksym Zhuravskyi (CTO and co-founder) and Yevhenii Bohomol (co-founder). Elegix is registered in Ukraine as an individual entrepreneur (FOP) business in Edward's name." },
+      { q: "Where are you based?", a: "In Lutsk, Ukraine. We work as a small remote team, four days a week." },
+      { q: "What stage is Elegix at?", a: "We're building the first version of the iOS and Android app. Waitlist members get in first, in the order they joined." },
+      { q: "How do I get early access?", a: "Join the waitlist with your email. We'll write once, when your spot opens. Early members also get a founding member price, locked for life." },
+      { q: "What do you do with my data?", a: "Only what's needed to run the app for you. It's never sold, analytics run only if you agree, and you can have your data deleted any time. The details are in our Privacy Policy." },
+      { q: "How can I contact you?", a: "Email hello@elegix.net. Edward reads every message, and we usually reply within a couple of days." },
+    ],
+  },
   story: { label: "Our story", id: "story" },
   beliefs: { label: "What we believe", title: "Our *principles*" },
   publicBuild: { title: "Built in public", text: "Elegix is in development and we share every step. Follow along:" },
