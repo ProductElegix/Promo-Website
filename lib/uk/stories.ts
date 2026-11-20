@@ -1,5 +1,5 @@
 /**
- * Ukrainian versions of the personal stories (/uk/stories/…). Slugs, dates, photos and related guides
+ * Ukrainian versions of the personal stories (/uk/about/stories/…). Slugs, dates, photos and related guides
  * come from lib/stories.ts; only the words live here. `person` matches the Ukrainian names in TEAM.
  */
 import { STORIES, type Story } from "@/lib/stories";
@@ -123,7 +123,7 @@ export const UK_STORIES: Story[] = [
       {
         h2: "Як я прийшла в Elegix",
         blocks: [
-          { p: "Приблизно тоді я познайомилася з [Едуардом Корицьким](/stories/why-i-built-elegix), засновником Elegix. Ми багато говорили про його ідею: про цілі, пріоритети й про те, як легко загубити важливе серед щоденних задач. У цих розмовах я весь час упізнавала себе." },
+          { p: "Приблизно тоді я познайомилася з [Едуардом Корицьким](/about/stories/why-i-built-elegix), засновником Elegix. Ми багато говорили про його ідею: про цілі, пріоритети й про те, як легко загубити важливе серед щоденних задач. У цих розмовах я весь час упізнавала себе." },
           { p: "Я зрозуміла, що хочу не просто підтримати ідею. Я хочу разом будувати цей продукт, якого мені самій так бракувало." },
           { p: "Так я прийшла в Elegix як CMO і співзасновниця." },
           { p: "Elegix збирає 6 ключових сфер життя в одну систему. Він допомагає побачити, чому ти віддаєш увагу, що постійно відкладаєш і де втрачаєш баланс." },

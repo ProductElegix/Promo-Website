@@ -14,6 +14,8 @@ import type { Lang } from "@/lib/i18n";
 
 export type AuthorPage = Author & {
   slug: string;
+  /** their personal story, when they have one: linked at the top of the author page */
+  story?: string;
   writes: { href: string; title: string; text: string; label: string; areas?: AreaKey[]; media?: MediaSlot; date: string }[];
 };
 
@@ -47,7 +49,7 @@ function build(lang: Lang): AuthorPage[] {
     const guides = a.name === founder.name
       ? [...GUIDES, ...AREA_GUIDES].map((g) => ({ href: guideHref(g), title: g.title, text: g.description, label: cardMeta(g, lang), areas: areasOf(g), media: g.media, date: g.updated }))
       : [];
-    return { ...a, slug: slugOf(a.name), writes: [...stories, ...guides].sort((x, y) => y.date.localeCompare(x.date)) };
+    return { ...a, slug: slugOf(a.name), story: stories[0]?.href, writes: [...stories, ...guides].sort((x, y) => y.date.localeCompare(x.date)) };
   });
 }
 

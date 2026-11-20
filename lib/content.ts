@@ -288,7 +288,7 @@ export const TRUST = {
   founder: {
     quote: "I tried every planner and habit tracker. Each fixed one piece, and none answered the bigger question: how do you build a balanced life without the process itself becoming overwhelming? Elegix is my answer.",
     fallback: "Questions, ideas or your own story with burnout? Write to me directly at hello@elegix.net. I read every message.",
-    storyLink: { href: "/stories/why-i-built-elegix", label: "Read my story" },
+    storyLink: { href: "/about/stories/why-i-built-elegix", label: "Read my story" },
     name: "Edward Korytskyi",
     role: "Founder",
     /** Edward's personal profiles (LinkedIn first). They go into the Person schema as sameAs. */
@@ -421,7 +421,7 @@ export const STORY = {
   ],
   takeaway: "You don't have to make it to everything, only to *what's yours*.",
   text: "I got my life back by doing less, not more. Elegix shows which of the 6 areas of your life is slipping, before it costs you what it cost me.",
-  more: { href: "/stories/why-i-built-elegix", label: "Read the full story" },
+  more: { href: "/about/stories/why-i-built-elegix", label: "Read the full story" },
   cta: "Get early access",
 };
 
@@ -708,8 +708,8 @@ export const PRESS = {
     label: "Background",
     title: "The *stories* behind it",
     links: [
-      { href: "/stories/why-i-built-elegix", label: "Edward's story: why he built Elegix" },
-      { href: "/stories/alina-krupa", label: "Alina's story: why she co-founded Elegix" },
+      { href: "/about/stories/why-i-built-elegix", label: "Edward's story: why he built Elegix" },
+      { href: "/about/stories/alina-krupa", label: "Alina's story: why she co-founded Elegix" },
       { href: "/about", label: "About Elegix and the team" },
     ],
   },
