@@ -107,6 +107,74 @@ export const STORIES: Story[] = [
       text: "Elegix tracks your goals, habits and tasks across 6 life areas and shows which one needs you next. Free app for iOS and Android. Join the waitlist for early access.",
     },
   },
+  {
+    slug: "alina-krupa",
+    person: "Alina Krupa",
+    title: "I loved a company that was never mine",
+    metaTitle: "Why Alina Krupa joined Elegix as CMO and co-founder",
+    description: "Alina Krupa spent years at C-level in IT and iGaming, measuring everything except her own life. Why she left, and why she co-founded Elegix.",
+    label: "Co-founder story",
+    lede: "Years at C-level taught me to measure everything. Everything except my own life.",
+    published: "2026-11-20",
+    updated: "2026-11-20",
+    minutes: 4,
+    media: { src: "/images/alina-krupa.jpg", alt: "Alina Krupa, CMO and co-founder of Elegix, in the evening light", brief: "Alina portrait", ratio: "3 / 2", position: "50% 20%" },
+    author: {
+      name: "Alina Krupa",
+      role: "CMO & Co-founder of Elegix",
+      photo: "/images/alina-krupa.jpg",
+      bio: "Spent years in IT and iGaming, from growing international markets to running teams and business lines at C-level.",
+      linkedin: "https://www.linkedin.com/in/alinakrupa/",
+    },
+    intro: [
+      { p: "It's been more than a year since, for reasons I won't go into, I left a company I probably loved more than anyone should love their job." },
+    ],
+    sections: [
+      {
+        h2: "A business that was never mine",
+        blocks: [
+          { p: "I truly lived for it. I woke up thinking about the business and fell asleep thinking about it. I worried about every decision, every person on the team, every result. I celebrated wins as if they were my own and took problems as if it were my personal business." },
+          { p: "Even though, formally, it was never mine." },
+          { p: "After I left, for the first time in a long while I had to think not about what to do next with the company, but about what to do next with myself." },
+          { p: "I don't regret any of it. Those years gave me people I value, huge experience and the courage to take responsibility. But slowly I realized how much I had put off for the sake of work." },
+        ],
+      },
+      {
+        h2: "I measured everything except myself",
+        blocks: [
+          { p: "Over my years in IT and iGaming I went from growing international markets to running teams and business lines at C-level. Strategy, marketing, finance, operations. I was used to everything being measurable: revenue, ROI, performance, growth." },
+          { p: "I could spend hours finding where a business was losing resources, and never notice where my own were going." },
+          { p: "When did I last properly rest? When did I last take care of my health before something already hurt? When did I last spend time with the people I love without checking work messages?" },
+          { p: "The strangest part is that from the outside everything looked great: the title, the results, the ambition. The postponed plans and constant tiredness had simply become normal." },
+          { p: "So I started asking myself: why do we plan a business's growth so carefully, and barely plan our own lives?" },
+        ],
+      },
+      {
+        h2: "How I came to Elegix",
+        blocks: [
+          { p: "Around then I met [Edward Korytskyi](/stories/why-i-built-elegix), the founder of Elegix. We talked a lot about his idea: about goals, priorities, and how easy it is to lose what matters among everyday tasks. I kept recognizing myself in those conversations." },
+          { p: "I realized I didn't just want to support the idea. I wanted to build this product together, the one I had needed so much myself." },
+          { p: "That's how I joined Elegix as CMO and co-founder." },
+          { p: "Elegix brings the 6 key areas of life into one system. It helps you see what you give your attention to, what you keep putting off, and where you're losing balance." },
+        ],
+      },
+      {
+        h2: "Ambition without a life on hold",
+        blocks: [
+          { p: "I still love my work. I love hard problems, big goals and the feeling of a result. And I'm not giving up on ambition." },
+          { p: "I just don't want to keep waiting for the next quarter, launch or deadline to finally have time for myself." },
+          { p: "I can't say I've found the perfect balance. I still have a lot to learn." },
+          { p: "I used to give almost all my time to a business I loved. Now, together with the team, I'm building our own product, one that reminds me my life deserves attention too." },
+          { p: "We're preparing the first version of Elegix for iOS and Android and opening the waitlist. If this story feels familiar, I'd love to see you among the first people to use Elegix." },
+        ],
+      },
+    ],
+    related: ["signs-of-burnout", "work-life-balance", "how-to-choose-priorities-in-life"],
+    cta: {
+      title: "Plan your life as carefully as your *business*",
+      text: "Elegix links your goals, habits and tasks to 6 life areas and shows which one you keep putting off. Free app for iOS and Android. Join the waitlist for early access.",
+    },
+  },
 ];
 
 export const storyBySlug = (slug: string) => STORIES.find((s) => s.slug === slug);

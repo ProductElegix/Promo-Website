@@ -116,7 +116,7 @@ export function Article({ guide: g, path, parent, related, author = FOUNDER_AUTH
           <p className={styles.lede}>{g.lede}</p>
           <p className={styles.meta}>
             {author.photo && <Image src={author.photo} alt="" width={32} height={32} className={styles.metaPhoto} />}
-            <span>By <Link href={isFounder ? "/about#story" : "/about#team"}>{author.name}</Link>, {author.role.charAt(0).toLowerCase() + author.role.slice(1)} · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
+            <span>By <Link href={isFounder ? "/about#story" : "/about#team"}>{author.name}</Link>, {author.role} · Updated <time dateTime={g.updated}>{date(g.updated)}</time> · {g.minutes} min read</span>
           </p>
         </header>
 
