@@ -1,0 +1,64 @@
+/* "Six areas. One life.": tall section, the stage sticks to the screen while the photos fan out */
+.spread { position: relative; }
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .spread { height: 320vh; height: 320svh; }
+  /* keep the photos hidden until the script has put them into the starting stack, so they never flash in their final places */
+  .spread:not([data-ready]) .photo { visibility: hidden; }
+}
+.stage {
+  position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden;
+  display: grid; place-items: center;
+}
+
+/* thin perspective grid behind everything, fading out at the edges */
+.room {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  fill: none; stroke: rgba(17, 17, 17, 0.09); stroke-width: 1;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 45%, transparent 100%);
+}
+.room * { vector-effect: non-scaling-stroke; }
+
+.head { position: relative; z-index: 1; display: grid; gap: 20px; justify-items: center; text-align: center; padding-inline: var(--gutter); }
+.title { font-size: clamp(42px, 7.2vw, 128px); line-height: 0.95; letter-spacing: -0.05em; max-width: 9.5ch; }
+.text { font-size: var(--fs-lead); line-height: 1.45; letter-spacing: -0.02em; color: var(--muted); max-width: 24rem; }
+
+/* each photo is placed by the centre of its frame: --x/--y in % of the stage, width in "units" of min(1vw, 1.7vh) */
+.photos { position: absolute; inset: 0; z-index: 2; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.photo {
+  --u: min(1vw, 1.7vh);
+  position: absolute; left: var(--x); top: var(--y); width: calc(var(--w) * var(--u));
+  will-change: transform;
+}
+/* the offset to the centre and the tilt live on the inner card, so the animation can own the li's transform */
+.card { position: relative; transform: translate(-50%, -50%) rotate(var(--r)); }
+.frame { position: relative; aspect-ratio: var(--ratio, 4 / 5); border-radius: var(--radius-m); overflow: hidden; background: var(--cream-2); }
+.frame img { object-fit: cover; }
+.tag {
+  position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 9px 4px; border-radius: 6px; background: var(--paper); color: var(--ink);
+  font-size: var(--fs-xs); font-weight: 500; letter-spacing: -0.01em; white-space: nowrap;
+}
+.tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--s); }
+
+.p1 { --x: 15%; --y: 27%; --w: 19; --r: -4deg; --ratio: 4 / 3; }
+.p2 { --x: 84%; --y: 26%; --w: 15; --r: 3deg; }
+.p3 { --x: 9%;  --y: 72%; --w: 15; --r: 3deg; }
+.p4 { --x: 88%; --y: 72%; --w: 18; --r: -3deg; --ratio: 4 / 3; }
+.p5 { --x: 31%; --y: 90%; --w: 14; --r: 2deg; --ratio: 4 / 3; }
+.p6 { --x: 67%; --y: 92%; --w: 13; --r: -2deg; --ratio: 4 / 3; }
+
+@media (max-width: 767px) {
+  .photo { --u: 1vw; }
+  .tag { left: 7px; bottom: 7px; padding: 4px 7px 3px; font-size: 11px; gap: 5px; }
+  .tag i { width: 6px; height: 6px; }
+  .p1 { --x: 27%; --y: 22%; --w: 40; }
+  .p2 { --x: 79%; --y: 21%; --w: 28; }
+  .p3 { --x: 1%;  --y: 50%; --w: 20; --ratio: 4 / 5; }
+  .p4 { --x: 99%; --y: 50%; --w: 20; --ratio: 4 / 5; }
+  .p5 { --x: 27%; --y: 80%; --w: 32; --ratio: 4 / 5; }
+  .p6 { --x: 74%; --y: 81%; --w: 38; }
+  .p3 .tag, .p4 .tag { display: none; }
+  .title { max-width: 8ch; }
+  .text { max-width: 17rem; }
+}

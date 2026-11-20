@@ -149,6 +149,20 @@ export const PROBLEM = {
   closing: "Burnout doesn't arrive in a day. It builds quietly in the parts of your life you stopped looking at.",
 };
 
+// 2b. One life, six areas: a stack of photos that fans out around the headline while scrolling
+export const SPREAD = {
+  title: "Six areas. *One life.*",
+  text: "Elegix keeps all six in view, so none of them slips quietly.",
+  photos: [
+    { area: "health" as AreaKey, src: "/images/area-health.jpg", alt: "A man running on a track at sunrise" },
+    { area: "career" as AreaKey, src: "/images/area-career.jpg", alt: "A woman working on a laptop at a wooden table" },
+    { area: "people" as AreaKey, src: "/images/how-areas.jpg", alt: "Friends laughing while making pizza together in a kitchen" },
+    { area: "growth" as AreaKey, src: "/images/area-growth.jpg", alt: "A stack of books on a green armchair next to plants" },
+    { area: "meaning" as AreaKey, src: "/images/about-hero.jpg", alt: "A man sitting on a mountain ridge above the clouds" },
+    { area: "hobby" as AreaKey, src: "/images/ready/hobby.jpg", alt: "Over-ear headphones on a wooden table" },
+  ],
+};
+
 // 3
 export const COMPARE = {
   eyebrow: "Why other apps fail",
