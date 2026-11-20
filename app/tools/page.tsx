@@ -53,7 +53,7 @@ export default function Tools() {
                 <h2>{t.h2}</h2>
                 <p>{t.text}</p>
                 <div data-tool={t.name}><GuideTool name={t.name} /></div>
-                <p><Link href={t.guide.href}>{t.guide.label} →</Link></p>
+                <p><Link href={t.guide.href}>{t.guide.label}</Link></p>
               </section>
             ))}
           </div>
