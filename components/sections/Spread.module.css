@@ -2,6 +2,8 @@
 .spread { position: relative; }
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   .spread { height: 320vh; height: 320svh; }
+  /* keep the photos hidden until the script has put them into the starting stack, so they never flash in their final places */
+  .spread:not([data-ready]) .photo { visibility: hidden; }
 }
 .stage {
   position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden;

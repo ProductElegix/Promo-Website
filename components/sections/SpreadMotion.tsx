@@ -12,7 +12,9 @@ export function SpreadMotion() {
 
   useEffect(() => {
     const section = ref.current?.closest<HTMLElement>("[data-spread]");
-    if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!section) return;
+    // with reduced motion the photos stay in their final places
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { section.dataset.ready = ""; return; }
     let ctx: { revert: () => void } | undefined;
     let cancelled = false;
 
@@ -46,15 +48,26 @@ export function SpreadMotion() {
           scrollTrigger: { trigger: section, start: "top top", end: "bottom bottom", scrub: 0.8, invalidateOnRefresh: true },
         });
 
-        // 1. a stack rises from below into the middle
+        // start: every photo sits in a tilted stack below the middle of the screen. Set on all of them up front:
+        // a staggered fromTo would only render the first photo's start state before the scroll reaches it.
+        const below = (_i: number, el: HTMLElement) => toCentre(el).y + window.innerHeight * 0.9;
+        gsap.set(photos, {
+          x: (_i: number, el: HTMLElement) => toCentre(el).x,
+          y: below,
+          rotate: (i: number) => tilt[i % tilt.length],
+          scale: 1.15,
+        });
+        section.dataset.ready = "";
+
+        // 1. the stack rises into the middle
         tl.fromTo(photos, {
           x: (_i: number, el: HTMLElement) => toCentre(el).x,
-          y: (_i: number, el: HTMLElement) => toCentre(el).y + window.innerHeight * 0.9,
+          y: below,
           rotate: (i: number) => tilt[i % tilt.length],
           scale: 1.15,
         }, {
           y: (_i: number, el: HTMLElement) => toCentre(el).y,
-          ease: "power2.out", duration: 1, stagger: 0.08,
+          ease: "power2.out", duration: 1, stagger: 0.08, immediateRender: false,
         });
         // 2. short pause, then they fan out to the corners
         tl.to(photos, { x: 0, y: 0, rotate: 0, scale: 1, ease: "power3.inOut", duration: 1.2, stagger: 0.04 }, "+=0.25");
