@@ -102,3 +102,31 @@
 }
 @media (max-width: 480px) { .row { grid-template-columns: minmax(0, 1fr) 84px; } }
 .search input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+/* life area page: its guides right under the header */
+.areaHub { margin-top: clamp(32px, 4vw, 56px); margin-bottom: clamp(40px, 5vw, 72px); }
+.areaHubHead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 20px; }
+.areaHubTitle { font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.02em; }
+.areaHubTitle span { color: var(--muted); font-variant-numeric: tabular-nums; }
+.areaHubSkip, .areaHubMore a { font-size: var(--fs-small); color: var(--ink); text-underline-offset: 3px; }
+.areaHubMore { margin-top: 16px; }
+
+/* guide library: the picked area's own page, as a banner over its guides */
+.areaBanner { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; padding: 18px 22px; border-radius: var(--radius-l); background: var(--s); color: var(--t); text-decoration: none; transition: transform .2s; }
+.areaBanner:hover { transform: translateY(-2px); }
+.areaBannerIcon { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border-radius: 50%; background: var(--t); color: var(--s); }
+.areaBannerIcon svg { width: 20px; height: 20px; color: var(--s); }
+.areaBannerText { display: grid; gap: 2px; min-width: 0; }
+.areaBannerText strong { font-size: 18px; font-weight: 500; letter-spacing: -0.02em; }
+.areaBannerText span { font-size: var(--fs-small); opacity: .85; }
+.areaBannerGo { margin-left: auto; flex: none; font-size: var(--fs-small); font-weight: 500; white-space: nowrap; }
+@media (max-width: 640px) { .areaBannerGo { display: none; } }
+
+/* the sidebar's links to the 6 area pages (also keeps them linked from the hub without JS) */
+.overviews { display: grid; gap: 8px; padding-right: clamp(16px, 2vw, 32px); }
+.overviews p { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-left: 12px; }
+.overviews ul { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0 0 0 8px; margin: 0; }
+.overviews a { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); font-size: 13px; text-decoration: none; transition: box-shadow .2s; }
+.overviews a:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+.overviews svg { width: 12px; height: 12px; color: var(--s); }
+@media (max-width: 860px) { .overviews { display: none; } }
