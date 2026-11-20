@@ -1,8 +1,0 @@
-.box { position: relative; width: clamp(110px, 17vh, 180px); aspect-ratio: 1; display: grid; place-items: center; }
-.flat { width: 52%; height: auto; color: rgba(255, 255, 255, .9); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-.canvas { position: absolute; inset: -20%; width: 140%; height: 140%; opacity: 0; transition: opacity .8s var(--ease); pointer-events: none; }
-.ready .canvas { opacity: 1; }
-.ready .flat { opacity: 0; transform: scale(.8); }
-@media (max-width: 860px) {
-  .box { width: 108px; }
-}

@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ABOUT_PAGE as A, AREAS, AREA_ORDER, SOCIALS, STORY, TEAM, TRUST, type AreaKey } from "@/lib/content";
 import { WordCycle } from "./WordCycle";
-import { Logo3D } from "@/components/ui/Logo3D";
 import { Wheel3D } from "@/components/ui/Wheel3D";
 import { Faq } from "@/components/sections/Faq";
 import { Avatar } from "@/components/ui/Avatar";
@@ -31,7 +30,7 @@ export default function About() {
     <main>
       <Breadcrumbs name="About" path="/about" />
       {/* 1. Hero: what Elegix is and who is behind it */}
-      <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede} top={<Logo3D />}>
+      <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede}>
         <a href="#join" className="btn lime">{A.hero.cta}</a>
         <p className={styles.who}>{A.hero.who}</p>
       </PhotoHero>
