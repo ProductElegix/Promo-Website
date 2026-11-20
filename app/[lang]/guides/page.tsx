@@ -30,7 +30,7 @@ const T = {
     crumb: "Guides", eyebrow: "Guides", h1Prefix: "Life balance guides", h1: "Guides to a *balanced* life",
     lede: "Practical guides on the Wheel of Life, burnout, work-life balance and goals, plus a page for each of the 6 areas of life.",
     start: "Start reading", startHere: "Start here", readGuide: "Read the guide",
-    allLabel: "Guides", allTitle: "Burnout, balance and *goals*",
+    allTitle: "Burnout, balance and *goals*",
     areasLabel: "Life areas", areasTitle: "The 6 areas of a *balanced* life", questions: "Questions people ask", tools: "Free tools", howWe: "How we write and check our guides",
     checkLabel: "Free Life Balance Check", checkTitle: "Find your weakest area in *2 minutes*",
     checkText: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area.",
@@ -43,7 +43,7 @@ const T = {
     crumb: "Гайди", eyebrow: "Гайди", h1Prefix: "Гайди про баланс життя", h1: "Гайди до *збалансованого* життя",
     lede: "Практичні гайди про колесо життя, вигорання, баланс роботи та життя й цілі, а також сторінка для кожної з 6 сфер життя.",
     start: "Почати читати", startHere: "Почни звідси", readGuide: "Читати гайд",
-    allLabel: "Гайди", allTitle: "Вигорання, баланс і *цілі*",
+    allTitle: "Вигорання, баланс і *цілі*",
     areasLabel: "Сфери життя", areasTitle: "6 сфер *збалансованого* життя", questions: "Питання, які ставлять люди", tools: "Безкоштовні інструменти", howWe: "Як ми пишемо й перевіряємо гайди",
     checkLabel: "Безкоштовна перевірка балансу", checkTitle: "Знайди свою найслабшу сферу за *2 хвилини*",
     checkText: "Оціни 6 сфер життя від 1 до 10. Ми надішлемо на пошту твою оцінку балансу життя й перший крок для найнижчої сфери.",
@@ -109,7 +109,6 @@ export default async function Guides() {
       <section className="section" aria-labelledby="all-guides" style={{ paddingTop: 0 }}>
         <div className="container">
           <div className={`section-head ${styles.center}`} data-reveal>
-            <span className="label">{t.allLabel}</span>
             <h2 id="all-guides" className="display h2"><Rich text={t.allTitle} /></h2>
           </div>
           <GuideFilter
