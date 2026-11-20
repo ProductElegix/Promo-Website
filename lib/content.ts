@@ -18,6 +18,8 @@ export type MediaSlot = {
   alt: string;
   brief: string;
   ratio: string; // CSS aspect-ratio, e.g. "4 / 5"
+  /** CSS object-position for the crop, e.g. "50% 25%" to keep a face in frame */
+  position?: string;
 };
 
 /** The 6 life areas, named and ordered exactly as in the app's Life Area radar. */
@@ -289,7 +291,7 @@ export const TEAM = {
   title: "The people behind *Elegix*",
   members: [
     { name: "Edward Korytskyi", role: "Founder", photo: "/images/founder.jpg", linkedin: "https://www.linkedin.com/in/korytsky" },
-    { name: "Alina Krupa", role: "CMO", photo: "/images/alina-krupa.jpg" },
+    { name: "Alina Krupa", role: "CMO & Co-founder", photo: "/images/alina-krupa.jpg", linkedin: "https://www.linkedin.com/in/alinakrupa/" },
     { name: "Maksym Zhuravskyi", role: "CTO" },
     { name: "Yevhenii Bohomol", role: "Product Analyst", photo: "/images/yevhenii-bohomol.jpg" }, // placeholder title, to confirm with Edward
   ] as { name: string; role: string; photo?: string; linkedin?: string }[],
@@ -545,7 +547,7 @@ export const CAREERS = {
       { q: "How can I get in touch about a job?", a: "Email hello@elegix.net with the subject “Careers”. Tell us what you do, what you'd like to work on and why this problem matters to you. A link to your work helps." },
       { q: "What does the Elegix team work on?", a: "A life balance tracker for iOS and Android. It links goals, habits and tasks to 6 life areas and shows, in one Life Balance score, which part of your life needs you next." },
       { q: "What is the work week like?", a: "We work four days a week, with Wednesday off, so nobody goes more than two days without a break. We try to keep clear priorities and one next step, the same way the app does." },
-      { q: "Who is on the team?", a: "Edward Korytskyi (founder), Alina Krupa (CMO), Maksym Zhuravskyi (CTO) and Yevhenii Bohomol. You can meet the team on the About page." },
+      { q: "Who is on the team?", a: "Edward Korytskyi (founder), Alina Krupa (CMO and co-founder), Maksym Zhuravskyi (CTO) and Yevhenii Bohomol. You can meet the team on the About page." },
     ],
   },
   open: {
