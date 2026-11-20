@@ -1,0 +1,14 @@
+.box { position: relative; width: min(100%, 560px); aspect-ratio: 1; }
+.flat { position: absolute; inset: 16%; display: grid; transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.flat svg { width: 100%; height: 100%; }
+.canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .6s var(--ease); touch-action: pan-y; }
+.ready .canvas { opacity: 1; }
+.ready .flat { opacity: 0; transform: scale(.92); pointer-events: none; }
+.caption {
+  position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%);
+  padding: 8px 14px 7px; border-radius: 999px; background: var(--black); color: #fff;
+  font-size: var(--fs-small); font-weight: 500; white-space: nowrap; pointer-events: none;
+  animation: in .4s var(--ease);
+}
+@keyframes in { from { opacity: 0; transform: translate(-50%, 6px); } }
+@media (prefers-reduced-motion: reduce) { .caption { animation: none; } }

@@ -22,16 +22,19 @@ type Props = {
   children: ReactNode;
   /** optional glass card, shown only where the phone is hidden (tablet widths) */
   card?: ReactNode;
+  /** optional piece above the eyebrow, e.g. the 3D logo on About */
+  top?: ReactNode;
 };
 
 /** Full-bleed photo hero with a white headline and, optionally, the app peeking in. */
-export function PhotoHero({ id, media, eyebrow, title, titlePrefix, lede, screen, children, card }: Props) {
+export function PhotoHero({ id, media, eyebrow, title, titlePrefix, lede, screen, children, card, top }: Props) {
   return (
     <section className={`on-dark ${styles.hero}`} aria-labelledby={id}>
       <div className={`grain ${styles.frame}`}>
         <div className={styles.photo} data-hero-photo><Media media={media} tone="dark" fill priority sizes="100vw" /></div>
         <div className={`${styles.atmo} ${media.src ? styles.onPhoto : ""}`} aria-hidden="true" />
         <div className={styles.content}>
+          {top && <div data-hero-item>{top}</div>}
           <span className="label" data-hero-item aria-hidden={titlePrefix ? true : undefined}>{eyebrow}</span>
           <h1 id={id} className={`display ${styles.title}`} data-hero-item>
             {titlePrefix && <span className="visually-hidden">{titlePrefix}: </span>}
