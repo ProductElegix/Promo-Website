@@ -8,7 +8,13 @@
 
 .device { position: relative; width: min(100%, 860px); display: grid; justify-items: center; perspective: 1400px; }
 .phoneWrap { transform-origin: 50% 100%; will-change: transform; }
-.phone { width: min(300px, 31svh, 58vw); min-width: 200px; box-shadow: 0 60px 120px -40px rgba(213, 244, 94, .22), 0 30px 60px -24px rgba(0, 0, 0, .8), inset 0 0 0 1.5px #2e3531; }
+/* a thin brushed-metal rim around the black bezel */
+.phone {
+  width: min(300px, 31svh, 58vw); min-width: 200px;
+  border: 2px solid transparent;
+  background: linear-gradient(#050706, #050706) padding-box, linear-gradient(150deg, #5d6460, #1d2120 30%, #2b302e 55%, #121514 75%, #4a514d) border-box;
+  box-shadow: 0 60px 120px -40px rgba(213, 244, 94, .22), 0 30px 60px -24px rgba(0, 0, 0, .8);
+}
 
 /* three notes around the phone */
 .notes { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
