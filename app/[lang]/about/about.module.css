@@ -88,7 +88,10 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 
 
 /* how it works: wheel | steps | phone */
-.howSection { padding-top: 0; }
+.howSection { background: var(--atmo-dark); color: #f1f1ec; border-radius: var(--radius-l); margin-inline: 8px; }
+.howSection .chapter p { color: rgba(255, 255, 255, .62); }
+.howSection .rhythmLine span { background: rgba(255, 255, 255, .08); color: rgba(255, 255, 255, .62); }
+.howSection .rhythmLine b { color: #fff; }
 .scrolly { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 5vw, 80px); }
 .stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; place-items: center; contain: paint; }
 .chapters { display: grid; }
@@ -104,6 +107,7 @@ ul.principles { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 860px) {
   .scrolly { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .stage { top: var(--header-h); height: 50svh; z-index: 2; background: var(--cream); }
+  .howSection .stage { background: var(--atmo-dark); }
   .chapters { position: relative; z-index: 1; }
   .chapter { min-height: 60svh; align-content: end; padding-bottom: 8svh; }
   .chapter:first-child { min-height: 50svh; }

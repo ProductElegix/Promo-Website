@@ -84,7 +84,7 @@ export default async function About() {
       </section>
 
       {/* 4. How it works: a scroll story, the 3D wheel stays on screen while See, Act and Reflect change it */}
-      <section id="how" className={`section ${styles.howSection}`} aria-labelledby="how-title">
+      <section id="how" className={`section on-dark ${styles.howSection}`} data-theme="dark" aria-labelledby="how-title">
         <div className="container">
           <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{A.how.label}</span>
@@ -93,7 +93,7 @@ export default async function About() {
           </div>
           <div className={styles.scrolly}>
             <div className={styles.stage}>
-              <Wheel3D scores={A.how.wheel.scores} prev={A.how.wheel.prev} text={A.how.wheel}
+              <Wheel3D dark scores={A.how.wheel.scores} prev={A.how.wheel.prev} text={A.how.wheel}
                 names={Object.fromEntries(AREA_ORDER.map((a) => [a, AREAS[a].short])) as Record<AreaKey, string>} />
             </div>
             <ol className={styles.chapters}>
