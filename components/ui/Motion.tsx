@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
  * - svg[data-wheel] path: wheel-of-life segments draw in from the centre
  * - [data-split-words]: words light up one after another as the paragraph scrolls through the screen
  * - [data-strip]: the photo strip opens up from behind the middle photo while scrolling
+ * - svg[data-draw]: a line chart draws its main line from left to right, then the points pop in
  * - [data-count]: a number counts up from 0 when it scrolls into view
  * - [data-timeline-fill]: the road to launch fills up to the current stage while scrolling; [data-milestone] steps fade in one by one
  * Content is fully visible without JavaScript and with prefers-reduced-motion; only transforms
@@ -87,6 +88,12 @@ export function Motion() {
               { xPercent: (mid - i) * 55, scale: i === mid ? 0.9 : 0.8, opacity: i === mid ? 1 : 0.4 },
               { xPercent: 0, scale: 1, opacity: 1, ease: "none", scrollTrigger: { trigger: strip, start: "top 95%", end: "top 30%", scrub: 0.8 } }),
           );
+        });
+
+        gsap.utils.toArray<SVGSVGElement>("svg[data-draw]").forEach((svg) => {
+          const tl = gsap.timeline({ scrollTrigger: { trigger: svg, start: "top 80%", once: true } });
+          tl.fromTo(svg.querySelectorAll("[data-draw-line]"), { strokeDasharray: "1 1", strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" })
+            .from(svg.querySelectorAll("[data-draw-point]"), { opacity: 0, duration: 0.4, stagger: 0.06 }, 0.3);
         });
 
         gsap.utils.toArray<HTMLElement>("[data-count]").forEach((el) => {

@@ -3,10 +3,11 @@ import { getContent } from "@/lib/lang";
 import { ui } from "@/lib/ui";
 import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
+import { ProductReveal } from "./ProductReveal";
 import styles from "./Opening.module.css";
 
 /** Copy split into word spans for the scroll-scrubbed reveal; *word* becomes a lime accent. */
-function Words({ text }: { text: string }) {
+export function Words({ text }: { text: string }) {
   // tokens with their accent flag; punctuation right after an accent stays glued to it (no break before ",")
   const tokens = text.split(/(\*[^*]+\*)/).filter(Boolean).flatMap((part) => {
     const accent = part.startsWith("*") && part.endsWith("*");
@@ -85,7 +86,7 @@ export async function Opening() {
         </div>
       </div>
 
-      <StatementStrip label={OPENING.statement.label} text={OPENING.statement.lead + OPENING.statement.rest} photos={OPENING.strip} />
+      <ProductReveal />
       <div className={styles.about} data-reveal>
         <h2 className={styles.aboutTitle}><Rich text={OPENING.about.title} /></h2>
         <p className={styles.aboutText}>{OPENING.about.text}</p>
