@@ -43,7 +43,6 @@ export const BRAND: C["BRAND"] = {
 export const NAV: C["NAV"] = [
   { href: "/about", label: "Про нас" },
   { href: "/guides", label: "Гайди" },
-  { href: "/#check", label: "Перевірка балансу" },
 ];
 export const NAV_CTA = "Отримати ранній доступ";
 

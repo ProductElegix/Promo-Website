@@ -8,6 +8,8 @@ export type Card = {
   href: string; title: string; text: string; media: MediaSlot;
   /** the line under the text: "Guide · 12 min read" */
   meta: string;
+  /** publication date, already formatted for the language; the guide list shows it in the kicker line */
+  date?: string;
   /** the life areas it's about, shown as tags above the title; an empty list reads "All 6 areas"; leave out for stories */
   areas?: AreaKey[];
 };

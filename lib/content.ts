@@ -49,7 +49,6 @@ export const BRAND = {
 export const NAV = [
   { href: "/about", label: "About" },
   { href: "/guides", label: "Guides" },
-  { href: "/#check", label: "Life Balance Check" },
 ];
 export const NAV_CTA: string = "Get early access";
 
