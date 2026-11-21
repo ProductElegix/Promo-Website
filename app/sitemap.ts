@@ -16,6 +16,7 @@ function entries(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     ...STORIES.map((s) => ({ url: `${SITE_URL}${storyHref(s)}`, lastModified: new Date(s.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
     { url: `${SITE_URL}/guides`, lastModified: guidesUpdated, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/guides/areas-of-life`, lastModified: new Date("2026-11-21"), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${SITE_URL}/guides/how-we-write-guides`, lastModified: new Date("2026-11-20"), changeFrequency: "yearly" as const, priority: 0.4 },
     { url: `${SITE_URL}/tools`, lastModified: guidesUpdated, changeFrequency: "monthly" as const, priority: 0.6 },
     ...AUTHORS.map((a) => ({ url: `${SITE_URL}/authors/${a.slug}`, lastModified: newest(a.writes.map((w) => w.date)), changeFrequency: "monthly" as const, priority: 0.4 })),
@@ -31,7 +32,7 @@ function entries(): MetadataRoute.Sitemap {
 /** Guide and life area pages exist in Ukrainian only once translated; every other page always does. */
 function ukReady(path: string) {
   const m = path.match(/^\/guides\/([^/]+)$/);
-  return !m || m[1] === "how-we-write-guides" || hasUk(m[1]);
+  return !m || m[1] === "how-we-write-guides" || m[1] === "areas-of-life" || hasUk(m[1]);
 }
 
 /**

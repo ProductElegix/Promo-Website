@@ -18,15 +18,11 @@
 /* centred section heads, like the home page */
 .center.center { justify-items: center; text-align: center; max-width: 60rem; margin-inline: auto; }
 
-/* free check card */
-.check { display: grid; gap: 20px; justify-items: center; text-align: center; border-radius: var(--radius-l); padding: clamp(40px, 7vw, 96px) clamp(20px, 5vw, 64px);
-  background: radial-gradient(70% 90% at 50% 0%, color-mix(in srgb, var(--lime) 65%, #fff), transparent 75%), var(--paper); }
-.check :global(.lede) { max-width: 36rem; }
 .grid.two { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 640px) { .grid.two { grid-template-columns: 1fr; } }
 
 
-.policy { text-align: center; font-size: var(--fs-small); color: var(--muted); margin-top: -24px; }
+.policy { text-align: left; font-size: var(--fs-small); color: var(--muted); margin-top: -24px; }
 .policy a { color: var(--ink); text-underline-offset: 3px; }
 
 .rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -94,7 +90,6 @@
 .kicker svg { width: 12px; height: 12px; color: var(--s); }
 
 /* the library: the guide list on the left; topics, life areas and the sign-up in a sidebar on the right */
-.librarySection.librarySection { background: #fff; }
 .library { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 340px); grid-template-rows: auto auto auto 1fr; column-gap: clamp(32px, 5vw, 80px); row-gap: clamp(36px, 4vw, 56px); align-items: start; margin-bottom: clamp(48px, 6vw, 80px); }
 .libraryMain { grid-column: 1; grid-row: 1 / -1; min-width: 0; }
 .topics, .areasSide, .subscribe { grid-column: 2; min-width: 0; }
@@ -159,3 +154,26 @@
 .subscribe form { flex-direction: column; align-items: stretch; border-bottom: 0; padding-bottom: 0; }
 .subscribe form input[type="email"] { flex: none; width: 100%; border-bottom: 1px solid var(--line); margin-bottom: 4px; }
 .subscribe :global(.btn) { width: 100%; }
+
+/* the 6 areas, explained: one wide card linking to the long read */
+.areasSection.areasSection { padding-top: 0; scroll-margin-top: calc(var(--header-h) + 32px); }
+.explainCard { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); padding: clamp(24px, 3vw, 40px); border-radius: var(--radius-m); background: var(--paper); color: var(--ink); text-decoration: none; transition: transform .2s; }
+.explainCard:hover { transform: translateY(-2px); }
+.explainText { display: grid; align-content: start; justify-items: start; gap: 14px; }
+.explainTitle { font-size: clamp(24px, 2.4vw, 36px); font-weight: 500; line-height: 1.08; letter-spacing: -0.035em; text-wrap: balance; }
+.explainCard:hover .explainTitle { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.explainLede { font-size: var(--fs-body); line-height: 1.5; color: var(--muted); max-width: 34rem; }
+.explainList { list-style: none; margin: 0; padding: 0; counter-reset: ex; align-self: center; }
+.explainList li { counter-increment: ex; display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: var(--fs-small); line-height: 1.35; }
+.explainList li:first-child { border-top: 1px solid var(--line); }
+.explainList li::before { content: counter(ex, decimal-leading-zero); color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) { .explainCard { grid-template-columns: 1fr; } }
+
+/* free check: a black band */
+.check { background: #000; padding: clamp(48px, 6vw, 88px) 0; }
+.checkInner { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; }
+.checkText { display: grid; gap: 14px; max-width: 40rem; }
+.checkTitle { font-size: clamp(30px, 3.6vw, 52px); font-weight: 500; line-height: 1.02; letter-spacing: -0.04em; }
+.checkText p { font-size: var(--fs-lead); line-height: 1.45; color: rgba(255, 255, 255, .64); }
+.check .kicker { color: rgba(255, 255, 255, .6); }
+.checkTitle em { font-style: normal; color: var(--lime); }

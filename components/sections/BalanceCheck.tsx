@@ -23,8 +23,18 @@ type Sent = { email: string; emailed: boolean; invited: boolean };
 
 const freshScores = () => Object.fromEntries(AREA_ORDER.map((a) => [a, START])) as Scores;
 
-/** Free Life Balance Check: the page shows the wheel and one button; the check itself runs in a modal, one area per step, then the result and the email. */
+/** Free Life Balance Check on the home page: the CTA band in its own section (#check). */
 export function BalanceCheck() {
+  return (
+    <section id="check" className={`section ${styles.section}`} aria-labelledby="check-title">
+      <div className="container"><CheckBand /></div>
+    </section>
+  );
+}
+
+/** The check's CTA band (sample wheel, pitch, one button) and its modal: one area per step, then the result and the email.
+ *  The same band and modal sit in guides in place of a separate calculator; `compact` stacks the button under the text for a narrow column. */
+export function CheckBand({ compact = false }: { compact?: boolean }) {
   const { CHECK } = useContent();
   const t = useUi();
   const dialog = useRef<HTMLDialogElement>(null);
@@ -37,26 +47,25 @@ export function BalanceCheck() {
   }
 
   return (
-    <section id="check" className={`section ${styles.section}`} aria-labelledby="check-title">
-      <div className="container">
-        {/* a full-width CTA band: sample wheel, the pitch, one button */}
-        <div className={`on-dark ${styles.band}`} data-reveal>
-          <button type="button" className={styles.wheelBtn} onClick={openCheck} tabIndex={-1} aria-hidden="true">
-            <Wheel scores={SAMPLE} size={140} ring="rgba(255,255,255,.1)" />
-          </button>
-          <div className={styles.copy}>
-            <span className="label">{CHECK.eyebrow}</span>
-            <h2 id="check-title" className={`display ${styles.title}`}><Rich text={CHECK.title} /></h2>
-            <p className={styles.text}>{CHECK.text}</p>
-          </div>
-          <button type="button" className={`btn ${styles.open}`} onClick={openCheck} aria-haspopup="dialog">{CHECK.button}</button>
+    <>
+      <div className={`on-dark ${styles.band} ${compact ? styles.compact : ""}`} data-reveal={compact ? undefined : ""}>
+        <button type="button" className={styles.wheelBtn} onClick={openCheck} tabIndex={-1} aria-hidden="true">
+          <Wheel scores={SAMPLE} size={140} ring="rgba(255,255,255,.1)" />
+        </button>
+        <div className={styles.copy}>
+          <span className="label">{CHECK.eyebrow}</span>
+          {compact
+            ? <p id="check-title" className={`display ${styles.title}`}><Rich text={CHECK.title} /></p>
+            : <h2 id="check-title" className={`display ${styles.title}`}><Rich text={CHECK.title} /></h2>}
+          <p className={styles.text}>{CHECK.text}</p>
         </div>
+        <button type="button" className={`btn ${styles.open}`} onClick={openCheck} aria-haspopup="dialog">{CHECK.button}</button>
       </div>
       <dialog ref={dialog} className={styles.dialog} aria-labelledby="check-step-title" onClose={() => setOpen(false)}
         onClick={(e) => { if (e.target === e.currentTarget) dialog.current?.close(); }}>
         {open && <CheckFlow onClose={() => dialog.current?.close()} closeLabel={t.close} />}
       </dialog>
-    </section>
+    </>
   );
 }
 

@@ -14,9 +14,6 @@ import { Rich } from "@/components/ui/Rich";
 import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import { Join } from "@/components/sections/Join";
 import { SITE_URL } from "@/lib/site";
-import { Inline, plainText } from "@/components/ui/Inline";
-import { BlockView } from "@/components/ui/Article";
-import article from "@/components/ui/Article.module.css";
 import { LIFE_AREAS_HUB } from "@/lib/life-areas-hub";
 import { LIFE_AREAS_HUB_UK } from "@/lib/uk/life-areas-hub";
 import styles from "./hub.module.css";
@@ -33,6 +30,7 @@ const T = {
     checkLabel: "Free Life Balance Check", checkTitle: "Find your weakest area in *2 minutes*",
     checkText: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area.",
     checkBtn: "Take the free check",
+    explainKicker: "Long read · 6 min", explainTitle: "Areas of life: what they are, and why 6 and not 8 or 12", explainText: "What counts as an area of life, the 6 areas in Elegix, how they compare with 8- and 12-area Wheel of Life models, and how to use them every week.",
     tabAll: "All guides", tabAreas: "Life areas", tabQuestions: "Questions", tabTools: "Free tools",
     subTitle: "Get new guides first", subText: "One email when a new guide is out, plus early access to Elegix. No spam, unsubscribe any time.", subBtn: "Subscribe", email: "Your email",
   },
@@ -47,6 +45,7 @@ const T = {
     checkLabel: "Безкоштовна перевірка балансу", checkTitle: "Знайди свою найслабшу сферу за *2 хвилини*",
     checkText: "Оціни 6 сфер життя від 1 до 10. Ми надішлемо на пошту твою оцінку балансу життя й перший крок для найнижчої сфери.",
     checkBtn: "Пройти безкоштовну перевірку",
+    explainKicker: "Довге читання · 6 хв", explainTitle: "Сфери життя: що це таке і чому 6, а не 8 чи 12", explainText: "Що вважати сферою життя, 6 сфер в Elegix, як вони співвідносяться з моделями колеса життя на 8 і 12 сфер і як користуватися ними щотижня.",
     tabAll: "Усі гайди", tabAreas: "Сфери життя", tabQuestions: "Питання", tabTools: "Безкоштовні інструменти",
     subTitle: "Отримуй нові гайди першим", subText: "Один лист, коли виходить новий гайд, і ранній доступ до Elegix. Без спаму, відписатися можна будь-коли.", subBtn: "Підписатися", email: "Твій email",
   },
@@ -74,8 +73,6 @@ export default async function Guides() {
   const recent = GUIDES.map((g, i) => ({ g, i })).sort((a, b) => b.g.published.localeCompare(a.g.published) || a.i - b.i).map(({ g }) => g);
   const tabs = [
     { href: "#library", label: t.tabAll },
-    { href: "#areas", label: t.tabAreas },
-    { href: "#questions", label: t.tabQuestions },
   ];
   const HUB = lang === "uk" ? LIFE_AREAS_HUB_UK : LIFE_AREAS_HUB;
   const all = [...GUIDES.map((g) => `/guides/${g.slug}`), ...AREA_GUIDES.map((g) => areaGuideHref(g.area))];
@@ -91,11 +88,6 @@ export default async function Guides() {
         url: `${SITE_URL}${langMeta(lang, "/guides").url}`,
         mainEntity: { "@type": "ItemList", itemListElement: all.map((href, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}${langMeta(lang, href).url}` })) },
       }} />
-      <JsonLd data={{
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: HUB.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: plainText(f.a) } })),
-      }} />
       {/* black top: the page title and section tabs, then the "start here" guide large */}
       <section className={`on-dark ${styles.top}`} data-theme="dark" aria-labelledby="guides-title">
         <div className="container">
@@ -103,6 +95,7 @@ export default async function Guides() {
             <h1 id="guides-title" className={styles.topTitle}>{t.h1Prefix}</h1>
             <nav className={styles.tabs} aria-label={t.crumb}>
               {tabs.map((x) => <a key={x.href} href={x.href}>{x.label}</a>)}
+              <Link href="/guides/areas-of-life">{t.tabAreas}</Link>
               <Link href="/tools">{t.tabTools}</Link>
             </nav>
           </div>
@@ -132,46 +125,34 @@ export default async function Guides() {
         </div>
       </section>
 
-      {/* what the 6 areas are: the text that used to live on /life-areas, so every area page sits under Guides */}
-      <section id="areas" className="section" aria-labelledby="areas-title" style={{ paddingTop: 0, scrollMarginTop: "calc(var(--header-h) + 32px)" }}>
+      {/* the 6 areas, explained: a short teaser for the long read on its own page */}
+      <section id="areas" className={`section ${styles.areasSection}`} aria-labelledby="areas-title">
         <div className="container">
-          <div className={`section-head ${styles.center}`} data-reveal>
-            <span className="label">{t.areasLabel}</span>
-            <h2 id="areas-title" className="display h2"><Rich text={t.areasTitle} /></h2>
+          <div className={styles.colHead}>
+            <h2 id="areas-title" className={styles.colTitle}>{t.areasLabel}</h2>
           </div>
-        </div>
-        <div className="container" style={{ maxWidth: 760 }}>
-          <div className={article.body}>
-            {HUB.sections.map((s) => (
-              <section key={s.h2}>
-                <h2>{s.h2}</h2>
-                {s.blocks.map((b, i) => <BlockView key={i} b={b} />)}
-              </section>
-            ))}
-            <section id="questions">
-              <h2>{t.questions}</h2>
-              <div className={article.faq}>
-                {HUB.faq.map((f) => (
-                  <details key={f.q}>
-                    <summary>{f.q}<span className={article.plus} aria-hidden="true" /></summary>
-                    <p><Inline text={f.a} /></p>
-                  </details>
-                ))}
-              </div>
-            </section>
-          </div>
+          <Link href="/guides/areas-of-life" className={styles.explainCard}>
+            <span className={styles.explainText}>
+              <span className={styles.kicker}>{t.explainKicker}</span>
+              <span className={styles.explainTitle}>{t.explainTitle}</span>
+              <span className={styles.explainLede}>{t.explainText}</span>
+            </span>
+            <ol className={styles.explainList}>
+              {HUB.sections.map((s) => <li key={s.h2}>{s.h2}</li>)}
+            </ol>
+          </Link>
         </div>
       </section>
 
-      {/* a next step for readers: the free check on the home page */}
-      <section className="section" aria-labelledby="check-cta" style={{ paddingTop: 0 }}>
-        <div className="container">
-          <div className={styles.check} data-reveal>
-            <span className="label">{t.checkLabel}</span>
-            <h2 id="check-cta" className="display h2"><Rich text={t.checkTitle} /></h2>
-            <p className="lede">{t.checkText}</p>
-            <Link href="/#check" className="btn">{t.checkBtn}</Link>
+      {/* a next step for readers: the free check on the home page, as a black band like the top of the page */}
+      <section className={`on-dark ${styles.check}`} data-theme="dark" aria-labelledby="check-cta">
+        <div className={`container ${styles.checkInner}`}>
+          <div className={styles.checkText}>
+            <span className={styles.kicker}>{t.checkLabel}</span>
+            <h2 id="check-cta" className={styles.checkTitle}><Rich text={t.checkTitle} /></h2>
+            <p>{t.checkText}</p>
           </div>
+          <Link href="/#check" className="btn lime">{t.checkBtn}</Link>
         </div>
       </section>
 
