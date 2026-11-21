@@ -1,28 +1,33 @@
 "use client";
 
 import Link, { useContent, useUi } from "@/components/ui/Lang";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AREA_ORDER, type AreaKey } from "@/lib/content";
 import { AreaIcon } from "./AreaIcon";
+import { AreaTags } from "./AreaTags";
+import { Media } from "./Media";
 import { track } from "@/lib/track";
 import { areaVars } from "./areaVars";
-import { GuideCards, type Card } from "./GuideCards";
+import type { Card } from "./GuideCards";
 import styles from "@/app/[lang]/guides/hub.module.css";
 
 type Filter = "all" | "whole" | AreaKey;
 
 type Props = {
-  /** every guide, in hub order; in hub order */
+  /** every guide, newest first */
   guides: (Card & { areas: AreaKey[] })[];
-  /** the life area page for each area: a banner over its guides when that area is picked */
+  /** the life area page for each area: listed in the sidebar, and a banner over its guides when that area is picked */
   areaPages: Partial<Record<AreaKey, Card>>;
+  /** the sidebar's last box (the email sign-up), rendered by the page */
+  subscribe?: ReactNode;
 };
 
 const isFilter = (v: string | null): v is Filter => v === "all" || v === "whole" || (AREA_ORDER as string[]).includes(v ?? "");
 
-/** Chips over the guide grid: all guides, guides about the whole wheel, or one of the 6 life areas.
- *  The pick lives in ?area= so a filtered view can be shared; without JS every guide shows. */
-export function GuideFilter({ guides, areaPages }: Props) {
+/** The guide library, laid out like a magazine: a list of guides (photo left, kicker, title, area tags) with search on the left,
+ *  and a sidebar with topic chips (all, whole wheel, or one of the 6 areas), the 6 life area pages and the email sign-up.
+ *  The picked topic lives in ?area= so a filtered view can be shared; without JS every guide shows. */
+export function GuideFilter({ guides, areaPages, subscribe }: Props) {
   const { AREAS } = useContent();
   const t = useUi();
   const [filter, setFilter] = useState<Filter>("all");
@@ -50,7 +55,6 @@ export function GuideFilter({ guides, areaPages }: Props) {
 
   const [query, setQuery] = useState("");
   const tagged = (f: AreaKey) => guides.filter((g) => g.areas.includes(f)).length;
-  /** pages a menu item shows; an area also shows that area's own page */
   const count = (f: Filter) => (f === "all" ? guides.length : f === "whole" ? guides.filter((g) => !g.areas.length).length : tagged(f));
 
   const inFilter: Card[] =
@@ -68,44 +72,26 @@ export function GuideFilter({ guides, areaPages }: Props) {
     { f: "whole", label: t.wholeLife },
     ...AREA_ORDER.map((a) => ({ f: a as Filter, label: AREAS[a].short })),
   ];
+  const areaList = AREA_ORDER.filter((a) => areaPages[a]).map((a) => ({ area: a, card: areaPages[a]! }));
 
   return (
     <div className={styles.library}>
-      <aside className={styles.menu} aria-label={t.guideTopics}>
-        <div ref={chipsRef} className={styles.menuList} role="group" aria-label={t.filterByArea}>
-          {items.map(({ f, label }) => {
-            const area = f !== "all" && f !== "whole" ? f : null;
-            return (
-              <button key={f} type="button" className={styles.menuItem} aria-pressed={filter === f} onClick={() => pick(f)} style={area ? areaVars(area) : undefined}>
-                {area ? <AreaIcon area={area} /> : <span className={f === "whole" ? styles.wheelDot : styles.allDot} aria-hidden="true" />}
-                {label}
-                <span className={styles.menuCount}>{count(f)}</span>
-              </button>
-            );
-          })}
-        </div>
-        <nav className={styles.overviews} aria-label={t.areaOverviews}>
-          <p>{t.areaOverviewsShort}</p>
-          <ul>
-            {AREA_ORDER.filter((a) => areaPages[a]).map((a) => (
-              <li key={a}><Link href={areaPages[a]!.href} style={areaVars(a)}><AreaIcon area={a} />{AREAS[a].short}</Link></li>
-            ))}
-          </ul>
-        </nav>
-      </aside>
       <div className={styles.libraryMain}>
+        <div className={styles.colHead}>
+          <h2 className={styles.colTitle}>{t.allGuides}</h2>
+          <p className={styles.result} aria-live="polite">
+            {q ? t.nResultsFor(cards.length, query.trim())
+              : filter === "all" ? t.nGuides(guides.length)
+              : filter === "whole" ? t.wholeLifeGuides
+              : t.nGuidesAbout(tagged(filter), AREAS[filter].short)}
+          </p>
+        </div>
         <label className={styles.search}>
           <span className="sr-only">{t.searchGuides}</span>
           <input type="search" placeholder={t.searchGuides} value={query} onChange={(e) => setQuery(e.target.value)}
             onBlur={() => q && track("search", { search_term: q })} />
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
         </label>
-        <p className={`${styles.result}`} aria-live="polite">
-          {q ? t.nResultsFor(cards.length, query.trim())
-            : filter === "all" ? t.nGuides(guides.length)
-            : filter === "whole" ? t.wholeLifeGuides
-            : t.nGuidesAbout(tagged(filter), AREAS[filter].short)}
-        </p>
         {!q && banner && (
           <Link href={banner.href} className={styles.areaBanner} style={areaVars(banner.area)}>
             <span className={styles.areaBannerIcon}><AreaIcon area={banner.area} /></span>
@@ -113,8 +99,60 @@ export function GuideFilter({ guides, areaPages }: Props) {
             <span className={styles.areaBannerGo}>{t.open}</span>
           </Link>
         )}
-        {cards.length ? <GuideCards cards={cards} rows /> : <p className={styles.empty}>{!q && banner ? t.guidesOnTheWay(AREAS[banner.area].short) : t.nothingFound}</p>}
+        {cards.length ? (
+          <ul className={styles.list}>
+            {cards.map((c) => (
+              <li key={c.href}>
+                <Link href={c.href} className={styles.item}>
+                  <span className={styles.itemPhoto}><Media media={{ ...c.media, ratio: "16 / 10" }} compact sizes="(max-width: 640px) 120px, 220px" /></span>
+                  <span className={styles.itemText}>
+                    <span className={styles.kicker}>{c.date ? `${c.meta} · ${c.date}` : c.meta}</span>
+                    <h3>{c.title}</h3>
+                    {c.areas && <AreaTags areas={c.areas} />}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : <p className={styles.empty}>{!q && banner ? t.guidesOnTheWay(AREAS[banner.area].short) : t.nothingFound}</p>}
       </div>
+
+      <section className={styles.topics} aria-label={t.guideTopics}>
+        <h2 className={styles.colTitle}>{t.guideTopics}</h2>
+        <div ref={chipsRef} className={styles.chips} role="group" aria-label={t.filterByArea}>
+          {items.map(({ f, label }) => {
+            const area = f !== "all" && f !== "whole" ? f : null;
+            return (
+              <button key={f} type="button" className={styles.chip} aria-pressed={filter === f} data-area={area ?? undefined} onClick={() => pick(f)} style={area ? areaVars(area) : undefined}>
+                {area ? <AreaIcon area={area} /> : f === "whole" ? <span className="area-wheel" aria-hidden="true" /> : null}
+                {label}
+                <span className={styles.chipCount}>{count(f)}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {areaList.length > 0 && (
+        <nav className={styles.areasSide} aria-label={t.areaOverviews}>
+          <h2 className={styles.colTitle}>{t.areaOverviews}</h2>
+          <ul>
+            {areaList.map(({ area, card }) => (
+              <li key={area}>
+                <Link href={card.href} className={styles.sideItem}>
+                  <span className={styles.sidePhoto}><Media media={{ ...card.media, ratio: "1 / 1" }} compact sizes="80px" /></span>
+                  <span className={styles.sideText}>
+                    <span className={styles.kicker} style={areaVars(area)}><AreaIcon area={area} />{AREAS[area].short}</span>
+                    <span className={styles.sideTitle}>{card.title}</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {subscribe && <div className={styles.subscribe}>{subscribe}</div>}
     </div>
   );
 }

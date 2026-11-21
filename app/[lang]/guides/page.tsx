@@ -7,12 +7,11 @@ import { langMeta, pageMeta, paramsLang } from "@/lib/meta";
 import type { Lang } from "@/lib/i18n";
 import { AreaTags } from "@/components/ui/AreaTags";
 import type { AreaKey } from "@/lib/content";
-import type { MediaSlot } from "@/lib/content";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
 import type { Card } from "@/components/ui/GuideCards";
 import { GuideFilter } from "@/components/ui/GuideFilter";
 import { Rich } from "@/components/ui/Rich";
-import { PhotoHero } from "@/components/sections/PhotoHero";
+import { WaitlistForm } from "@/components/ui/WaitlistForm";
 import { Join } from "@/components/sections/Join";
 import { SITE_URL } from "@/lib/site";
 import { Inline, plainText } from "@/components/ui/Inline";
@@ -34,6 +33,8 @@ const T = {
     checkLabel: "Free Life Balance Check", checkTitle: "Find your weakest area in *2 minutes*",
     checkText: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area.",
     checkBtn: "Take the free check",
+    tabAll: "All guides", tabAreas: "Life areas", tabQuestions: "Questions", tabTools: "Free tools",
+    subTitle: "Get new guides first", subText: "One email when a new guide is out, plus early access to Elegix. No spam, unsubscribe any time.", subBtn: "Subscribe", email: "Your email",
   },
   uk: {
     title: "Гайди про баланс життя: вигорання, цілі та баланс",
@@ -46,10 +47,14 @@ const T = {
     checkLabel: "Безкоштовна перевірка балансу", checkTitle: "Знайди свою найслабшу сферу за *2 хвилини*",
     checkText: "Оціни 6 сфер життя від 1 до 10. Ми надішлемо на пошту твою оцінку балансу життя й перший крок для найнижчої сфери.",
     checkBtn: "Пройти безкоштовну перевірку",
+    tabAll: "Усі гайди", tabAreas: "Сфери життя", tabQuestions: "Питання", tabTools: "Безкоштовні інструменти",
+    subTitle: "Отримуй нові гайди першим", subText: "Один лист, коли виходить новий гайд, і ранній доступ до Elegix. Без спаму, відписатися можна будь-коли.", subBtn: "Підписатися", email: "Твій email",
   },
 } satisfies Record<Lang, Record<string, string>>;
 
-const HERO = (lang: Lang): MediaSlot => ({ src: "/images/how-next.jpg", alt: T[lang].heroAlt, brief: "Guides hero", ratio: "3 / 2" });
+/** "October 22, 2026" / "22 жовтня 2026 р." */
+const formatDate = (iso: string, lang: Lang) =>
+  new Intl.DateTimeFormat(lang === "uk" ? "uk-UA" : "en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = await paramsLang(params);
@@ -57,13 +62,21 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return { ...m, alternates: { ...m.alternates, types: { "application/rss+xml": [{ url: "/guides/feed.xml", title: "Elegix guides" }] } } };
 }
 
-/** Hub for every guide and life area page, so each one is two clicks from the home page. The first guide is the "start here". */
+/** Hub for every guide and life area page, so each one is two clicks from the home page, laid out like a magazine:
+ *  a black top with the section tabs and the "start here" guide large, then the guide list with a sidebar (topics, life areas, sign-up). */
 export default async function Guides() {
   const lang = await getLang();
   const t = T[lang];
   const { GUIDES, AREA_GUIDES } = guidesOf(lang);
   const [first] = GUIDES;
   const areaCards: Card[] = AREA_GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g, lang), areas: areasOf(g) }));
+  // the list: newest first (the hub order breaks ties)
+  const recent = GUIDES.map((g, i) => ({ g, i })).sort((a, b) => b.g.published.localeCompare(a.g.published) || a.i - b.i).map(({ g }) => g);
+  const tabs = [
+    { href: "#library", label: t.tabAll },
+    { href: "#areas", label: t.tabAreas },
+    { href: "#questions", label: t.tabQuestions },
+  ];
   const HUB = lang === "uk" ? LIFE_AREAS_HUB_UK : LIFE_AREAS_HUB;
   const all = [...GUIDES.map((g) => `/guides/${g.slug}`), ...AREA_GUIDES.map((g) => areaGuideHref(g.area))];
   return (
@@ -83,32 +96,38 @@ export default async function Guides() {
         "@type": "FAQPage",
         mainEntity: HUB.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: plainText(f.a) } })),
       }} />
-      <PhotoHero id="guides-title" media={HERO(lang)} eyebrow={t.eyebrow} titlePrefix={t.h1Prefix} title={t.h1} lede={t.lede}>
-        <a href="#start" className="btn lime">{t.start}</a>
-      </PhotoHero>
-
-      {/* start here: the first guide, large */}
-      <section id="start" className="section" aria-labelledby="start-title" style={{ scrollMarginTop: "var(--header-h)" }}>
+      {/* black top: the page title and section tabs, then the "start here" guide large */}
+      <section className={`on-dark ${styles.top}`} data-theme="dark" aria-labelledby="guides-title">
         <div className="container">
-          <Link href={`/guides/${first.slug}`} className={styles.featured} data-reveal>
-            <span className={styles.featuredPhoto}>{first.media.src && <Image src={first.media.src} alt={first.media.alt} fill sizes="(max-width: 860px) 100vw, 60vw" />}</span>
-            <span className={styles.featuredText}>
-              <span className="label">{t.startHere}</span>
-              <AreaTags areas={first.areas} />
-              <h2 id="start-title" className={styles.featuredTitle}>{first.title}</h2>
+          <div className={styles.topBar}>
+            <h1 id="guides-title" className={styles.topTitle}>{t.h1Prefix}</h1>
+            <nav className={styles.tabs} aria-label={t.crumb}>
+              {tabs.map((x) => <a key={x.href} href={x.href}>{x.label}</a>)}
+              <Link href="/tools">{t.tabTools}</Link>
+            </nav>
+          </div>
+          <Link href={`/guides/${first.slug}`} className={styles.lead}>
+            <span className={styles.leadText}>
+              <span className={styles.kicker}>{t.startHere} · {formatDate(first.published, lang)}</span>
+              <h2 className={styles.leadTitle}>{first.title}</h2>
               <p>{first.description}</p>
-              <span className={styles.meta}>{cardMeta(first, lang)}</span>
-              <span className="btn">{t.readGuide}</span>
+              <AreaTags areas={first.areas} />
             </span>
+            <span className={styles.leadPhoto}>{first.media.src && <Image src={first.media.src} alt={first.media.alt} fill priority sizes="(max-width: 860px) 100vw, 50vw" />}</span>
           </Link>
         </div>
       </section>
 
-      <section className="section" aria-label={t.crumb} style={{ paddingTop: 0 }}>
+      <section id="library" className={`section ${styles.librarySection}`} aria-label={t.crumb}>
         <div className="container">
           <GuideFilter
-            guides={GUIDES.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g, lang), areas: areasOf(g) }))}
-            areaPages={Object.fromEntries(AREA_GUIDES.map((g, i) => [g.area, areaCards[i]])) as Partial<Record<AreaKey, Card>>} />
+            guides={recent.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g, lang), date: formatDate(g.published, lang), areas: areasOf(g) }))}
+            areaPages={Object.fromEntries(AREA_GUIDES.map((g, i) => [g.area, areaCards[i]])) as Partial<Record<AreaKey, Card>>}
+            subscribe={<>
+              <h2 className={styles.subTitle}>{t.subTitle}</h2>
+              <p>{t.subText}</p>
+              <WaitlistForm source="guides" variant="underline" placeholder={t.email} buttonLabel={t.subBtn} />
+            </>} />
           <p className={styles.policy}><Link href="/tools">{t.tools}</Link> · <Link href="/guides/how-we-write-guides">{t.howWe}</Link> · <a href="/guides/feed.xml">RSS</a></p>
         </div>
       </section>
