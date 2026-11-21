@@ -26,7 +26,7 @@
 
 /* With motion: a tall section, the stage sticks to the screen while the statement and then the phone play out */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  .reveal[data-armed] { height: 240vh; height: 240svh; }
+  .reveal[data-armed] { height: 290vh; height: 290svh; }
   .reveal[data-armed] .stage { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 600px; padding: 0 var(--gutter); overflow: hidden; display: block; }
   .reveal[data-armed] .head { position: absolute; inset: 0; align-content: center; padding: 0 var(--gutter); }
   .reveal[data-armed] .device { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
