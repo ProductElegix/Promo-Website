@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 /**
  * Scroll animation for the product reveal (second screen of the home page). GSAP loads on the visitor's first
- * scroll, touch or key press, like the site-wide motion; until then the block is a plain stacked layout below the fold.
+ * scroll, touch or key press, or after 2.5 s; until then CSS holds the block in its starting pose.
  * Timeline, scrubbed by scroll while the stage sticks to the screen:
  *   1. once the block fills the screen, the statement's words light up one by one (the phone already peeks up below it);
  *   2. the statement lifts away while the phone rises and turns in 3D to face you, a light sweeping its glass;
@@ -21,17 +21,20 @@ export function ProductRevealMotion() {
     let cancelled = false;
 
     const EVENTS = ["scroll", "wheel", "touchstart", "pointerdown", "keydown"] as const;
-    const stop = () => EVENTS.forEach((e) => window.removeEventListener(e, start));
+    const stop = () => { EVENTS.forEach((e) => window.removeEventListener(e, start)); window.clearTimeout(idle); };
     function start() { stop(); void init(); }
+    // load on the first scroll or touch, or once the page is idle, whichever comes first, so it's ready before the block is reached
+    let idle = 0;
     if (window.scrollY > 0) start();
-    else EVENTS.forEach((e) => window.addEventListener(e, start, { passive: true }));
+    else {
+      EVENTS.forEach((e) => window.addEventListener(e, start, { passive: true }));
+      idle = window.setTimeout(start, 2500);
+    }
 
     async function init() {
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       if (cancelled || !root) return;
       gsap.registerPlugin(ScrollTrigger);
-      // the tall sticky layout only switches on when the animation can run, so nothing is ever stuck half-way
-      root.dataset.armed = "";
 
       ctx = gsap.context(() => {
         const head = root.querySelector("[data-product-head]");
@@ -43,7 +46,8 @@ export function ProductRevealMotion() {
 
         // the phone already peeks up from the bottom edge, tilted back, so the stage is never an empty black screen
         // turned away in 3D; it straightens to face you as it rises, while a light sweeps across the glass
-        gsap.set(phone, { yPercent: 80, rotateX: 34, rotateY: -22, rotateZ: 7, scale: 0.8, opacity: 0.55, transformPerspective: 1400 });
+        // (the CSS already shows this pose before GSAP loads; every part is set here so none of it is read back from the CSS matrix)
+        gsap.set(phone, { x: 0, y: 0, z: 0, skewX: 0, skewY: 0, yPercent: 80, rotateX: 34, rotateY: -22, rotateZ: 7, scale: 0.8, opacity: 0.55, transformPerspective: 1400 });
         gsap.set(sheen, { xPercent: -100 });
         gsap.set(notes, { opacity: 0, x: (_i: number, el: HTMLElement) => side(el) * 40 });
 
@@ -64,7 +68,7 @@ export function ProductRevealMotion() {
       ScrollTrigger.refresh();
     }
 
-    return () => { cancelled = true; stop(); ctx?.revert(); delete root.dataset.armed; };
+    return () => { cancelled = true; stop(); ctx?.revert(); };
   }, []);
 
   return <span ref={ref} hidden />;
