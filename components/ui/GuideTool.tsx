@@ -1,17 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { AREA_ORDER, type AreaKey } from "@/lib/content";
-import { localePath, type Lang } from "@/lib/i18n";
-import { ui } from "@/lib/ui";
-import { useContent, useLang } from "./Lang";
+import { useLang } from "./Lang";
 import type { GuideToolName } from "@/lib/guides";
-import { Wheel } from "./Wheel";
+import { CheckBand } from "@/components/sections/BalanceCheck";
 import styles from "./GuideTool.module.css";
 
-/** Interactive tools inside guides. Nothing here is sent anywhere: the numbers stay in the browser. */
+/** Interactive tools inside guides. The calculators keep their numbers in the browser; the Wheel of Life one is the Life Balance Check (it can email the result). */
 export function GuideTool({ name }: { name: GuideToolName }) {
-  if (name === "wheel-calculator") return <WheelCalculator />;
+  // the Wheel of Life "calculator" is the site's one Life Balance Check: the same band and step-by-step modal as on the home page
+  if (name === "wheel-calculator") return <CheckBand compact />;
   if (name === "burnout-check") return <BurnoutCheck />;
   if (name === "hours-calculator") return <HoursCalculator />;
   return <WheelTemplate />;
@@ -19,12 +17,6 @@ export function GuideTool({ name }: { name: GuideToolName }) {
 
 const TEXT = {
   en: {
-    wheelTitle: "Wheel of Life calculator",
-    wheelHint: "Rate each area from 1 to 10 for how satisfied you are with it right now. Your wheel updates as you go.",
-    wheelLabel: (avg: string) => `Your Wheel of Life: average ${avg} out of 10`,
-    average: "Average:", lowest: "Lowest area:", gap: "Biggest gap:",
-    points: (n: number) => `${n} points`, bumpy: ", a bumpy wheel", fairly: ", fairly even", even: ", perfectly even",
-    wheelNote: "Start with your lowest area: choose one small step for it this week. Your scores stay in your browser.",
     signs: [
       "I'm tired even after a full night's sleep",
       "Sleep is the first thing I cut when I'm busy",
@@ -59,12 +51,6 @@ const TEXT = {
     download: "Download the PDF (A4)",
   },
   uk: {
-    wheelTitle: "Калькулятор колеса життя",
-    wheelHint: "Оціни кожну сферу від 1 до 10: наскільки ти задоволений нею зараз. Колесо оновлюється одразу.",
-    wheelLabel: (avg: string) => `Твоє колесо життя: у середньому ${avg} з 10`,
-    average: "Середнє:", lowest: "Найнижча сфера:", gap: "Найбільший розрив:",
-    points: (n: number) => `${n} ${ui("uk").pointsWord(n)}`, bumpy: ", колесо нерівне", fairly: ", досить рівно", even: ", ідеально рівно",
-    wheelNote: "Почни з найнижчої сфери: обери для неї один маленький крок на цей тиждень. Твої оцінки залишаються в браузері.",
     signs: [
       "Я втомлений навіть після повноцінного сну",
       "Коли я зайнятий, першим скорочую сон",
@@ -100,48 +86,6 @@ const TEXT = {
   },
 };
 const useText = () => TEXT[useLang()];
-
-const AREA_PAGE: Record<AreaKey, string> = {
-  health: "/guides/health", people: "/guides/relationships", meaning: "/guides/spirituality",
-  hobby: "/guides/leisure", growth: "/guides/personal-growth", career: "/guides/finance-and-career",
-};
-
-function WheelCalculator() {
-  const t = useText();
-  const lang = useLang();
-  const { AREAS } = useContent();
-  const [scores, setScores] = useState<Record<AreaKey, number>>(() => Object.fromEntries(AREA_ORDER.map((a) => [a, 5])) as Record<AreaKey, number>);
-  const values = AREA_ORDER.map((a) => scores[a]);
-  const average = values.reduce((s, n) => s + n, 0) / values.length;
-  const lowest = AREA_ORDER.reduce((low, a) => (scores[a] < scores[low] ? a : low), AREA_ORDER[0]);
-  const highest = AREA_ORDER.reduce((high, a) => (scores[a] > scores[high] ? a : high), AREA_ORDER[0]);
-  const gap = scores[highest] - scores[lowest];
-  return (
-    <figure className={styles.tool} aria-labelledby="wheel-calc-title">
-      <p id="wheel-calc-title" className={styles.title}>{t.wheelTitle}</p>
-      <p className={styles.hint}>{t.wheelHint}</p>
-      <div className={styles.split}>
-        <div className={styles.sliders}>
-          {AREA_ORDER.map((a) => (
-            <label key={a} className={styles.slider}>
-              <span>{AREAS[a].name}<b>{scores[a]}</b></span>
-              <input type="range" min={1} max={10} value={scores[a]} style={{ accentColor: `var(--${a}-s)` }}
-                onChange={(e) => setScores({ ...scores, [a]: Number(e.target.value) })} />
-            </label>
-          ))}
-        </div>
-        <div className={styles.result}>
-          <Wheel scores={values} size={200} label={t.wheelLabel(average.toFixed(1))} />
-          <p><b>{t.average}</b> {average.toFixed(1)} / 10</p>
-          <p><b>{t.lowest}</b> <a href={localePath(lang as Lang, AREA_PAGE[lowest])}>{AREAS[lowest].name}</a> ({scores[lowest]})</p>
-          <p><b>{t.gap}</b> {t.points(gap)}{gap >= 4 ? t.bumpy : gap > 0 ? t.fairly : t.even}</p>
-        </div>
-      </div>
-      <figcaption className={styles.note}>{t.wheelNote}</figcaption>
-    </figure>
-  );
-}
-
 
 function BurnoutCheck() {
   const t = useText();
