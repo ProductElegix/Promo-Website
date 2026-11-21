@@ -10,6 +10,7 @@ import { Rich } from "@/components/ui/Rich";
 import { MARK } from "@/components/ui/Logo";
 import { CopyText } from "./CopyText";
 import styles from "./press.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = await paramsLang(params);
@@ -52,8 +53,8 @@ export default async function Press() {
             <h1 id="press-title" className="display h2"><Rich text={P.title} /></h1>
             <p className="lede">{P.lede}</p>
             <div className={styles.actions}>
-              <a href={P.download.href} download className="btn">{P.download.label}</a>
-              <a href={mail} className="btn ghost">{P.contact.label}</a>
+              <a href={P.download.href} download className="btn"><RollText>{P.download.label}</RollText></a>
+              <a href={mail} className="btn ghost"><RollText>{P.contact.label}</RollText></a>
             </div>
           </div>
         </div>
@@ -151,7 +152,7 @@ export default async function Press() {
               ))}
             </ol>
           </div>
-          <a href={P.concept.download.href} download className={`btn ghost ${styles.conceptBtn}`}>{P.concept.download.label}</a>
+          <a href={P.concept.download.href} download className={`btn ghost ${styles.conceptBtn}`}><RollText>{P.concept.download.label}</RollText></a>
         </div>
       </section>
 
@@ -229,8 +230,8 @@ export default async function Press() {
             <h2 id="press-contact" className="display h2"><Rich text={P.cta.title} /></h2>
             <p className="lede">{P.cta.text}</p>
             <div className={styles.actions}>
-              <a href={mail} className="btn lime">{P.contact.label}</a>
-              <a href={P.download.href} download className="btn ghost">{P.download.label}</a>
+              <a href={mail} className="btn lime"><RollText>{P.contact.label}</RollText></a>
+              <a href={P.download.href} download className="btn ghost"><RollText>{P.download.label}</RollText></a>
             </div>
             <p className={`caption ${styles.email}`}>{P.contact.email}</p>
           </div>

@@ -79,7 +79,7 @@ export default async function About() {
           <div className={styles.storyEnd} data-reveal>
             <p className={`display ${styles.takeaway}`}><Rich text={STORY.takeaway} /></p>
             <p className={styles.storyText}>{STORY.text}</p>
-            <Link href={STORY.more.href} className="btn">{STORY.more.label}</Link>
+            <Link href={STORY.more.href} className="btn"><RollText>{STORY.more.label}</RollText></Link>
           </div>
         </div>
       </section>

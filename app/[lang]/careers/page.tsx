@@ -71,7 +71,7 @@ export default async function Careers() {
               <h2 id="product-title" className="display h2"><Rich text={C.product.title} /></h2>
               <p className="lede">{C.product.text}</p>
               <ul className={styles.points}>{C.product.points.map((p) => <li key={p}><span className={styles.tick} aria-hidden="true">✓</span>{p}</li>)}</ul>
-              <Link href={C.product.link.href} className="btn">{C.product.link.label}</Link>
+              <Link href={C.product.link.href} className="btn"><RollText>{C.product.link.label}</RollText></Link>
             </div>
             <div className={styles.productVisual}><Phone screen={APP.screens[1].media} className={styles.phone} /></div>
           </div>

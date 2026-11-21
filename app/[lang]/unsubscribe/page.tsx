@@ -4,6 +4,7 @@ import { verifyUnsubscribe } from "@/lib/unsubscribe";
 import { langMeta, paramsLang } from "@/lib/meta";
 import { getLang } from "@/lib/lang";
 import type { Lang } from "@/lib/i18n";
+import { RollText } from "@/components/ui/RollText";
 
 const T: Record<Lang, {
   meta: string; label: string; ask: [string, (e: string) => string]; done: [string, (e: string) => string];
@@ -65,10 +66,10 @@ export default async function Unsubscribe({ searchParams }: { searchParams: Sear
             <input type="hidden" name="e" value={email} />
             <input type="hidden" name="t" value={token} />
             <input type="hidden" name="l" value={lang} />
-            <button type="submit" className="btn dark">{t.button}</button>
+            <button type="submit" className="btn dark"><RollText>{t.button}</RollText></button>
           </form>
         )}
-        <Link href="/" className="btn ghost">{t.back}</Link>
+        <Link href="/" className="btn ghost"><RollText>{t.back}</RollText></Link>
       </div>
     </main>
   );

@@ -10,6 +10,7 @@ import { ui } from "@/lib/ui";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
 import { GuideCards } from "@/components/ui/GuideCards";
 import styles from "@/components/ui/Article.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 export const dynamicParams = false;
 export const generateStaticParams = () => AUTHORS.map((a) => ({ slug: a.slug }));
@@ -64,7 +65,7 @@ export default async function AuthorPage({ params }: Props) {
               <h1 id="author-title" className={styles.authorName} style={{ fontSize: 28 }}>{a.name}</h1>
               <p className={styles.authorRole}>{a.role}</p>
               <p className={styles.authorBio}>{a.bio}</p>
-              {a.story && <Link href={a.story} className="btn" style={{ marginTop: 16, marginRight: 16 }}>{t.readStory}</Link>}
+              {a.story && <Link href={a.story} className="btn" style={{ marginTop: 16, marginRight: 16 }}><RollText>{t.readStory}</RollText></Link>}
               {a.linkedin && <a href={a.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </div>

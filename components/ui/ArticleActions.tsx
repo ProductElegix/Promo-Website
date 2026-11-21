@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { track } from "@/lib/track";
 import { useUi } from "./Lang";
 import styles from "./Article.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 /** End of a guide: "Was this helpful?" (a GA4 event, no form) and share buttons, with the phone's own share sheet where there is one. */
 export function ArticleActions({ slug, title, url }: { slug: string; title: string; url: string }) {
@@ -41,8 +42,8 @@ export function ArticleActions({ slug, title, url }: { slug: string; title: stri
           <>
             <p>{tr.wasHelpful}</p>
             <div className={styles.actionRow}>
-              <button type="button" className={styles.actionBtn} onClick={() => answer("yes")}>{tr.yes}</button>
-              <button type="button" className={styles.actionBtn} onClick={() => answer("no")}>{tr.notReally}</button>
+              <button type="button" className={styles.actionBtn} onClick={() => answer("yes")}><RollText>{tr.yes}</RollText></button>
+              <button type="button" className={styles.actionBtn} onClick={() => answer("no")}><RollText>{tr.notReally}</RollText></button>
             </div>
           </>
         )}

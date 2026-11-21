@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link, { useUi } from "@/components/ui/Lang";
 import styles from "./ClarityConsent.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 const KEY = "elegix_cookie_consent"; // "yes" | "no"
 
@@ -50,8 +51,8 @@ export function ClarityConsent({ id }: { id: string }) {
     <div className={styles.banner} role="region" aria-label={t.cookiePrefs}>
       <p>{t.cookieText} <Link href="/privacy">{t.privacyPolicy}</Link></p>
       <div className={styles.actions}>
-        <button type="button" className={styles.decline} onClick={() => { save("no"); setOpen(false); }}>{t.decline}</button>
-        <button type="button" className={styles.accept} onClick={() => { save("yes"); setOpen(false); loadClarity(id); grantGoogle(); }}>{t.accept}</button>
+        <button type="button" className={styles.decline} onClick={() => { save("no"); setOpen(false); }}><RollText>{t.decline}</RollText></button>
+        <button type="button" className={styles.accept} onClick={() => { save("yes"); setOpen(false); loadClarity(id); grantGoogle(); }}><RollText>{t.accept}</RollText></button>
       </div>
     </div>
   );

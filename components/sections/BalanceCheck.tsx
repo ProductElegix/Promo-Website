@@ -174,8 +174,8 @@ function CheckFlow({ onClose, closeLabel }: { onClose: () => void; closeLabel: s
               <div className={styles.ends}><span>1 · {CHECK.low}</span><span>10 · {CHECK.high}</span></div>
             </div>
             <div className={styles.nav}>
-              {step > 0 && <button type="button" className="btn ghost" onClick={() => go(step - 1)}>{CHECK.back}</button>}
-              <button type="button" className="btn dark" onClick={() => go(step + 1)}>{step === TOTAL - 1 ? CHECK.finish : CHECK.next}</button>
+              {step > 0 && <button type="button" className="btn ghost" onClick={() => go(step - 1)}><RollText>{CHECK.back}</RollText></button>}
+              <button type="button" className="btn dark" onClick={() => go(step + 1)}><RollText>{step === TOTAL - 1 ? CHECK.finish : CHECK.next}</RollText></button>
             </div>
           </div>
         ) : (
@@ -192,7 +192,7 @@ function CheckFlow({ onClose, closeLabel }: { onClose: () => void; closeLabel: s
                   {sent.emailed ? CHECK.sent : CHECK.done} <b>{sent.email}</b>.
                 </p>
                 {sent.invited && <CommunityNote className={styles.done} />}
-                <div className={styles.nav}><button type="button" className="btn dark" onClick={onClose}>{closeLabel}</button></div>
+                <div className={styles.nav}><button type="button" className="btn dark" onClick={onClose}><RollText>{closeLabel}</RollText></button></div>
               </>
             ) : (
               <form className={styles.form} onSubmit={onSubmit} noValidate data-clarity-mask="true">
@@ -202,12 +202,12 @@ function CheckFlow({ onClose, closeLabel }: { onClose: () => void; closeLabel: s
                   <input ref={focusRef as React.RefObject<HTMLInputElement>} id="email-check" type="email" inputMode="email" autoComplete="email" placeholder={t.yourEmail} value={email}
                     onChange={(e) => setEmail(e.target.value)} required aria-describedby="check-status" />
                   <input type="text" name="company" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
-                  <button type="submit" className="btn lime" disabled={busy}>{busy ? t.sending : CHECK.submit}</button>
+                  <button type="submit" className="btn lime" disabled={busy}>{busy ? t.sending : <RollText>{CHECK.submit}</RollText>}</button>
                 </div>
                 <p className={styles.consent}>{CONSENT.before} <Link href="/privacy">{CONSENT.link}</Link>{CONSENT.after}</p>
                 <p id="check-status" className={styles.error} role="status" aria-live="polite">{error}</p>
                 <div className={styles.nav}>
-                  <button type="button" className="btn ghost" onClick={() => setStep(TOTAL - 1)}>{CHECK.back}</button>
+                  <button type="button" className="btn ghost" onClick={() => setStep(TOTAL - 1)}><RollText>{CHECK.back}</RollText></button>
                   <button type="button" className={styles.textBtn} onClick={restart}>{CHECK.restart}</button>
                 </div>
               </form>

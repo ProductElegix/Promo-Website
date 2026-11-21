@@ -283,7 +283,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
               {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </aside>
-          <Link href={authorHref(author.name)} className={`btn ghost ${styles.authorAll}`}>{t.readAllBy(author.name.split(" ")[0])}</Link>
+          <Link href={authorHref(author.name)} className={`btn ghost ${styles.authorAll}`}><RollText>{t.readAllBy(author.name.split(" ")[0])}</RollText></Link>
           </div>
           </div>
         </div>

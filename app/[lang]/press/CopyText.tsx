@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { track } from "@/lib/track";
 import styles from "./press.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 /** "Copy" button for a ready-made description; says "Copied" for a moment after a click. */
 export function CopyText({ text, label, done, id }: { text: string; label: string; done: string; id: string }) {
@@ -17,7 +18,7 @@ export function CopyText({ text, label, done, id }: { text: string; label: strin
   };
   return (
     <button type="button" className={`btn ghost ${styles.copy}`} onClick={copy} aria-live="polite">
-      {copied ? done : label}
+      <RollText key={copied ? "done" : "label"}>{copied ? done : label}</RollText>
     </button>
   );
 }

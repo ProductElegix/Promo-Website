@@ -97,7 +97,7 @@ export function Header() {
           <NavLink href="/#join" className={styles.cta} onClick={toJoin}><RollText>{NAV_CTA}</RollText></NavLink>
           <button type="button" className={`${styles.burger} caption`} aria-expanded={open} aria-controls="site-menu"
             onClick={() => setOpen((o) => !o)}>
-            {open ? t.close : t.menu}<span className={styles.burgerIcon} aria-hidden="true" />
+            <RollText key={open ? "close" : "menu"}>{open ? t.close : t.menu}</RollText><span className={styles.burgerIcon} aria-hidden="true" />
           </button>
         </div>
       </div>
