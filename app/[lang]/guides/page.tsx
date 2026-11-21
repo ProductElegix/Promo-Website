@@ -33,6 +33,7 @@ const T = {
     checkLabel: "Free Life Balance Check", checkTitle: "Find your weakest area in *2 minutes*",
     checkText: "Rate your 6 life areas from 1 to 10. We'll email your Life Balance score and one first step for your lowest area.",
     checkBtn: "Take the free check",
+    onThisPage: "On this page",
     tabAll: "All guides", tabAreas: "Life areas", tabQuestions: "Questions", tabTools: "Free tools",
     subTitle: "Get new guides first", subText: "One email when a new guide is out, plus early access to Elegix. No spam, unsubscribe any time.", subBtn: "Subscribe", email: "Your email",
   },
@@ -47,6 +48,7 @@ const T = {
     checkLabel: "Безкоштовна перевірка балансу", checkTitle: "Знайди свою найслабшу сферу за *2 хвилини*",
     checkText: "Оціни 6 сфер життя від 1 до 10. Ми надішлемо на пошту твою оцінку балансу життя й перший крок для найнижчої сфери.",
     checkBtn: "Пройти безкоштовну перевірку",
+    onThisPage: "На цій сторінці",
     tabAll: "Усі гайди", tabAreas: "Сфери життя", tabQuestions: "Питання", tabTools: "Безкоштовні інструменти",
     subTitle: "Отримуй нові гайди першим", subText: "Один лист, коли виходить новий гайд, і ранній доступ до Elegix. Без спаму, відписатися можна будь-коли.", subBtn: "Підписатися", email: "Твій email",
   },
@@ -133,45 +135,56 @@ export default async function Guides() {
       </section>
 
       {/* what the 6 areas are: the text that used to live on /life-areas, so every area page sits under Guides */}
-      <section id="areas" className="section" aria-labelledby="areas-title" style={{ paddingTop: 0, scrollMarginTop: "calc(var(--header-h) + 32px)" }}>
+      {/* what the 6 areas are: the text that used to live on /life-areas, so every area page sits under Guides.
+          Same magazine layout as the library: a ruled column head, the text on the left, a sticky list of its sections on the right */}
+      <section id="areas" className={`section ${styles.areasSection}`} aria-labelledby="areas-title">
         <div className="container">
-          <div className={`section-head ${styles.center}`} data-reveal>
-            <span className="label">{t.areasLabel}</span>
-            <h2 id="areas-title" className="display h2"><Rich text={t.areasTitle} /></h2>
-          </div>
-        </div>
-        <div className="container" style={{ maxWidth: 760 }}>
-          <div className={article.body}>
-            {HUB.sections.map((s) => (
-              <section key={s.h2}>
-                <h2>{s.h2}</h2>
-                {s.blocks.map((b, i) => <BlockView key={i} b={b} />)}
-              </section>
-            ))}
-            <section id="questions">
-              <h2>{t.questions}</h2>
-              <div className={article.faq}>
-                {HUB.faq.map((f) => (
-                  <details key={f.q}>
-                    <summary>{f.q}<span className={article.plus} aria-hidden="true" /></summary>
-                    <p><Inline text={f.a} /></p>
-                  </details>
-                ))}
+          <div className={styles.explain}>
+            <div className={styles.explainMain}>
+              <div className={styles.colHead}>
+                <h2 id="areas-title" className={styles.colTitle}>{t.areasTitle.replace(/\*/g, "")}</h2>
+                <span className={styles.result}>{t.areasLabel}</span>
               </div>
-            </section>
+              <div className={article.body}>
+                {HUB.sections.map((s, i) => (
+                  <section key={s.h2} id={`area-${i + 1}`}>
+                    <h2>{s.h2}</h2>
+                    {s.blocks.map((b, k) => <BlockView key={k} b={b} />)}
+                  </section>
+                ))}
+                <section id="questions">
+                  <h2>{t.questions}</h2>
+                  <div className={article.faq}>
+                    {HUB.faq.map((f) => (
+                      <details key={f.q}>
+                        <summary>{f.q}<span className={article.plus} aria-hidden="true" /></summary>
+                        <p><Inline text={f.a} /></p>
+                      </details>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            </div>
+            <nav className={styles.toc} aria-label={t.onThisPage}>
+              <h2 className={styles.colTitle}>{t.onThisPage}</h2>
+              <ol>
+                {HUB.sections.map((s, i) => <li key={s.h2}><a href={`#area-${i + 1}`}>{s.h2}</a></li>)}
+                <li><a href="#questions">{t.questions}</a></li>
+              </ol>
+            </nav>
           </div>
         </div>
       </section>
 
-      {/* a next step for readers: the free check on the home page */}
-      <section className="section" aria-labelledby="check-cta" style={{ paddingTop: 0 }}>
-        <div className="container">
-          <div className={styles.check} data-reveal>
-            <span className="label">{t.checkLabel}</span>
-            <h2 id="check-cta" className="display h2"><Rich text={t.checkTitle} /></h2>
-            <p className="lede">{t.checkText}</p>
-            <Link href="/#check" className="btn">{t.checkBtn}</Link>
+      {/* a next step for readers: the free check on the home page, as a black band like the top of the page */}
+      <section className={`on-dark ${styles.check}`} data-theme="dark" aria-labelledby="check-cta">
+        <div className={`container ${styles.checkInner}`}>
+          <div className={styles.checkText}>
+            <span className={styles.kicker}>{t.checkLabel}</span>
+            <h2 id="check-cta" className={styles.checkTitle}><Rich text={t.checkTitle} /></h2>
+            <p>{t.checkText}</p>
           </div>
+          <Link href="/#check" className="btn lime">{t.checkBtn}</Link>
         </div>
       </section>
 
