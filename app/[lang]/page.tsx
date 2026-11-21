@@ -5,7 +5,8 @@ import { Spread } from "@/components/sections/Spread";
 import { Orbit } from "@/components/sections/Orbit";
 import { Compare } from "@/components/sections/Compare";
 import { HowItWorks } from "@/components/sections/HowItWorks";
-import { AreasList } from "@/components/sections/AreasList";
+import { Result } from "@/components/sections/Result";
+import { Testers } from "@/components/sections/Testers";
 import { BalanceCheck } from "@/components/sections/BalanceCheck";
 import { Trust } from "@/components/sections/Trust";
 import { PopularGuides } from "@/components/sections/PopularGuides";
@@ -29,10 +30,11 @@ export default async function Home() {
       <Problem />
       <Spread />
       <HowItWorks />
+      <Result />
       <Orbit />
       <Compare />
-      <AreasList />
       <BalanceCheck />
+      <Testers />
       <Trust />
       <PopularGuides />
       <Faq />

@@ -11,3 +11,13 @@
 .title { margin: 0; }
 .sub { font-size: var(--fs-lead); color: rgba(255, 255, 255, .75); max-width: 30rem; }
 .form { width: 100%; max-width: 520px; margin-top: 12px; }
+
+/* what happens after you join: three short steps under the form */
+.after { width: 100%; max-width: 720px; margin-top: 18px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, .18); display: grid; gap: 14px; }
+.afterTitle { color: rgba(255, 255, 255, .6); }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
+.steps li { display: grid; gap: 6px; align-content: start; font-size: var(--fs-small); line-height: 1.45; color: rgba(255, 255, 255, .85); }
+.when { font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); }
+@media (max-width: 640px) {
+  .steps { grid-template-columns: 1fr; gap: 12px; }
+}

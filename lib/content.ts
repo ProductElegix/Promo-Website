@@ -49,7 +49,7 @@ export const BRAND = {
 export const NAV = [
   { href: "/about", label: "About" },
   { href: "/guides", label: "Guides" },
-  { href: "/careers", label: "Careers" },
+  { href: "/#check", label: "Life Balance Check" },
 ];
 export const NAV_CTA: string = "Get early access";
 
@@ -124,6 +124,20 @@ export const OPENING = {
     text: "Most apps reward you for doing more. Elegix shows what doing more is costing you: a 1-minute weekly check-in, one Life Balance score and one small next step for the area that needs you most.",
   },
   card: { title: "Ready to get started?", text: "Join the early access list." },
+};
+
+/**
+ * Second screen of the home page: the "What is Elegix" statement lights up word by word, then the phone with the
+ * real Life Area screen rises and straightens while scrolling, and three notes point at what it shows.
+ * The numbers in the notes are the ones on the screenshot (public/images/app/life-area-v2.jpg): change them together.
+ */
+export const PRODUCT = {
+  screen: "Life Area",
+  callouts: [
+    { title: "6 areas, one radar", text: "Where your energy went this week, at a glance." },
+    { title: "Week over week", text: "Health up 50%. What grew and what dropped since last week." },
+    { title: "One Life Balance score", text: "5.0 out of 10, up 24%. One number for your whole life." },
+  ],
 };
 
 /** Facts ticker under the hero: a value and a short caption, scrolling on a dark strip. */
@@ -220,6 +234,29 @@ export const HOW = {
   ] },
 };
 
+// 4b · What changes: an illustrative month of weekly check-ins, so the page shows the good part, not only the problem
+export const RESULT = {
+  label: "After 4 weeks",
+  title: "Small steps. A *visible* change.",
+  lede: "One area gets a little attention every week, and the whole picture moves. This is what four 1-minute check-ins can look like.",
+  example: "Example",
+  weeks: ["Week 1", "Week 2", "Week 3", "Week 4"],
+  /** the area that got the weekly next step; its score per week, then the Life Balance score per week */
+  focus: "health" as AreaKey,
+  focusScores: [3, 4, 6, 7],
+  balance: [4.7, 5.1, 5.7, 6.2],
+  balanceLabel: "Life Balance score",
+  /** the 6 area scores (AREA_ORDER) on the first and the last week, for the two wheels */
+  before: { label: "Week 1", scores: [3, 5, 4, 3, 5, 8] },
+  after: { label: "Week 4", scores: [7, 6, 5, 5, 6, 8] },
+  stats: [
+    { value: "3 to 7", label: "Health, after one 20-minute walk a day" },
+    { value: "4.7 to 6.2", label: "Life Balance score" },
+    { value: "4 min", label: "spent on check-ins all month" },
+  ],
+  note: "An illustrative example, not a promise. Your own numbers come from your check-ins.",
+};
+
 // 6
 export const AREAS_SECTION = {
   label: "Six areas",
@@ -300,6 +337,24 @@ export const TRUST = {
   },
 };
 
+/**
+ * Early testers on the home page, above the founder. A quote goes up only with the person's OK.
+ * The waitlist counter shows the size of the Mailgun list once it reaches `min` (lib/waitlist-count.ts);
+ * below that, or without Mailgun keys, it's hidden.
+ */
+export const TESTERS = {
+  label: "Early testers",
+  title: "What people say after a few *weeks*",
+  quotes: [
+    {
+      text: "I've had Notion and three habit trackers, and all of them told me how busy I was. Elegix was the first to show me I hadn't done a single thing for my health in a month. The weekly check-in takes a minute, and it's the only one I haven't skipped.",
+      name: "Oleksandr Klimanov",
+      role: "Early tester",
+    },
+  ] as { text: string; name: string; role: string; photo?: string }[],
+  counter: { min: 50, before: "", after: "people are already on the waitlist" },
+};
+
 /** The team on /about#team. Add `photo` when a portrait arrives; until then initials show. */
 export const TEAM = {
   label: "Team",
@@ -331,6 +386,15 @@ export const JOIN = {
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
   button: "Get early access",
   note: "No payment now.",
+  /** what happens after the form, under it. `nowCommunity` replaces `now` while the Telegram invite is switched on */
+  after: {
+    title: "What happens next",
+    steps: [
+      { when: "Right away", now: "A welcome email with your place on the list.", nowCommunity: "A welcome email and an invite to our private Telegram group." },
+      { when: "Before launch", now: "Beta invites go out in the order people joined, plus updates as we build." },
+      { when: "At launch", now: "Full access and your founding member price, locked for life." },
+    ] as { when: string; now: string; nowCommunity?: string }[],
+  },
 };
 
 // 11

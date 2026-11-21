@@ -1,0 +1,48 @@
+/* Default (no JavaScript, reduced motion): the statement, then the phone with its notes, stacked. */
+.reveal { position: relative; }
+.stage { display: grid; justify-items: center; gap: clamp(40px, 5vw, 72px); padding: clamp(72px, 9vw, 150px) var(--gutter) clamp(32px, 4vw, 64px); }
+.head { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.statement { max-width: 28ch; font-size: clamp(26px, 3.2vw, 50px); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; color: #f2f2f0; text-wrap: balance; }
+.statement em, .statement [class*="accent"] { font-style: normal; color: var(--lime); }
+.statement [data-word] { display: inline-block; }
+
+.device { position: relative; width: min(100%, 860px); display: grid; justify-items: center; perspective: 1400px; }
+.phoneWrap { transform-origin: 50% 100%; will-change: transform; }
+.phone { width: min(300px, 31svh, 58vw); min-width: 200px; box-shadow: 0 60px 120px -40px rgba(213, 244, 94, .22), 0 30px 60px -24px rgba(0, 0, 0, .8), inset 0 0 0 1.5px #2e3531; }
+
+/* three notes around the phone */
+.notes { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.note {
+  position: absolute; width: min(240px, 38vw); display: grid; gap: 4px; padding: 14px 16px;
+  border-radius: var(--radius-m); background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); color: #fff;
+}
+.note b { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+.note b::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--lime); vertical-align: 2px; }
+.note span { font-size: var(--fs-small); line-height: 1.4; color: rgba(255, 255, 255, .68); }
+.n1 { right: calc(50% + min(150px, 15.5svh, 29vw) + 28px); top: 22%; }
+.n2 { left: calc(50% + min(150px, 15.5svh, 29vw) + 28px); top: 38%; }
+.n3 { right: calc(50% + min(150px, 15.5svh, 29vw) + 28px); top: 66%; }
+
+/* With motion: a tall section, the stage sticks to the screen while the statement and then the phone play out */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal[data-armed] { height: 290vh; height: 290svh; }
+  .reveal[data-armed] .stage { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 600px; padding: 0 var(--gutter); overflow: hidden; display: block; }
+  .reveal[data-armed] .head { position: absolute; inset: 0; align-content: center; padding: 0 var(--gutter); }
+  .reveal[data-armed] .device { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .reveal[data-armed] .phone { width: min(330px, 38svh, 58vw); }
+  .reveal[data-armed] .n1, .reveal[data-armed] .n3 { right: calc(50% + min(165px, 19svh, 29vw) + 32px); }
+  .reveal[data-armed] .n2 { left: calc(50% + min(165px, 19svh, 29vw) + 32px); }
+}
+
+@media (max-width: 767px) {
+  .note { width: 44vw; padding: 10px 12px; background: rgba(28, 30, 29, .88); }
+  .note b { font-size: 13px; }
+  .note b::before { display: none; }
+  .note span { font-size: 12px; }
+  .n1, .n3 { right: auto !important; left: -4px; }
+  .n2 { left: auto !important; right: -4px; }
+  .n1 { top: 8%; }
+  .n2 { top: 40%; }
+  .n3 { top: 72%; }
+}
