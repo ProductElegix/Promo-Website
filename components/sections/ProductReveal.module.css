@@ -7,7 +7,10 @@
 .statement [data-word] { display: inline-block; }
 
 .device { position: relative; width: min(100%, 860px); display: grid; justify-items: center; perspective: 1400px; }
-.phoneWrap { transform-origin: 50% 100%; will-change: transform; }
+.phoneWrap { position: relative; transform-origin: 50% 100%; will-change: transform; }
+/* the 3D phone: a canvas 1.5x the flat phone so it has room to turn; once it has drawn, the flat phone hides */
+.phone3d { position: absolute; left: -25%; top: -25%; width: 150%; height: 150%; pointer-events: none; }
+.phoneWrap[data-phone3d] .phone { visibility: hidden; }
 .phone { width: min(300px, 31svh, 58vw); min-width: 200px; box-shadow: 0 60px 120px -40px rgba(213, 244, 94, .22), 0 30px 60px -24px rgba(0, 0, 0, .8), inset 0 0 0 1.5px #2e3531; }
 
 /* three notes around the phone */
