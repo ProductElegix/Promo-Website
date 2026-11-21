@@ -15,6 +15,8 @@ type Props = {
   /** Short area names for the labels around the wheel. */
   names: Record<AreaKey, string>;
   text: { label: string; balance: string; last: string; now: string };
+  /** On a black section: a dark plate and dark empty tiles. */
+  dark?: boolean;
 };
 
 const RINGS = 10;
@@ -31,7 +33,7 @@ const avg = (s: number[]) => (s.reduce((a, b) => a + b, 0) / s.length).toFixed(1
  * The flat SVG wheel is shown first and stays for reduced motion or without WebGL;
  * three.js loads only when the wheel comes near the viewport.
  */
-export function Wheel3D({ scores, prev, names, text }: Props) {
+export function Wheel3D({ scores, prev, names, text, dark = false }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const tags = useRef<(HTMLSpanElement | null)[]>([]);
   const api = useRef<ReturnType<typeof build> | null>(null);
@@ -80,7 +82,7 @@ export function Wheel3D({ scores, prev, names, text }: Props) {
       io.disconnect();
       Promise.all([import("three"), import("three/examples/jsm/environments/RoomEnvironment.js")]).then(([THREE, { RoomEnvironment }]) => {
         if (cancelled) return;
-        const built = build(THREE, RoomEnvironment, el, tags.current, scores, prev, focus, () => setReady(true));
+        const built = build(THREE, RoomEnvironment, el, tags.current, scores, prev, focus, dark, () => setReady(true));
         dispose = built.dispose;
         api.current = built;
         built.setMode(mode);
@@ -97,7 +99,7 @@ export function Wheel3D({ scores, prev, names, text }: Props) {
   const sub = mode === 1 ? names[AREA_ORDER[focus]] : mode === 2 ? (flip ? text.now : text.last) : text.balance;
 
   return (
-    <div ref={box} className={`${styles.box} ${ready ? styles.ready : ""}`}>
+    <div ref={box} className={`${styles.box} ${dark ? styles.dark : ""} ${ready ? styles.ready : ""}`}>
       <div className={styles.flat}><Wheel scores={scores} size={320} label={text.label} /></div>
       <div className={styles.score} aria-hidden="true">
         <b key={value}>{value}</b>
@@ -121,11 +123,14 @@ function build(
   now: number[],
   prev: number[],
   focus: number,
+  dark: boolean,
   onReady: () => void,
 ) {
   const css = getComputedStyle(document.documentElement);
   const cssColor = (v: string, fb: string) => new THREE.Color(css.getPropertyValue(v).trim() || fb);
   const white = new THREE.Color(0xffffff);
+  // what empty tiles fade towards: off-white on the page, near-black on a dark section
+  const base = new THREE.Color(dark ? 0x1b1d1c : 0xf2f2f0);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -157,10 +162,10 @@ function build(
   const sc = sun.shadow.camera as T.OrthographicCamera;
   sc.left = -8; sc.right = 8; sc.top = 8; sc.bottom = -8; sc.near = 1; sc.far = 30;
   scene.add(sun);
-  scene.add(new THREE.HemisphereLight(0xffffff, 0xe9e9e5, 0.9));
+  scene.add(new THREE.HemisphereLight(0xffffff, dark ? 0x2a2c2b : 0xe9e9e5, dark ? 0.7 : 0.9));
 
   // soft shadow on the page under the plate
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.16 }));
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: dark ? 0 : 0.16 }));
   ground.position.z = -0.75;
   ground.receiveShadow = true;
   scene.add(ground);
@@ -172,7 +177,7 @@ function build(
   const plateShape = new THREE.Shape();
   plateShape.absarc(0, 0, R1 + 0.35, 0, Math.PI * 2, false);
   const plateGeo = new THREE.ExtrudeGeometry(plateShape, { depth: 0.3, bevelEnabled: true, bevelThickness: 0.12, bevelSize: 0.12, bevelSegments: 6, curveSegments: 96 });
-  const plate = new THREE.Mesh(plateGeo, new THREE.MeshPhysicalMaterial({ color: 0xfbfbf8, roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.4 }));
+  const plate = new THREE.Mesh(plateGeo, new THREE.MeshPhysicalMaterial({ color: dark ? 0x121413 : 0xfbfbf8, roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.4 }));
   plate.position.z = -0.55;
   plate.castShadow = true;
   plate.receiveShadow = true;
@@ -181,7 +186,7 @@ function build(
   // the hub in the middle, the score sits on it
   const hub = new THREE.Mesh(
     new THREE.CylinderGeometry(R0 - 0.12, R0 - 0.12, 0.5, 64),
-    new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.15 }),
+    new THREE.MeshPhysicalMaterial({ color: dark ? 0x1e201f : 0xffffff, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.15 }),
   );
   hub.rotation.x = Math.PI / 2;
   hub.castShadow = true;
@@ -213,8 +218,8 @@ function build(
     group.rotation.z = angle;
     wheel.add(group);
     const strong = cssColor(`--${area}-s`, "#009a44");
-    const tint = cssColor(`--${area}-t`, "#d5f45e").lerp(white, 0.45);
-    const muted = strong.clone().lerp(new THREE.Color(0xf2f2f0), 0.72);
+    const tint = dark ? strong.clone().lerp(base, 0.86) : cssColor(`--${area}-t`, "#d5f45e").lerp(white, 0.45);
+    const muted = strong.clone().lerp(base, dark ? 0.7 : 0.72);
     const tiles: Tile[] = ringGeo.map((geo, s) => {
       const mat = new THREE.MeshPhysicalMaterial({ color: tint.clone(), roughness: 0.5, clearcoat: 0.5, clearcoatRoughness: 0.25 });
       const mesh = new THREE.Mesh(geo, mat);
@@ -237,7 +242,7 @@ function build(
       t.z = on ? (dim ? -0.1 : 0.02) : -0.24;
       t.c = on
         ? dim ? a.muted : a.strong.clone().lerp(white, Math.max(0, 0.12 - t.ring * 0.015))
-        : dim ? a.muted.clone().lerp(white, 0.4) : a.tint;
+        : dim ? a.muted.clone().lerp(dark ? base : white, 0.4) : a.tint;
       t.rough = on ? 0.28 : 0.55;
     }));
   };

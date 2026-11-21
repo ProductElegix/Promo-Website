@@ -26,6 +26,10 @@
 .ready .score { display: grid; }
 .score b { font-size: clamp(26px, 4vw, 44px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; color: var(--ink); animation: pop .5s var(--ease); }
 .score span { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); animation: pop .5s var(--ease); }
+/* on a black section */
+.dark .score b { color: #fff; }
+.dark .score span { color: rgba(255, 255, 255, .55); }
+.dark .tag { box-shadow: 0 6px 18px -8px rgba(0, 0, 0, .6); }
 @keyframes pop { from { opacity: 0; transform: translateY(6px); } }
 @media (max-width: 560px) {
   .box { width: min(82vw, 340px); }
@@ -33,5 +37,6 @@
   .tag svg { width: 11px; height: 11px; }
   .score b { font-size: 24px; }
   .score span { font-size: 9px; }
+  .dark.box { width: min(64vw, 300px); }
 }
 @media (prefers-reduced-motion: reduce) { .score b, .score span { animation: none; } }
