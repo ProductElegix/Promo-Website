@@ -25,6 +25,7 @@ import { ArticleActions } from "./ArticleActions";
 import { GuideAnalytics } from "./GuideAnalytics";
 import { WaitlistForm } from "./WaitlistForm";
 import styles from "./Article.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 type Parent = { name: string; path: string };
 type Props = {
@@ -205,7 +206,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
               <div className={styles.sideCta}>
                 <p className={styles.sideCtaTitle}>{t.sideCtaTitle}</p>
                 <p>{t.sideCtaText}</p>
-                <a href="#join" className="btn lime" data-cta="side">{t.getEarlyAccess}</a>
+                <a href="#join" className="btn lime" data-cta="side"><RollText>{t.getEarlyAccess}</RollText></a>
               </div>
             )}
           </aside>

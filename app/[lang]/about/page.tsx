@@ -22,6 +22,7 @@ import { OG_IMAGE } from "@/lib/site";
 import { storyHref } from "@/lib/stories";
 import { storiesOf } from "@/lib/stories-l10n";
 import styles from "./about.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang: l } = await params;
@@ -46,7 +47,7 @@ export default async function About() {
       <Breadcrumbs name={t.about} path={langMeta(lang, "/about").url} />
       {/* 1. Hero: what Elegix is and who is behind it */}
       <PhotoHero id="about-title" media={A.hero.media} eyebrow={A.hero.label} title={A.hero.title} lede={A.hero.lede}>
-        <a href="#join" className="btn lime">{A.hero.cta}</a>
+        <a href="#join" className="btn lime"><RollText>{A.hero.cta}</RollText></a>
         <p className={styles.who}>{A.hero.who}</p>
       </PhotoHero>
 

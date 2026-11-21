@@ -12,6 +12,7 @@ import { PhotoHero } from "@/components/sections/PhotoHero";
 import { StatementSection, StatementStrip } from "@/components/sections/Opening";
 import { Faq } from "@/components/sections/Faq";
 import styles from "./careers.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const lang = await paramsLang(params);
@@ -33,7 +34,7 @@ export default async function Careers() {
       <Breadcrumbs name={ui(lang).careers} path={langMeta(lang, "/careers").url} />
       <JsonLd data={FAQ_DATA} />
       <PhotoHero id="careers-title" media={C.media} eyebrow={C.label} titlePrefix={C.h1Prefix} title={C.title} lede={C.lede}>
-        <a href="#open-roles" className="btn lime">{C.cta}</a>
+        <a href="#open-roles" className="btn lime"><RollText>{C.cta}</RollText></a>
       </PhotoHero>
 
       <StatementSection>
@@ -86,7 +87,7 @@ export default async function Careers() {
             <h2 id="open-roles-title" className="display h2"><Rich text={C.open.title} /></h2>
             <p className="lede">{C.open.text}</p>
             <div className={styles.actions}>
-              <a href={mail} className="btn lime">{C.open.button}</a>
+              <a href={mail} className="btn lime"><RollText>{C.open.button}</RollText></a>
               <Link href={C.open.team.href} className={styles.team}>{C.open.team.label}</Link>
             </div>
           </div>

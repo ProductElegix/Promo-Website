@@ -6,6 +6,7 @@ import { useContent, usePlainPath, useUi } from "@/components/ui/Lang";
 import { LangSwitch } from "@/components/ui/LangSwitch";
 import { Logo } from "@/components/ui/Logo";
 import styles from "./Header.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 /** True when the page under the header bar is a dark section (data-theme="dark" or .on-dark). */
 function isOverDark(header: HTMLElement | null) {
@@ -93,7 +94,7 @@ export function Header() {
         </nav>
         <div className={styles.actions}>
           <LangSwitch className={styles.lang} />
-          <NavLink href="/#join" className={styles.cta} onClick={toJoin}>{NAV_CTA}</NavLink>
+          <NavLink href="/#join" className={styles.cta} onClick={toJoin}><RollText>{NAV_CTA}</RollText></NavLink>
           <button type="button" className={`${styles.burger} caption`} aria-expanded={open} aria-controls="site-menu"
             onClick={() => setOpen((o) => !o)}>
             {open ? t.close : t.menu}<span className={styles.burgerIcon} aria-hidden="true" />

@@ -11,6 +11,7 @@ import { Rich } from "@/components/ui/Rich";
 import { CommunityNote } from "@/components/ui/CommunityNote";
 import { Wheel } from "@/components/ui/Wheel";
 import styles from "./BalanceCheck.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 /** the wheel shown on the page before anyone starts: an uneven life, so the idea reads at a glance */
@@ -59,7 +60,7 @@ export function CheckBand({ compact = false }: { compact?: boolean }) {
             : <h2 id="check-title" className={`display ${styles.title}`}><Rich text={CHECK.title} /></h2>}
           <p className={styles.text}>{CHECK.text}</p>
         </div>
-        <button type="button" className={`btn ${styles.open}`} onClick={openCheck} aria-haspopup="dialog">{CHECK.button}</button>
+        <button type="button" className={`btn ${styles.open}`} onClick={openCheck} aria-haspopup="dialog"><RollText>{CHECK.button}</RollText></button>
       </div>
       <dialog ref={dialog} className={styles.dialog} aria-labelledby="check-step-title" onClose={() => setOpen(false)}
         onClick={(e) => { if (e.target === e.currentTarget) dialog.current?.close(); }}>
