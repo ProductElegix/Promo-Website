@@ -238,7 +238,9 @@ export const RESULT = {
   label: "After 4 weeks",
   title: "Small steps. A *visible* change.",
   lede: "One area gets a little attention every week, and the whole picture moves. This is what four 1-minute check-ins can look like.",
-  example: "Example",
+  /** under the big focus-area number: "+4 in 4 weeks" */
+  inWeeks: "in 4 weeks",
+  monthLabel: "The month at a glance",
   weeks: ["Week 1", "Week 2", "Week 3", "Week 4"],
   /** the area that got the weekly next step; its score per week, then the Life Balance score per week */
   focus: "health" as AreaKey,
