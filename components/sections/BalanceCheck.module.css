@@ -1,12 +1,14 @@
-/* on the page: title, lede and one button on the left, a sample wheel on the right */
-.card { background: var(--paper); border-radius: var(--radius-l); padding: clamp(24px, 4vw, 56px); display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
-.intro { display: grid; gap: 20px; justify-items: start; }
-.intro :global(.lede) { max-width: 34rem; }
-.open { margin-top: 8px; }
-.wheelPanel { display: grid; place-items: center; padding: clamp(24px, 3vw, 48px); border: 0; border-radius: var(--radius-m); background: var(--cream); cursor: pointer; font: inherit; }
-.wheel { width: min(100%, 340px); display: grid; transition: transform .6s var(--ease); }
-.wheel svg { width: 100%; height: auto; }
-.wheelPanel:hover .wheel { transform: rotate(-8deg) scale(1.02); }
+/* on the page: one full-width CTA band (sample wheel, pitch, button); the section adds no padding of its own */
+/* pulls the neighbours in, so the band sits closer than a full section gap */
+.section { padding-block: 0; margin-block: calc(var(--section-y) * -0.4); }
+.band { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: clamp(20px, 3vw, 48px); padding: clamp(24px, 3vw, 40px) clamp(24px, 4vw, 56px); border-radius: var(--radius-l); background: var(--ink); }
+.wheelBtn { display: grid; padding: 0; border: 0; background: none; cursor: pointer; }
+.wheelBtn svg { width: clamp(96px, 10vw, 140px); height: auto; transition: transform .6s var(--ease); }
+.wheelBtn:hover svg { transform: rotate(-12deg); }
+.copy { display: grid; gap: 12px; justify-items: start; }
+.title { margin: 0; font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.02; letter-spacing: -0.035em; }
+.text { margin: 0; max-width: 40rem; font-size: 0.98rem; color: rgba(255, 255, 255, .62); }
+.open { justify-self: end; }
 
 /* the modal */
 .dialog { width: min(920px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; border: 0; border-radius: var(--radius-m); background: var(--paper); color: var(--ink); overflow: auto; overscroll-behavior: contain; }
@@ -76,10 +78,13 @@
 .done { margin: 0; }
 .done:focus { outline: none; }
 
-@media (max-width: 960px) {
-  .card { grid-template-columns: minmax(0, 1fr); }
-  .wheelPanel { order: -1; }
-  .wheel { width: min(100%, 200px); }
+@media (max-width: 860px) {
+  .band { grid-template-columns: auto minmax(0, 1fr); }
+  .open { grid-column: 1 / -1; justify-self: stretch; }
+}
+@media (max-width: 560px) {
+  .band { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; }
+  .wheelBtn svg { width: 88px; }
 }
 @media (max-width: 720px) {
   .dialog { width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; margin: 0; }
@@ -98,5 +103,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .dialog[open], .dialog[open]::backdrop, .step { animation: none; }
-  .wheel { transition: none; }
+  .wheelBtn svg { transition: none; }
 }

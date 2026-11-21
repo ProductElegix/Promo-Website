@@ -37,18 +37,19 @@ export function BalanceCheck() {
   }
 
   return (
-    <section id="check" className="section" aria-labelledby="check-title">
+    <section id="check" className={`section ${styles.section}`} aria-labelledby="check-title">
       <div className="container">
-        <div className={styles.card} data-reveal>
-          <div className={styles.intro}>
-            <span className="label">{CHECK.eyebrow}</span>
-            <h2 id="check-title" className="display h2"><Rich text={CHECK.title} /></h2>
-            <p className="lede">{CHECK.text}</p>
-            <button type="button" className={`btn ${styles.open}`} onClick={openCheck} aria-haspopup="dialog">{CHECK.button}</button>
-          </div>
-          <button type="button" className={styles.wheelPanel} onClick={openCheck} tabIndex={-1} aria-hidden="true">
-            <span className={styles.wheel}><Wheel scores={SAMPLE} size={300} /></span>
+        {/* a full-width CTA band: sample wheel, the pitch, one button */}
+        <div className={`on-dark ${styles.band}`} data-reveal>
+          <button type="button" className={styles.wheelBtn} onClick={openCheck} tabIndex={-1} aria-hidden="true">
+            <Wheel scores={SAMPLE} size={140} ring="rgba(255,255,255,.1)" />
           </button>
+          <div className={styles.copy}>
+            <span className="label">{CHECK.eyebrow}</span>
+            <h2 id="check-title" className={`display ${styles.title}`}><Rich text={CHECK.title} /></h2>
+            <p className={styles.text}>{CHECK.text}</p>
+          </div>
+          <button type="button" className={`btn ${styles.open}`} onClick={openCheck} aria-haspopup="dialog">{CHECK.button}</button>
         </div>
       </div>
       <dialog ref={dialog} className={styles.dialog} aria-labelledby="check-step-title" onClose={() => setOpen(false)}
