@@ -380,8 +380,8 @@ export const JOIN = {
   eyebrow: "Early access",
   title: "Join before *launch*.",
   // one plain line under the title instead of a perks list
-  sub: "First access and a founding member price, locked for life.",
-  perks: ["First access, in the order you join", "A founding member price, locked for life", "Vote on what we build next", "Behind-the-scenes updates as it's built"],
+  sub: "First access, and 3 months of Premium free at launch.",
+  perks: ["First access, in the order you join", "3 months of Premium free at launch", "Vote on what we build next", "Behind-the-scenes updates as it's built"],
   media: { src: "/images/join.jpg", alt: "Morning sun casting leaf shadows on a warm, weathered wall with a plant in the corner", brief: "Early access · warm, sunlit, calm · 2400×1600", ratio: "3 / 2" } as MediaSlot,
   signature: { name: "Edward Korytskyi", role: "Founder, Elegix" },
   button: "Get early access",
@@ -392,7 +392,7 @@ export const JOIN = {
     steps: [
       { when: "Right away", now: "A welcome email with your place on the list.", nowCommunity: "A welcome email and an invite to our private Telegram group." },
       { when: "Before launch", now: "Beta invites go out in the order people joined, plus updates as we build." },
-      { when: "At launch", now: "Full access and your founding member price, locked for life." },
+      { when: "At launch", now: "Full access, plus 3 months of Premium free." },
     ] as { when: string; now: string; nowCommunity?: string }[],
   },
 };
@@ -409,10 +409,10 @@ export const FAQ = [
   { q: "Is the Life Balance score real or just a number?", a: "It combines your 1-minute weekly check-in, where you rate each area, with what you actually do. If there's too little data, Elegix tells you instead of guessing." },
   { q: "I've given up on every planner. Why would this one stick?", a: "You start from a ready template in 2 minutes. After that it's a 1-minute weekly check-in, plus a 10-minute monthly review. There's nothing to maintain." },
   { q: "When does it launch?", a: "We're finishing the first version. Waitlist members get in first, in the order they joined." },
-  { q: "Is it free?", a: "Yes, Elegix is free to use. An optional Premium plan adds more, and its pricing will be announced before launch. Waitlist members hear first." },
+  { q: "Is it free?", a: "Yes, Elegix is free to use. An optional Premium plan adds more, and its pricing will be announced before launch. Waitlist members get 3 months of Premium free." },
   { q: "Which platforms?", a: "iOS and Android, one account on all your devices." },
   { q: "What happens to my data?", a: "It's used only to run the app for you. It's never sold, and you can delete it any time." },
-  { q: "What do I get for joining early?", a: "First access, a founding member price and a say in what we build next." },
+  { q: "What do I get for joining early?", a: "First access, 3 months of Premium free at launch and a say in what we build next." },
   { q: "What does Elegix mean?", a: "It comes from Valencian and Western Catalan, where elegix means “choose”. We picked it because Elegix is about consciously choosing how you spend your time and energy across the areas of your life." },
 ];
 
@@ -548,7 +548,7 @@ export const ABOUT_PAGE = {
       { title: "The idea", text: "Years of planners that fixed one piece and missed the whole picture." },
       { title: "Design and prototype", text: "The 6 areas, the Life Balance score and the weekly check-in, tested on ourselves." },
       { title: "First version", text: "Building the iOS and Android app and sharing every step in public.", current: true },
-      { title: "Early access", text: "Waitlist members get in first, with a founding member price." },
+      { title: "Early access", text: "Waitlist members get in first, with 3 months of Premium free." },
       { title: "Public launch", text: "Elegix on the App Store and Google Play." },
     ] as { title: string; text: string; current?: boolean }[],
   },
@@ -559,7 +559,7 @@ export const ABOUT_PAGE = {
   pricing: {
     label: "Pricing",
     title: "Free to use. *Premium* if you want more.",
-    text: "Elegix is free to download and use. An optional Premium plan adds more, and its pricing will be announced before launch. Waitlist members hear first.",
+    text: "Elegix is free to download and use. An optional Premium plan adds more, and its pricing will be announced before launch. Waitlist members get 3 months of Premium free.",
   },
   name: {
     label: "Why the name",
@@ -580,7 +580,7 @@ export const ABOUT_PAGE = {
       { q: "Who is behind Elegix?", a: "Four people: Edward Korytskyi (founder), Alina Krupa (CMO and co-founder), Maksym Zhuravskyi (CTO and co-founder) and Yevhenii Bohomol (co-founder). Elegix is registered in Ukraine as an individual entrepreneur (FOP) business in Edward's name." },
       { q: "Where are you based?", a: "In Lutsk, Ukraine. We work as a small remote team, four days a week." },
       { q: "What stage is Elegix at?", a: "We're building the first version of the iOS and Android app. Waitlist members get in first, in the order they joined." },
-      { q: "How do I get early access?", a: "Join the waitlist with your email. Early members also get a founding member price, locked for life." },
+      { q: "How do I get early access?", a: "Join the waitlist with your email. Early members also get 3 months of Premium free at launch." },
       { q: "What do you do with my data?", a: "Only what's needed to run the app for you. It's never sold, analytics run only if you agree, and you can have your data deleted any time. The details are in our Privacy Policy." },
       { q: "How can I contact you?", a: "Email hello@elegix.net. Edward reads every message, and we usually reply within a couple of days." },
     ],
@@ -588,7 +588,7 @@ export const ABOUT_PAGE = {
   story: { label: "Our story", id: "story" },
   beliefs: { label: "What we believe", title: "Our *principles*" },
   publicBuild: { title: "Built in public", text: "Elegix is in development and we share every step. Follow along:" },
-  cta: { title: "Ready to see your *whole* life?", text: "Join the waitlist and get early access, a founding member price and a say in what we build next." },
+  cta: { title: "Ready to see your *whole* life?", text: "Join the waitlist and get early access, 3 months of Premium free and a say in what we build next." },
 };
 
 /** Closing "Ready when you are": the app in the middle, one everyday object per life area around it. */
