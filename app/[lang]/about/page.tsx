@@ -113,7 +113,7 @@ export default async function About() {
       </section>
 
       {/* 5. Who it's for */}
-      <section className="section" aria-labelledby="audience-title" style={{ paddingTop: 0 }}>
+      <section className="section" aria-labelledby="audience-title">
         <div className="container">
           <div className={`section-head ${styles.center}`} data-reveal>
             <span className="label">{A.audience.label}</span>
