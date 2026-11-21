@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
  * scroll, touch or key press, like the site-wide motion; until then the block is a plain stacked layout below the fold.
  * Timeline, scrubbed by scroll while the stage sticks to the screen:
  *   1. once the block fills the screen, the statement's words light up one by one (the phone already peeks up below it);
- *   2. the statement lifts away while the phone rises (and, in 3D, turns to face you);
+ *   2. the statement lifts away while the phone rises, straightens and faces you;
  *   3. the three notes slide in one after another; then the picture holds for a moment.
  * Only transforms and opacity move.
  */
@@ -41,8 +41,7 @@ export function ProductRevealMotion() {
         const side = (el: HTMLElement) => (el.getBoundingClientRect().left + el.offsetWidth / 2 < window.innerWidth / 2 ? -1 : 1);
 
         // the phone already peeks up from the bottom edge, tilted back, so the stage is never an empty black screen
-        // the 3D phone turns itself (Phone3D); here the phone only rises and grows
-        gsap.set(phone, { yPercent: 80, scale: 0.8, opacity: 0.7 });
+        gsap.set(phone, { yPercent: 80, rotateX: 34, scale: 0.8, opacity: 0.55 });
         gsap.set(notes, { opacity: 0, x: (_i: number, el: HTMLElement) => side(el) * 40 });
 
         // once the stage fills the screen and sticks: the words light up one by one (the phone peeks up below them),
@@ -53,7 +52,7 @@ export function ProductRevealMotion() {
         });
         tl.fromTo(words, { opacity: 0.14 }, { opacity: 1, stagger: 0.04, duration: 0.2 });
         tl.to(head, { yPercent: -35, opacity: 0, duration: 0.45, ease: "power1.in" }, "+=0.1")
-          .to(phone, { yPercent: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" }, "<")
+          .to(phone, { yPercent: 0, rotateX: 0, scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" }, "<")
           .to(notes, { opacity: 1, x: 0, duration: 0.45, stagger: 0.3, ease: "power2.out" }, "-=0.35")
           .to({}, { duration: 0.4 });
       }, root);

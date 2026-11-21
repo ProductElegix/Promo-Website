@@ -1,14 +1,13 @@
 import { APP as APP_EN } from "@/lib/content";
 import { getContent } from "@/lib/lang";
 import { Phone } from "@/components/ui/Phone";
-import { Phone3D } from "@/components/ui/Phone3D";
 import { Words } from "./Opening";
 import { ProductRevealMotion } from "./ProductRevealMotion";
 import styles from "./ProductReveal.module.css";
 
 /**
  * Second screen of the home page, inside the black opening: the "What is Elegix" statement lights up word by word,
- * then the phone with the real Life Area screen (in 3D once three.js loads) rises from below, turns to face you and three notes appear around it.
+ * then the phone with the real Life Area screen rises from below, straightens and three notes appear around it.
  * Scroll-scrubbed by ProductRevealMotion; without JavaScript or with reduced motion it's a plain stacked layout.
  */
 export async function ProductReveal() {
@@ -24,7 +23,6 @@ export async function ProductReveal() {
         <div className={styles.device} data-product-device>
           <div className={styles.phoneWrap} data-product-phone>
             <Phone screen={screen} className={styles.phone} />
-            {screen.src && <Phone3D src={screen.src} sectionSelector="[data-product]" turn={[0.3, 0.72]} className={styles.phone3d} />}
           </div>
           <ul className={styles.notes}>
             {PRODUCT.callouts.map((n, i) => (
