@@ -92,14 +92,14 @@ export function GuideFilter({ guides, areaPages }: Props) {
             ))}
           </ul>
         </nav>
+      </aside>
+      <div className={styles.libraryMain}>
         <label className={styles.search}>
           <span className="sr-only">{t.searchGuides}</span>
           <input type="search" placeholder={t.searchGuides} value={query} onChange={(e) => setQuery(e.target.value)}
             onBlur={() => q && track("search", { search_term: q })} />
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
         </label>
-      </aside>
-      <div className={styles.libraryMain}>
         <p className={`${styles.result}`} aria-live="polite">
           {q ? t.nResultsFor(cards.length, query.trim())
             : filter === "all" ? t.nGuides(guides.length)
