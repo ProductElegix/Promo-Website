@@ -37,6 +37,7 @@ function Room() {
 /**
  * "Six areas. One life.": a pinned block. A stack of tilted photos rises from below into the middle of the screen,
  * then fans out to the corners around the headline while the visitor scrolls, and the page moves on.
+ * As the block leaves the screen, the photos drift up at different speeds (parallax), as if at different depths.
  * Without JavaScript or with reduced motion the photos simply sit in their final places around the headline.
  */
 export async function Spread() {
@@ -45,18 +46,20 @@ export async function Spread() {
     <section className={styles.spread} aria-labelledby="spread-title" data-spread>
       <div className={styles.stage}>
         <Room />
-        <div className={styles.head}>
+        <div className={styles.head} data-spread-head>
           <h2 id="spread-title" className={`display ${styles.title}`}><Rich text={SPREAD.title} /></h2>
           <p className={styles.text} data-spread-text>{SPREAD.text}</p>
         </div>
         <ul className={styles.photos}>
           {SPREAD.photos.map((p, i) => (
             <li key={p.src} className={`${styles.photo} ${styles[`p${i + 1}`]}`} style={areaVars(p.area)} data-spread-photo>
+              <div data-spread-drift>
               <div className={styles.card}>
                 <div className={styles.frame}>
                   <Image src={p.src} alt={p.alt} fill sizes="(max-width: 767px) 40vw, 20vw" />
                 </div>
                 <span className={styles.tag}><i aria-hidden="true" />{AREAS[p.area].name}</span>
+              </div>
               </div>
             </li>
           ))}
