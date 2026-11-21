@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 /**
  * Scroll animation for the Spread block: GSAP is loaded once the block comes near the screen.
  * The photos start as a tilted stack below the screen, rise into the centre, then fly out to their
- * places (set in CSS) around the headline. Scrubbed by scroll; only transforms and opacity move.
+ * places (set in CSS) around the headline, and drift apart at different speeds as the block scrolls away. Scrubbed by scroll; only transforms and opacity move.
  */
 export function SpreadMotion() {
   const ref = useRef<HTMLSpanElement>(null);
@@ -75,6 +75,17 @@ export function SpreadMotion() {
         if (room) tl.fromTo(room, { scale: 1.12 }, { scale: 1, duration: tl.duration() }, 0);
         // 3. hold the finished picture for a moment before the page scrolls on
         tl.to({}, { duration: 0.5 });
+
+        // 4. parallax on the way out: once the block unpins, each photo drifts up at its own speed, as if some
+        // hang closer to the viewer than others, while the headline lags behind like the far wall of the room
+        const depth = [0.55, 0.3, 0.75, 0.4, 0.95, 0.65];
+        const head = section.querySelector("[data-spread-head]");
+        const out = { trigger: section, start: "bottom bottom", end: "bottom top", scrub: 0.6, invalidateOnRefresh: true };
+        gsap.utils.toArray<HTMLElement>("[data-spread-drift]", section).forEach((el, i) =>
+          gsap.fromTo(el, { y: 0 }, { y: () => -window.innerHeight * depth[i % depth.length], rotate: (i % 2 ? 1 : -1) * 3, ease: "none", scrollTrigger: out }),
+        );
+        if (head) gsap.fromTo(head, { y: 0 }, { y: () => window.innerHeight * 0.25, ease: "none", scrollTrigger: out });
+        if (room) gsap.fromTo(room, { yPercent: 0 }, { yPercent: 18, ease: "none", scrollTrigger: out });
       }, section);
 
       ScrollTrigger.refresh();
