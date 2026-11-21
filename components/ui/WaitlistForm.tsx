@@ -5,6 +5,7 @@ import Link, { useContent, useLang, useUi } from "@/components/ui/Lang";
 import { CommunityNote } from "./CommunityNote";
 import { readAttribution } from "@/lib/attribution";
 import styles from "./WaitlistForm.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -68,7 +69,7 @@ export function WaitlistForm({ source, variant = "underline", start, placeholder
         {/* honeypot for bots */}
         <input type="text" name="company" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
         <button type="submit" className={variant === "underline" ? "btn" : styles.barBtn} disabled={busy}>
-          {busy ? t.joining : buttonLabel}
+          {busy ? t.joining : <RollText>{buttonLabel}</RollText>}
         </button>
       </form>
       <p className={styles.consent}>{CONSENT.before} <Link href="/privacy">{CONSENT.link}</Link>{CONSENT.after}</p>

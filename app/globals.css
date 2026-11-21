@@ -169,6 +169,23 @@ button { font: inherit; }
 .btn.ghost:hover { opacity: 1; background: var(--ink); color: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); }
 .on-dark .btn.ghost:hover { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px var(--paper); }
 
+/* rolling label (RollText): every letter rolls up and its copy rolls in from below, staggered left to right */
+.roll { position: relative; display: inline-block; }
+.roll-chars { display: inline-flex; flex-wrap: wrap; justify-content: center; row-gap: .3em; }
+.roll-w { display: inline-flex; }
+/* the rolling letters are the hover cue, so these buttons don't also fade */
+:is(a, button):has(> .roll):hover { opacity: 1; }
+.roll-c { position: relative; display: inline-block; overflow: hidden; white-space: pre; margin-block: -.15em; vertical-align: top; }
+.roll-c::before, .roll-c::after {
+  content: attr(data-c); display: block; padding-block: .15em;
+  transition: transform .5s cubic-bezier(.65, 0, .35, 1) calc(var(--i) * 22ms);
+}
+.roll-c::after { position: absolute; left: 0; top: 100%; }
+:is(a, button):is(:hover, :focus-visible) .roll-c::before,
+:is(a, button):is(:hover, :focus-visible) .roll-c::after { transform: translateY(-100%); }
+@media (hover: none) { .roll-c::before, .roll-c::after { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .roll-c::before, .roll-c::after { transform: none !important; } }
+
 /* pills (life areas): square-cut like the tags */
 .pill {
   display: inline-flex; align-items: center; gap: 6px;

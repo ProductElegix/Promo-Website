@@ -5,6 +5,7 @@ import { useLang } from "./Lang";
 import type { GuideToolName } from "@/lib/guides";
 import { CheckBand } from "@/components/sections/BalanceCheck";
 import styles from "./GuideTool.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 /** Interactive tools inside guides. The calculators keep their numbers in the browser; the Wheel of Life one is the Life Balance Check (it can email the result). */
 export function GuideTool({ name }: { name: GuideToolName }) {
@@ -152,7 +153,7 @@ function WheelTemplate() {
     <figure className={styles.tool}>
       <p className={styles.title}>{t.templateTitle}</p>
       <p className={styles.hint}>{t.templateHint}</p>
-      <a className={`btn ${styles.download}`} href="/downloads/wheel-of-life-template.pdf" download>{t.download}</a>
+      <a className={`btn ${styles.download}`} href="/downloads/wheel-of-life-template.pdf" download><RollText>{t.download}</RollText></a>
     </figure>
   );
 }

@@ -4,6 +4,7 @@ import { Phone } from "@/components/ui/Phone";
 import { Pill } from "@/components/ui/Pill";
 import { Rich } from "@/components/ui/Rich";
 import styles from "./Ready.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 /** Closing block: headline + CTA, then the app surrounded by everyday objects, one per life area. */
 export async function Ready() {
@@ -15,7 +16,7 @@ export async function Ready() {
           <span className="label">{READY.label}</span>
           <h2 id="ready-title" className="display h2"><Rich text={READY.title} /></h2>
           <p className={`lede ${styles.lede}`}><Rich text={READY.lede} /></p>
-          <a href="#join" className="btn">{READY.cta}</a>
+          <a href="#join" className="btn"><RollText>{READY.cta}</RollText></a>
         </div>
       </div>
       <div className={styles.table}>

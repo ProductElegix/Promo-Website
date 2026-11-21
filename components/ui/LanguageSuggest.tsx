@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { localePath, LANG_CHOICE_KEY, UK_VISIBLE } from "@/lib/i18n";
 import { useLang, usePlainPath } from "./Lang";
 import styles from "./LanguageSuggest.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 /** A Ukrainian reader: the browser asks for Ukrainian, or for Russian from a Ukrainian time zone. */
 function prefersUkrainian() {
@@ -36,8 +37,8 @@ export function LanguageSuggest() {
     <div className={styles.banner} role="region" aria-label="Мова сайту" lang="uk">
       <p>Цей сайт є українською.</p>
       <div className={styles.actions}>
-        <button type="button" className={styles.stay} onClick={() => { remember("en"); setOpen(false); }}>Залишитися англійською</button>
-        <a className={styles.go} href={localePath("uk", path)} hrefLang="uk" onClick={() => remember("uk")}>Українською</a>
+        <button type="button" className={styles.stay} onClick={() => { remember("en"); setOpen(false); }}><RollText>Залишитися англійською</RollText></button>
+        <a className={styles.go} href={localePath("uk", path)} hrefLang="uk" onClick={() => remember("uk")}><RollText>Українською</RollText></a>
       </div>
     </div>
   );

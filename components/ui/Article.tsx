@@ -25,6 +25,7 @@ import { ArticleActions } from "./ArticleActions";
 import { GuideAnalytics } from "./GuideAnalytics";
 import { WaitlistForm } from "./WaitlistForm";
 import styles from "./Article.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 type Parent = { name: string; path: string };
 type Props = {
@@ -205,7 +206,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
               <div className={styles.sideCta}>
                 <p className={styles.sideCtaTitle}>{t.sideCtaTitle}</p>
                 <p>{t.sideCtaText}</p>
-                <a href="#join" className="btn lime" data-cta="side">{t.getEarlyAccess}</a>
+                <a href="#join" className="btn lime" data-cta="side"><RollText>{t.getEarlyAccess}</RollText></a>
               </div>
             )}
           </aside>
@@ -282,7 +283,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
               {author.linkedin && <a href={author.linkedin} target="_blank" rel="noopener me" className={styles.authorLink}>LinkedIn</a>}
             </div>
           </aside>
-          <Link href={authorHref(author.name)} className={`btn ghost ${styles.authorAll}`}>{t.readAllBy(author.name.split(" ")[0])}</Link>
+          <Link href={authorHref(author.name)} className={`btn ghost ${styles.authorAll}`}><RollText>{t.readAllBy(author.name.split(" ")[0])}</RollText></Link>
           </div>
           </div>
         </div>

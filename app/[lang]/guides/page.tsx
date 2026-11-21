@@ -17,6 +17,7 @@ import { SITE_URL } from "@/lib/site";
 import { LIFE_AREAS_HUB } from "@/lib/life-areas-hub";
 import { LIFE_AREAS_HUB_UK } from "@/lib/uk/life-areas-hub";
 import styles from "./hub.module.css";
+import { RollText } from "@/components/ui/RollText";
 
 const T = {
   en: {
@@ -152,7 +153,7 @@ export default async function Guides() {
             <h2 id="check-cta" className={styles.checkTitle}><Rich text={t.checkTitle} /></h2>
             <p>{t.checkText}</p>
           </div>
-          <Link href="/#check" className="btn lime">{t.checkBtn}</Link>
+          <Link href="/#check" className="btn lime"><RollText>{t.checkBtn}</RollText></Link>
         </div>
       </section>
 

@@ -4,6 +4,7 @@ import { getLang } from "@/lib/lang";
 import { ui } from "@/lib/ui";
 import { GuideCards } from "@/components/ui/GuideCards";
 import { Rich } from "@/components/ui/Rich";
+import { RollText } from "@/components/ui/RollText";
 
 /** The 3 main guides, linked from the home page so they get its weight, not only the menu's. */
 const POPULAR = ["wheel-of-life", "signs-of-burnout", "work-life-balance"];
@@ -21,7 +22,7 @@ export async function PopularGuides() {
           <h2 id="guides-title" className="display h2"><Rich text={t.startWithBasics} /></h2>
         </div>
         <GuideCards cards={guides.map((g) => ({ href: guideHref(g), title: g.title, text: g.description, media: g.media, meta: cardMeta(g, lang), areas: areasOf(g) }))} />
-        <p style={{ marginTop: 32, textAlign: "center" }}><Link href="/guides" className="btn">{t.allGuides}</Link></p>
+        <p style={{ marginTop: 32, textAlign: "center" }}><Link href="/guides" className="btn"><RollText>{t.allGuides}</RollText></Link></p>
       </div>
     </section>
   );
