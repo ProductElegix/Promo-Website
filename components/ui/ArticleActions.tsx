@@ -7,15 +7,15 @@ import styles from "./Article.module.css";
 import { RollText } from "@/components/ui/RollText";
 
 /** End of a guide: "Was this helpful?" (a GA4 event, no form) and share buttons, with the phone's own share sheet where there is one. */
-export function ArticleActions({ slug, title, url }: { slug: string; title: string; url: string }) {
+export function ArticleActions({ slug, title, url, kind = "guide" }: { slug: string; title: string; url: string; kind?: "guide" | "post" }) {
   const tr = useUi();
   const [vote, setVote] = useState<"yes" | "no" | null>(null);
   const [copied, setCopied] = useState(false);
   const [native, setNative] = useState(false);
   useEffect(() => { setNative(typeof navigator !== "undefined" && "share" in navigator); }, []);
 
-  const answer = (v: "yes" | "no") => { setVote(v); track("guide_feedback", { guide: slug, helpful: v }); };
-  const shared = (via: string) => track("share", { method: via, content_type: "guide", item_id: slug });
+  const answer = (v: "yes" | "no") => { setVote(v); track(kind === "post" ? "post_feedback" : "guide_feedback", { [kind === "post" ? "post" : "guide"]: slug, helpful: v }); };
+  const shared = (via: string) => track("share", { method: via, content_type: kind, item_id: slug });
 
   async function copy() {
     try { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 2000); shared("copy"); } catch { /* clipboard blocked: the links below still work */ }
@@ -40,7 +40,7 @@ export function ArticleActions({ slug, title, url }: { slug: string; title: stri
           <p>{vote === "yes" ? tr.thanksHelped : tr.thanksMissing}</p>
         ) : (
           <>
-            <p>{tr.wasHelpful}</p>
+            <p>{kind === "post" ? tr.wasPostHelpful : tr.wasHelpful}</p>
             <div className={styles.actionRow}>
               <button type="button" className={styles.actionBtn} onClick={() => answer("yes")}><RollText>{tr.yes}</RollText></button>
               <button type="button" className={styles.actionBtn} onClick={() => answer("no")}><RollText>{tr.notReally}</RollText></button>

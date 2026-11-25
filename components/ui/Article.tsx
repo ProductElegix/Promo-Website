@@ -56,6 +56,8 @@ type Props = {
   comments?: ReactNode;
   /** blog posts: the comments' heading as one more line of the table of contents */
   commentsToc?: { id: string; label: string };
+  /** blog posts: "Was this helpful?" and share buttons at the end, like the guides */
+  share?: boolean;
 };
 
 /** How the guides are written and checked, linked from every guide's byline and author box. */
@@ -118,7 +120,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").r
 const dateIn = (lang: Lang) => (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString(lang === "uk" ? "uk-UA" : "en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub, comments, commentsToc }: Props) {
+export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub, comments, commentsToc, share = false }: Props) {
   const lang = await getLang();
   const t = ui(lang);
   const date = dateIn(lang);
@@ -279,7 +281,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
 
           {comments}
 
-          {promote && <ArticleActions slug={g.slug} title={g.title} url={url} />}
+          {(promote || share) && <ArticleActions slug={g.slug} title={g.title} url={url} kind={promote ? "guide" : "post"} />}
 
           <div className={styles.authorBlock}>
           <aside className={styles.author} aria-label={t.aboutAuthor}>

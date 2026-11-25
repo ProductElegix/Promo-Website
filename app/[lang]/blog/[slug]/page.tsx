@@ -49,6 +49,7 @@ export default async function BlogPostPage({ params }: Props) {
       author={authorOf(p, lang)} tocTitle={t.inThisPost} source={`blog:${p.slug}`}
       lists={[{ id: "more-posts-title", title: t.morePosts, items: others }]}
       comments={<TeamComments comments={visibleComments(p)} lang={lang} />}
+      share
       commentsToc={visibleComments(p).length ? { id: "team-comments", label: t.fromTheTeam } : undefined} />
   );
 }
