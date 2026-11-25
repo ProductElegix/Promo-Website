@@ -12,7 +12,11 @@ import { usePathname } from "next/navigation";
  * - [data-parallax]: the same for section photos (Early access)
  * - [data-scale-in]: a full-bleed photo eases from slightly zoomed in to its natural size as it scrolls into view
  * - [data-drift]: objects around the phone in the closing block drift in from the sides
- * - [data-reveal]: headings and cards fade up once as they scroll into view
+ * - [data-reveal]: cards fade up once as they scroll into view. When the block is a big heading, or holds
+ *   one (a section head), the heading's lines rise out of a mask instead (GSAP SplitText, as on the Duna
+ *   site) and the tag, lede and button around it fade up just after
+ * - [data-wipe]: a photo frame wipes up from the bottom while the photo settles from a slight zoom (Duna)
+ * - [data-rise]: big letters rise one after another out of their box (the footer wordmark)
  * - svg[data-wheel] path: wheel-of-life segments draw in from the centre
  * - [data-split-words]: words light up one after another as the paragraph scrolls through the screen
  * - [data-strip]: the photo strip opens up from behind the middle photo while scrolling
@@ -28,6 +32,7 @@ export function Motion() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let ctx: { revert: () => void } | undefined;
+    let splits: { revert: () => void }[] = [];
     let cancelled = false;
 
     const EVENTS = ["scroll", "wheel", "touchstart", "pointerdown", "keydown"] as const;
@@ -41,9 +46,10 @@ export function Motion() {
     else EVENTS.forEach((e) => window.addEventListener(e, start, { passive: true }));
 
     async function init() {
-      const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
+      const [{ gsap }, { ScrollTrigger }, { SplitText }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger"), import("gsap/SplitText")]);
       if (cancelled) return;
-      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollTrigger, SplitText);
+      splits = [];
 
       ctx = gsap.context(() => {
         // close to the CSS --ease, cubic-bezier(0.22, 1, 0.36, 1): fast start, long soft landing
@@ -67,10 +73,56 @@ export function Motion() {
           gsap.from(el, { x: (el.getBoundingClientRect().left < window.innerWidth / 2 ? -1 : 1) * 60, y: 30, opacity: 0, duration: 1.1, ease, delay: (i % 3) * 0.08, scrollTrigger: { trigger: el, start: "top 95%", once: true } }),
         );
 
+        /** a heading's lines rise one after another out of a mask; returns when the last line has started */
+        const riseLines = (heading: HTMLElement, trigger: HTMLElement) => {
+          const split = SplitText.create(heading, {
+            type: "lines", mask: "lines", linesClass: "sline", aria: "none", autoSplit: true,
+            onSplit: (self) => gsap.from(self.lines, {
+              yPercent: 110, duration: 1.2, ease, stagger: 0.09,
+              scrollTrigger: { trigger, start: "top 88%", once: true },
+            }),
+          });
+          splits.push(split);
+          return Math.max(0, split.lines.length - 1) * 0.09;
+        };
+        const HEADING = ":is(h1, h2).display";
+
         gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
           // what is already on screen when the page opens shows immediately, no flash
           if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
-          gsap.from(el, { y: 28, opacity: 0, duration: 1.1, ease, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+          if (el.matches(HEADING)) { riseLines(el, el); return; }
+          const heading = el.querySelector<HTMLElement>(`:scope > ${HEADING}`);
+          if (!heading) {
+            gsap.from(el, { y: 28, opacity: 0, duration: 1.1, ease, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+            return;
+          }
+          const before = Array.from(el.children).filter((c) => c.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING);
+          const after = Array.from(el.children).filter((c) => c !== heading && !before.includes(c));
+          const lines = riseLines(heading, el);
+          if (before.length) gsap.from(before, { y: 16, opacity: 0, duration: 0.9, ease, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+          if (after.length) gsap.from(after, { y: 20, opacity: 0, duration: 1, ease, stagger: 0.08, delay: 0.25 + lines, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+        });
+
+        // photo frames wipe up from the bottom while the photo settles; cards in one row follow each other
+        gsap.utils.toArray<HTMLElement>("[data-wipe]").forEach((el) => {
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+          const row = el.closest("li");
+          const index = row?.parentElement ? Array.from(row.parentElement.children).indexOf(row) % 3 : 0;
+          const scrollTrigger = { trigger: el, start: "top 92%", once: true };
+          gsap.fromTo(el, { clipPath: "inset(100% 0% 0% 0%)" }, {
+            clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease, delay: index * 0.1, scrollTrigger,
+            onComplete: () => { gsap.set(el, { clearProps: "clipPath" }); },
+          });
+          const img = el.querySelector("img");
+          // clearProps hands the photo back to its CSS hover zoom
+          if (img) gsap.fromTo(img, { scale: 1.25 }, { scale: 1, duration: 1.6, ease, delay: index * 0.1, scrollTrigger, clearProps: "transform" });
+        });
+
+        // big letters rise out of their box one after another
+        gsap.utils.toArray<HTMLElement>("[data-rise]").forEach((el) => {
+          const split = SplitText.create(el, { type: "chars", aria: "none" });
+          splits.push(split);
+          gsap.from(split.chars, { yPercent: 105, duration: 1.3, ease, stagger: 0.05, scrollTrigger: { trigger: el, start: "top 98%", once: true } });
         });
 
         gsap.utils.toArray<HTMLElement>("[data-split-words]").forEach((el) =>
@@ -123,7 +175,7 @@ export function Motion() {
       ScrollTrigger.refresh();
     }
 
-    return () => { cancelled = true; stop(); ctx?.revert(); };
+    return () => { cancelled = true; stop(); ctx?.revert(); splits.forEach((sp) => sp.revert()); };
   }, [pathname]);
 
   return null;

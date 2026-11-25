@@ -37,8 +37,8 @@ export async function Footer() {
       <div className={styles.mark} aria-hidden="true"><LogoMark /></div>
 
       <div className={styles.wordmark} aria-hidden="true">
-        <span className={styles.echo}>{FOOTER.wordmark}</span>
-        <span className={styles.solid}>{FOOTER.wordmark}</span>
+        <span className={styles.echo} data-rise>{FOOTER.wordmark}</span>
+        <span className={styles.solid} data-rise>{FOOTER.wordmark}</span>
       </div>
     </footer>
   );

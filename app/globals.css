@@ -69,6 +69,13 @@
 html { scroll-behavior: smooth; overflow-x: clip; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* older Safari has no overflow-x: clip */
 @supports not (overflow-x: clip) { html, body { overflow-x: hidden; } }
+/* Lenis (SmoothScroll) drives the wheel scroll itself on desktop; native smooth scrolling would fight it */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto; }
+.lenis.lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+/* SplitText line masks (Motion): room for descenders so "g", "y" aren't cut while a line rises */
+.sline { padding-bottom: .08em; margin-bottom: -.08em; }
 body {
   margin: 0;
   background: var(--charcoal);

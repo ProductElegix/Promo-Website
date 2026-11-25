@@ -166,7 +166,7 @@ export default async function Press() {
           <ul className={styles.photos}>
             {P.photos.team.map((p) => (
               <li key={p.src} className={styles.photo} data-reveal>
-                <div className={styles.portrait}><Image src={p.src} alt={p.name} fill sizes="(max-width: 860px) 50vw, 25vw" /></div>
+                <div className={styles.portrait} data-wipe><Image src={p.src} alt={p.name} fill sizes="(max-width: 860px) 50vw, 25vw" /></div>
                 <div className={styles.photoInfo}>
                   <b>{p.name}</b>
                   <span className="muted">{p.role}</span>
