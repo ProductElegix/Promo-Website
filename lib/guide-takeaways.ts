@@ -14,9 +14,9 @@ export const TAKEAWAYS: Record<string, string[]> = {
   ],
   "work-life-balance": [
     "Work-life balance isn't equal hours. It means no area of your life is neglected for so long that it breaks.",
-    "Start by measuring all 6 areas of life, then set one hard stop for work and keep it.",
-    "Working 55+ hours a week is linked to a 35% higher risk of stroke, according to the WHO and ILO.",
-    "Small rules you keep beat one big change. Review your balance once a week.",
+    "The WHO and ILO linked working 55+ hours a week to a 35% higher risk of stroke than a 35 to 40 hour week.",
+    "For most people the problem isn't total hours but work touching every one of them.",
+    "Start with one end time for work that you actually keep, and review your balance once a week.",
   ],
   "goals-for-every-area-of-life": [
     "Set one small goal per area of life so work doesn't quietly take every hour.",
