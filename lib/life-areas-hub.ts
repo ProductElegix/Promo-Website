@@ -65,7 +65,7 @@ export const LIFE_AREAS_HUB: { sections: { h2: string; blocks: Block[] }[]; faq:
       h2: "How to use the 6 areas of life",
       blocks: [
         { steps: [
-          { title: "Score each area from 1 to 10", text: "Go with your first answer. The free [Wheel of Life calculator](/guides/wheel-of-life) draws your wheel as you move the sliders." },
+          { title: "Score each area from 1 to 10", text: "Go with your first answer. The free [Wheel of Life calculator](/tools draws your wheel as you move the sliders." },
           { title: "Pick one area to focus on", text: "Usually the lowest, or the one that would lift the others. Health often comes first, because bad sleep drags every other score down. Our guide on [choosing what to focus on](/guides/how-to-choose-what-to-focus-on) helps when two areas compete." },
           { title: "Set one small goal and one habit", text: "Keep it small enough to do this week. See [goals for every area of life](/guides/goals-for-every-area-of-life) for examples." },
           { title: "Re-score every week", text: "A one-minute check-in shows if things are moving. Balance is not every area at 10; it's no area left at 2 for months." },
