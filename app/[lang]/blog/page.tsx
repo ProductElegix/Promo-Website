@@ -5,7 +5,8 @@ import { getLang } from "@/lib/lang";
 import { langMeta, pageMeta, paramsLang } from "@/lib/meta";
 import type { Lang } from "@/lib/i18n";
 import { Breadcrumbs, JsonLd } from "@/components/ui/JsonLd";
-import { BlogCover } from "@/components/ui/BlogCover";
+import Image from "next/image";
+import { Media } from "@/components/ui/Media";
 import { Join } from "@/components/sections/Join";
 import { SITE_URL } from "@/lib/site";
 import { ui } from "@/lib/ui";
@@ -72,7 +73,7 @@ export default async function Blog() {
                 <p>{first.description}</p>
                 <span className={styles.read}>{u.readPost}</span>
               </span>
-              <span className={styles.leadCover}><BlogCover name={first.cover} alt={first.coverAlt} lang={lang} /></span>
+              <span className={hub.leadPhoto}>{first.media.src && <Image src={first.media.src} alt={first.media.alt} fill priority sizes="(max-width: 860px) 100vw, 50vw" style={first.media.position ? { objectPosition: first.media.position } : undefined} />}</span>
             </Link>
           )}
         </div>
@@ -85,7 +86,7 @@ export default async function Blog() {
               {rest.map((p) => (
                 <li key={p.slug}>
                   <Link href={postHref(p)} className={styles.post}>
-                    <BlogCover name={p.cover} alt={p.coverAlt} lang={lang} />
+                    <Media media={{ ...p.media, ratio: "16 / 10" }} sizes="(max-width: 860px) 100vw, 50vw" />
                     <span className={styles.postText}>
                       <span className={hub.kicker}>{byline(p)}</span>
                       <h2>{p.title}</h2>

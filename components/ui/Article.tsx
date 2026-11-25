@@ -52,8 +52,6 @@ type Props = {
   lists?: { id: string; title: string; items: Props["related"] }[];
   /** life area pages: the guides about this area, right under the header, so the page is the home of its area */
   hub?: ReactNode;
-  /** blog posts: an illustration in place of the photo under the header */
-  cover?: ReactNode;
   /** blog posts: comments from the team, after the last section and before the author card */
   comments?: ReactNode;
 };
@@ -118,7 +116,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").r
 const dateIn = (lang: Lang) => (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString(lang === "uk" ? "uk-UA" : "en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub, cover, comments }: Props) {
+export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub, comments }: Props) {
   const lang = await getLang();
   const t = ui(lang);
   const date = dateIn(lang);
@@ -202,7 +200,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
         {hub}
 
         <div className={`container ${styles.photo}`}>
-          {cover ?? <Media media={g.media} priority sizes="(max-width: 1100px) 100vw, 1100px" />}
+          <Media media={g.media} priority sizes="(max-width: 1100px) 100vw, 1100px" />
         </div>
 
         <div className={`container ${styles.layout}`}>

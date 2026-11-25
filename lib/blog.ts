@@ -4,20 +4,19 @@
  * own words, no tools or calculators in the middle of the text.
  *
  * English lives here, Ukrainian in lib/uk/blog.ts (same slugs, same order). Each post renders with the
- * Article layout, a brand illustration as its cover (components/ui/BlogCover.tsx, never a stock photo),
- * and optional comments from the team.
+ * Article layout with a real photo as its cover (an <img> search engines and share cards pick up),
+ * and optional comments from the team. Only inside the article: never as the background of a card or banner.
  *
  * Drafts: `{ todo }` blocks and comments with `draft: true` are placeholders for the author. They show
  * on previews with a yellow "Draft" mark and are left out in production (lib/drafts.ts), so nothing made
  * up is ever presented on the live site as a real fact or a real quote.
  */
 import type { Block, Guide } from "@/lib/guides";
+import type { MediaSlot } from "@/lib/content";
 import type { Lang } from "@/lib/i18n";
 import { contentOf } from "@/lib/l10n";
 import { SHOW_DRAFTS } from "@/lib/drafts";
 import { UK_POSTS } from "@/lib/uk/blog";
-
-export type BlogCoverName = "wednesday";
 
 /** A comment from someone on the team under a post. */
 export type TeamComment = {
@@ -28,12 +27,9 @@ export type TeamComment = {
   draft?: boolean;
 };
 
-export type BlogPost = Omit<Guide, "related" | "areas" | "media"> & {
+export type BlogPost = Omit<Guide, "related" | "areas"> & {
   /** the author's English name, as in TEAM.members */
   person: string;
-  cover: BlogCoverName;
-  /** what the cover shows, for screen readers */
-  coverAlt: string;
   /** paragraphs between the cover and the first heading */
   intro: Block[];
   comments?: TeamComment[];
@@ -53,8 +49,8 @@ export const POSTS: BlogPost[] = [
     published: "2026-11-25",
     updated: "2026-11-25",
     minutes: 5,
-    cover: "wednesday",
-    coverAlt: "A week drawn as seven tiles: four working days in black, Wednesday in lime as the day off, and the weekend in gray",
+    // TODO(Edward): swap for a real photo of the team or of your own Wednesday (ideally 2400×1600), see the PR.
+    media: { src: "/images/area-health.jpg", alt: "A man running on a track at sunrise", brief: "Blog cover · a real midweek morning", ratio: "3 / 2", position: "50% 60%" } satisfies MediaSlot,
     intro: [
       { p: "At Elegix we work four days a week. Our day off isn't Friday, like most people expect, but Wednesday. Whenever I tell someone this, they ask twice: first about the four days, then about Wednesday. So I decided to write it all down once, honestly and in detail." },
     ],
