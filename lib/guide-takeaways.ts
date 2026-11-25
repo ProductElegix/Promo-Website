@@ -43,10 +43,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "A priority that isn't in your calendar isn't one yet: give each a small weekly step.",
   ],
   "choosing-between-career-and-family": [
-    "Career vs family is hundreds of small choices, not one decision you make once.",
-    "Decide by seasons of three to six months. Leaning one way is fine; leaning forever is the risk.",
-    "Write the choice down, score both options against your values, decide with your partner and set a review date.",
-    "Protect both with small rules, like a hard stop at work and phone-free time at home.",
+    "“Career or family” is rarely one decision. It's hundreds of small ones, and work wins them by default.",
+    "In a 2026 Pew survey, 54% of US parents working full time said balancing work and family is difficult.",
+    "Decide for a season of 3 to 6 months, with a floor you protect for the other side and an end date.",
+    "When it really is one decision, write it down specifically and prefer the option you can undo.",
   ],
   "decision-fatigue": [
     "Decision fatigue is the idea that after a long run of choices we choose worse and slip into defaults.",
