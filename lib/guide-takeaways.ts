@@ -61,10 +61,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Agree with your manager where saved time goes, so expectations don't quietly reset.",
   ],
   "plan-next-year-by-area-of-life": [
-    "Plan the year by area of life, not as a work plan with a gym resolution attached.",
-    "Review the past year, choose two focus areas, set one goal and one micro-habit for each. It takes about an hour.",
-    "Specific goals, if-then plans and fresh-start dates make goals more likely to stick.",
-    "Re-score weekly and check in quarterly. If the plan slips, shrink it to one area and restart.",
+    "A fresh date makes it easier to start, but plans usually fade in February or March, not in January.",
+    "Look at all 6 areas, choose two to focus on and give the rest a maintenance goal.",
+    "Every goal needs a small habit with a day and a time that survives a bad week.",
+    "Plan slipped? Shrink the habit and restart on the first of the next month.",
   ],
   "four-day-work-week-extra-day": [
     "In the UK pilot of 2022, 71% of employees reported lower burnout and 56 of 61 companies kept the four-day week.",

@@ -5,7 +5,6 @@ import financeAndCareer from "./finance-and-career";
 import health from "./health";
 import leisure from "./leisure";
 import personalGrowth from "./personal-growth";
-import planNextYearByAreaOfLife from "./plan-next-year-by-area-of-life";
 import relationships from "./relationships";
 import spirituality from "./spirituality";
 
@@ -17,7 +16,6 @@ export const EXTRAS: Record<string, GuideExtra> = {
   "health": health,
   "leisure": leisure,
   "personal-growth": personalGrowth,
-  "plan-next-year-by-area-of-life": planNextYearByAreaOfLife,
   "relationships": relationships,
   "spirituality": spirituality,
 };
