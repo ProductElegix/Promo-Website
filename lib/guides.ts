@@ -341,40 +341,53 @@ const BASE_GUIDES: Guide[] = [
     slug: "goals-for-every-area-of-life",
     areas: [],
     title: "How to set goals for every area of your life",
-    metaTitle: "How to set goals for every area of life: examples",
-    description: "Set goals for health, relationships, spirituality, leisure, growth and career: one goal per area, a reason why and a weekly habit. With examples.",
+    metaTitle: "How to set goals for every area of life, with examples",
+    description: "One small goal for each of 6 areas of life, a reason why, and a weekly habit with a day and a time. What goal research actually supports, with examples you can adapt.",
     label: "Guide · Goals",
-    lede: "Most people set goals for one area of life, usually work or money, and wonder why the rest feels empty. Setting one small goal for each area keeps your ambition and your life pulling in the same direction.",
+    lede: "Most people set goals for one part of life, usually work or money, and then wonder why the rest feels thin. Setting one small goal for each area won't make you more ambitious. It makes sure your ambition isn't quietly paid for by everything else.",
     published: "2026-10-22",
-    updated: "2026-10-22",
+    updated: "2026-11-25",
     minutes: 6,
     media: PHOTO("/images/area-growth.jpg", "A stack of books on a green armchair next to plants"),
     sections: [
       {
-        h2: "Why one goal per area works",
+        h2: "Why one goal per area",
         blocks: [
-          { p: "Goals compete for the same hours. When every goal is about your career, your calendar quietly says your health and relationships don't matter. One goal per area forces a choice in each part of your life, and six small goals are easier to keep than one huge one." },
+          { p: "Goals compete for the same hours. When every goal is about your career, your calendar quietly says that health and people can wait. One goal per area forces a choice in each part of your life. It also keeps each goal small, which matters, because you'll be keeping six of them alongside a job." },
+          { p: "That doesn't mean six ambitious goals. Pick one or two areas to really push, and give the rest a maintenance goal: something that stops them from slipping." },
+        ],
+      },
+      {
+        h2: "What the research supports",
+        blocks: [
+          { p: "Two findings are well established and useful here." },
+          { list: [
+            "**Specific goals beat “do your best”.** Across decades of studies, people with clear, specific goals did better than people told to simply do their best ([Locke and Latham, American Psychologist, 2002](https://doi.org/10.1037/0003-066X.57.9.705)). “Run a 5K by March” gives you something to check. “Be healthier” doesn't.",
+            "**Deciding when and where helps you start.** Plans in the form “when X happens, I'll do Y” made people noticeably more likely to follow through, in a review of 94 studies ([Gollwitzer and Sheeran, Advances in Experimental Social Psychology, 2006](https://doi.org/10.1016/S0065-2601%2806%2938002-1)). That's why every goal below has a habit with a day and a time.",
+          ] },
+          { p: "Neither finding promises that a goal will change your life. They just make it more likely that you'll actually do the thing you wrote down." },
         ],
       },
       {
         h2: "A 4-step method",
         blocks: [
           { steps: [
-            { title: "Score your areas", text: "Start with the [Wheel of Life](/guides/wheel-of-life). Your lowest scores are where a goal will change the most." },
-            { title: "Write one goal per area", text: "Make it concrete and finite: “Run a 5K by March”, not “be healthier”. If an area is fine, a maintenance goal is enough." },
-            { title: "Add your why", text: "One sentence on why the goal matters to you. On tired days the why is what gets you moving, not the goal itself." },
-            { title: "Link a weekly habit", text: "Every goal needs one action you repeat weekly. The goal is the direction; the habit is what moves you." },
+            { title: "Score your areas", text: "Start with the [Wheel of Life](/guides/wheel-of-life). The lowest scores are where a goal will change the most." },
+            { title: "Write one goal per area", text: "Concrete, with an end: “Run a 5K by March”, not “be healthier”. If an area is fine, a maintenance goal is enough." },
+            { title: "Add your why", text: "One sentence on why it matters to you. On tired days, the reason is what gets you moving, not the goal." },
+            { title: "Link a weekly habit", text: "One action you repeat every week, with a day and a time. The goal is the direction. The habit is what actually moves you." },
           ] },
         ],
       },
       {
-        h2: "Examples of goals for each area of life",
+        h2: "Examples for each area",
         blocks: [
+          { p: "These are examples to adapt, not a list to copy. A good goal for you depends on where you are now." },
           { list: [
             "**[Health](/guides/health):** sleep 7 hours on weeknights for a month. Habit: screens off at 22:30.",
-            "**[Relationships](/guides/relationships):** reconnect with three old friends this quarter. Habit: one call every Sunday.",
-            "**[Spirituality](/guides/spirituality):** write down my top five values. Habit: ten minutes of journaling on Friday evening.",
-            "**[Leisure](/guides/leisure):** learn three songs on the guitar. Habit: two 20-minute practice sessions a week.",
+            "**[Relationships](/guides/relationships):** get back in touch with three old friends this quarter. Habit: one call every Sunday afternoon.",
+            "**[Spirituality](/guides/spirituality):** write down the five values that matter most to you. Habit: ten minutes of journaling on Friday evening.",
+            "**[Leisure](/guides/leisure):** learn three songs on the guitar. Habit: two 20-minute practice sessions a week, Tuesday and Saturday.",
             "**[Personal growth](/guides/personal-growth):** read six books this half-year. Habit: 20 pages before bed.",
             "**[Finance & career](/guides/finance-and-career):** build a three-month emergency fund. Habit: move a fixed amount to savings every payday.",
           ] },
@@ -383,12 +396,20 @@ const BASE_GUIDES: Guide[] = [
       {
         h2: "Keep them alive",
         blocks: [
-          { p: "Goals die in a notes app. Check them once a week in a [10-minute weekly review](/guides/weekly-review) and re-score your areas once a month. If a goal hasn't moved for a month, make the habit smaller, not the goal bigger." },
-          { p: "[Elegix](/about) is built on this method: every goal, habit and task belongs to one of 6 life areas, each goal carries your why, and your Life Balance score shows whether your goals are actually changing your life." },
+          { p: "Goals die in a notes app. Look at them once a week in a [10-minute weekly review](/guides/weekly-review) and re-score your areas once a month. If a goal hasn't moved for a month, make the habit smaller rather than the goal bigger. A ten-minute walk you take beats an hour at the gym you skip." },
+          { p: "[Elegix](/about) is built on this method: every goal, habit and task belongs to one of 6 life areas, each goal carries your reason, and the weekly check-in shows whether your goals are changing anything." },
         ],
       },
     ],
+    faq: [
+      { q: "How many goals should I have at once?", a: "One per area of life at most, with only one or two of them ambitious. The rest can be maintenance goals that stop an area from slipping." },
+      { q: "What's the difference between a goal and a habit?", a: "A goal is the result you want, such as running a 5K by March. A habit is the repeated action that gets you there, such as two runs a week on Tuesday and Saturday." },
+      { q: "What if I keep dropping my goals?", a: "Make the weekly habit smaller and give it a fixed day and time. Most goals fail because the step is too big for a busy week, not because the goal is wrong." },
+    ],
     related: ["wheel-of-life", "plan-next-year-by-area-of-life", "weekly-review"],
+    changes: [
+      { date: "2026-11-25", text: "Rewritten and shortened, with the two goal-setting findings that are well supported and cited from the original papers." },
+    ],
     cta: CTA,
   },
   {

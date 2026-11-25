@@ -19,10 +19,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Start with one end time for work that you actually keep, and review your balance once a week.",
   ],
   "goals-for-every-area-of-life": [
-    "Set one small goal per area of life so work doesn't quietly take every hour.",
-    "A good goal says what you'll do, by when, how you'll know it's done and why it matters.",
-    "Keep one to three active goals and a light maintenance goal for the other areas.",
-    "Link each goal to a weekly habit and check it in a weekly review. If it stalls, shrink the habit.",
+    "One small goal for each area of life stops work from quietly taking every hour.",
+    "Specific goals and “when and where” plans are two well-supported ways to actually follow through.",
+    "Push one or two areas, and give the rest a maintenance goal.",
+    "If a goal hasn't moved for a month, make the habit smaller, not the goal bigger.",
   ],
   "weekly-review": [
     "Areas of life rarely fall apart in a day. They slide week by week, so a weekly check is the right rhythm.",
