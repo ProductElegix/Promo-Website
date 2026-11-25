@@ -12,7 +12,7 @@ import styles from "@/components/ui/Article.module.css";
 
 type Tool = { id: string; name: GuideToolName; h2: string; text: string; guide: { href: string; label: string } };
 
-/** Every interactive tool from the guides on one page, each with a link to the guide that explains it. */
+/** Every interactive tool on one page (guides link here instead of embedding them), each with a link to the guide that explains it. */
 const PAGE: Record<Lang, { title: string; description: string; crumb: string; guides: string; label: string; h1: string; lede: [string, string, string]; tools: Tool[] }> = {
   en: {
     title: "Free life balance tools",

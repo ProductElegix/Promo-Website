@@ -15,7 +15,6 @@ import type { Lang } from "@/lib/i18n";
 import { authorHref } from "@/lib/authors";
 import { OG_IMAGE, SITE_URL, founderPerson } from "@/lib/site";
 import { Breadcrumbs, JsonLd } from "./JsonLd";
-import { GuideTool } from "./GuideTool";
 import { Inline, plainText } from "./Inline";
 import { Media } from "./Media";
 import { AreaTags } from "./AreaTags";
@@ -110,7 +109,6 @@ export function BlockView({ b }: { b: Block }) {
   }
   if ("tip" in b) return <p className={styles.tip}><Inline text={b.tip} /></p>;
   if ("todo" in b) return SHOW_DRAFTS ? <p className={styles.todo}><strong>TODO</strong> {b.todo}</p> : null;
-  if ("tool" in b) return <div data-tool={b.tool}><GuideTool name={b.tool} /></div>;
   return <p><Inline text={b.p} /></p>;
 }
 
