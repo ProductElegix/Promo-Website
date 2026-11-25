@@ -1,0 +1,12 @@
+.tagline { font-size: var(--fs-small); color: rgba(255, 255, 255, .64); }
+.read { font-size: var(--fs-small); font-weight: 500; color: var(--lime); text-decoration: underline; text-underline-offset: 4px; }
+
+.list.list { padding-block: clamp(32px, 4vw, 56px); }
+.posts { list-style: none; margin: 0 0 clamp(32px, 4vw, 56px); padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.post { display: grid; gap: 18px; height: 100%; padding: 10px 10px 22px; background: var(--paper); border-radius: var(--radius-l); color: var(--ink); text-decoration: none; transition: transform .2s; }
+.post:hover { transform: translateY(-3px); }
+.postText { display: grid; gap: 10px; padding-inline: 12px; }
+.postText h2 { font-size: clamp(20px, 1.8vw, 26px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.15; }
+.postText p { color: var(--muted); line-height: 1.5; }
+@media (max-width: 860px) { .posts { grid-template-columns: 1fr; } }
+.guides { font-size: var(--fs-small); color: var(--muted); }

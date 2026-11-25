@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/site";
 import { AREA_GUIDES, GUIDES } from "@/lib/guides";
 import { STORIES, storyHref } from "@/lib/stories";
 import { AUTHORS } from "@/lib/authors";
+import { POSTS, postHref } from "@/lib/blog";
 import { UK_PUBLIC, localePath } from "@/lib/i18n";
 import { hasUk } from "@/lib/guides";
 
@@ -18,6 +19,8 @@ function entries(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/guides`, lastModified: guidesUpdated, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/guides/areas-of-life`, lastModified: new Date("2026-11-21"), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${SITE_URL}/guides/how-we-write-guides`, lastModified: new Date("2026-11-20"), changeFrequency: "yearly" as const, priority: 0.4 },
+    { url: `${SITE_URL}/blog`, lastModified: newest(POSTS.map((p) => p.updated)), changeFrequency: "weekly" as const, priority: 0.7 },
+    ...POSTS.map((p) => ({ url: `${SITE_URL}${postHref(p)}`, lastModified: new Date(p.updated), changeFrequency: "monthly" as const, priority: 0.6 })),
     { url: `${SITE_URL}/tools`, lastModified: guidesUpdated, changeFrequency: "monthly" as const, priority: 0.6 },
     ...AUTHORS.map((a) => ({ url: `${SITE_URL}/authors/${a.slug}`, lastModified: newest(a.writes.map((w) => w.date)), changeFrequency: "monthly" as const, priority: 0.4 })),
     ...GUIDES.map((g) => ({ url: `${SITE_URL}/guides/${g.slug}`, lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.7 })),

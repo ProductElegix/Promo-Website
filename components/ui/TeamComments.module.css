@@ -1,0 +1,15 @@
+/* team comments under a blog post: a quiet list on paper cards, like the author box */
+.wrap { display: grid; gap: 18px; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.item { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; background: var(--paper); border-radius: var(--radius-l); padding: clamp(18px, 2.2vw, 24px); }
+.photo { position: relative; width: 48px; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--cream-2); display: grid; place-items: center; font-size: var(--fs-small); font-weight: 500; }
+.photo img { object-fit: cover; }
+.text { display: grid; gap: 6px; min-width: 0; }
+.who.who { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: var(--fs-small); line-height: 1.3; }
+.name { font-weight: 500; color: var(--ink); font-size: var(--fs-body); }
+.role { color: var(--muted); }
+.words.words { font-size: var(--fs-body); line-height: 1.6; }
+/* drafts: placeholder words that are not the person's own yet (previews only) */
+.draft { outline: 1px dashed #c9a400; outline-offset: -1px; }
+.badge { align-self: center; padding: 3px 8px; border-radius: 999px; background: #fff4b8; color: #6b5600; font-size: var(--fs-xs); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+.note.note { font-size: var(--fs-xs); line-height: 1.4; color: #6b5600; }

@@ -10,6 +10,7 @@ import { areasOf, cardMeta, guideHref, guidesOf } from "@/lib/guides";
 import { STORIES, storyHref, type Author } from "@/lib/stories";
 import { storiesOf } from "@/lib/stories-l10n";
 import { ui } from "@/lib/ui";
+import { postHref, postsOf, teamMember } from "@/lib/blog";
 import type { Lang } from "@/lib/i18n";
 
 export type AuthorPage = Author & {
@@ -49,7 +50,9 @@ function build(lang: Lang): AuthorPage[] {
     const guides = a.name === founder.name
       ? [...GUIDES, ...AREA_GUIDES].map((g) => ({ href: guideHref(g), title: g.title, text: g.description, label: cardMeta(g, lang), areas: areasOf(g), media: g.media, date: g.updated }))
       : [];
-    return { ...a, slug: slugOf(a.name), story: stories[0]?.href, writes: [...stories, ...guides].sort((x, y) => y.date.localeCompare(x.date)) };
+    const posts = postsOf(lang).POSTS.filter((p) => teamMember(lang, p.person)?.name === a.name)
+      .map((p) => ({ href: postHref(p), title: p.title, text: p.description, label: `${t.blog} · ${t.minRead(p.minutes)}`, date: p.updated }));
+    return { ...a, slug: slugOf(a.name), story: stories[0]?.href, writes: [...stories, ...posts, ...guides].sort((x, y) => y.date.localeCompare(x.date)) };
   });
 }
 
