@@ -2,6 +2,7 @@ import Image from "next/image";
 import { teamMember, type TeamComment } from "@/lib/blog";
 import type { Lang } from "@/lib/i18n";
 import { ui } from "@/lib/ui";
+import articleStyles from "./Article.module.css";
 import styles from "./TeamComments.module.css";
 
 /**
@@ -14,7 +15,7 @@ export function TeamComments({ comments, lang }: { comments: TeamComment[]; lang
   if (!comments.length) return null;
   return (
     <section id="team-comments" className={styles.wrap} aria-labelledby="team-comments-title">
-      <h2 id="team-comments-title">{t.fromTheTeam} <span className={styles.count}>{comments.length}</span></h2>
+      <h2 id="team-comments-title">{t.fromTheTeam}<a href="#team-comments" className={articleStyles.anchor} aria-label={t.linkTo(t.fromTheTeam)}>#</a></h2>
       <ul className={styles.list}>
         {comments.map((c) => {
           const m = teamMember(lang, c.person);

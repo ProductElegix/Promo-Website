@@ -43,7 +43,7 @@ export const POSTS: BlogPost[] = [
     person: "Edward Korytskyi",
     title: "Why we work four days a week, with Wednesday off",
     metaTitle: "Why Elegix works a four-day week with Wednesday off",
-    description: "Elegix founder Edward Korytskyi on why the team moved to four working days, why the day off is Wednesday and not Friday, and what it changed: less burnout, more done in life and in careers.",
+    description: "Elegix founder Edward Korytskyi on why the team has worked four days a week from day one, why the day off is Wednesday and not Friday, and what it changed: less burnout, more done in life and in careers.",
     label: "Blog",
     lede: "Not Friday, Wednesday. And no, it's not because we're lazy.",
     published: "2026-11-25",
@@ -60,7 +60,7 @@ export const POSTS: BlogPost[] = [
         blocks: [
           { p: "For a few years I worked 16, sometimes 20 hours a day. I was sure that more hours meant more results. Once I didn't sleep for 5 days straight because of a deadline, and at 20 I weighed 48 kilograms, about 106 pounds. I wrote about it in detail in [my story](/about/stories/why-i-built-elegix)." },
           { p: "That's when I understood something simple that I still remind myself of: hours and results are not the same thing. Past a certain point, every extra hour takes more than it gives." },
-          { p: "So when we started building the team, I knew exactly what I didn't want: for people to repeat my path." },
+          { p: "So when I started building the team, I knew exactly what I didn't want: for people to repeat my path. The four-day week became a rule from the very first day. I set it myself when I created the company, before anyone joined." },
         ],
       },
       {
@@ -69,29 +69,28 @@ export const POSTS: BlogPost[] = [
           { p: "Elegix helps you see the 6 areas of your life: health, relationships, spirituality, leisure, growth, and finance and career. Work is only one of the six. So why should it take five, six, sometimes seven days a week?" },
           { p: "It would feel dishonest to tell people \"don't forget the other areas\" while we ourselves lived from deadline to deadline. So the four-day week isn't a perk for us, and it isn't an experiment for LinkedIn. It's part of what we make." },
           { p: "In Valencian, Elegix means \"choose\". Four working days is probably the most honest choice we've made as a team." },
-          { todo: "When exactly you moved to four days (month and year) and who suggested it first. One sentence." },
         ],
       },
       {
         h2: "Why Wednesday",
         blocks: [
-          { p: "A four-day week usually means long weekends: Friday, Saturday, Sunday. We thought about Friday first too." },
+          { p: "A four-day week usually means long weekends: Friday, Saturday, Sunday. So the first question I get is why not Friday." },
           { p: "But Friday makes the weekend longer, not the week lighter. Four working days in a row are still a marathon, just a shorter one." },
           { p: "Wednesday cuts the week in half. Two days of work, a day for yourself, two more days of work. There's no \"just make it to Friday\". In the middle of the week there's a day to sleep in, go to the gym while it's empty, take care of the personal things you have no energy for on Saturday, or simply do nothing." },
           { p: "And on Thursday you come back to work not tired after four days, but rested after one. The two days left before the weekend don't look scary at all." },
-          { todo: "Check that these are your real reasons for choosing Wednesday. If there was another one (someone on the team suggested it, or you tried Friday and it didn't work), add it here." },
+          { p: "We're not dogmatic about it. There was a time when Wednesday didn't suit one person, and they could move their day off to Friday. But today the whole team really does take Wednesday, simply because it's easier." },
         ],
       },
       {
-        h2: "What changed",
+        h2: "What it gives us",
         blocks: [
           { p: "I won't make up percentages. We're a small team and we haven't run any studies on ourselves. I'll tell you what I see." },
           { p: "**People burn out less.** Nobody reaches the end of the week running on fumes. Wednesday works like a fuse: even a hard week doesn't get the chance to pile up." },
           { p: "**More gets done in personal life.** Everyone on the team now has a day that belongs only to them. And that day started to pay off, in health, in learning, in relationships." },
-          { todo: "One concrete example: what you started doing on Wednesdays yourself and what came of it." },
+          { p: "For me, Wednesday is a day for myself. I try not to work at all and to rest from everything: no phone, no laptop, nothing. It's the one day in the week when nobody, me included, expects anything from me." },
           { p: "**And more gets done in our careers.** This surprised me most. With four days, everything unnecessary shows right away: meetings \"just in case\", small tasks nobody needs. What's left is what actually moves the product and each of us forward." },
-          { todo: "What exactly you managed to do more of in four days: a release, a feature, a client, a course. No numbers you don't have, but one real fact will make this paragraph much stronger." },
-          { p: "But the team will say it better than I can. Their words are below the post." },
+          { p: "I also started noticing that people work better when they have more drive. And with that drive came more creative ideas. Rested people don't just do the work, they suggest how to do it differently." },
+          { p: "But the team will say it better than I can. Their words are below, in “What the team says”." },
         ],
       },
       {
@@ -99,7 +98,7 @@ export const POSTS: BlogPost[] = [
         blocks: [
           { p: "A four-day week isn't magic. Giving people a day off isn't enough, you also have to learn to use it. The first Wednesdays easily turn into \"I'll just check my email\", and then into one more workday from the sofa." },
           { p: "We agreed that Wednesday isn't for work. Not \"if possible\". It's just not for work." },
-          { todo: "Honestly: what do you do when a deadline is on fire and it's Wednesday? And did pay change after the switch? People ask about these first." },
+          { p: "People usually ask two things next. **What if a deadline is on fire on a Wednesday?** We don't have deadlines on Wednesdays, because it's a day off. We plan around it, the same way nobody plans a deadline for Sunday. **Did pay go down?** There was no switch: we've worked four days from the start, so there was nothing to cut." },
         ],
       },
       {

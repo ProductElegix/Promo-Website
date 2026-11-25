@@ -48,6 +48,7 @@ export default async function BlogPostPage({ params }: Props) {
     <Article guide={p} path={postHref(p)} parent={{ name: t.blog, path: "/blog" }} related={related}
       author={authorOf(p, lang)} tocTitle={t.inThisPost} source={`blog:${p.slug}`}
       lists={[{ id: "more-posts-title", title: t.morePosts, items: others }]}
-      comments={<TeamComments comments={visibleComments(p)} lang={lang} />} />
+      comments={<TeamComments comments={visibleComments(p)} lang={lang} />}
+      commentsToc={visibleComments(p).length ? { id: "team-comments", label: t.fromTheTeam } : undefined} />
   );
 }

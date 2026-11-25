@@ -54,6 +54,8 @@ type Props = {
   hub?: ReactNode;
   /** blog posts: comments from the team, after the last section and before the author card */
   comments?: ReactNode;
+  /** blog posts: the comments' heading as one more line of the table of contents */
+  commentsToc?: { id: string; label: string };
 };
 
 /** How the guides are written and checked, linked from every guide's byline and author box. */
@@ -116,7 +118,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").r
 const dateIn = (lang: Lang) => (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString(lang === "uk" ? "uk-UA" : "en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub, comments }: Props) {
+export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub, comments, commentsToc }: Props) {
   const lang = await getLang();
   const t = ui(lang);
   const date = dateIn(lang);
@@ -132,6 +134,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
   const sources = sourcesOf(g);
   const toc = [
     ...g.sections.map((s) => ({ id: anchor(s.h2), label: s.h2 })),
+    ...(commentsToc ? [commentsToc] : []),
     ...(g.faq ? [{ id: "questions", label: t.questionsPeopleAsk }] : []),
     ...(sources.length ? [{ id: "sources", label: t.sources }] : []),
   ];
