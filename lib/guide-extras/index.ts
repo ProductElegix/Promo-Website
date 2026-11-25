@@ -14,7 +14,6 @@ import relationships from "./relationships";
 import signsOfBurnout from "./signs-of-burnout";
 import spirituality from "./spirituality";
 import weeklyReview from "./weekly-review";
-import wheelOfLife from "./wheel-of-life";
 import workLifeBalance from "./work-life-balance";
 
 /** Extra long-form sections per page slug. Add a file per page and register it here. */
@@ -34,6 +33,5 @@ export const EXTRAS: Record<string, GuideExtra> = {
   "signs-of-burnout": signsOfBurnout,
   "spirituality": spirituality,
   "weekly-review": weeklyReview,
-  "wheel-of-life": wheelOfLife,
   "work-life-balance": workLifeBalance,
 };

@@ -1,10 +1,10 @@
 /** "Key takeaways" shown at the top of each guide: the short answer for skimmers and AI search. */
 export const TAKEAWAYS: Record<string, string[]> = {
   "wheel-of-life": [
-    "The Wheel of Life is a circle with one slice per area of life. You score each from 1 to 10 and see your balance at a glance.",
-    "Six areas are enough: health, relationships, spirituality, leisure, personal growth, and finance & career.",
-    "Read the shape before the numbers: one deep dent is the easiest wheel to fix.",
-    "Re-score weekly in a minute and do a full wheel monthly. The wheel is a diagnosis, so pick one area and one weekly action.",
+    "The Wheel of Life is a circle with one slice per area of life. You score each from 1 to 10 and see your balance on one page.",
+    "It's a reflection exercise, not a validated test: it can't diagnose anything, and scores don't compare between people.",
+    "Read the shape first: one deep dent is the easiest wheel to work with.",
+    "Pick one area and one action for the week, re-score weekly and look back once a month.",
   ],
   "signs-of-burnout": [
     "Burnout in high achievers shows up in sleep, mood and relationships long before it shows in work results.",
