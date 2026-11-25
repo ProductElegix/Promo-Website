@@ -17,6 +17,7 @@ import { usePathname } from "next/navigation";
  *   site) and the tag, lede and button around it fade up just after
  * - [data-wipe]: a photo frame wipes up from the bottom while the photo settles from a slight zoom (Duna)
  * - [data-rise]: big letters rise one after another out of their box (the footer wordmark)
+ * - everything else (headings, photos, text blocks, cards) gets a quiet default; see "everything else" below
  * - svg[data-wheel] path: wheel-of-life segments draw in from the centre
  * - [data-split-words]: words light up one after another as the paragraph scrolls through the screen
  * - [data-strip]: the photo strip opens up from behind the middle photo while scrolling
@@ -93,14 +94,15 @@ export function Motion() {
           if (el.matches(HEADING)) { riseLines(el, el); return; }
           const heading = el.querySelector<HTMLElement>(`:scope > ${HEADING}`);
           if (!heading) {
-            gsap.from(el, { y: 28, opacity: 0, duration: 1.1, ease, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+            gsap.fromTo(el, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease, clearProps: "transform,opacity", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
             return;
           }
           const before = Array.from(el.children).filter((c) => c.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING);
           const after = Array.from(el.children).filter((c) => c !== heading && !before.includes(c));
           const lines = riseLines(heading, el);
-          if (before.length) gsap.from(before, { y: 16, opacity: 0, duration: 0.9, ease, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
-          if (after.length) gsap.from(after, { y: 20, opacity: 0, duration: 1, ease, stagger: 0.08, delay: 0.25 + lines, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+          // explicit end values: buttons have a CSS opacity transition, which a from() tween would read mid-way
+          if (before.length) gsap.fromTo(before, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease, clearProps: "transform,opacity", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+          if (after.length) gsap.fromTo(after, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease, stagger: 0.08, delay: 0.25 + lines, clearProps: "transform,opacity", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
         });
 
         // photo frames wipe up from the bottom while the photo settles; cards in one row follow each other
@@ -116,6 +118,53 @@ export function Motion() {
           const img = el.querySelector("img");
           // clearProps hands the photo back to its CSS hover zoom
           if (img) gsap.fromTo(img, { scale: 1.25 }, { scale: 1, duration: 1.6, ease, delay: index * 0.1, scrollTrigger, clearProps: "transform" });
+        });
+
+        /* ---------- everything else on every page, without markup of its own ----------
+         * Whatever the marked effects above don't already move gets a quiet default, so every page
+         * (guides, articles, tools, legal pages, the footer) moves the same way:
+         * - section headings: lines rise out of a mask
+         * - photos (next/image fill frames): wipe up while the photo settles
+         * - text blocks, list items, cards, buttons: fade up, batched so a row comes in one after another
+         * Skips: the first screen, the header, dialogs, the sticky contents list, anything inside an
+         * element that already has its own motion, and [data-no-motion]. */
+        const OWN = "[data-reveal], [data-wipe], [data-rise], [data-strip], [data-drift], [data-split-words], [data-timeline], [data-hero-item], [data-hero-phone], [data-hero-photo], [data-parallax], [data-scale-in], [data-no-motion], [data-spread], [data-product], header, dialog, [data-lenis-prevent]";
+        const page = document.querySelector<HTMLElement>(".page");
+        const footer = document.querySelector<HTMLElement>("footer");
+        const below = (el: Element) => el.getBoundingClientRect().top > window.innerHeight * 0.9;
+        const free = (el: Element) => !el.closest(OWN) && below(el);
+
+        if (page) {
+          page.querySelectorAll<HTMLElement>("h2, h1.display").forEach((h) => {
+            if (!free(h) || h.closest("li, a, summary, button")) return;
+            h.dataset.motionDone = "";
+            riseLines(h, h);
+          });
+
+          page.querySelectorAll<HTMLImageElement>('img[data-nimg="fill"]').forEach((img) => {
+            const frame = img.parentElement;
+            if (!frame || !free(frame) || frame.offsetWidth < 96 || frame.closest("[data-motion-done]")) return;
+            frame.dataset.motionDone = "";
+            gsap.fromTo(frame, { clipPath: "inset(100% 0% 0% 0%)" }, {
+              clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease, scrollTrigger: { trigger: frame, start: "top 92%", once: true },
+              onComplete: () => { gsap.set(frame, { clearProps: "clipPath" }); },
+            });
+            gsap.fromTo(img, { scale: 1.2 }, { scale: 1, duration: 1.6, ease, clearProps: "transform", scrollTrigger: { trigger: frame, start: "top 92%", once: true } });
+          });
+        }
+
+        // blocks: the outermost text block, list item, card or button not already moving
+        const BLOCK = "p, li, figure, blockquote, table, details, form, .btn, [class*='card'], [class*='Card']";
+        const blocks: HTMLElement[] = [];
+        [page, footer].forEach((root) => root?.querySelectorAll<HTMLElement>(BLOCK).forEach((el) => {
+          if (!free(el) || el.closest("[data-motion-done]") || el.closest("nav ul, .area-tags, [class*='chips'], [class*='tabs']")) return;
+          if (blocks.some((b) => b.contains(el))) return;
+          blocks.push(el);
+        }));
+        gsap.set(blocks, { y: 24, opacity: 0 });
+        ScrollTrigger.batch(blocks, {
+          start: "top 92%", once: true,
+          onEnter: (batch) => gsap.to(batch, { y: 0, opacity: 1, duration: 0.9, ease, stagger: 0.07, overwrite: true, clearProps: "transform,opacity" }),
         });
 
         // big letters rise out of their box one after another
@@ -175,7 +224,9 @@ export function Motion() {
       ScrollTrigger.refresh();
     }
 
-    return () => { cancelled = true; stop(); ctx?.revert(); splits.forEach((sp) => sp.revert()); };
+    return () => { cancelled = true; stop(); ctx?.revert(); splits.forEach((sp) => sp.revert());
+      document.querySelectorAll<HTMLElement>("[data-motion-done]").forEach((el) => delete el.dataset.motionDone);
+    };
   }, [pathname]);
 
   return null;
