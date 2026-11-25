@@ -529,35 +529,26 @@ const BASE_GUIDES: Guide[] = [
     slug: "how-to-choose-priorities-in-life",
     areas: [],
     title: "How to choose your priorities in life: a simple method across 6 areas",
-    metaTitle: "How to choose priorities in life: a 6-area method",
-    description: "How to decide what matters when everything feels important: score 6 areas of life, find your values and choose 2 priorities for the season.",
+    metaTitle: "How to choose priorities in life: a method across 6 areas",
+    description: "How to decide what matters when everything feels important: look at 6 areas of life, separate importance from urgency, and choose two priorities for the next three months.",
     label: "Guide · Priorities",
-    lede: "When everything feels like a priority, nothing is. Choosing your priorities isn't about ranking your whole life once and forever. It's about choosing what gets your best time and energy for the next few months, and being at peace with what waits.",
+    lede: "When everything feels like a priority, nothing is. Choosing priorities isn't ranking your whole life once and forever. It's deciding what gets your best time and energy for the next few months, and being at peace with what waits.",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-25",
     minutes: 7,
     media: PHOTO("/images/hero.jpg", "A woman in a grey sweater looking out at the sea"),
     sections: [
       {
-        h2: "Why choosing priorities feels so hard",
+        h2: "Why it feels so hard",
         blocks: [
-          { p: "Most people don't lack priorities. They have too many, and they never chose them. Some came from a job description, some from parents, some from social media. When you never choose, the loudest one wins, and the loudest one is usually work." },
-          { p: "The method below takes about 20 minutes. You only need a pen and an honest hour of quiet." },
+          { p: "Most people don't lack priorities. They have too many, and they never really chose them. Some came with a job, some from parents, some from what everyone else seems to be doing. When you don't choose, the loudest one wins, and the loudest one is usually work, because it's the one with deadlines." },
+          { p: "The method below takes about twenty minutes, a pen and a bit of quiet." },
         ],
       },
       {
-        h2: "Step 1. See the whole picture",
+        h2: "Step 1. Look at the whole picture",
         blocks: [
-          { p: "Before choosing, look at all of your life, not just the part that shouts. Score each of the 6 areas from 1 to 10 for how satisfied you are right now:" },
-          { list: [
-            "**[Health](/guides/health):** sleep, movement, food and energy.",
-            "**[Relationships](/guides/relationships):** family, friends, partner and community.",
-            "**[Spirituality](/guides/spirituality):** values, reflection, mindfulness and inner calm.",
-            "**[Leisure](/guides/leisure):** rest, play, creativity and fun.",
-            "**[Personal growth](/guides/personal-growth):** learning, skills and new challenges.",
-            "**[Finance & career](/guides/finance-and-career):** work, income, savings and business.",
-          ] },
-          { tip: "This is the [Wheel of Life](/guides/wheel-of-life). You can also take the free [Life Balance Check](/#check) and get your scores by email." },
+          { p: "Before choosing, look at all of your life, not just the part that's shouting. Score each of the 6 areas from 1 to 10 for how satisfied you are right now: [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career). This is the [Wheel of Life](/guides/wheel-of-life)." },
         ],
       },
       {
@@ -566,15 +557,23 @@ const BASE_GUIDES: Guide[] = [
           { p: "For each area, answer two questions in one line each:" },
           { list: [
             "**How important is this area to me right now, from 1 to 10?** Not how important it should be. How important it is to you.",
-            "**If nothing changes here for a year, how will I feel?** This one cuts through. Some low scores you can live with. Others hurt to imagine.",
+            "**If nothing changes here for a year, how will I feel?** Some low scores you can live with. Others hurt to imagine.",
           ] },
-          { p: "An area with high importance and a low score is a priority candidate. An area with low importance and a low score can wait, guilt-free." },
+          { p: "An area that is important to you and scores low is a candidate. An area that scores low but doesn't matter much right now can wait, without guilt." },
+          { p: "If you're not sure what matters to you, it can help to look at values rather than areas. The psychologist Shalom Schwartz described ten broad values, such as security, achievement, benevolence and self-direction, that people recognise across many cultures, though each person ranks them differently ([Schwartz, Online Readings in Psychology and Culture, 2012](https://doi.org/10.9707/2307-0919.1116)). Ask which two or three of them you'd want people to see in how you actually spend your weeks." },
         ],
       },
       {
-        h2: "Step 3. Choose two priorities for this season",
+        h2: "A note on relationships",
         blocks: [
-          { p: "Pick no more than two areas for the next three months. One is usually the area that's hurting most. The other is often the one you keep postponing because it never feels urgent, such as relationships or growth." },
+          { p: "Relationships come up on a lot of priority lists, and there's a reason worth knowing. The Harvard Study of Adult Development has followed the same group of men, and later their families, since 1938. Its director, Robert Waldinger, has said the team expected cholesterol or blood pressure at 50 to predict who would be healthy and happy at 80, but the strongest predictor turned out to be how satisfied people were with their relationships ([Harvard Gazette, 2023](https://news.harvard.edu/gazette/story/2023/02/work-out-daily-ok-but-how-socially-fit-are-you/))." },
+          { p: "That doesn't mean relationships must be your priority. It means they're easy to postpone, because they rarely send a deadline, and the cost shows up years later." },
+        ],
+      },
+      {
+        h2: "Step 3. Choose two priorities for the next three months",
+        blocks: [
+          { p: "Pick no more than two areas. One is usually the area that's hurting most. The other is often the one you keep putting off because it never feels urgent." },
           { p: "Write each one as a sentence with a reason: “For the next three months I choose health, because I want energy for my kids in the evening.” The reason is what keeps you going when the choice gets hard." },
           { tip: "Two is a real limit. With three or more, you're back to a list where work wins by default." },
         ],
@@ -582,17 +581,21 @@ const BASE_GUIDES: Guide[] = [
       {
         h2: "Step 4. Turn priorities into weekly steps",
         blocks: [
-          { p: "A priority you don't see in your calendar isn't a priority yet. For each one, set one goal for the season and one small habit for every week. Then each Sunday, [choose what to focus on this week](/guides/how-to-choose-what-to-focus-on) and give it a slot." },
-          { p: "Check in once a month: are your two areas moving? Did another area pay the price? Adjust and keep going. Our [goals for every area of life](/guides/goals-for-every-area-of-life) guide has examples for each area." },
+          { p: "A priority that doesn't show up in your calendar isn't one yet. For each, set one goal for the three months and one small habit for every week. Then each Sunday, [choose what to focus on this week](/guides/how-to-choose-what-to-focus-on) and give it a slot." },
+          { p: "Saying no gets easier once the priorities are written down: “I'm keeping my evenings for my health this season” is a reason people accept more easily than “I'm busy”." },
+          { p: "Check once a month whether your two areas are moving and whether another area is paying for it. [Elegix](/about) does that check for you every week, across the same 6 areas." },
         ],
       },
     ],
     faq: [
-      { q: "Should my priorities stay the same forever?", a: "No. Priorities change with seasons of life: a launch, a new baby, a move. Re-choose them every three months, and check them in a monthly review." },
-      { q: "What if my job leaves no time for my priorities?", a: "Start smaller than you think: one 20-minute action a week. If even that doesn't fit for months, that's important information about your job, not about you. The [work-life balance guide](/guides/work-life-balance) can help." },
-      { q: "Is there an app for choosing priorities across life areas?", a: "Elegix is a free life balance tracker for iOS and Android. You score 6 life areas, link goals and habits to them and see your balance over time. Join the waitlist for early access." },
+      { q: "Should my priorities stay the same forever?", a: "No. Priorities change with seasons of life: a launch, a new baby, a move. Choose them again every three months and check them once a month." },
+      { q: "What if my job leaves no time for my priorities?", a: "Start smaller than you think: one 20-minute action a week. If even that doesn't fit for months, that tells you something about the job, not about you. The [work-life balance guide](/guides/work-life-balance) can help." },
+      { q: "How many priorities should I have?", a: "Two at a time for the next three months, with the other areas kept at a basic level. With more than that, it stops being a choice." },
     ],
     related: ["how-to-choose-what-to-focus-on", "choosing-between-career-and-family", "decision-fatigue"],
+    changes: [
+      { date: "2026-11-25", text: "Rewritten and shortened. The values research and the Harvard study are now part of the method, not separate sections." },
+    ],
     cta: CTA,
   },
   {

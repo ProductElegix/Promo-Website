@@ -37,10 +37,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "At the end of the week, check whether you kept the choice, and make the next step smaller if you didn't.",
   ],
   "how-to-choose-priorities-in-life": [
-    "Priorities are a choice for a season of about three months, not a ranking of your life forever.",
-    "Score your 6 areas, rate how important each is to you, and pick no more than two priorities.",
-    "Ground them in three to five personal values so they survive a busy month.",
-    "A priority isn't real until it has a weekly habit in your calendar. Use it to say no to what serves neither.",
+    "Priorities are a choice for about three months, not a ranking of your life forever.",
+    "Look at all 6 areas and separate what matters to you from what is merely urgent.",
+    "Choose no more than two priorities, each written as a sentence with a reason.",
+    "A priority that isn't in your calendar isn't one yet: give each a small weekly step.",
   ],
   "choosing-between-career-and-family": [
     "Career vs family is hundreds of small choices, not one decision you make once.",
