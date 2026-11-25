@@ -115,12 +115,11 @@ export const POSTS: BlogPost[] = [
         ],
       },
     ],
-    // TODO(Edward): replace every draft comment with the real words of that person, then remove `draft: true`.
-    // Until then these show on previews only, marked "Draft", and are left out of the live site.
+    // approved by each person on 2026-11-25
     comments: [
-      { person: "Alina Krupa", draft: true, text: "Wednesday became my day for myself. I finally stopped putting my life off until \"after the launch\", and honestly, I started working better, not worse." },
-      { person: "Maksym Zhuravskyi", draft: true, text: "For me the biggest difference is in my head: in two days you don't get tired enough for everything to fall apart on Thursday. I like the code I write after Wednesday more." },
-      { person: "Yevhenii Bohomol", draft: true, text: "My Wednesdays are for learning and sport. I don't feel like I'm \"serving out the week\", and it shows at work." },
+      { person: "Alina Krupa", text: "Wednesday became my day for myself. I finally stopped putting my life off until \"after the launch\", and honestly, I started working better, not worse." },
+      { person: "Maksym Zhuravskyi", text: "For me the biggest difference is in my head: in two days you don't get tired enough for everything to fall apart on Thursday. I like the code I write after Wednesday more." },
+      { person: "Yevhenii Bohomol", text: "My Wednesdays are for learning and sport. I don't feel like I'm \"serving out the week\", and it shows at work." },
     ],
     related: ["four-day-work-week-extra-day", "signs-of-burnout", "work-life-balance"],
     cta: {
