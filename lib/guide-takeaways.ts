@@ -49,10 +49,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Protect both with small rules, like a hard stop at work and phone-free time at home.",
   ],
   "decision-fatigue": [
-    "Decision fatigue is the drop in choice quality after a long day of decisions. The lab science is debated, but the feeling is real.",
-    "Common signs: putting off simple choices, picking the default and deciding on impulse late in the day.",
-    "Cut daily decisions with rules, defaults and delegation, and make big choices in the morning.",
-    "Start with three to five rules for the choices that annoy you most, not rules for everything.",
+    "Decision fatigue is the idea that after a long run of choices we choose worse and slip into defaults.",
+    "The famous judges study and the willpower-as-a-battery theory didn't hold up in large replications.",
+    "The everyday experience is still real: tired people choose worse, so fewer small decisions is a low-risk help.",
+    "Turn repeated choices into rules and set good defaults while you're not tired.",
   ],
   "ai-time-savings-work-life-balance": [
     "People who use AI at work report saving a median of about three hours a week, yet most weeks feel just as full.",
