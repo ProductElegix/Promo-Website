@@ -12,7 +12,6 @@ import personalGrowth from "./personal-growth";
 import planNextYearByAreaOfLife from "./plan-next-year-by-area-of-life";
 import relationships from "./relationships";
 import spirituality from "./spirituality";
-import weeklyReview from "./weekly-review";
 
 /** Extra long-form sections per page slug. Add a file per page and register it here. */
 export const EXTRAS: Record<string, GuideExtra> = {
@@ -29,5 +28,4 @@ export const EXTRAS: Record<string, GuideExtra> = {
   "plan-next-year-by-area-of-life": planNextYearByAreaOfLife,
   "relationships": relationships,
   "spirituality": spirituality,
-  "weekly-review": weeklyReview,
 };

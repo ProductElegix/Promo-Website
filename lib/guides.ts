@@ -395,43 +395,72 @@ const BASE_GUIDES: Guide[] = [
     slug: "weekly-review",
     areas: [],
     title: "The 10-minute weekly review that keeps your life in balance",
-    metaTitle: "Weekly review template: 10 minutes for life balance",
-    description: "A 10-minute weekly review: re-score your 6 life areas, note one win and one slip, and choose one step for next week. A template for every Sunday.",
+    metaTitle: "Weekly review: a 10-minute template for life balance",
+    description: "A short weekly review for your whole life, not just your task list: re-score 6 areas, note one win and one slip, choose one step. Why weekly, and how it differs from GTD.",
     label: "Guide · Weekly review",
-    lede: "A weekly review is the smallest habit with the biggest effect on balance. Ten minutes once a week is enough to catch a slipping area of your life before it turns into a problem.",
+    lede: "Most parts of life don't fall apart in a day. They slide, a little each week, and you notice months later. A weekly review is the smallest habit that catches the slide early: ten minutes, once a week, looking at all of your life instead of only at work.",
     published: "2026-10-22",
-    updated: "2026-10-22",
+    updated: "2026-11-25",
     minutes: 5,
     media: PHOTO("/images/area-home.jpg", "A bright, tidy living room with plants and an orange armchair"),
     sections: [
       {
-        h2: "Why weekly",
+        h2: "Why once a week",
         blocks: [
-          { p: "Daily reviews are too close: every day looks like an exception. Monthly reviews are too far: by then an area has been slipping for weeks. A week is long enough to see a pattern and short enough to fix it with one small step." },
+          { p: "Every day is too close: each one looks like an exception. Once a month is too far: by then an area has been slipping for weeks. A week is long enough to see a pattern and short enough to fix it with one small step." },
+          { p: "There's also some evidence that stopping to reflect is time well spent. In a field study at a large call centre, new employees who spent the last 15 minutes of their day writing about what they had learned did about 23% better on the final test of their training than those who used the time to keep working ([Di Stefano et al., Harvard Business School, 2014](https://www.hbs.edu/faculty/Pages/item.aspx?num=63487)). It's one study about learning a job, not about life balance, but the idea carries: experience turns into change when you stop and look at it." },
         ],
       },
       {
         h2: "The 10-minute template",
         blocks: [
           { steps: [
-            { title: "Re-score your 6 areas (1 minute)", text: "Rate [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career) from 1 to 10. Don't think long; compare with last week." },
-            { title: "One win (2 minutes)", text: "What went well? Which goal or habit moved? Write it down. Noticing progress is what keeps you doing this." },
-            { title: "One slip (2 minutes)", text: "Which area dropped or stayed low? Finish the sentence “It slipped because…”. Be curious, not harsh." },
-            { title: "One step for next week (3 minutes)", text: "Choose one small action for the area that needs you most and put it in your calendar now, with a day and a time." },
-            { title: "Look at the week ahead (2 minutes)", text: "Scan your calendar. Is there room for that step? If the week is already full of work, decide now what gives." },
+            { title: "Re-score your 6 areas (1 minute)", text: "Rate [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career) from 1 to 10. Don't think long, and compare with last week." },
+            { title: "One win (2 minutes)", text: "What went well? Which goal or habit moved? Write it down. Noticing progress is a big part of what keeps people doing this." },
+            { title: "One slip (2 minutes)", text: "Which area dropped or stayed low? Finish the sentence “It slipped because…”. Be curious rather than harsh." },
+            { title: "One step for next week (3 minutes)", text: "Choose one small action for the area that needs you most and put it in the calendar now, with a day and a time." },
+            { title: "Look at the week ahead (2 minutes)", text: "Is there room for that step? If the week is already full, decide now what gives, rather than on Wednesday night." },
           ] },
-          { tip: "Do it at the same time every week, for example Sunday evening with a coffee. A fixed slot turns it into a habit you don't have to think about." },
+          { p: "A few questions help when you're stuck: Where did my time go that I didn't choose? Who did I not see that I wanted to? What am I postponing “until after”? You don't need all of them every week. One honest answer is enough." },
+          { tip: "Do it at the same time each week, for example Sunday evening with a coffee. A fixed slot is what turns it into a habit you don't have to think about." },
         ],
       },
       {
-        h2: "Add a monthly review",
+        h2: "How it differs from the GTD weekly review",
         blocks: [
-          { p: "Once a month, take ten more minutes: look at four weeks of scores, fill in a full [Wheel of Life](/guides/wheel-of-life), and check your [goals for each area of life](/guides/goals-for-every-area-of-life). Keep what works, drop what doesn't, and pick next month's focus area." },
-          { p: "In [Elegix](/about) the weekly check-in takes a minute and the monthly review about ten. Your scores, goals and habits are already in one place, so the review is about deciding, not collecting." },
+          { p: "If you know David Allen's Getting Things Done, you know its weekly review: get clear, get current, get creative, with steps like emptying your inboxes and going through your project and someday lists ([Getting Things Done, 2009](https://gettingthingsdone.com/2009/05/the-gtd-weekly-review/)). It's a good system for keeping track of commitments." },
+          { p: "This review asks a different question. GTD asks whether your lists are up to date. This one asks whether your life is in the shape you want. You can do both, and some people do them back to back. If you only have ten minutes, this one tells you where the next week should go." },
+        ],
+      },
+      {
+        h2: "Why people stop, and how to keep going",
+        blocks: [
+          { list: [
+            "**It grows.** Ten minutes turns into an hour of planning, and an hour is easy to skip. Keep a timer on it.",
+            "**It becomes a verdict.** If every review ends with a list of failures, you'll avoid it. Start with the win.",
+            "**Too many steps.** Five actions for next week means none get done. One is enough.",
+            "**No fixed time.** “Sometime on the weekend” usually means never. Pick a slot.",
+          ] },
+          { p: "Missed a week? Just do the next one. The scores from two weeks ago are still worth comparing." },
+        ],
+      },
+      {
+        h2: "Add a monthly look back",
+        blocks: [
+          { p: "Once a month, take ten more minutes: look at four weeks of scores, fill in a full [Wheel of Life](/guides/wheel-of-life) and ask whether the area you've been working on actually moved. Keep what works, drop what doesn't, and choose next month's area." },
+          { p: "In [Elegix](/about) the weekly check-in takes about a minute and your scores, goals and habits are already in one place, so the review is about deciding, not collecting." },
         ],
       },
     ],
-    related: ["wheel-of-life", "decision-fatigue", "plan-next-year-by-area-of-life"],
+    faq: [
+      { q: "How long should a weekly review take?", a: "About ten minutes. A short review you actually do every week is worth more than a long one you skip after a month." },
+      { q: "What's the best day for a weekly review?", a: "Whatever day you can keep. Sunday evening and Friday afternoon are common because they sit between one week and the next." },
+      { q: "Is this the same as the GTD weekly review?", a: "No. The GTD review keeps your task lists and projects up to date. This one checks how the six areas of your life are doing and picks one step for the week. They work well together." },
+    ],
+    related: ["wheel-of-life", "decision-fatigue", "signs-of-burnout"],
+    changes: [
+      { date: "2026-11-25", text: "Rewritten and shortened. The reflection study is now cited from Harvard Business School, with what it does and doesn't show." },
+    ],
     cta: CTA,
   },
   {

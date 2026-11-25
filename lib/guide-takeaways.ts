@@ -25,10 +25,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Link each goal to a weekly habit and check it in a weekly review. If it stalls, shrink the habit.",
   ],
   "weekly-review": [
-    "A 10-minute weekly review catches a slipping area of life before it becomes a problem.",
-    "The template: re-score your 6 areas, name one win and one slip, choose one step, look at the week ahead.",
-    "Unlike the GTD review, it checks your life areas, not just your task list.",
-    "Keep it short and at a fixed time, or you'll skip it after three weeks. Add a monthly review on top.",
+    "Areas of life rarely fall apart in a day. They slide week by week, so a weekly check is the right rhythm.",
+    "The template: re-score 6 areas, note one win and one slip, choose one step, look at the week ahead.",
+    "Unlike the GTD review, it checks your whole life, not just your task lists.",
+    "Keep it short and at a fixed time, and add a monthly look back on top.",
   ],
   "how-to-choose-what-to-focus-on": [
     "Weeks fail when you try to move everything at once, so work takes every hour by default.",
