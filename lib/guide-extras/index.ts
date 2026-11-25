@@ -3,7 +3,6 @@ import aiTimeSavingsWorkLifeBalance from "./ai-time-savings-work-life-balance";
 import choosingBetweenCareerAndFamily from "./choosing-between-career-and-family";
 import decisionFatigue from "./decision-fatigue";
 import financeAndCareer from "./finance-and-career";
-import fourDayWorkWeekExtraDay from "./four-day-work-week-extra-day";
 import goalsForEveryAreaOfLife from "./goals-for-every-area-of-life";
 import health from "./health";
 import howToChoosePrioritiesInLife from "./how-to-choose-priorities-in-life";
@@ -24,7 +23,6 @@ export const EXTRAS: Record<string, GuideExtra> = {
   "choosing-between-career-and-family": choosingBetweenCareerAndFamily,
   "decision-fatigue": decisionFatigue,
   "finance-and-career": financeAndCareer,
-  "four-day-work-week-extra-day": fourDayWorkWeekExtraDay,
   "goals-for-every-area-of-life": goalsForEveryAreaOfLife,
   "health": health,
   "how-to-choose-priorities-in-life": howToChoosePrioritiesInLife,

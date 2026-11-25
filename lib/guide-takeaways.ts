@@ -67,9 +67,9 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Re-score weekly and check in quarterly. If the plan slips, shrink it to one area and restart.",
   ],
   "four-day-work-week-extra-day": [
-    "In the UK four-day week pilot, 71% of employees reported lower burnout after six months.",
-    "Most people spend the extra day on life admin first. Cap admin at two hours and give the day one area of life.",
-    "Reduced-hours models free about 7–8 hours a week; compressed weeks take most of them back on workdays.",
-    "No four-day week? Two protected evenings and a weekend morning add up to a similar eight hours.",
+    "In the UK pilot of 2022, 71% of employees reported lower burnout and 56 of 61 companies kept the four-day week.",
+    "The companies volunteered and the results are self-reported, so it's a strong signal, not a guarantee for every team.",
+    "Left undecided, a free weekday fills with errands and email. Decide in advance which area of life it belongs to.",
+    "No four-day week? Two work-free evenings and a weekend morning add up to roughly a working day.",
   ],
 };
