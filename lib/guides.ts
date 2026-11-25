@@ -20,7 +20,9 @@ export type Block =
   | { steps: { title: string; text: string }[] }
   | { tip: string }
   /** an interactive tool or download, rendered by components/ui/GuideTool.tsx */
-  | { tool: GuideToolName };
+  | { tool: GuideToolName }
+  /** blog posts: a note for the author where a real fact belongs; shown on previews only (lib/drafts.ts), never in production */
+  | { todo: string };
 
 export type GuideToolName = "wheel-calculator" | "wheel-template" | "burnout-check" | "hours-calculator";
 

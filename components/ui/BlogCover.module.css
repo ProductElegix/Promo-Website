@@ -1,0 +1,15 @@
+/* blog cover illustration: black ground, the week as tiles, Wednesday in lime */
+.cover { box-shadow: inset 0 0 0 1px rgba(242, 242, 240, 0.14); container-type: inline-size; position: relative; aspect-ratio: 16 / 9; background: var(--black); border-radius: var(--radius-l); overflow: hidden; padding: 6cqw 6cqw 7cqw; display: grid; grid-template-rows: auto 1fr; }
+.title { font-size: max(11px, 1.5cqw); text-transform: uppercase; letter-spacing: 0.14em; color: var(--lime) !important; margin: 0; }
+.week { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.6cqw; align-items: end; align-self: end; }
+.day { position: relative; display: flex; flex-direction: column; justify-content: space-between; height: 24cqw; border-radius: 2cqw; padding: 1.6cqw 1.4cqw; }
+.name { font-size: max(11px, 2.6cqw); font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
+.what { font-size: max(9px, 1.3cqw); text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.2; }
+.work { background: #1b1b1b; border: 1px solid rgba(242, 242, 240, 0.18); color: var(--paper); }
+.work .what { color: rgba(242, 242, 240, 0.55); }
+.weekend { background: #3a3a37; color: var(--paper); }
+.weekend .what { color: rgba(242, 242, 240, 0.7); }
+.wed { height: 38cqw; background: var(--lime); color: var(--black); }
+.wed .what { color: var(--black); font-weight: 500; }
+/* a sun on Wednesday: a flat circle, no glow */
+.sun { position: absolute; left: 50%; top: 42%; width: 5.6cqw; aspect-ratio: 1; border-radius: 50%; background: var(--green); transform: translate(-50%, -50%); }

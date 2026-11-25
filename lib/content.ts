@@ -49,6 +49,7 @@ export const BRAND = {
 export const NAV = [
   { href: "/about", label: "About" },
   { href: "/guides", label: "Guides" },
+  { href: "/blog", label: "Blog" },
 ];
 export const NAV_CTA: string = "Get early access";
 
@@ -432,7 +433,7 @@ export const FOOTER = {
   about: "A life balance tracker for people who want to grow at work without losing the rest of their life.",
   name: "Elegix: Valencian for “choose”.",
   email: "hello@elegix.net",
-  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/careers", label: "Careers" }, { href: "/press", label: "Press" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Get early access" }],
+  nav: [{ href: "/about", label: "About" }, { href: "/guides", label: "Guides" }, { href: "/blog", label: "Blog" }, { href: "/careers", label: "Careers" }, { href: "/press", label: "Press" }, { href: "/#faq", label: "FAQ" }, { href: "/#join", label: "Get early access" }],
   legal: [{ href: "/privacy", label: "Privacy policy" }, { href: "/terms", label: "Terms" }],
   socials: SOCIALS,
   wordmark: "Elegix",

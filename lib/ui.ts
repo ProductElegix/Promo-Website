@@ -143,6 +143,14 @@ const en = {
   pricingAndName: "Pricing and the name",
   readStory: "Read story",
   byName: (name: string) => `by ${name}`,
+  // blog
+  blog: "Blog",
+  inThisPost: "In this post",
+  fromTheTeam: "What the team says",
+  draft: "Draft",
+  draftNote: (first: string) => `Placeholder text. Replace with ${first}'s own words before this goes live.`,
+  readPost: "Read the post",
+  morePosts: "More from the blog",
 };
 
 export type UI = typeof en;
@@ -268,6 +276,13 @@ const uk: UI = {
   pricingAndName: "Ціни та назва",
   readStory: "Читати історію",
   byName: (name) => `${name}`,
+  blog: "Блог",
+  inThisPost: "У цій статті",
+  fromTheTeam: "Що каже команда",
+  draft: "Чернетка",
+  draftNote: (first) => `Текст-заглушка. Заміни словами, які скаже ${first}, перед публікацією.`,
+  readPost: "Читати статтю",
+  morePosts: "Ще з блогу",
 };
 
 export const ui = (lang: Lang): UI => (lang === "uk" ? uk : en);

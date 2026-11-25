@@ -43,6 +43,7 @@ export const BRAND: C["BRAND"] = {
 export const NAV: C["NAV"] = [
   { href: "/about", label: "Про нас" },
   { href: "/guides", label: "Гайди" },
+  { href: "/blog", label: "Блог" },
 ];
 export const NAV_CTA = "Отримати ранній доступ";
 
@@ -308,7 +309,7 @@ export const FOOTER: C["FOOTER"] = {
   about: "Трекер балансу життя для тих, хто хоче рости в роботі, не втрачаючи решту життя.",
   name: "Elegix: «обирай» валенсійською.",
   email: "hello@elegix.net",
-  nav: [{ href: "/about", label: "Про нас" }, { href: "/guides", label: "Гайди" }, { href: "/careers", label: "Кар’єра" }, { href: "/press", label: "Для преси" }, { href: "/#faq", label: "Питання" }, { href: "/#join", label: "Отримати ранній доступ" }],
+  nav: [{ href: "/about", label: "Про нас" }, { href: "/guides", label: "Гайди" }, { href: "/blog", label: "Блог" }, { href: "/careers", label: "Кар’єра" }, { href: "/press", label: "Для преси" }, { href: "/#faq", label: "Питання" }, { href: "/#join", label: "Отримати ранній доступ" }],
   legal: [{ href: "/privacy", label: "Політика конфіденційності" }, { href: "/terms", label: "Умови використання" }],
   socials: SOCIALS,
   wordmark: "Elegix",

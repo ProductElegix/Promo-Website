@@ -24,6 +24,7 @@ import { Toc } from "./Toc";
 import { ArticleActions } from "./ArticleActions";
 import { GuideAnalytics } from "./GuideAnalytics";
 import { WaitlistForm } from "./WaitlistForm";
+import { SHOW_DRAFTS } from "@/lib/drafts";
 import styles from "./Article.module.css";
 import { RollText } from "@/components/ui/RollText";
 
@@ -51,6 +52,10 @@ type Props = {
   lists?: { id: string; title: string; items: Props["related"] }[];
   /** life area pages: the guides about this area, right under the header, so the page is the home of its area */
   hub?: ReactNode;
+  /** blog posts: an illustration in place of the photo under the header */
+  cover?: ReactNode;
+  /** blog posts: comments from the team, after the last section and before the author card */
+  comments?: ReactNode;
 };
 
 /** How the guides are written and checked, linked from every guide's byline and author box. */
@@ -102,6 +107,7 @@ export function BlockView({ b }: { b: Block }) {
     );
   }
   if ("tip" in b) return <p className={styles.tip}><Inline text={b.tip} /></p>;
+  if ("todo" in b) return SHOW_DRAFTS ? <p className={styles.todo}><strong>TODO</strong> {b.todo}</p> : null;
   if ("tool" in b) return <div data-tool={b.tool}><GuideTool name={b.tool} /></div>;
   return <p><Inline text={b.p} /></p>;
 }
@@ -112,7 +118,7 @@ const anchor = (h: string) => h.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").r
 const dateIn = (lang: Lang) => (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString(lang === "uk" ? "uk-UA" : "en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 /** A long-form page: breadcrumbs, h1, photo, sections, FAQ, related reading and the waitlist. */
-export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub }: Props) {
+export async function Article({ guide: g, path: plainPath, parent, related, author: ownAuthor, tocTitle: ownToc, source, stories, promote = false, midTitle: ownMid, lists = [], areas, hub, cover, comments }: Props) {
   const lang = await getLang();
   const t = ui(lang);
   const date = dateIn(lang);
@@ -196,7 +202,7 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
         {hub}
 
         <div className={`container ${styles.photo}`}>
-          <Media media={g.media} priority sizes="(max-width: 1100px) 100vw, 1100px" />
+          {cover ?? <Media media={g.media} priority sizes="(max-width: 1100px) 100vw, 1100px" />}
         </div>
 
         <div className={`container ${styles.layout}`}>
@@ -269,6 +275,8 @@ export async function Article({ guide: g, path: plainPath, parent, related, auth
               {promote && <p className={styles.disclaimer}>{t.disclaimer} {t.read} <Link href={EDITORIAL_PATH}>{t.howWeWriteAndCheck}</Link>.</p>}
             </section>
           )}
+
+          {comments}
 
           {promote && <ArticleActions slug={g.slug} title={g.title} url={url} />}
 

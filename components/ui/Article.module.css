@@ -162,3 +162,7 @@
 /* the author card, then one full-width button to everything that person wrote */
 .authorBlock { display: grid; gap: 10px; }
 .authorAll.authorAll { display: flex; justify-content: center; width: 100%; text-decoration: none; }
+
+/* blog posts: a spot where the author should add a real fact; previews only (lib/drafts.ts) */
+.todo { background: #fff4b8; border: 1px dashed #c9a400; border-radius: var(--radius-m); padding: 14px 18px; font-size: var(--fs-small) !important; color: var(--ink) !important; }
+.todo strong { font-weight: 500; letter-spacing: 0.04em; margin-right: 6px; }
