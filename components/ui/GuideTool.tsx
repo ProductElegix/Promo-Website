@@ -7,7 +7,7 @@ import { CheckBand } from "@/components/sections/BalanceCheck";
 import styles from "./GuideTool.module.css";
 import { RollText } from "@/components/ui/RollText";
 
-/** Interactive tools inside guides. The calculators keep their numbers in the browser; the Wheel of Life one is the Life Balance Check (it can email the result). */
+/** Interactive tools for the Tools page (/tools); guides link to them instead of embedding them. The calculators keep their numbers in the browser; the Wheel of Life one is the Life Balance Check (it can email the result). */
 export function GuideTool({ name }: { name: GuideToolName }) {
   // the Wheel of Life "calculator" is the site's one Life Balance Check: the same band and step-by-step modal as on the home page
   if (name === "wheel-calculator") return <CheckBand compact />;
@@ -33,8 +33,8 @@ const TEXT = {
       "I numb out (scrolling, snacks, TV) instead of resting",
     ],
     few: "Few warning signs. Keep an eye on them with a short weekly check-in.",
-    several: "Several warning signs. Start with steps 1 and 2 below this week: make it visible and protect your sleep.",
-    many: "Many warning signs. Take this seriously: follow the steps below and talk to a doctor or a mental health professional.",
+    several: "Several warning signs. Start this week with two things: score your 6 areas of life so it's visible, and protect your sleep.",
+    many: "Many warning signs. Take this seriously: protect your sleep, ask for one change at work and talk to a doctor or a mental health professional.",
     burnoutTitle: "Burnout self-check: 12 signs",
     burnoutHint: "Tick each statement that has been true for you most weeks over the last month.",
     of12: (n: number) => `${n} of 12.`,
@@ -67,8 +67,8 @@ const TEXT = {
       "Замість відпочинку я «вимикаюся» (стрічка, перекуси, серіали)",
     ],
     few: "Мало тривожних ознак. Стеж за ними за допомогою короткої щотижневої перевірки.",
-    several: "Кілька тривожних ознак. Почни цього тижня з кроків 1 і 2 нижче: зроби це видимим і захисти свій сон.",
-    many: "Багато тривожних ознак. Постався до цього серйозно: виконай кроки нижче й поговори з лікарем або фахівцем із ментального здоров’я.",
+    several: "Кілька тривожних ознак. Почни цього тижня з двох речей: оціни свої 6 сфер життя, щоб це стало видимим, і захисти свій сон.",
+    many: "Багато тривожних ознак. Постався до цього серйозно: захисти сон, попроси про одну зміну на роботі й поговори з лікарем або фахівцем із ментального здоров’я.",
     burnoutTitle: "Самоперевірка на вигорання: 12 ознак",
     burnoutHint: "Познач кожне твердження, яке було правдою для тебе більшість тижнів за останній місяць.",
     of12: (n: number) => `${n} з 12.`,

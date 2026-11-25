@@ -19,11 +19,11 @@ export type Block =
   | { list: string[] }
   | { steps: { title: string; text: string }[] }
   | { tip: string }
-  /** an interactive tool or download, rendered by components/ui/GuideTool.tsx */
-  | { tool: GuideToolName }
   /** blog posts: a note for the author where a real fact belongs; shown on previews only (lib/drafts.ts), never in production */
   | { todo: string };
 
+/** Interactive tools (components/ui/GuideTool.tsx). They live on the Tools page (/tools), never inside a guide:
+ *  a guide links to one in a sentence, like [free hours calculator](/tools#hours-calculator). */
 export type GuideToolName = "wheel-calculator" | "wheel-template" | "burnout-check" | "hours-calculator";
 
 /** Extra depth for a guide or life area page, kept in lib/guide-extras/<slug>.ts so each page's long-form
