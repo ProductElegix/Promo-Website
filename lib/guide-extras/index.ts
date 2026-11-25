@@ -11,7 +11,6 @@ import leisure from "./leisure";
 import personalGrowth from "./personal-growth";
 import planNextYearByAreaOfLife from "./plan-next-year-by-area-of-life";
 import relationships from "./relationships";
-import signsOfBurnout from "./signs-of-burnout";
 import spirituality from "./spirituality";
 import weeklyReview from "./weekly-review";
 import workLifeBalance from "./work-life-balance";
@@ -30,7 +29,6 @@ export const EXTRAS: Record<string, GuideExtra> = {
   "personal-growth": personalGrowth,
   "plan-next-year-by-area-of-life": planNextYearByAreaOfLife,
   "relationships": relationships,
-  "signs-of-burnout": signsOfBurnout,
   "spirituality": spirituality,
   "weekly-review": weeklyReview,
   "work-life-balance": workLifeBalance,

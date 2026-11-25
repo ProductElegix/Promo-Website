@@ -7,10 +7,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Pick one area and one action for the week, re-score weekly and look back once a month.",
   ],
   "signs-of-burnout": [
-    "Burnout in high achievers shows up in sleep, mood and relationships long before it shows in work results.",
-    "The WHO defines burnout by three signs: exhaustion, cynicism about work and a drop in effectiveness.",
-    "If several of the 12 signs have been true most weeks for a month, take it seriously and start with sleep.",
-    "See a doctor or therapist if the signs last more than a few weeks, rest no longer helps or your health is affected.",
+    "The WHO describes burnout by three parts: exhaustion, cynicism about work and a feeling of being less effective.",
+    "It's an occupational phenomenon, not a medical condition, and it's usually more about workload and conditions than about a weak person.",
+    "Early signs show up in sleep, mood and relationships long before they show in work results.",
+    "Start with sleep and one specific request at work, and see a doctor if the signs last for weeks.",
   ],
   "work-life-balance": [
     "Work-life balance isn't equal hours. It means no area of your life is neglected for so long that it breaks.",
