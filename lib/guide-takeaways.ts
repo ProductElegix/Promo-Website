@@ -55,10 +55,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Turn repeated choices into rules and set good defaults while you're not tired.",
   ],
   "ai-time-savings-work-life-balance": [
-    "People who use AI at work report saving a median of about three hours a week, yet most weeks feel just as full.",
-    "Saved time goes back to work because work always has a queue and your life doesn't.",
-    "Measure the hours AI saves, choose one area of life for them and book that time as a block.",
-    "Agree with your manager where saved time goes, so expectations don't quietly reset.",
+    "AI saves a lot of time on narrow tasks and much less across whole jobs: about 3% in a large Danish study.",
+    "Saved time comes in scattered minutes, so by default work takes it.",
+    "Each week, give that time to one area of life and turn the minutes into one fixed block.",
+    "Keep your usual end time, and agree any extra output on purpose.",
   ],
   "plan-next-year-by-area-of-life": [
     "A fresh date makes it easier to start, but plans usually fade in February or March, not in January.",
