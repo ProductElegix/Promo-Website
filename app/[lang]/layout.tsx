@@ -3,6 +3,7 @@ import { Inter_Tight } from "next/font/google";
 import { Header } from "@/components/sections/Header";
 import { Attribution } from "@/components/ui/Attribution";
 import { Motion } from "@/components/ui/Motion";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { HashScroll } from "@/components/ui/HashScroll";
 import { Clarity } from "@/components/ui/Clarity";
@@ -94,6 +95,7 @@ export default async function RootLayout({ children, params }: Props) {
         <JsonLd data={organization(lang)} />
         <Attribution />
         <Motion />
+        <SmoothScroll />
         <ScrollToTop />
         <HashScroll />
         <Clarity />

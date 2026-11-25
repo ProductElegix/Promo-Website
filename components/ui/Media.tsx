@@ -14,19 +14,21 @@ type Props = {
   /** place the brief at the top (when something overlaps the bottom) */
   metaTop?: boolean;
   className?: string;
+  /** the frame wipes up into view as it scrolls in (see [data-wipe] in Motion) */
+  wipe?: boolean;
 };
 
 /**
  * An image slot. With `media.src` it renders an optimised next/image.
  * Without it, it renders a placeholder that says what belongs there.
  */
-export function Media({ media, tone = "light", fill = false, compact = false, sizes = "50vw", priority, metaTop = false, className = "" }: Props) {
+export function Media({ media, tone = "light", fill = false, compact = false, sizes = "50vw", priority, metaTop = false, className = "", wipe = false }: Props) {
   const box = `${styles.box} ${fill ? styles.fill : ""} ${className}`;
   const style = fill ? undefined : { aspectRatio: media.ratio };
 
   if (media.src) {
     return (
-      <div className={box} style={style}>
+      <div className={box} style={style} data-wipe={wipe ? "" : undefined}>
         <Image src={media.src} alt={media.alt} fill sizes={sizes} priority={priority} fetchPriority={priority ? "high" : undefined} className={styles.img} style={media.position ? { objectPosition: media.position } : undefined} />
       </div>
     );

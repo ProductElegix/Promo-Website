@@ -57,7 +57,7 @@ export function Toc({ title, items, bodyId }: { title: string; items: Item[]; bo
   return (
     <>
       <div className={styles.progressTop} aria-hidden="true" style={{ transform: `scaleX(${progress})` }} />
-      <details ref={ref} className={styles.toc} open>
+      <details ref={ref} className={styles.toc} open data-lenis-prevent>
         <summary className={styles.tocSummary}>
           <span className={styles.tocTitle}>{title}</span>
           <span className={styles.tocNow}>{active >= 0 ? `${String(active + 1).padStart(2, "0")} / ${String(items.length).padStart(2, "0")}` : t.sections(items.length)}</span>

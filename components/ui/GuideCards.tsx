@@ -31,7 +31,7 @@ export function GuideCards({ cards, two = false, rows = false }: { cards: Card[]
               </span>
             </span>
             <span className={styles.rowPhoto}>
-              <Media media={{ ...c.media, ratio: "1 / 1" }} compact sizes="180px" />
+              <Media media={{ ...c.media, ratio: "1 / 1" }} compact sizes="180px" wipe />
             </span>
           </Link>
         </li>
@@ -43,7 +43,7 @@ export function GuideCards({ cards, two = false, rows = false }: { cards: Card[]
       {cards.map((c) => (
         <li key={c.href}>
           <Link href={c.href} className={styles.card}>
-            <Media media={{ ...c.media, ratio: "16 / 10" }} sizes="(max-width: 640px) 100vw, 400px" />
+            <Media media={{ ...c.media, ratio: "16 / 10" }} sizes="(max-width: 640px) 100vw, 400px" wipe />
             <span className={styles.cardText}>
               {c.areas && <AreaTags areas={c.areas} />}
               <h3>{c.title}</h3>
