@@ -5,7 +5,6 @@ import financeAndCareer from "./finance-and-career";
 import goalsForEveryAreaOfLife from "./goals-for-every-area-of-life";
 import health from "./health";
 import howToChoosePrioritiesInLife from "./how-to-choose-priorities-in-life";
-import howToChooseWhatToFocusOn from "./how-to-choose-what-to-focus-on";
 import leisure from "./leisure";
 import personalGrowth from "./personal-growth";
 import planNextYearByAreaOfLife from "./plan-next-year-by-area-of-life";
@@ -20,7 +19,6 @@ export const EXTRAS: Record<string, GuideExtra> = {
   "goals-for-every-area-of-life": goalsForEveryAreaOfLife,
   "health": health,
   "how-to-choose-priorities-in-life": howToChoosePrioritiesInLife,
-  "how-to-choose-what-to-focus-on": howToChooseWhatToFocusOn,
   "leisure": leisure,
   "personal-growth": personalGrowth,
   "plan-next-year-by-area-of-life": planNextYearByAreaOfLife,

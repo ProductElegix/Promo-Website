@@ -31,10 +31,10 @@ export const TAKEAWAYS: Record<string, string[]> = {
     "Keep it short and at a fixed time, and add a monthly look back on top.",
   ],
   "how-to-choose-what-to-focus-on": [
-    "Weeks fail when you try to move everything at once, so work takes every hour by default.",
-    "Choose one area of life and one action per week, and put it in your calendar. It takes 5 minutes.",
+    "Work arrives with deadlines, so without a deliberate choice it takes the week by default.",
+    "Choose one area of life and one small action for the week, and put it in your calendar. It takes 5 minutes.",
     "Park other goals on a “next weeks” list rather than deleting them.",
-    "Switching between goals leaves “attention residue”, so one focus gets more done.",
+    "At the end of the week, check whether you kept the choice, and make the next step smaller if you didn't.",
   ],
   "how-to-choose-priorities-in-life": [
     "Priorities are a choice for a season of about three months, not a ranking of your life forever.",

@@ -467,20 +467,21 @@ const BASE_GUIDES: Guide[] = [
     slug: "how-to-choose-what-to-focus-on",
     areas: [],
     title: "How to choose what to focus on this week",
-    metaTitle: "How to choose what to focus on: a 5-minute method",
-    description: "Too many goals and not enough week? A 5-minute Sunday method to choose one focus area of your life, one small action for it, and what to let go of.",
+    metaTitle: "How to choose what to focus on: a 5-minute weekly method",
+    description: "Too many goals and not enough week? A 5-minute Sunday method to choose one area of your life to focus on, one small action for it, and what to let go of.",
     label: "Guide · Weekly focus",
-    lede: "Most weeks don't fail because you were lazy. They fail because you tried to move everything at once, so work took every hour by default. Choosing one focus for the week is the fastest way to make progress without dropping the rest of your life.",
+    lede: "Most weeks don't go wrong because you were lazy. They go wrong because you tried to move everything at once, and work, which always arrives with a deadline, took the hours by default. Choosing one focus for the week is a small way to fight that.",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-25",
     minutes: 5,
     media: PHOTO("/images/how-next.jpg", "A notebook, pen and laptop on a wooden desk"),
     sections: [
       {
-        h2: "Why one focus beats a long list",
+        h2: "Why one focus works better than a long list",
         blocks: [
-          { p: "A to-do list treats every item as equal. Your week isn't. Work arrives with deadlines and other people's urgency, so it always wins the fight for your time. Everything without a deadline, such as sleep, friends, reading or a hobby, quietly loses." },
-          { p: "Choosing one focus area for the week flips that. You still do your job, but one other part of your life gets a protected place in the calendar. Over a month that's four areas that moved, instead of none." },
+          { p: "A to-do list treats every item as equal, and your week doesn't. Work comes with deadlines and other people's urgency, so it wins the fight for your time. Everything without a deadline, like sleep, friends, reading or a hobby, quietly loses." },
+          { p: "This isn't a new observation. In a 1954 speech, Dwight D. Eisenhower quoted an unnamed college president: “I have two kinds of problems, the urgent and the important. The urgent are not important, and the important are never urgent” ([Quote Investigator, 2014](https://quoteinvestigator.com/2014/05/09/urgent/)). The four-box Eisenhower matrix came much later. It's useful for sorting tasks, but it doesn't help much with the bigger question of which part of your life needs you this week." },
+          { p: "There's also a cost to spreading yourself across too many things. The researcher Sophie Leroy found that people who moved to a new task while the last one was unfinished did worse on the new one, because part of their attention stayed behind. She called it attention residue ([Leroy, Organizational Behavior and Human Decision Processes, 2009](https://doi.org/10.1016/j.obhdp.2009.04.002)). Her study was about work tasks over minutes, not goals over a week, but the lesson carries: four new habits at once each get the leftovers." },
         ],
       },
       {
@@ -488,38 +489,40 @@ const BASE_GUIDES: Guide[] = [
         blocks: [
           { steps: [
             { title: "Score your areas (1 minute)", text: "Rate [health](/guides/health), [relationships](/guides/relationships), [spirituality](/guides/spirituality), [leisure](/guides/leisure), [personal growth](/guides/personal-growth) and [finance & career](/guides/finance-and-career) from 1 to 10. Go with your first answer." },
-            { title: "Choose one area (1 minute)", text: "Pick the lowest score, or the area that would lift others if it moved. Tired and short-tempered? Health usually comes first, because sleep improves everything else." },
-            { title: "Choose one action (2 minutes)", text: "Make it small and specific: “two 30-minute walks, Tuesday and Thursday at 7pm”, not “exercise more”. If you can't fail at it, it's the right size." },
-            { title: "Put it in the calendar (1 minute)", text: "Give the action a day and a time, like a meeting. An action without a slot is a wish." },
+            { title: "Choose one area (1 minute)", text: "The lowest score, or the area that would lift the others if it moved. Tired and short-tempered? Health usually comes first, because sleep helps everything else." },
+            { title: "Choose one action (2 minutes)", text: "Small and specific: “two 30-minute walks, Tuesday and Thursday at 7pm”, not “exercise more”. If you can't really fail at it, it's the right size." },
+            { title: "Put it in the calendar (1 minute)", text: "Give it a day and a time, like a meeting. An action without a slot is a wish." },
           ] },
-          { tip: "Write the sentence down: “This week I choose ___.” Saying it out loud, or to a friend, makes it much harder to drift away from by Wednesday." },
         ],
       },
       {
         h2: "What to let go of",
         blocks: [
-          { p: "Choosing a focus also means choosing what not to push this week. That's not giving up. It's being honest about what fits in seven days." },
+          { p: "Choosing a focus also means choosing what you won't push this week. That isn't giving up. It's being honest about what fits into seven days." },
           { list: [
-            "**Park, don't delete.** Move other goals to a “next weeks” list so they don't nag you.",
+            "**Park, don't delete.** Move other goals to a “next weeks” list so they stop nagging you.",
             "**Keep the basics running.** A focus on relationships doesn't mean you stop sleeping or working. It means one area gets extra attention.",
-            "**Say one no.** Find one meeting, favour or late evening you can decline to make room for your action.",
+            "**Say one no.** One meeting, favour or late evening you can decline to make room for your action.",
           ] },
         ],
       },
       {
         h2: "At the end of the week",
         blocks: [
-          { p: "Next Sunday, before you choose again, check one thing: did you keep your choice? If you did, notice how that area feels now. If you didn't, ask what got in the way and make next week's action smaller. Our [10-minute weekly review](/guides/weekly-review) turns this into a simple routine." },
-          { p: "This is the loop [Elegix](/about) is built around. The name even comes from it: in Valencian, “elegix” means “choose”. Each week you choose the area that needs you, and the app shows whether your week matched your choice." },
+          { p: "Next Sunday, before you choose again, check one thing: did you keep your choice? If you did, notice how that area feels now. If you didn't, ask what got in the way and make next week's action smaller. The [10-minute weekly review](/guides/weekly-review) turns this into a routine." },
+          { p: "This is the loop [Elegix](/about) is built around, and where its name comes from: in Valencian, “elegix” means “choose”. Each week you choose the area that needs you, and the app shows whether your week matched the choice." },
         ],
       },
     ],
     faq: [
-      { q: "What if two areas are equally low?", a: "Choose the one with the smallest first step, or the one that feeds the other. Better sleep, for example, often lifts both health and leisure. You can take the other area next week." },
-      { q: "Should work ever be my weekly focus?", a: "Yes, if finance & career is the area that's truly behind, for example money stress or a stalled skill. The point is to choose it on purpose, not to let work win by default." },
-      { q: "How is this different from setting goals?", a: "Goals describe where you want to be in months or years. A weekly focus is the small step you take this week toward one of them. Read [how to set goals for every area of life](/guides/goals-for-every-area-of-life)." },
+      { q: "What if two areas are equally low?", a: "Choose the one with the smallest first step, or the one that feeds the other. Better sleep, for example, often lifts both health and leisure. The other one can be next week's focus." },
+      { q: "Can work be my weekly focus?", a: "Yes, if finance and career really is the area that's behind, for example money stress or a skill that's stalled. The point is to choose it on purpose, not to let work win by default." },
+      { q: "How is this different from setting goals?", a: "Goals describe where you want to be in months or years. A weekly focus is the small step you take this week towards one of them. See [goals for every area of life](/guides/goals-for-every-area-of-life)." },
     ],
     related: ["weekly-review", "how-to-choose-priorities-in-life", "decision-fatigue"],
+    changes: [
+      { date: "2026-11-25", text: "Rewritten and shortened. The Eisenhower quote and the attention residue study are now cited with what they do and don't show." },
+    ],
     cta: CTA,
   },
   {
